@@ -1,0 +1,34 @@
+.relativo { position: relative; }
+
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td { vertical-align: middle; }
+
+.moneda-peso { color: blue; }
+.moneda-dolar { color: green; }
+
+.modal-dialog.modal-800 {
+    width: 800px;
+    margin: 5px auto;
+    height: 800px;
+}
+
+#iframe-modificar-sindicato {
+	
+    margin: 5px auto;
+    height: 400px;
+}
+#iframe-modificar-sub-departamento {
+	
+    margin: 5px auto;
+    height: 500px;
+}
+
+#iframe-modificar-empresa {
+    
+    margin: 30px auto;
+    height: 600px;
+}
+
+#iframe-modificar-alerta {    
+    margin: 5px auto;
+    height: 450px;
+}
