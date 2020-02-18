@@ -21,12 +21,12 @@ if($clientes)
  
 if(!$id_empresa)
 {
-  $titulo     = "Nuevo Cliente";
+  $titulo     = "Nuevo afiliado";
   $id_empresa = 0;
 }
 else
 {
-  $titulo = "Modificar Cliente";
+  $titulo = "Modificar afiliado";
 }
 ?>
   <div class="row">

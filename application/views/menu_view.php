@@ -19,10 +19,10 @@
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Afiliados<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?php echo site_url('clientes/listado') ?>" class="item-menu">Listado </a></li>
-                <li><a href="<?php echo site_url('clientes/nuevo') ?>" class="item-menu">Nuevo Cliente</a></li>
+                <li><a href="<?php echo site_url('clientes/nuevo') ?>" class="item-menu">Nuevo afiliado</a></li>
               </ul>
             </li>        
         <li>
