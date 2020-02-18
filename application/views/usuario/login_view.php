@@ -10,8 +10,28 @@
     <!-- <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/celomaicon.jpg') ?>">
     <link rel="icon" href="<?php echo base_url('assets/images/celomaicon.jpg') ?>"> -->
 
+    <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <style type="text/css">
+    
+    body {
+      background-color: #eeeeee;
+    }
+    
+    body input.form-control,
+    body .btn {
+      border-radius: 2px;
+    }
+
+    .container-top{
+      margin-top: 25px;
+      margin-bottom: 25px; 
+    }
+    
+    .container-top img {
+      width: 100%;
+    }
+    
     #bg {
       min-height: 100%;
       min-width: 1024px;
@@ -32,10 +52,10 @@
 
     #login-div {
       background-color: #FFFFFF;
-      -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
-      box-shadow: 0 5px 15px rgba(0,0,0,.5);
+      box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.2);
       padding: 15px;
       margin-top: 25px;
+      border-radius: 2px;
     }
     </style>
 
@@ -72,12 +92,20 @@
             </div>';
     ?>
 
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
-        <div id="login-div" class="col-md-5 col-md-offset-3">
+        <div class="col-md-12 text-center">
+          <div class="col-md-6 col-md-offset-3 container-top">
+            <img src="http://www.grupoprovision.com/img/logo1.png">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+        <div id="login-div">
           <div class="row">
             <div class="col-md-12">
-              <h4 class="page-header" style="margin-top:5px;">Iniciar Sesi&oacute;n</h4>
+              <h5 class="page-header text-uppercase" style="margin-top:5px;">Iniciar sesi&oacute;n</h4>
             </div>
           </div><!-- /.row -->
 
@@ -99,13 +127,13 @@
                   <label for="contrasenia" class="control-label">Contrase&ntilde;a</label>
                   <input type="password" name="contrasenia" id="contrasenia" maxlength="32" class="form-control">
                   <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                  <p class="help-block text-center hide">Debe ingresar su Contrase&ntilde;a.</p>
+                  <p class="help-block text-center hide">Debe ingresar su contrase&ntilde;a.</p>
                 </div>
               </div>
             </div><!-- /.row -->
 
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-12 text-right">
                 <input type="submit" id="btn-enviar" value="Iniciar sesi&oacute;n" class="btn btn-primary">
                 <!-- <p class="pull-right">
                   <small>&iquest;Olvid&oacute; su contrase&ntilde;a? 
@@ -116,8 +144,9 @@
             <!-- /.row -->
           <?php echo form_close(); ?>
         </div>
+        </div>
       </div><!-- /.row -->
-    </div><!-- /.container -->
+    </div><!-- /.container-fluid -->
 
     <!-- Modal -->
     <div class="modal fade" id="modal-documento" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
