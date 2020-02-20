@@ -92,10 +92,17 @@ class Stock extends MY_Controller {
     
     // datos pasados al modelo
     $data = array(
-                  'id_stock'       => $this->input->post('id_stock'),
-                  'id_usuario'      => $this->input->post('select_usuario'),
-                  'fecha_mensaje'   => $this->input->post('fecha_mensaje'),
-                  'mensaje'         => $this->input->post('mensaje')
+                  'id_stock'           => $this->input->post('id_stock'),
+                  'codigo_patilla'     => $this->input->post('codigo_patilla'),
+                  'codigo_color'       => $this->input->post('codigo_color'),
+                  'descripcion_color'  => $this->input->post('descripcion_color'),
+                  'nro_codigo_interno' => $this->input->post('nro_codigo_interno'),
+                  'letra_color_interno'=> $this->input->post('letra_color_interno'),
+                  'id_tipo_armazon'    => $this->input->post('id_tipo_armazon'),
+                  'id_material'        => $this->input->post('id_material'),
+                  'id_ubicacion'       => $this->input->post('id_ubicacion'),
+                  'costo'              => $this->input->post('costo '),
+                  'precio_venta'       => $this->input->post('precio_venta'),
                 );
     
      //guardamos los datos de la empresa 
@@ -138,16 +145,33 @@ class Stock extends MY_Controller {
 
     $this->load->helper('form');
 
-    // obtenemos las empresas
-    $usuarios = $this->stock_model->obtenerUsuarios();
+    // obtenemos los tipo de armazones
+    $tipo_armazon = $this->stock_model->obtenerTipoArmazon();
 
-    // recorremos las liquidaciones del usuario obtenidas
-    foreach( $usuarios->result() as $row )
+    foreach( $tipo_armazon->result() as $row )
     {     
+      $tipo_armazon[] = array('id_tipo_armazon' => (int)$row->id_tipo_armazon,
+                                  'descripcion'     => $row->descripcion
+                              );  
+    }
 
-      $usuarios_validas[] = array('id_usuario' => (int)$row->id_usuario,
-                                  'nombre'     => $row->nombre,
-                                  'apellido'   => $row->apellido
+    // obtenemos los tipo de armazones
+    $ubicacion = $this->stock_model->obtenerUbicacion();
+
+    foreach( $ubicacion->result() as $row )
+    {     
+      $ubicacion[] = array('id_ubicacion' => (int)$row->id,
+                            'descripcion'     => $row->descripcion
+                          );  
+    }
+
+    // obtenemos los tipo de armazones
+    $material = $this->stock_model->obtenerMateriales();
+
+    foreach( $material->result() as $row )
+    {     
+      $material[] = array('id_material' => (int)$row->id,
+                            'descripcion'     => $row->descripcion
                                   );  
     }
 
@@ -156,7 +180,9 @@ class Stock extends MY_Controller {
     {
       // $this->util->dump_exit($usuarios_validas);
       $data = array(
-                    'usuarios'       => $usuarios_validas,
+                    'tipo_armazon'   => $tipo_armazon,
+                    'ubicacion'      => $ubicacion,
+                    'material'       => $material,
                     'contenido_view' => 'stock/stock_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/stock/stock_view.js'),
@@ -166,17 +192,18 @@ class Stock extends MY_Controller {
     }
     else
     {
-      $stock = $this->stock_model->obtenerDetalleAlerta($id_stock);
+      //obtenemos el detalle del stock 
+      $stock = $this->stock_model->obtenerDetalle($id_stock);
   
       // $this->util->dump_exit($stock);
-      $data = array('usuarios'           => $usuarios_validas,
-                    'fecha_mensaje'      => $stock->row()->fecha_mensaje,
-                    'mensaje'            => $stock->row()->mensaje,
-                    'id_usuario'         => $stock->row()->id_usuario,
-                    'id_stock'          => $id_stock,
-                    'contenido_view'     => 'stock/stock_view',
-                    'css'                => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-                    'js'                 => array(base_url('assets/js/stock/stock_view.js'),
+      $data = array('tipo_armazon'   => $tipo_armazon,
+                    'ubicacion'      => $ubicacion,
+                    'material'       => $material,
+                    'stock'          => $stock,
+                    'id_stock'       => $id_stock,
+                    'contenido_view' => 'stock/stock_view',
+                    'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
+                    'js'             => array(base_url('assets/js/stock/stock_view.js'),
                                                             "https://code.jquery.com/ui/1.12.1/jquery-ui.js"), 
                     ); 
     }    

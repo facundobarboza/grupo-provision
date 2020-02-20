@@ -53,12 +53,12 @@ class Clientes extends MY_Controller {
       // $this->util->dump_exit($row);
 
       $clientes_validas[] = array(
-        'id_empresa'     => (int)$row->id_empresa,
-        'nombre_empresa' => $row->nombre_empresa,
-        'direccion'      => $row->direccion,
-        'cuit'           => $row->cuit,
-        'tipo_actividad' => $row->tipo_actividad,
-        'nombre_contacto'=> $row->nombre_contacto
+        'id_cliente'        => (int)$row->id_cliente,
+        'nombre_cliente'    => $row->nombre_cliente,
+        'apellido_cliente'  => $row->apellido_cliente,
+        'dni_cliente'       => $row->dni_cliente,
+        'numero_cliente'    => $row->numero_cliente,
+        'id_sindicato_cliente' => $row->id_sindicato_cliente
       );  
     }
 
@@ -77,7 +77,7 @@ class Clientes extends MY_Controller {
     if($id_elimino>0)
     {      
       // guardamos el log
-      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_empresa","id_empresa",$id_elimino);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_cliente","id_cliente",$id_elimino);
       $this->session->set_flashdata('exito', 'Se elimino la Empresa con &eacute;xito.');
       redirect('clientes/listado','refresh');    
     }
@@ -99,37 +99,29 @@ class Clientes extends MY_Controller {
     $this->load->model('clientes_model');
     
     // datos pasados al modelo
-    $data = array(
-                  'id_empresa'         => $this->input->post('id_empresa'),
-                  'nombre_empresa'     => $this->input->post('nombre_empresa'),
-                  'direccion_empresa'  => $this->input->post('direccion_empresa'),
-                  'cuit_empresa'       => $this->input->post('cuit_empresa'),
-                  'actividad_empresa'  => $this->input->post('actividad_empresa'),
-                  'telefono_empresa_1' => $this->input->post('telefono_empresa_1'),
-                  'telefono_empresa_2' => $this->input->post('telefono_empresa_2'),
-                  'mail_empresa'       => $this->input->post('mail_empresa'),
-                  'contacto_empresa'   => $this->input->post('contacto_empresa'),
-                  'observacion_empresa'=> $this->input->post('observacion_empresa'),
-                  'facebook_empresa'   => $this->input->post('facebook_empresa'),
-                  'instagram_empresa'  => $this->input->post('instagram_empresa'),
-                  'fecha_vigencia'     => $this->input->post('fecha_vigencia')
+    $data = array('id_cliente'        => $this->input->post('id_cliente'),
+                  'nombre_cliente'    => $this->input->post('nombre_cliente'),
+                  'apellido_cliente'  => $this->input->post('apellido_cliente'),
+                  'dni_cliente'       => $this->input->post('dni_cliente'),
+                  'numero_cliente'    => $this->input->post('numero_cliente'),
+                  'id_sindicato_cliente' => $this->input->post('id_sindicato_cliente')
                 );
      // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
     $this->clientes_model->agregar($data);
     
-    if($this->input->post('id_empresa')==0)
+    if($this->input->post('id_cliente')==0)
     {
       // guardamos el log
       // $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se ha ingreso la Empresa con &eacute;xito.');
+      $this->session->set_flashdata('exito', 'Se ingreso el Cliente con &eacute;xito.');
 
     }
     else
     {
       // guardamos el log
-      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_empresa","id_empresa",$this->input->post('id_empresa'));
-      $this->session->set_flashdata('exito', 'Se modifico la Empresa con &eacute;xito.');
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_empresa","id_cliente",$this->input->post('id_cliente'));
+      $this->session->set_flashdata('exito', 'Se modifico el Cliente con &eacute;xito.');
       
     }
     redirect('clientes/listado','refresh');
@@ -165,7 +157,7 @@ class Clientes extends MY_Controller {
     else
     {
       // obtenemos los datos del usuario
-      $clientes = $this->clientes_model->obtenerEmpresa($id_empresa);
+      $clientes = $this->clientes_model->obtenerCliente($id_cliente);
 
       // $this->util->dump_exit($clientes->row());
       $data = array(
@@ -353,14 +345,14 @@ class Clientes extends MY_Controller {
    * @access public
    * @return void
    */
-  public function eliminar($id_empresa=0) {
+  public function eliminar($id_cliente=0) {
     // cargamos el modelo
     $this->load->model('clientes_model');
 
     $this->load->helper('form');
 
     // obtenemos las clientes
-    $this->clientes_model->eliminar($id_empresa);
+    $this->clientes_model->eliminar($id_cliente);
 
      // $this->util->dump_exit($clientes_validas);
     
