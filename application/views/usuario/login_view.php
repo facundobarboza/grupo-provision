@@ -10,8 +10,8 @@
     <!-- <link rel="apple-touch-icon" href="<?php echo base_url('assets/images/celomaicon.jpg') ?>">
     <link rel="icon" href="<?php echo base_url('assets/images/celomaicon.jpg') ?>"> -->
 
-    <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
     <style type="text/css">
     
     body {
@@ -95,8 +95,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 text-center">
-          <div class="col-md-6 col-md-offset-3 container-top">
-            <img src="http://www.grupoprovision.com/img/logo1.png">
+          <div class="col-md-4 col-md-offset-4 container-top">
+            <!-- <img src="http://www.grupoprovision.com/img/logo1.png"> -->
+            <img src="./assets/images/grupo-provision.png">
           </div>
         </div>
       </div>

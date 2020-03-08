@@ -5,7 +5,7 @@
 
 if(!$id_sindicato)
 {
-  $titulo          = "Nuevo Sindicato";
+  $titulo       = "Nuevo Sindicato";
   $id_sindicato = 0;
 }
 else
@@ -14,10 +14,10 @@ else
 }
 ?>
   <div class="row">
-    <div class="col-md-6" align="center">
-      <h3 class="page-header">
+    <div class="col-md-6">
+    <h4 class="page-header text-uppercase">
         <?echo $titulo;?>
-      </h3>
+      </h4>
     </div>
   </div><!-- /.row -->
 <?php 
@@ -26,7 +26,9 @@ echo form_open('sindicatos/guardarSindicato', array('id' => 'formulario-sindicat
 ?>
 
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
       <div class="form-group has-feedback">
         <label for="empresa_usuario">Empresa Asociada</label>
         <select class="form-control" name="select_empresa" id="select_empresa"  >
@@ -52,7 +54,7 @@ echo form_open('sindicatos/guardarSindicato', array('id' => 'formulario-sindicat
    <div class="row">
     <div class="col-md-2">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-8">
       <div class="form-group has-feedback">
         <label for="nombre_sindicato">Nombre</label>
         <input type="text" class="form-control" name="nombre_sindicato" id="nombre_sindicato" autocomplete="off" autofocus maxlength="32" value="<? echo $nombre_sindicato;?>">
@@ -64,7 +66,7 @@ echo form_open('sindicatos/guardarSindicato', array('id' => 'formulario-sindicat
   </div><!-- /.row -->
 
   <div class="row">
-    <div class="col-md-6" align="center" >
+    <div class="col-md-6 text-right">
       <input type="submit" value="Guardar" id='guardar-sindicato' class="btn btn-primary">
     </div>
   </div><!-- /.row -->

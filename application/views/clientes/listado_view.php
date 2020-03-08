@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <h3 class="page-header">
+  <h4 class="page-header text-uppercase">
       Listado de afiliados
-    </h3>
+    </h4>
   </div>
 </div><!-- /.row-fluid -->
 <div class="row">
@@ -11,11 +11,11 @@
       <thead>
         <tr>
           <th>Nombre</th>
-          <th>Direccion</th>
-          <th>CUIT</th>
-          <th>Actividad</th>
-          <th>Contacto</th>
-          <th>Modificar/ Eliminar</th>
+          <th>Apellido</th>
+          <th>DNI</th>
+          <th>Número</th>
+          <th>Sindicato</th>
+          <th>Modificar / Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -23,19 +23,19 @@
       foreach( $empresas as $empresa ) { ?>
         <tr>
           <td>
-            <?php echo $empresa['nombre_empresa']; ?>
+            <?php echo $empresa['nombre_cliente']; ?>
           </td>
           <td>
-            <?php echo $empresa['direccion']; ?>
+            <?php echo $empresa['apellido_cliente']; ?>
           </td>
           <td>
-            <?php echo $empresa['cuit']; ?>
+            <?php echo $empresa['dni_cliente']; ?>
           </td>
           <td>
-            <?php echo $empresa['tipo_actividad']; ?>
+            <?php echo $empresa['numero_cliente']; ?>
           </td>
           <td>
-            <?php echo $empresa['nombre_contacto']; ?>
+            <?php echo $empresa['id_sindicato_cliente']; ?>
           </td>
           <td width="160px">
             <div class="info" data-id="<?php echo $empresa['id_empresa'] ?>"></div>

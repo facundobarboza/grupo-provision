@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <h3 class="page-header">
+  <h4 class="page-header text-uppercase">
       Listado de Sindicatos
-    </h3>
+    </h4>
   </div>
 </div><!-- /.row-fluid -->
 <div class="row">
@@ -16,13 +16,13 @@
   </div>
 </div><!-- /.row -->
 <div class="row">
-  <div class="col-md-10 col-md-offset-1">
+  <div class="col-md-12">
     <table id="datatable-sindicatos" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>
           <th>Nombre Sindicato</th>
           <th>Empresa</th>
-          <th>Modificar/ Eliminar</th>
+          <th>Modificar / Eliminar</th>
         </tr>
       </thead>
       <tbody>
@@ -60,7 +60,6 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" title="cerrar"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        
       </div><!-- /.modal-header -->
       <div class="modal-body" >                
         <iframe src="" id="iframe-modificar-sindicato" width="100%" style="border:0;"></iframe>        
