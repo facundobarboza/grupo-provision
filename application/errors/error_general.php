@@ -54,7 +54,7 @@ p {
 </style>
 </head>
 <body>
-	<div id="container">
+	<div id="container-fluid">
 		<h1><?php echo $heading; ?></h1>
 		<?php echo $message; ?>
 	</div>

@@ -1,4 +1,4 @@
-<footer style="background-color:#dcdcdc; padding: 10px 0; margin-top: 30px;">
+<footer>
   <p class="text-center" style="margin:0;">
     Derechos Reservados &copy; - <?php echo date('Y'); ?> <strong>Grupo Provision S.R.L</strong> 
   </p>
@@ -34,7 +34,7 @@
           <tr>
             <th>Memoria</th>
             <th>Renderizado</th>
-            <th>Versión</th>
+            <th>Versiï¿½n</th>
           </tr>
         </thead>
         <tbody>

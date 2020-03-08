@@ -7,10 +7,12 @@
     <title>Grupo Provision S.R.L</title>
 
     <link rel="icon" href="<?php echo base_url('assets/images/favicon.ico') ?>" />
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+
     <link href="<?php echo base_url('assets/css/jquery-ui.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/bootstrap.submenu.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/util.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
 
     <!--[if lt IE 9]>
       <script src="<?php echo base_url('assets/js/html5shiv.min.js') ?>"></script>
@@ -31,7 +33,7 @@
     }
     ?>
 
-    <iframe src="<?php echo site_url($url_index); ?>" id="iframe-principal" width="100%" style="border:0; padding-top:5px;"></iframe>
+    <iframe src="<?php echo site_url($url_index); ?>" id="iframe-principal" class="p-l-250" width="100%" style="position: fixed; border:0; padding-top:5px;"></iframe>
 
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery-ui.min.js') ?>"></script>

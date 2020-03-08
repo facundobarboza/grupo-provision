@@ -1,17 +1,10 @@
 var
-    $formulario           = $("#formulario-empresa"),
-    $nombre_empresa       = $('#nombre_empresa'),
-    $direccion_empresa    = $('#direccion_empresa'),
-    $cuit_empresa         = $('#cuit_empresa' ),
-    $actividad_empresa    = $('#actividad_empresa'),
-    $telefono_empresa_1   = $('#telefono_empresa_1'),
-    $telefono_empresa_2   = $('#telefono_empresa_2'),
-    $mail_empresa         = $('#mail_empresa'),
-    $contacto_empresa     = $('#contacto_empresa'),
-    $observacion_empresa  = $('#observacion_empresa'),
-    $facebook_empresa     = $('#facebook_empresa'),
-    $instagram_empresa    = $('#instagram_empresa'),
-    $fecha_vigencia       = $("#fecha_vigencia")
+    $formulario           = $("#formulario-cliente"),
+    $nombre_cliente       = $('#nombre_cliente'),
+    $apellido_cliente     = $('#apellido_cliente'),
+    $dni_cliente          = $('#dni_cliente'),
+    $numero_cliente       = $('#numero_cliente'),
+    $id_sindicato_cliente = $('#id_sindicato_cliente')
 
 // DOM ready!
 $(function() {
@@ -30,32 +23,25 @@ $fecha_vigencia.datepicker({
     var
         error              = false,
 
-        nombre_empresa       = $nombre_empresa.val(),
-        direccion_empresa    = $direccion_empresa.val(),
-        cuit_empresa         = $cuit_empresa.val(),
-        actividad_empresa    = $actividad_empresa.val(),
-        telefono_empresa_1   = $telefono_empresa_1.val(),
-        telefono_empresa_2   = $telefono_empresa_2.val(),
-        mail_empresa         = $mail_empresa.val(),
-        contacto_empresa     = $contacto_empresa.val(),
-        observacion_empresa  = $observacion_empresa.val(),
-        facebook_empresa     = $facebook_empresa.val(),
-        instagram_empresa    = $instagram_empresa.val();
-        fecha_vigencia       = $fecha_vigencia.val();
+        nombre_cliente       = $nombre_cliente.val(),
+        apellido_cliente     = $apellido_cliente.val(),
+        dni_cliente          = $dni_cliente.val(),
+        numero_cliente       = $numero_cliente.val(),
+        id_sindicato_cliente = $id_sindicato_cliente.val()
 
     // no ingreso
-    if( nombre_empresa == "" )
+    if( nombre_cliente == "" )
     {
       error = true;
 
-      $nombre_empresa
+      $nombre_cliente
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0)
         .removeClass("hide");
 
-      $nombre_empresa
+      $nombre_cliente
         .parent()
         .find(".text-center")
         .eq(0)
@@ -64,18 +50,18 @@ $fecha_vigencia.datepicker({
     }
     else
     {
-      if( direccion_empresa == "")
+      if( apellido_cliente == "")
       {
         error = true;
 
-        $direccion_empresa
+        $apellido_cliente
           .parent()
           .addClass("has-error")
           .find(".form-control-feedback")
           .eq(0)
           .removeClass("hide");
 
-        $direccion_empresa
+        $apellido_cliente
           .parent()
           .find(".text-center")
           .eq(0)
@@ -85,18 +71,18 @@ $fecha_vigencia.datepicker({
       else
       { 
 
-         if( cuit_empresa == "" )
+         if( dni_cliente == "" )
         {
           error = true;
 
-          $cuit_empresa
+          $dni_cliente
             .parent()
             .addClass("has-error")
             .find(".form-control-feedback")
             .eq(0)
             .removeClass("hide");
 
-          $cuit_empresa
+          $dni_cliente
             .parent()
             .find(".text-center")
             .eq(0)
@@ -105,18 +91,18 @@ $fecha_vigencia.datepicker({
         }
         else
         {
-          if( actividad_empresa == "" )
+          if( numero_cliente == "" )
           {
             error = true;
 
-            $actividad_empresa
+            $numero_cliente
               .parent()
               .addClass("has-error")
               .find(".form-control-feedback")
               .eq(0)
               .removeClass("hide");
 
-            $actividad_empresa
+            $numero_cliente
               .parent()
               .find(".text-center")
               .eq(0)
@@ -125,121 +111,23 @@ $fecha_vigencia.datepicker({
           }
           else
           {
-            if( contacto_empresa == "" )
+            if( id_sindicato_cliente == "" )
             {
               error = true;
 
-              $contacto_empresa
+              $id_sindicato_cliente
                 .parent()
                 .addClass("has-error")
                 .find(".form-control-feedback")
                 .eq(0)
                 .removeClass("hide");
 
-              $contacto_empresa
+              $id_sindicato_cliente
                 .parent()
                 .find(".text-center")
                 .eq(0)
                 .removeClass("hide");
-            }
-            else
-            {
-              if( mail_empresa  == "" )
-              {
-                error = true;
-
-                $mail_empresa
-                  .parent()
-                  .addClass("has-error")
-                  .find(".form-control-feedback")
-                  .eq(0)
-                  .removeClass("hide");
-
-                $mail_empresa
-                  .parent()
-                  .find(".text-center")
-                  .eq(0)
-                  .removeClass("hide");
-
-              }
-              else
-              {
-                if( telefono_empresa_1 == "")
-                {
-                  error = true;
-
-                  $telefono_empresa_1
-                    .parent()
-                    .addClass("has-error")
-                    .find(".form-control-feedback")
-                    .eq(0)
-                    .removeClass("hide");
-
-                  $telefono_empresa_1
-                    .parent()
-                    .find(".text-center")
-                    .eq(0)
-                    .removeClass("hide");
-                }
-                else
-                {
-                  if( fecha_vigencia == "" )
-                  {
-                    error = true;
-
-                    $fecha_vigencia
-                      .parent()
-                      .addClass("has-error")
-                      .find(".form-control-feedback")
-                      .eq(0)
-                      .removeClass("hide");
-
-                    $fecha_vigencia
-                      .parent()
-                      .find(".text-center")
-                      .eq(0)
-                      .removeClass("hide");
-                  }
-                  // if( observacion_empresa == "" )
-                  // {
-                  //   error = true;
-
-                  //   $observacion_empresa
-                  //     .parent()
-                  //     .addClass("has-error")
-                  //     .find(".form-control-feedback")
-                  //     .eq(0)
-                  //     .removeClass("hide");
-
-                  //   $observacion_empresa
-                  //     .parent()
-                  //     .find(".text-center")
-                  //     .eq(0)
-                  //     .removeClass("hide");
-                  // }
-                  // else
-                  // {
-                  //   if( fecha_vigencia == "" )
-                  //   {
-                  //     error = true;
-
-                  //     $fecha_vigencia
-                  //       .parent()
-                  //       .addClass("has-error")
-                  //       .find(".form-control-feedback")
-                  //       .eq(0)
-                  //       .removeClass("hide");
-
-                  //     $fecha_vigencia
-                  //       .parent()
-                  //       .find(".text-center")
-                  //       .eq(0)
-                  //       .removeClass("hide");
-                  //   }
-                  // }                  
-                }
-              }
-            }     
+            }   
           }          
         }        
       }

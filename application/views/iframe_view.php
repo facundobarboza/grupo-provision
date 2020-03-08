@@ -10,6 +10,7 @@
 
     <link href="<?php echo base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
     <link href="<?php echo base_url('assets/css/util.css') ?>" rel="stylesheet">
+    <link href="<?php echo base_url('assets/css/main.css') ?>" rel="stylesheet">
     <?php
 
     // cargar estilos
@@ -30,7 +31,7 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <?php
       // error flashdata
       if( $this->session->flashdata('exito') )
@@ -67,7 +68,7 @@
 
     </div><!-- /.container -->
 
-    <?php $this->load->view('pie_view') ?>
+    <!-- <?php $this->load->view('pie_view') ?> -->
 
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>

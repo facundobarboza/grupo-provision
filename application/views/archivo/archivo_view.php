@@ -41,10 +41,10 @@ else
 }
 ?>
   <div class="row">
-    <div class="col-md-12" align="center">
-      <h3 class="page-header">
+    <div class="col-md-12">
+      <h4 class="page-header text-uppercase">
         <?echo $titulo;?>
-      </h3>
+</h4>
     </div>
   </div><!-- /.row -->
 <?php 
