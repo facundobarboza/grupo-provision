@@ -96,7 +96,7 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
   <div class="row">
   <div class="col-md-2">
     </div>
-    <div class="col-md-8 text-right">
+    <div class="col-md-8" align="center">
       <input type="submit" value="Guardar" class="btn btn-primary">
     </div>
   </div><!-- /.row -->

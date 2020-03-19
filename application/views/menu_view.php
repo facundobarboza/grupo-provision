@@ -28,6 +28,15 @@
 
 <div class="sidenav">
     <ul>
+        <li data-toggle="collapse" data-target="#fichas">
+            <span class="collapse-item">Gestion de Fichas</span>
+            <ul class="nav nav-list collapse" id="fichas">
+                <li><a href="<?php echo site_url('archivo/listado') ?>" class="collapse-item item-menu">- Listado Fichas
+                    </a></li>
+                <li><a href="<?php echo site_url('archivo/nuevo') ?>" class="collapse-item item-menu">- Nueva Ficha</a>
+                </li>
+            </ul>
+        </li>
         <li data-toggle="collapse" data-target="#afiliado">
             <span class="collapse-item">Afiliados</span>
             <ul class="nav nav-list collapse" id="afiliado">
@@ -39,15 +48,6 @@
         </li>
         <li>
             <a href="<?php echo site_url('sindicatos/listado') ?>" class="collapse-item item-menu">Sindicatos </a>
-        </li>
-        <li data-toggle="collapse" data-target="#fichas">
-            <span class="collapse-item">Gestion de Fichas</span>
-            <ul class="nav nav-list collapse" id="fichas">
-                <li><a href="<?php echo site_url('archivo/listado') ?>" class="collapse-item item-menu">- Listado Fichas
-                    </a></li>
-                <li><a href="<?php echo site_url('archivo/nuevo') ?>" class="collapse-item item-menu">- Nueva Ficha</a>
-                </li>
-            </ul>
         </li>
         <li>
             <a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">Stock </a>

@@ -7,12 +7,32 @@
 
 if($archivos)
 {
-  $id_archivo          = $archivos->row()->id_archivo;
-  $id_departamento     = $archivos->row()->id_departamento;
-  $id_empresa          = $archivos->row()->id_empresa;
-  $id_sub_departamento = $archivos->row()->id_sub_departamento;
-  $observacion         = $archivos->row()->observacion;
-  $fecha_vigencia      = $this->util->fecha($archivos->row()->fecha_vigencia);
+  $id_ficha                 = $archivos->row()->id_ficha;
+  $beneficiario             = $archivos->row()->beneficiario;
+  $id_cliente               = $archivos->row()->id_cliente;
+  $delegacion               = $archivos->row()->delegacion;
+  $optica                   = $archivos->row()->optica;
+  $fecha                    = $this->util->fecha($archivos->row()->fecha);
+  $codigo_armazon           = $archivos->row()->codigo_armazon;
+  $color_armazon            = $archivos->row()->color_armazon;
+  $id_stock                 = $archivos->row()->id_stock;
+  $estado                   = $archivos->row()->estado;
+  $voucher                  = $archivos->row()->voucher;
+  $nro_pedido               = $archivos->row()->nro_pedido;
+  $grad_od_esf              = $archivos->row()->grad_od_esf;
+  $grad_od_cil              = $archivos->row()->grad_od_cil;
+  $eje_od                   = $archivos->row()->eje_od;
+  $grad_oi_esf              = $archivos->row()->grad_oi_esf;
+  $grad_oi_cil              = $archivos->row()->grad_oi_cil;
+  $eje_oi                   = $archivos->row()->eje_oi;
+  $comentario               = $archivos->row()->comentario;
+  $es_lejos                 = $archivos->row()->es_lejos;
+  $adicional                = $archivos->row()->adicional;
+  $descripcion_adicional    = $archivos->row()->descripcion_adicional;
+  $telefono                 = $archivos->row()->telefono;
+  $costo_adicional          = $archivos->row()->costo_adicional;
+  $seña_adicional           = $archivos->row()->seña_adicional;
+  $saldo_adicional          = $archivos->row()->saldo_adicional;
 }
 else
 {
@@ -32,12 +52,12 @@ $this->load->helper('cookie');
 // }
 if(!$id_archivo)
 {
-  $titulo          = "Subir Archivo";
+  $titulo = "Ficha";
   $id_sub_departamento = 0;
 }
 else
 {
-  $titulo = "Modificar Archivo";
+  $titulo = "Modificar Ficha";
 }
 ?>
   <div class="row">
@@ -50,119 +70,224 @@ else
 <?php 
 
 echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-archivo')); 
-
 ?>
 
   <div class="row">
-    
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="empresa_usuario">Empresa </label>
-        <select class="form-control" name="select_empresa" id="select_empresa" autofocus >
-          <option value="0">Seleccionar --</option>
-          <?
-          foreach( $empresas as $empresa ) 
-          {
-            if($id_empresa==$empresa['id_empresa']||$this->input->cookie('id_empresa',true)==$empresa['id_empresa']) 
-              echo "<option value='".$empresa['id_empresa']."' selected >".$empresa['nombre_empresa']."</option>";
-            else  
-              echo "<option value='".$empresa['id_empresa']."'>".$empresa['nombre_empresa']."</option>";
-
-          }
-          ?>          
-        </select>
-        <input type="hidden" name="id_sub_departamento" value="<? echo $id_sub_departamento;?>">
-        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-        <p class="text-center help-block hide">Debe seleccionar una empresa.</p>
-      </div>
-    </div>
-   <div class="col-md-4">
-      <div class="form-group has-feedback">
-        <label for="select_departamento">Departamento</label>
-        <input type="hidden" id="cookie_id_departamento" value="<? echo $id_departamento?>" >
-        <select class="form-control" name="select_departamento" id="select_departamento"  >
-          <option value="0">Seleccionar --</option>
-          <?
-            foreach( $departamentos as $departamento ) 
-            {
-              if($id_departamento==$departamento['id_departamento']|| $this->input->cookie('id_departamento',true)==$empresa['id_departamento']) 
-                echo "<option value='".$departamento['id_departamento']."' selected >".$departamento['descripcion']."</option>";
-              else  
-                echo "<option value='".$departamento['id_departamento']."'>".$departamento['descripcion']."</option>";
-            }            
-          ?> 
-        </select>
-        <input type="hidden" name="id_departamento" value="<? echo $id_departamento;?>">
-        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-        <p class="text-center help-block hide">Debe seleccionar un departamento.</p>
+        <label for="beneficiario">Beneficiario</label>
+        <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="32" value="<? echo $beneficiario?>">
+        <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un beneficiario.</p>
       </div>
     </div>
      <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="select_departamento">Sub - Departamento</label>
-        <input type="hidden" id="cookie_id_sub_departamento" value="<? echo $id_sub_departamento?>" >
-        <select class="form-control" name="select_sub_departamento" id="select_sub_departamento"  >
-          <option value="0">Seleccionar --</option>
-          <?
-            foreach( $departamentos as $departamento ) 
-            {
-              if($id_departamento==$departamento['id_sub_departamento']|| $this->input->cookie('id_departamento',true)==$empresa['id_departamento']) 
-                echo "<option value='".$departamento['id_departamento']."' selected >".$departamento['descripcion']."</option>";
-              else  
-                echo "<option value='".$departamento['id_departamento']."'>".$departamento['descripcion']."</option>";
-            }            
-          ?> 
-        </select>
-        <input type="hidden" name="id_departamento" value="<? echo $id_departamento;?>">
+        <label for="delegacion">Delegación</label>
+        <input type="text" class="form-control" name="delegacion" id="delegacion" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-        <p class="text-center help-block hide">Debe seleccionar un departamento.</p>
+        <p class="text-center help-block hide">Debe ingresar un delegación.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="optica">Optica</label>
+        <input type="text" class="form-control" name="optica" id="optica" autocomplete="off" autofocus maxlength="32" value="<? echo $optica?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un optica.</p>
       </div>
     </div>
   </div><!-- /.row -->
-  <br>
-  <br>
+
   <div class="row">
-    <div class="col-md-3" >
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="fecha">Fecha</label>
+        <input type="text" class="form-control" name="fecha" id="fecha" autocomplete="off" autofocus maxlength="50" value="<? echo $fecha?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un fecha.</p>
+      </div>
     </div>
-    <div class="col-md-6" align="center" >
-      <table align="center" class="table table-bordered">
-        <thead class="thead-dark">
-          <tr class="table-secondary" bgcolor="#D6D8DA">
-            <th scope="col">#</th>
-            <th scope="col" align="center">Detalle del Archivo</th>            
-          </tr>
-        </thead>
-        <tr>
-          <td width="35%" align="right">
-            <b>Fecha de Vigencia</b>
-          </td>          
-          <td align="center">            
-            <input type="text" name='fecha_vigencia' id="fecha_vigencia" autocomplete="off" value='<?echo $fecha_vigencia?>'>
-            <p class="text-center help-block hide">Debe seleccionar una fecha.</p>            
-          </td>
-        </tr>
-         <tr>
-          <td width="20%" align="right">
-            <b>Archivo</b>
-          </td>          
-          <td align="center">
-            <input type="hidden" name='id_archivo' value="0">            
-            <input type="file" class="form-control-file" name='userfile' id="archivo">
-            <p class="text-center help-block hide">Debe seleccionar un archivo.</p>            
-          </td>
-        </tr>
-         <tr>
-          <td width="20%" align="right">
-            <b>Observacion</b>
-          </td>          
-          <td align="center">   
-            <textarea class="form-control" name='observacion' id="observacion" rows="3" autocomplete="off" ><?echo $observacion;?></textarea>
-            <p class="text-center help-block hide">Debe colocar una observacion.</p>            
-          </td>
-        </tr>         
-      </table>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="codigo_armazon">Armazón</label>
+        <input type="text" class="form-control" name="codigo_armazon" id="codigo_armazon" autocomplete="off" autofocus maxlength="32" value="<? echo $codigo_armazon?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un codigo de armazon.</p>
+      </div>
     </div>
-     <div class="col-md-3" >
+    <div class="col-md-4">
+    <div class="form-group has-feedback">
+      <label for="color_armazon">Color de armazón</label>
+      <input type="text" class="form-control" name="color_armazon" id="color_armazon" autocomplete="off" autofocus maxlength="50" value="<? echo $color_armazon?>">
+      <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+      <p class="text-center help-block hide">Debe ingresar un color de armazón.</p>
+    </div>
+  </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="estado">Estado</label>
+        <input type="text" class="form-control" name="estado" id="estado" autocomplete="off" autofocus maxlength="32" value="<? echo $estado?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un codigo de estado.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="voucher">Voucher</label>
+        <input type="text" class="form-control" name="voucher" id="voucher" autocomplete="off" autofocus maxlength="50" value="<? echo $voucher?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un color de voucher.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="nro_pedido">Número de pedido</label>
+        <input type="text" class="form-control" name="nro_pedido" id="nro_pedido" autocomplete="off" autofocus maxlength="32" value="<? echo $estado?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un de número pedido.</p>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="grad_od_esf">Graduación ojo derecho esférico</label>
+        <input type="text" class="form-control" name="grad_od_esf" id="grad_od_esf" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_od_esf?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho esférico.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="grad_od_cil">Graduación ojo derecho cilindrico</label>
+        <input type="text" class="form-control" name="grad_od_cil" id="grad_od_cil" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_od_cil?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho cilindrico.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="eje_od">Eje ojo derecho</label>
+        <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_od?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="grad_oi_esf">Graduación ojo izquierdo esférico</label>
+        <input type="text" class="form-control" name="grad_oi_esf" id="grad_oi_esf" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_oi_esf?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo esférico.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="grad_oi_cil">Graduación ojo izquierdo cilindrico</label>
+        <input type="text" class="form-control" name="grad_oi_cil" id="grad_oi_cil" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_oi_cil?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="eje_oi">Eje ojo izquierdo</label>
+        <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_oi?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="comentario">Comentario</label>
+        <input type="text" class="form-control" name="comentario" id="comentario" autocomplete="off" autofocus maxlength="50" value="<? echo $comentario?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un comentario.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="es_lejos">Lejos</label>
+        <input type="text" class="form-control" name="es_lejos" id="es_lejos" autocomplete="off" autofocus maxlength="32" value="<? echo $es_lejos?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar lejos.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="adicional">Adicional</label>
+        <input type="text" class="form-control" name="adicional" id="adicional" autocomplete="off" autofocus maxlength="50" value="<? echo $adicional?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un adicional.</p>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="descripcion_adicional">Descripción adicional</label>
+        <input type="text" class="form-control" name="descripcion_adicional" id="descripcion_adicional" autocomplete="off" autofocus maxlength="50" value="<? echo $descripcion_adicional?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar una descripción adicional.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="telefono">Telefono</label>
+        <input type="text" class="form-control" name="telefono" id="telefono" autocomplete="off" autofocus maxlength="32" value="<? echo $telefono?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un telefono.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="costo_adicional">Adicional</label>
+        <input type="text" class="form-control" name="costo_adicional" id="costo_adicional" autocomplete="off" autofocus maxlength="50" value="<? echo $costo_adicional?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un costo adicional.</p>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="seña_adicional">Seña adicional</label>
+        <input type="text" class="form-control" name="seña_adicional" id="seña_adicional" autocomplete="off" autofocus maxlength="50" value="<? echo $seña_adicional?>">
+        <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un seña adicional.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="saldo_adicional">Saldo adicional</label>
+        <input type="text" class="form-control" name="saldo_adicional" id="saldo_adicional" autocomplete="off" autofocus maxlength="32" value="<? echo $saldo_adicional?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar un saldo adicional.</p>
+      </div>
     </div>
   </div><!-- /.row -->
  
@@ -174,80 +299,6 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-arc
   </div><!-- /.row -->
   <br>
   <br>
-  <div class="row">
-  <div class="col-md-12 ">
-    <table id="datatable-archivo" class="table table-striped table-bordered table-hover" width="100%">
-      <thead>
-        <tr>  
-          <th>Empresa</th>
-          <th>Departamento</th>
-          <th>Sub Departamento</th>
-          <th>Nombre archivo</th>
-          <th>Vigencia</th>
-          <th>Observacion</th>
-          <th>Ver</th>
-          <th>Modificar</th>
-          <th>Eliminar</th>
-        </tr>
-      </thead>
-      <tbody> 
-      <?php 
-      foreach( $archivos_dia as $archivo_dia ) { ?>
-        <tr>
-          <td>
-            <?php echo $archivo_dia['nombre_empresa']; ?>
-          </td>
-          <td>
-            <?php echo $archivo_dia['departamento']; ?>
-          </td>
-          <td>
-            <?php echo $archivo_dia['sub_departamento']; ?>
-          </td>
-          <td>
-            <?php echo $archivo_dia['nombre_archivo']; ?>
-          </td>
-          <td>
-            <?php echo Util::fecha($archivo_dia['fecha_vigencia']) ?>
-          </td>
-          <td>
-            <?php echo $archivo_dia['observacion']; ?>
-          </td>
-          <td width="60px">
-            <div class="info" data-id="<?php echo $archivo_dia['id_archivo'] ?>"></div>
-            <div class="text-center">
-              <?
-              // print_r($archivo_dia);exit;
-              // http://127.0.0.1/celoma/uploads/1/2/6/academia.jpg
-              // http://127.0.0.1/celoma/archivo/D:/www/celoma/uploads/1/2/6/academia.jpg
-              $ruta = "../uploads/".$archivo_dia['id_empresa']."/".$archivo_dia['id_departamento']."/".$archivo_dia['id_sub_departamento']."/".$archivo_dia['nombre_archivo'];
-              ?>
-              <button type="button" class="btn btn-default btn-xs btn-mostrar-archivo" title="Mostrar Archivo">
-                 <a href="<?echo $ruta?>" 
-                  onclick="window.open(this.href, this.target); return false;">
-                <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
-              </button>              
-            </div>
-          </td>
-          <td width="60px">
-            <div class="info" data-id="<?php echo $archivo_dia['id_archivo'] ?>"></div>
-            <div class="text-center">
-              <button type="button" class="btn btn-default btn-xs btn-modificar" title="Modificar Archivo">
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-            </div>
-          </td>
-          <td width="60px">
-            <div class="text-center">
-              <button type="button" class="btn btn-default btn-xs btn-eliminar-archivo" title="Eliminar archivo">
-                <span class="glyphicon glyphicon-remove"></span>
-              </button>
-            </div>
-          </td>
-        </tr>
-      <?php } ?>   
-      </tbody>
-    </table>
-  </div>
-</div><!-- /.row-fluid -->
+  <br>
+  <br>
 <?php echo form_close(); ?>

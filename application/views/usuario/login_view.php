@@ -97,7 +97,7 @@
         <div class="col-md-12 text-center">
           <div class="col-md-4 col-md-offset-4 container-top">
             <!-- <img src="http://www.grupoprovision.com/img/logo1.png"> -->
-            <img src="./assets/images/grupo-provision.png">
+            <img src="../assets/images/grupo-provision.png">
           </div>
         </div>
       </div>

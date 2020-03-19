@@ -79,7 +79,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-alerta', 'role' =
 </div><!-- /.row -->
 
 <div class="row">
-    <div class="col-md-6 text-right">
+    <div class="col-md-6" align="center">
         <input type="submit" value="Guardar" id='guardar-departamento' class="btn btn-primary">
     </div>
 </div><!-- /.row -->
