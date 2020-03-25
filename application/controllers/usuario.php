@@ -174,9 +174,6 @@ class Usuario extends MY_Controller {
                 'apellido'   => $usuario->row()->apellido,
                 'email'      => $usuario->row()->mail,
                 'id_rol'     => $usuario->row()->id_rol,
-                'id_empresa' => $usuario->row()->id_empresa,
-                'id_sub_departamento' => $usuario->row()->id_sub_departamento,
-                'id_departamento'     => $usuario->row()->id_departamento,
                 'user_name'  => $this->input->post('user_name')
               );
               // guardamos datos en sesion
@@ -492,27 +489,14 @@ class Usuario extends MY_Controller {
   public function nuevo($id_usuario=0) {
     // cargamos el modelo
     $this->load->model('usuario_model');
-    $this->load->model('sindicatos_model');
 
     $this->load->helper('form');
 
-    // obtenemos las empresas
-    $empresas = $this->sindicatos_model->obtenerEmpresa();
-
-    // recorremos las liquidaciones del usuario obtenidas
-    foreach( $empresas->result() as $row )
-    {     
-
-      $empresas_validas[] = array('id_empresa' => (int)$row->id_empresa,
-                                  'nombre_empresa'  => $row->nombre_empresa
-                                  );  
-    }
 
     // si es nueva le pasamos estos datos a la vista
     if($id_usuario==0)
     {
       $data = array(
-                    'empresas'       => $empresas_validas,
                     'contenido_view' => 'usuario/usuario_view',
                     'js'             => array(base_url('assets/js/usuario/usuario_view.js'))
                     );  
@@ -524,7 +508,6 @@ class Usuario extends MY_Controller {
 
       // $this->util->dump_exit($usuarios->row());
       $data = array(
-                    'empresas'       => $empresas_validas,
                     'usuarios'        => $usuarios,
                     'contenido_view' => 'usuario/usuario_view',
                     'js'             => array(base_url('assets/js/usuario/usuario_view.js'))
@@ -609,12 +592,9 @@ class Usuario extends MY_Controller {
                   'nombre'     => $this->input->post('nombre_usuario'),
                   'apellido'   => $this->input->post('apellido_usuario'),
                   'id_rol'     => $this->input->post('select_rol_usuario'),
-                  'id_empresa' => $this->input->post('select_empresa_usuario'),
                   'user_name'  => $this->input->post('user_name'),
                   'contrasenia'=> $this->input->post('contrasenia_usuario'),
                   'mail'       => $this->input->post('mail_usuario'),
-                  'id_departamento'     => $this->input->post('select_departamento'),
-                  'id_sub_departamento' => $this->input->post('select_sub_departamento')
                 );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 

@@ -3,10 +3,10 @@
 // $this->util->dump_exit($empresa);
 
 
-if(!$id_alerta)
+if(!$id_stock)
 {
   $titulo    = "Nueva Stock";
-  $id_alerta = 0;
+  $id_stock = 0;
 }
 else
 {
@@ -22,26 +22,17 @@ else
 </div><!-- /.row -->
 <?php 
 
-echo form_open('stock/guardarStock', array('id' => 'formulario-alerta', 'role' => 'form')); 
+echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' => 'form')); 
 ?>
 <div class="row">
     <div class="col-md-4">
         <div class="form-group has-feedback">
-            <label for="alerta_usuario">Usuarios</label>
+            <label for="stock_usuario">Usuarios</label>
             <select class="form-control" name="select_usuario" id="select_usuario">
                 <option value="0">Seleccionar --</option>
-                <?
-          foreach( $usuarios as $usuario ) 
-          {
-            if(($id_usuario==$usuario['id_usuario']))
-              echo "<option value='".$usuario['id_usuario']."' selected >".$usuario['apellido'].", ".$usuario['nombre']."</option>";
-            else  
-              echo "<option value='".$usuario['id_usuario']."'>".$usuario['apellido'].", ".$usuario['nombre']."</option>";
-
-          }
-          ?>
+                
             </select>
-            <input type="hidden" name="id_alerta" value="<? echo $id_alerta;?>">
+            <input type="hidden" name="id_stock" value="<? echo $id_stock;?>">
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
             <p class="text-center help-block hide">Debe seleccionar un usuario.</p>
         </div>
@@ -55,7 +46,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-alerta', 'role' =
         <div class="form-group has-feedback">
             <label for="fecha">Fecha</label><br>
             <input form-control type="text" name='fecha_mensaje' id="fecha_mensaje" autocomplete="off"
-                value='<?echo Util::fecha($fecha_mensaje)?>'>
+                value=''>
             <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
             <p class="text-center help-block hide">Debe seleccionar una fecha.</p>

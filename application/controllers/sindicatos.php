@@ -31,7 +31,7 @@ class Sindicatos extends MY_Controller {
   // --------------------------------------------------------------------
 
   /**
-   * cargar la vista con el listado de empresas
+   * cargar la vista con el listado de sindicatos
    *
    * @access public
    * @return void
@@ -42,19 +42,18 @@ class Sindicatos extends MY_Controller {
 
     // obtenemos lso sindicatos
     $sindicatos  = $this->sindicatos_model->obtenerSindicatos();
-    // $this->util->dump_exit($empresas->result());
+    // $this->util->dump_exit($sindicatos->result());
     
   
     foreach( $sindicatos->result() as $row )
     {     
 
-      $sindicatos_validos[] = array('id_departamento' => (int)$row->id_departamento,
-                                  'nombre_empresa'  => $row->nombre_empresa,
+      $sindicatos_validos[] = array('id_sindicato' => (int)$row->id_sindicato,
                                   'descripcion'     => $row->descripcion
                                   );  
     }
 
-    // $this->util->dump_exit($empresas_validas);
+    // $this->util->dump_exit($sindicatos_validas);
 
     // datos pasados a la vista
     $data = array(
@@ -71,7 +70,7 @@ class Sindicatos extends MY_Controller {
     {      
       // guardamos el log
       $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se elimino el departamento con &eacute;xito.');
+      $this->session->set_flashdata('exito', 'Se elimino el sindicato con &eacute;xito.');
       redirect('sindicatos/listado','refresh');    
     }
     else
@@ -87,16 +86,15 @@ class Sindicatos extends MY_Controller {
    * @access public
    * @return void
    */
-  public function guardarDepartamento() {
+  public function guardarSindicato() {
 
     // cargamos el modelo
     $this->load->model('sindicatos_model');
     
     // datos pasados al modelo
     $data = array(
-                  'id_departamento'    => $this->input->post('id_departamento'),
-                  'id_empresa'         => $this->input->post('select_empresa'),
-                  'nombre_departamento'=> $this->input->post('nombre_departamento')
+                  'id_sindicato'=> $this->input->post('id_sindicato'),
+                  'nombre_sindicato'=> $this->input->post('nombre_sindicato')
                 );
     
      //guardamos los datos de la empresa 
@@ -104,20 +102,20 @@ class Sindicatos extends MY_Controller {
      
     // $this->util->dump_exit($data);
 
-    //si guardamos un nuevo departamento
-    if($this->input->post('id_departamento')==0)
+    //si guardamos un nuevo sindicato
+    if($this->input->post('id_sindicato')==0)
     {
       // guardamos el log
       $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se ingreso el Departamento con &eacute;xito.');  
-      redirect('departamentos/nuevoDepartamento/','refresh');
+      $this->session->set_flashdata('exito', 'Se ingreso el Sindicato con &eacute;xito.');  
+      redirect('sindicatos/nuevoSindicato/','refresh');
     }
     else
     {
       // guardamos el log
       $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se modifico el Departamento con &eacute;xito.');
-      redirect('departamentos/nuevoDepartamento/'.$this->input->post('id_departamento'),'refresh');
+      $this->session->set_flashdata('exito', 'Se modifico el Sindicato con &eacute;xito.');
+      redirect('sindicatos/nuevoSindicato/'.$this->input->post('id_sindicato'),'refresh');
     }
     
     
@@ -133,46 +131,31 @@ class Sindicatos extends MY_Controller {
    * @access public
    * @return void
    */
-  public function nuevoDepartamento($id_departamento=0) {
+  public function nuevoSindicato($id_sindicato=0) {
     // cargamos el modelo
     $this->load->model('sindicatos_model');
 
     $this->load->helper('form');
 
-    // obtenemos las empresas
-    $empresas = $this->sindicatos_model->obtenerEmpresa();
-
-    // recorremos las liquidaciones del usuario obtenidas
-    foreach( $empresas->result() as $row )
-    {     
-
-      $empresas_validas[] = array('id_empresa' => (int)$row->id_empresa,
-                                  'nombre_empresa'  => $row->nombre_empresa
-                                  );  
-    }
-
     // si es nueva le pasamos estos datos a la vista
-    if($id_departamento==0)
+    if($id_sindicato==0)
     {
-      // $this->util->dump_exit($empresas->row());
+      // $this->util->dump_exit($sindicatos->row());
       $data = array(
-                    'empresas'       => $empresas_validas,
                     'contenido_view' => 'sindicatos/sindicato_view',
-                    'js'             => array(base_url('assets/js/departamentos/sindicato_view.js'))
+                    'js'             => array(base_url('assets/js/sindicatos/sindicato_view.js'))
                     );  
        // $this->util->dump_exit($data);
     }
     else
     {
-      $departamentos = $this->sindicatos_model->obtenerDepartamentos($id_departamento);
+      $sindicatos = $this->sindicatos_model->obtenerSindicato($id_sindicato);
   
-      // $this->util->dump_exit($departamentos->row());
-      $data = array('empresas'           => $empresas_validas,
-                    'id_departamento'    => $departamentos->row()->id_departamento,
-                    'nombre_departamento'=> $departamentos->row()->descripcion,
-                    'id_empresa'         => $departamentos->row()->id_empresa,
+      // $this->util->dump_exit($sindicatos->row());
+      $data = array('id_sindicato'    => $sindicatos->row()->id_sindicato,
+                    'nombre_sindicato'=> $sindicatos->row()->descripcion,
                     'contenido_view'     => 'sindicatos/sindicato_view',
-                    'js'                 => array(base_url('assets/js/departamentos/sindicato_view.js'))
+                    'js'                 => array(base_url('assets/js/sindicatos/sindicato_view.js'))
                     ); 
     }    
 
@@ -186,16 +169,16 @@ class Sindicatos extends MY_Controller {
    * @access public
    * @return void
    */
-  public function eliminar($id_departamento=0) {
+  public function eliminar($id_sindicato=0) {
     // cargamos el modelo
     $this->load->model('sindicatos_model');
 
     $this->load->helper('form');
 
-    // obtenemos las empresas
-    $this->sindicatos_model->eliminar($id_departamento);
+    // obtenemos las sindicatos
+    $this->sindicatos_model->eliminar($id_sindicato);
 
-     // $this->util->dump_exit($empresas_validas);
+     // $this->util->dump_exit($sindicatos_validas);
     
     // $this->load->view('iframe_view', $data);
   }

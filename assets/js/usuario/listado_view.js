@@ -155,7 +155,6 @@ var
         { bSortable: true },
         { bSortable: true },
         { bSortable: true },
-        { bSortable: true },
         { bSortable: false }
       ]
     });

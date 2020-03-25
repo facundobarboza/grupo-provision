@@ -102,7 +102,7 @@ class Stock_model extends MY_Model {
     $this->db->select("*", FALSE)
              ->from("ubicacion");
     
-    $result = $this->db->get()
+    $result = $this->db->get();
     
 
     // Util::dump_exit($result->row());
@@ -142,13 +142,12 @@ class Stock_model extends MY_Model {
    * @param  integer $login
    * @return array
    */
-  public function obtenerAlertas() {   
+  public function obtenerStocks() {   
     
-    $id_empresa = $this->session->userdata('id_empresa');
-    $this->db->select("id_alerta, mensaje, apellido,nombre,fecha_mensaje", FALSE)
-           ->from($this->_table)
-           ->join('usuario',$this->_table.'.id_usuario=usuario.id_usuario')
-           ->where('usuario.id_empresa', $id_empresa);     
+    $this->db->select("*", FALSE)
+           ->from($this->_table);
+           // ->join('usuario',$this->_table.'.id_usuario=usuario.id_usuario')
+           // ->where('cantidad', 0);     
     
     $result = $this->db->get();
 

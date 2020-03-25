@@ -14,7 +14,6 @@
                     <th>Nombre</th>
                     <th>Apellido</th>
                     <th>Mail</th>
-                    <th>Empresa</th>
                     <th>Usuario</th>
                     <th>Modificar</th>
                 </tr>
@@ -34,9 +33,6 @@
                     </td>
                     <td>
                         <?php echo $usuario['mail']; ?>
-                    </td>
-                    <td>
-                        <?php echo $usuario['nombre_empresa']; ?>
                     </td>
                     <td>
                         <?php echo $usuario['user_name']; ?>

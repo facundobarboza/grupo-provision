@@ -1,7 +1,6 @@
 var
-    $formulario           = $("#formulario-departamento"),
-    $select_empresa       = $('#select_empresa'),
-    $nombre_departamento    = $('#nombre_departamento')
+    $formulario           = $("#formulario-sindicato"),
+    $nombre_sindicato    = $('#nombre_sindicato')
 
 // DOM ready!
 $(function() {
@@ -11,48 +10,28 @@ $(function() {
   $formulario.on("submit", function(e) {
     var
         error               = false,
-        nombre_departamento = $nombre_departamento.val(),
-        select_empresa      = $select_empresa.val();
+        nombre_sindicato = $nombre_sindicato.val(),
 
-    // no ingreso
-    if( select_empresa == 0 )
+    
+    if( nombre_sindicato == "")
     {
       error = true;
 
-      $select_empresa
+      $nombre_sindicato
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
-        .eq(0);
+        .eq(0)
+        .removeClass("hide");
 
-      $select_empresa
+      $nombre_sindicato
         .parent()
         .find(".text-center")
         .eq(0)
         .removeClass("hide");
-
     }
-    else
-    {
-      if( nombre_departamento == "")
-      {
-        error = true;
-
-        $nombre_departamento
-          .parent()
-          .addClass("has-error")
-          .find(".form-control-feedback")
-          .eq(0)
-          .removeClass("hide");
-
-        $nombre_departamento
-          .parent()
-          .find(".text-center")
-          .eq(0)
-          .removeClass("hide");
-      }
       
-    }    
+        
 
     if( !error )
     {

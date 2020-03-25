@@ -20,8 +20,8 @@
     <table id="datatable-sindicatos" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Nombre Sindicato</th>
-          <th>Empresa</th>
           <th>Modificar / Eliminar</th>
         </tr>
       </thead>
@@ -30,12 +30,13 @@
       foreach( $sindicatos as $sindicato ) { ?>
         <tr>
           <td>
-            <?php echo $sindicato['descripcion']; ?>
+            <?php echo $sindicato['id_sindicato']; ?>
           </td>
           <td>
-            <?php echo $sindicato['nombre_empresa']; ?>
+            <?php echo $sindicato['descripcion']; ?>
           </td>
-          <td width="160px">
+          
+          <td width="60px">
             <div class="info" data-id="<?php echo $sindicato['id_sindicato'] ?>"></div>
             <div class="text-center">
               <button type="button" class="btn btn-default btn-xs btn-modificar-sindicato" title="Modificar sindicato">

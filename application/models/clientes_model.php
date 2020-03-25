@@ -35,8 +35,8 @@ class Clientes_model extends MY_Model {
     {
       $this->db->set('nombre_cliente',utf8_encode($data['nombre_cliente']))
               ->set('apellido_cliente',utf8_encode($data['apellido_cliente']))
-              ->set('dni_cliente',utf8_encode($data['dni_cliente']))
-              ->set('numero_cliente',utf8_encode($data['numero_cliente']))
+              ->set('dni',utf8_encode($data['dni_cliente']))
+              ->set('nro_cliente',utf8_encode($data['numero_cliente']))
               ->set('id_sindicato_cliente',utf8_encode($data['id_sindicato_cliente']))
              ->insert($this->_table);
     }
@@ -46,8 +46,8 @@ class Clientes_model extends MY_Model {
       $sql = "UPDATE ".$this->_table."
               SET nombre_cliente       = '".utf8_encode($data['nombre_cliente'])."',
                   apellido_cliente     = '".utf8_encode($data['apellido_cliente'])."',
-                  dni_cliente          = '".utf8_encode($data['dni_cliente'])."',
-                  numero_cliente       = '".utf8_encode($data['numero_cliente'])."',
+                  dni                  = '".utf8_encode($data['dni_cliente'])."',
+                  nro_cliente       = '".utf8_encode($data['numero_cliente'])."',
                   id_sindicato_cliente = '".utf8_encode($data['id_sindicato_cliente'])."'
               WHERE id_cliente = ".$data['id_cliente'].";";
               
@@ -76,6 +76,28 @@ class Clientes_model extends MY_Model {
     return $result;
   }
 
+
+  // --------------------------------------------------------------------
+
+  /**
+   * Obtener los datos de la empresa
+   *
+   * @access public
+   * @param  integer $login
+   * @return array
+   */
+  public function ListarClientes() {
+    $this->db->select("*", FALSE)
+             ->from($this->_table)
+             ->join("sindicatos", "id_sindicato_cliente=id_sindicato")
+             ->where('clientes.activo', 1);
+    $result = $this->db->get();
+
+    // Util::dump_exit($result->row());
+
+    return $result;
+  }
+
    // --------------------------------------------------------------------
 
   /**
@@ -85,20 +107,12 @@ class Clientes_model extends MY_Model {
    * @param  integer $login
    * @return array
    */
-  public function obtenerDepartamentos($id_empresa=0) {   
-
-    //si es nueva la empresa
-    if($id_empresa==0)
-    {
-      $this->db->select("*", FALSE)
-             ->from($this->_table);
-    }
-    else
-    {
-      $this->db->select("*", FALSE)
-             ->from($this->_table)
-             ->where('id_empresa', $id_empresa); 
-    }
+  public function obtenerSindicatos() {   
+   
+    $this->db->select("*")
+           ->from("sindicatos")
+           ->where('activo', 1); 
+ 
     $result = $this->db->get();
 
     // Util::dump_exit($result->row());
@@ -144,11 +158,11 @@ class Clientes_model extends MY_Model {
    * @param  integer $id_empresa
    * @return array
    */
-  public function eliminar($id_empresa=0) {
+  public function eliminar($id_cliente=0) {
    //si existe modificamos
   $sql = "UPDATE ".$this->_table."
             SET activo  = 0
-            WHERE id_empresa = ".$id_empresa.";";
+            WHERE id_cliente = ".$id_cliente.";";
     $this->db->query($sql);
 
     // Util::dump_exit($result->row());

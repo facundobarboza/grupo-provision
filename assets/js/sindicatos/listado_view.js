@@ -52,7 +52,7 @@ var
         });
       
       //pasamos por parametro el id
-      $iframe_modificar_sindicato.attr('src',appGeneral.obtenerSiteUrl() + "sindicatos/nuevoDepartamento/" + $info.data("id"));
+      $iframe_modificar_sindicato.attr('src',appGeneral.obtenerSiteUrl() + "sindicatos/nuevoSindicato/" + $info.data("id"));
 
        // window.location = appGeneral.obtenerSiteUrl() + "empresas/nueva/" + $info.data("id");
       
@@ -67,7 +67,7 @@ var
         });
       
       //pasamos por parametro el id
-      $iframe_modificar_sindicato.attr('src',appGeneral.obtenerSiteUrl() + "sindicatos/nuevoDepartamento/");
+      $iframe_modificar_sindicato.attr('src',appGeneral.obtenerSiteUrl() + "sindicatos/nuevoSindicato/");
 
     });
 

@@ -40,23 +40,31 @@ class Stock extends MY_Controller {
     // cargamos el modelo
     $this->load->model(array('stock_model'));
 
-    // obtenemos el recibo de sueldo
-    $stock = $this->stock_model->obtenerAlertas();
+  // echo "entro";exit;
+    $stock = $this->stock_model->obtenerStocks();
     // $this->util->dump_exit($stock->result());    
   
     foreach( $stock->result() as $row )
     {
-      $stock_validas[] = array( 'id_stock'     => (int)$row->id_stock,
-                                  'nombre'        => $row->apellido.", ".$row->nombre,
-                                  'mensaje'       => $row->mensaje,
-                                  'fecha_mensaje' => $row->fecha_mensaje
+      $stock_validas[] = array( 'id_stock'            => (int)$row->id_stock,
+                                'codigo_patilla'      => $row->codigo_patilla,
+                                'codigo_color'        => $row->codigo_color,
+                                'descripcion_color'   => $row->descripcion_color,
+                                'nro_codigo_interno'  => $row->nro_codigo_interno,
+                                'letra_color_interno' => $row->letra_color_interno,
+                                'id_tipo_armazon'     => $row->id_tipo_armazon,
+                                'id_material'         => $row->id_material,
+                                'id_ubicacion'        => $row->id_ubicacion,
+                                'cantidad'            => $row->cantidad,
+                                'costo'               => $row->costo,
+                                'precio_venta'        => $row->precio_venta
                                   );  
     }
     // $this->util->dump_exit($empresas_validas);
 
     // datos pasados a la vista
     $data = array(
-      'stock'       => $stock_validas,
+      'stocks'       => $stock_validas,
       'contenido_view' => 'stock/listado_view',
       'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),
       'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
@@ -146,19 +154,21 @@ class Stock extends MY_Controller {
     $this->load->helper('form');
 
     // obtenemos los tipo de armazones
-    $tipo_armazon = $this->stock_model->obtenerTipoArmazon();
-
-    foreach( $tipo_armazon->result() as $row )
+    $tipo_armazon_r = $this->stock_model->obtenerTipoArmazon();
+    
+    foreach( $tipo_armazon_r->result() as $row )
     {     
       $tipo_armazon[] = array('id_tipo_armazon' => (int)$row->id_tipo_armazon,
-                                  'descripcion'     => $row->descripcion
+                                  'descripcion' => $row->descripcion
                               );  
     }
 
-    // obtenemos los tipo de armazones
-    $ubicacion = $this->stock_model->obtenerUbicacion();
 
-    foreach( $ubicacion->result() as $row )
+
+    // obtenemos los tipo de armazones
+    $ubicacion_r = $this->stock_model->obtenerUbicacion();
+
+    foreach( $ubicacion_r->result() as $row )
     {     
       $ubicacion[] = array('id_ubicacion' => (int)$row->id,
                             'descripcion'     => $row->descripcion
@@ -166,9 +176,9 @@ class Stock extends MY_Controller {
     }
 
     // obtenemos los tipo de armazones
-    $material = $this->stock_model->obtenerMateriales();
+    $material_r = $this->stock_model->obtenerMateriales();
 
-    foreach( $material->result() as $row )
+    foreach( $material_r->result() as $row )
     {     
       $material[] = array('id_material' => (int)$row->id,
                             'descripcion'     => $row->descripcion

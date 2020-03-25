@@ -15,7 +15,7 @@ class archivo_model extends MY_Model {
 
     // establecemos el esquema y la tabla
     $this->_schema = '';
-    $this->_table  = 'archivos';
+    $this->_table  = 'fichas';
   }
    // --------------------------------------------------------------------
 
