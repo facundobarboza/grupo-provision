@@ -49,8 +49,14 @@
         <li>
             <a href="<?php echo site_url('sindicatos/listado') ?>" class="collapse-item item-menu">Sindicatos </a>
         </li>
-        <li>
-            <a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">Stock </a>
+        <li data-toggle="collapse" data-target="#stock">
+            <span class="collapse-item">Stock</span>
+            <ul class="nav nav-list collapse" id="stock">
+                <li><a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">- Listado </a>
+                </li>
+                <li><a href="<?php echo site_url('stock/nuevo') ?>" class="collapse-item item-menu">- Nuevo
+                stock</a></li>
+            </ul>
         </li>
         <li data-toggle="collapse" data-target="#usuarios">
             <span class="collapse-item">Usuarios</span>
