@@ -54,7 +54,7 @@
             <ul class="nav nav-list collapse" id="stock">
                 <li><a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">- Listado </a>
                 </li>
-                <li><a href="<?php echo site_url('stock/nuevo') ?>" class="collapse-item item-menu">- Nuevo
+                <li><a href="<?php echo site_url('stock/nuevoStock') ?>" class="collapse-item item-menu">- Nuevo
                 stock</a></li>
             </ul>
         </li>
