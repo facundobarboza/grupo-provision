@@ -36,12 +36,13 @@ footer {
   position: fixed;
   z-index: 1;
   top: 0;
-  left: 0;
-  background-color: #f8f8f8;
+  left: -1;
+  /* background-color: #f8f8f8; */
+  background-color: #32373d;
   border: 1px solid #e7e7e7;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
+  padding-top: 50px;
   text-transform: uppercase;
 }
 
@@ -58,7 +59,8 @@ footer {
   padding: 8px 8px 8px 15px;
   text-decoration: none;
   font-size: 11px;
-  color: #818188;
+  /* color: #818188; */
+  color: rgba(255, 255, 255, 0.6);
   display: block;
   transition: 0.3s;
   cursor: pointer;
