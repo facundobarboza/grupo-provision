@@ -8,12 +8,13 @@
         </h4>
     </div>
 </div><!-- /.row-fluid -->
-<div class="row">
+<!-- <div class="row">
     <div class="col-md-12" align="right">
         <input type="button" id='nueva-stock' value="Agregar a Stock" class="btn btn-primary"
             title="Agregar un nuevo stock"><br>
-    </div>
-</div><!-- /.row -->
+    </div> -->
+</div>
+<!-- /.row -->
 <div class="row">
     <div class="col-md-12" align="center">
         &nbsp;&nbsp;&nbsp;

@@ -57,115 +57,6 @@
         width: 100%;
     }
 
-    #sidebar {
-        min-width: 300px;
-        max-width: 300px;
-        background: #32373d;
-        color: #fff;
-        transition: all 0.3s;
-        position: relative;
-    }
-
-    #sidebar .h6 {
-        color: #fff;
-    }
-
-    #sidebar.active {
-        margin-left: -300px;
-    }
-
-    #sidebar.active .custom-menu {
-        margin-right: -50px;
-    }
-
-    #sidebar.active .btn.btn-primary:before {
-        content: "\f054";
-        font-family: "FontAwesome";
-        left: 2px !important;
-    }
-
-    #sidebar.active .btn.btn-primary:after {
-        display: none;
-    }
-
-    #sidebar h1 {
-        margin-bottom: 20px;
-        font-weight: 700;
-        font-size: 20px;
-    }
-
-    #sidebar h1 .logo {
-        color: #fff;
-        display: block;
-        padding: 10px 30px;
-        background: #2f89fc;
-    }
-
-    #sidebar ul.components {
-        padding: 0;
-    }
-
-    #sidebar ul li {
-        font-size: 16px;
-    }
-
-    #sidebar ul li>ul {
-        margin-left: 10px;
-    }
-
-    #sidebar ul li>ul li {
-        font-size: 14px;
-    }
-
-    #sidebar ul li a {
-        padding: 15px 30px;
-        display: block;
-        color: rgba(255, 255, 255, .6);
-        border-bottom: 1px solid rgba(255, 255, 255, .05);
-    }
-
-    #sidebar ul li a span.notif {
-        position: relative;
-    }
-
-    #sidebar ul li a span.notif small {
-        position: absolute;
-        top: -3px;
-        bottom: 0;
-        right: -3px;
-        width: 12px;
-        height: 12px;
-        content: '';
-        background: red;
-        border-radius: 50%;
-        font-family: 'Poppins', Arial, sans-serif;
-        font-size: 8px;
-    }
-
-    #sidebar ul li a:hover {
-        color: #fff;
-        background: #2f89fc;
-        border-bottom: 1px solid #2f89fc;
-    }
-
-    #sidebar ul li.active>a {
-        background: transparent;
-        color: #fff;
-    }
-
-    #sidebar ul li.active>a:hover {
-        background: #2f89fc;
-        border-bottom: 1px solid #2f89fc;
-    }
-
-    #sidebar .custom-menu {
-        display: inline-block;
-        position: absolute;
-        top: 20px;
-        right: 0;
-        margin-right: -35px;
-    }
-
     .bg-wrap {
         width: 100%;
         position: relative;
@@ -277,6 +168,30 @@
     span.fa {
         margin-right: 4px;
     }
+
+    .navbar.navbar-default {
+        background-color: #32373d;
+        color: rgba(255, 255, 255, 0.6);
+        border: none;
+    }
+
+    .navbar.navbar-default .navbar-brand,
+    .navbar-default .navbar-nav>li>a {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .navbar-default .navbar-nav>li>a:hover,
+    .navbar-default .navbar-nav>li>a:focus,
+    .navbar-default .navbar-nav>.open>a,
+    .navbar-default .navbar-nav>.open>a:hover,
+    .navbar-default .navbar-nav>.open>a:focus {
+        color: #ffffff;
+        background-color: transparent;
+    }
+
+    .sidenav h6 {
+        color: #ffffff;
+    }
 </style>
 
 <nav class="navbar navbar-default menu-superior" role="navigation" style="position: relative;">
@@ -294,14 +209,16 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
+            <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?>
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo site_url('usuario/perfil') ?>" class="item-menu">Perfil</a></li>
                     <li><a href="<?php echo site_url('usuario/logout') ?>">Cerrar sesi&oacute;n</a></li>
                 </ul>
-            </li>
+            </li> -->
+            <li><a href="<?php echo site_url('usuario/perfil') ?>"><span class="fa fa-address-card"></span> Perfil</a></li>
+            <li><a href="<?php echo site_url('usuario/logout') ?>"><span class="fa fa-sign-out"></span> Cerrar sesi&oacute;n</a></li>
         </ul>
     </div>
     <!-- /.navbar-collapse -->
@@ -312,7 +229,7 @@
         <div class="img bg-wrap text-center" style="background-image: url(assets/images/anteojo-bg.jpg);">
             <div class="user-logo">
                 <img src="assets/images/logo-solo.png" width="50">
-                <h6><a style="color: white" href="<?php echo site_url('usuario/perfil') ?>"><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?></a></h6>
+                <h6><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?></h6>
             </div>
         </div>
         <ul>
