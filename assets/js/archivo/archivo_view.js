@@ -1,61 +1,38 @@
 var
-    $formulario               = $("#formulario-archivo"),
-    $select_empresa           = $('#select_empresa'),
-    $select_departamento      = $('#select_departamento'),
-    $select_sub_departamento  = $('#select_sub_departamento'),
-    $archivo                  = $('#archivo'),
-    $observacion              = $('#observacion'),
-    $fecha_vigencia           = $('#fecha_vigencia');
+    $formulario               = $("#formulario-fichas"),
+    $id_ficha                 = $("#id_ficha"),
+    $id_stock                 = $("#id_stock"),
+    $id_cliente               = $("#id_cliente"),
+
+    $beneficiario             = $("#beneficiario"),    
+    $delegacion               = $("#delegacion"),
+    $optica                   = $("#optica"),
+    $fecha                    = $("#fecha"),
+    $codigo_armazon           = $("#codigo_armazon"),
+    $color_armazon            = $("#color_armazon"),
+    $estado                   = $("#estado"),
+    $voucher                  = $("#voucher"),
+    $nro_pedido               = $("#nro_pedido"),
+    $grad_od_esf              = $("#grad_od_esf"),
+    $grad_od_cil              = $("#grad_od_cil"),
+    $eje_od                   = $("#eje_od"),
+    $grad_oi_esf              = $("#grad_oi_esf"),
+    $grad_oi_cil              = $("#grad_oi_cil"),
+    $eje_oi                   = $("#eje_oi"),
+    $comentario               = $("#comentario"),
+    $es_lejos                 = $("#es_lejos"),
+    $adicional                = $("#adicional"),
+    $descripcion_adicional    = $("#descripcion_adicional"),
+    $telefono                 = $("#telefono"),
+    $costo_adicional          = $("#costo_adicional"),
+    $sena_adicional           = $("#sena_adicional"),
+    $saldo_adicional          = $("#saldo_adicional");
+
 
 // DOM ready!
 $(function() {
 
-  id_departamento = $("#cookie_id_departamento").val();
-  //precargamos el select de departamento con el ultimo usado
-  if($select_empresa.val()>0)
-  {    
-
-    jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "sub_departamentos/traerDepartamento/"+$select_empresa.val()+"/"+id_departamento,
-            type: 'POST',
-            data: {
-                'id_empresa': $select_empresa.val()
-            },
-            async: true,
-            dataType: 'html',
-            contentType: 'application/x-www-form-urlencoded',
-            timeout: 10000,
-            success: function (data)
-            {
-              // alert(data);
-              $('#select_departamento').html(data);
-            }
-        });
-  }
-
-
-
-  if(id_departamento>0)
-  {    
-    id_sub_departamento = $("#cookie_id_sub_departamento").val();
-
-    jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "sub_departamentos/traerSubDepartamento/"+id_departamento+"/"+id_sub_departamento,
-            type: 'POST',
-            data: {
-                'id_departamento': $select_departamento.val()
-            },
-            async: true,
-            dataType: 'html',
-            contentType: 'application/x-www-form-urlencoded',
-            timeout: 10000,
-            success: function (data)
-            {
-              // alert(data);
-              $('#select_sub_departamento').html(data);
-            }
-        });
-  }
+  
 
   // establecer los mensajes del datatable
     datatable_es.sLengthMenu   = "Mostrando _MENU_ archivos por p&aacute;gina";
@@ -82,7 +59,7 @@ $(function() {
       ]
     });
 
-  $fecha_vigencia.datepicker({
+  $fecha.datepicker({
           firstDay: 1,
           dateFormat: 'dd-mm-yy',
           monthNames: ['Enero', 'Febreo', 'Marzo',
@@ -93,127 +70,263 @@ $(function() {
 
   $formulario.on("submit", function(e) {
     var
-        error                   = false,
-        select_empresa          = $select_empresa.val(),
-        select_departamento     = $select_departamento.val(),
-        select_sub_departamento = $select_sub_departamento.val(),
-        archivo                 = $archivo.val(),
-        observacion             = $observacion.val(),
-        fecha_vigencia          = $fecha_vigencia.val();
+        error                 = false,
+        beneficiario          = $beneficiario.val(),
+        delegacion            = $delegacion.val(),
+        optica                = $optica.val(),
+        fecha                 = $fecha.val(),
+        codigo_armazon        = $codigo_armazon.val(),
+        color_armazon         = $color_armazon.val(),
+        estado                = $estado.val(),
+        voucher               = $voucher.val(),
+        nro_pedido            = $nro_pedido.val(),
+        grad_od_esf           = $grad_od_esf.val(),
+        grad_od_cil           = $grad_od_cil.val(),
+        eje_od                = $eje_od.val(),
+        grad_oi_esf           = $grad_oi_esf.val(),
+        grad_oi_cil           = $grad_oi_cil.val(),
+        eje_oi                = $eje_oi.val(),
+        comentario            = $comentario.val(),
+        es_lejos              = $es_lejos.val(),
+        adicional             = $adicional.val(),
+        descripcion_adicional = $descripcion_adicional.val(),
+        telefono              = $telefono.val(),
+        costo_adicional       = $costo_adicional.val(),
+        sena_adicional        = $sena_adicional.val(),
+        saldo_adicional       = $saldo_adicional.val();
 
-
-    // no ingreso
-    if( select_empresa == 0 )
+    
+    if (beneficiario == "" )
     {
       error = true;
-
-      $select_empresa
-        .parent()
-        .addClass("has-error")
-        .find(".form-control-feedback")
-        .eq(0);
-
-      $select_empresa
-        .parent()
-        .find(".text-center")
-        .eq(0)
-        .removeClass("hide");
+      $beneficiario.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $beneficiario.parent().find(".text-center").eq(0).removeClass("hide");
     }
     else
     {
-      if( select_departamento == 0)
-      {
-        error = true;
-
-        $select_departamento
-          .parent()
-          .addClass("has-error")
-          .find(".form-control-feedback")
-          .eq(0);
-
-        $select_departamento
-          .parent()
-          .find(".text-center")
-          .eq(0)
-          .removeClass("hide");
-      }
-      else
-      {
-        if( select_sub_departamento == 0)
-        {
-          error = true;
-
-          $select_sub_departamento
-            .parent()
-            .addClass("has-error")
-            .find(".form-control-feedback")
-            .eq(0);
-
-          $select_sub_departamento
-            .parent()
-            .find(".text-center")
-            .eq(0)
-            .removeClass("hide");
-        }
-        else
-        {
-          if( fecha_vigencia == "")
-          {
-            error = true;
-
-            $fecha_vigencia
-              .parent()
-              .addClass("has-error")
-              .find(".form-control-feedback")
-              .eq(0);
-
-            $fecha_vigencia
-              .parent()
-              .find(".text-center")
-              .eq(0)
-              .removeClass("hide");
-          }
-          else
-          {
-            if( archivo == "")
-            {
-              error = true;
-
-              $archivo
-                .parent()
-                .addClass("has-error")
-                .find(".form-control-feedback")
-                .eq(0);
-
-              $archivo
-                .parent()
-                .find(".text-center")
-                .eq(0)
-                .removeClass("hide");
-            }
-            // else
-            // {
-            //   if( observacion == "")
-            //   {
-            //     error = true;
-
-            //     $observacion
-            //       .parent()
-            //       .addClass("has-error")
-            //       .find(".form-control-feedback")
-            //       .eq(0);
-
-            //     $observacion
-            //       .parent()
-            //       .find(".text-center")
-            //       .eq(0)
-            //       .removeClass("hide");
-            //   }        
-            // }           
-          }          
-        }        
-      }      
-    }    
+      $beneficiario.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (delegacion == "" )
+    {
+      error = true;
+      $delegacion.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $delegacion.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $delegacion.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (optica == "" )
+    {
+      error = true;
+      $optica.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $optica.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $optica.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (fecha == "" )
+    {
+      error = true;
+      $fecha.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $fecha.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $fecha.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (codigo_armazon == "" )
+    {
+      error = true;
+      $codigo_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $codigo_armazon.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $codigo_armazon.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (color_armazon == "" )
+    {
+      error = true;
+      $color_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $color_armazon.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $color_armazon.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (estado == "" )
+    {
+      error = true;
+      $estado.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $estado.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $estado.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (voucher == "" )
+    {
+      error = true;
+      $voucher.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $voucher.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $voucher.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (nro_pedido == "" )
+    {
+      error = true;
+      $nro_pedido.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $nro_pedido.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $nro_pedido.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (grad_od_esf == "" )
+    {
+      error = true;
+      $grad_od_esf.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $grad_od_esf.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $grad_od_esf.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (grad_od_cil == "" )
+    {
+      error = true;
+      $grad_od_cil.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $grad_od_cil.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $grad_od_cil.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (eje_od == "" )
+    {
+      error = true;
+      $eje_od.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $eje_od.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $eje_od.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (grad_oi_esf == "" )
+    {
+      error = true;
+      $grad_oi_esf.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $grad_oi_esf.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $grad_oi_esf.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (grad_oi_cil == "" )
+    {
+      error = true;
+      $grad_oi_cil.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $grad_oi_cil.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $grad_oi_cil.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (eje_oi  == "" )
+    {
+      error = true;
+      $eje_oi.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $eje_oi.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $eje_oi.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (comentario == "" )
+    {
+      error = true;
+      $comentario.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $comentario.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $comentario.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (es_lejos == "" )
+    {
+      error = true;
+      $es_lejos.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $es_lejos.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $es_lejos.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (adicional == "" )
+    {
+      error = true;
+      $adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $adicional.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $adicional.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (descripcion_adicional == "" )
+    {
+      error = true;
+      $descripcion_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $descripcion_adicional.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $descripcion_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (telefono == "" )
+    {
+      error = true;
+      $telefono.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $telefono.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $telefono.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (costo_adicional == "" )
+    {
+      error = true;
+      $costo_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $costo_adicional.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $costo_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (sena_adicional == "" )
+    {
+      error = true;
+      $sena_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $sena_adicional.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $sena_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    if (saldo_adicional== "" )
+    {
+      error = true;
+      $saldo_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+      $saldo_adicional.parent().find(".text-center").eq(0).removeClass("hide");
+    }
+    else
+    {
+      $saldo_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
+    }
+    
 
     if(! error )
     {
@@ -246,46 +359,6 @@ $(function() {
     }
     else
       e.preventDefault();
-  });
-
-  $select_empresa.change(function(){
-    // alert()
-    jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "sub_departamentos/traerDepartamento/"+$select_empresa.val(),
-            type: 'POST',
-            data: {
-                'id_empresa': $select_empresa.val()
-            },
-            async: true,
-            dataType: 'html',
-            contentType: 'application/x-www-form-urlencoded',
-            timeout: 10000,
-            success: function (data)
-            {
-              // alert(data);
-              $('#select_departamento').html(data);
-            }
-        });
-  });
-
-   $select_departamento.change(function(){
-    
-    jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "sub_departamentos/traerSubDepartamento/"+$select_departamento.val(),
-            type: 'POST',
-            data: {
-                'id_departamento': $select_departamento.val()
-            },
-            async: true,
-            dataType: 'html',
-            contentType: 'application/x-www-form-urlencoded',
-            timeout: 10000,
-            success: function (data)
-            {
-              // alert(data);
-              $('#select_sub_departamento').html(data);
-            }
-        });
   });
 
     // boton para eliminar un archivo
@@ -321,3 +394,43 @@ $(function() {
     });
   
 });
+
+function filtrar_teclas(e, goods, invert)
+{
+  var key, keychar;
+  key = getkey(e);
+  if (key == null) return false;
+
+  // get character
+  keychar = String.fromCharCode(key);
+  keychar = keychar.toLowerCase();
+  goods = goods.toLowerCase();
+
+  // check goodkeys
+  //si invert==true checkea que las teclas que se pasaron no aparezcan
+  //de lo contrario solo deja imprimir las teclas que se pasaron
+  if (arguments.length==3 && invert)
+  {
+    if (goods.indexOf(keychar) == -1)
+      return true;
+  }
+  else if (goods.indexOf(keychar) != -1)
+    return true;
+
+  // control keys
+  if ( key==null || key==0 || key==8 || key==9 || key==13 || key==27 )
+     return true;
+
+  // else return false
+  return false;
+}
+
+function getkey(e)
+{
+  if (window.event)
+    return window.event.keyCode;
+  else if (e)
+    return e.which;
+  else
+    return null;
+}

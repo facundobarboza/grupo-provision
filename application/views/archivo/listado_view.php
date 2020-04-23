@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
   <h4 class="page-header text-uppercase">
-      Listado de Archivos Subidos
+      Listado Fichas
     </h4>
   </div>
 </div><!-- /.row-fluid -->
@@ -17,72 +17,61 @@
 </div><!-- /.row -->
 <div class="row">
   <div class="col-md-12 ">
-    <table id="datatable-archivo" class="table table-striped table-bordered table-hover" width="100%">
+    <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>  
           <th>#</th>
-          <th>Empresa</th>
-          <th>Departamento</th>
-          <th>Sub Departamento</th>
-          <th>Nombre archivo</th>
-          <th>Vigencia</th>
-          <th>Observacion</th>
-          <th>Ver</th>
+          <th>ID</th>
+          <th>Beneficiario</th>
+          <th>Optica</th>
+          <th>Codigo Armazon</th>
+          <th>Color Armazon</th>
+          <th>Estado</th>
+          <th>Fecha</th>
           <th>Modificar</th>
           <th>Eliminar</th>
         </tr>
       </thead>
       <tbody> 
       <?php 
-      foreach( $archivos as $archivo ) { ?>
+      foreach( $fichas as $ficha ) { ?>
         <tr>
           <td align="center">
-            <div class="info" data-id="<?php echo $archivo['id_archivo'] ?>"></div>
+            <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
             <input type="checkbox" class="cb-eliminar">
           </td>
           <td>
-            <?php echo $archivo['nombre_empresa']; ?>
+            <?php echo $ficha['id_ficha']; ?>
           </td>
           <td>
-            <?php echo $archivo['departamento']; ?>
+            <?php echo $ficha['beneficiario']; ?>
           </td>
           <td>
-            <?php echo $archivo['sub_departamento']; ?>
+            <?php echo $ficha['optica']; ?>
           </td>
           <td>
-            <?php echo $archivo['nombre_archivo']; ?>
+            <?php echo $ficha['codigo_armazon']; ?>
           </td>
           <td>
-            <?php echo Util::fecha($archivo['fecha_vigencia']); ?>
+            <?php echo$ficha['color_armazon']; ?>
           </td>
           <td>
-            <?php echo $archivo['observacion']; ?>
+            <?php echo $ficha['estado']; ?>
+          </td>
+          <td>
+            <?php echo Util::fecha($ficha['fecha']); ?>
           </td>
           <td width="60px">
-            <div class="info" data-id="<?php echo $archivo['id_archivo'] ?>"></div>
+            <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
             <div class="text-center">
-              <?
-               $ruta = "../uploads/".$archivo['id_empresa']."/".$archivo['id_departamento']."/".$archivo['id_sub_departamento']."/".$archivo['nombre_archivo'];
-              ?>
-              <button type="button" class="btn btn-default btn-xs btn-mostrar-archivo" title="Mostrar Archivo">
-                 <a href="<?echo $ruta?>" 
-                  onclick="window.open(this.href, this.target); return false;">
-                <span class="glyphicon glyphicon-eye-open"></span>
-              </a>
-              </button>              
-            </div>
-          </td>
-          <td width="60px">
-            <div class="info" data-id="<?php echo $archivo['id_archivo'] ?>"></div>
-            <div class="text-center">
-              <button type="button" class="btn btn-default btn-xs btn-modificar-archivo" title="Modificar Archivo">
+              <button type="button" class="btn btn-default btn-xs btn-modificar-ficha" title="Modificar Archivo">
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
             </div>
           </td>
           <td width="60px">
             <div class="text-center">
-              <button type="button" class="btn btn-default btn-xs btn-eliminar-archivo" title="Eliminar archivo">
+              <button type="button" class="btn btn-default btn-xs btn-eliminar-ficha" title="Eliminar ficha">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </div>

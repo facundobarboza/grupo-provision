@@ -75,38 +75,66 @@ class archivo_model extends MY_Model {
   {
     // Util::dump_exit($data);
     //si no existe lo guardamos
-    $fecha_vigencia = Util::fecha_db($data['fecha_vigencia']);
+    $fecha = Util::fecha_db($data['fecha']);
 
-    if($data['id_archivo']==0)
+    if($data['id_ficha']==0)
     {
-
-      $this->db->set('id_sub_departamento',$data['id_sub_departamento'])
-                ->set('observacion',$data['observacion'])
-                ->set('fecha_vigencia',$fecha_vigencia)
-                ->set('nombre_archivo',$data['nombre_archivo'])
-                ->set('ruta',$data['ruta'])
-                ->set('size',$data['size'])
-                ->set('ancho',$data['ancho'])
-                ->set('largo',$data['largo'])
-                ->set('file_ext',$data['file_ext'])
-                ->set('tipo',$data['tipo'])
+      // Util::dump_exit($data);
+      $this->db->set('beneficiario', $data['beneficiario'])
+                ->set('delegacion', $data['delegacion'])
+                ->set('optica', $data['optica'])
+                ->set('fecha', $fecha)
+                ->set('codigo_armazon', $data['codigo_armazon'])
+                ->set('color_armazon', $data['color_armazon'])
+                ->set('estado', $data['estado'])
+                ->set('voucher', $data['voucher'])
+                ->set('nro_pedido', $data['nro_pedido'])
+                ->set('grad_od_esf', $data['grad_od_esf'])
+                ->set('grad_od_cil', $data['grad_od_cil'])
+                ->set('eje_od', $data['eje_od'])
+                ->set('grad_oi_esf', $data['grad_oi_esf'])
+                ->set('grad_oi_cil', $data['grad_oi_cil'])
+                ->set('eje_oi', $data['eje_oi'])
+                ->set('comentario', $data['comentario'])
+                ->set('es_lejos', $data['es_lejos'])
+                ->set('adicional', $data['adicional'])
+                ->set('descripcion_adicional', $data['descripcion_adicional'])
+                ->set('telefono', $data['telefono'])
+                ->set('costo_adicional', $data['costo_adicional'])
+                ->set('sena_adicional', $data['sena_adicional'])
+                ->set('saldo_adicional', $data['saldo_adicional'])
              ->insert($this->_table);
     }
     else
     {
       //si existe modificamos
       $sql = "UPDATE ".$this->_table."
-              SET id_sub_departamento = ".$data['id_sub_departamento'].",
-                  observacion         = '".$data['observacion']."',
-                  fecha_vigencia      = '".$fecha_vigencia."',
-                  nombre_archivo      = '".$data['nombre_archivo']."',
-                  ruta                = '".$data['ruta']."',
-                  size                = ".$data['size'].",
-                  ancho               = ".$data['nombre_archivo'].",
-                  largo                = ".$data['largo'].",
-                  file_ext            = '".$data['file_ext']."',
-                  tipo                = '".$data['tipo']."'
-              WHERE id_archivo = ".$data['id_archivo'].";";
+              SET 
+              beneficiario          = '".$data['beneficiario']."',
+              delegacion            = '".$data['delegacion']."',
+              optica                = '".$data['optica']."',
+              fecha                 = '".$fecha."',
+              codigo_armazon        = '".$data['codigo_armazon']."',
+              color_armazon         = '".$data['color_armazon']."',
+              estado                = '".$data['estado']."',
+              voucher               = '".$data['voucher']."',
+              nro_pedido            = '".$data['nro_pedido']."',
+              grad_od_esf           = '".$data['grad_od_esf']."',
+              grad_od_cil           = '".$data['grad_od_cil']."',
+              eje_od                = '".$data['eje_od']."',
+              grad_oi_esf           = '".$data['grad_oi_esf']."',
+              grad_oi_cil           = '".$data['grad_oi_cil']."',
+              eje_oi                = '".$data['eje_oi']."',
+              comentario            = '".$data['comentario']."',
+              es_lejos              = '".$data['es_lejos']."',
+              adicional             = '".$data['adicional']."',
+              descripcion_adicional = '".$data['descripcion_adicional']."',
+              telefono              = '".$data['telefono']."',
+              costo_adicional       = '".$data['costo_adicional']."',
+              sena_adicional        = '".$data['sena_adicional']."',
+              saldo_adicional       = '".$data['saldo_adicional']."'
+              WHERE id_ficha = ".$data['id_ficha'].";";
+              // echo $sql; die();
       $this->db->query($sql);
     }
   }
@@ -158,43 +186,12 @@ class archivo_model extends MY_Model {
    * @access public
    * @return array
    */
-  public function obtenerArchivos() {
+  public function obtenerFichas() {
    
-    $fecha = date("Y-m-d");
-    //si no es super admin filtramos por empresa
-    if($this->session->userdata('id_rol')!=1)
-    {
-      $id_empresa          = $this->session->userdata('id_empresa');
-      $id_departamento     = $this->session->userdata('id_departamento');
-      $id_sub_departamento = $this->session->userdata('id_sub_departamento');
-
-      $this->db->select("id_archivo,nombre_archivo,".$this->_table.".observacion,archivos.fecha_vigencia,nombre_empresa,departamento.descripcion as departamento,sub_departamento.descripcion as sub_departamento,ruta,sub_departamento.id_sub_departamento,departamento.id_departamento,empresa.id_empresa", FALSE)
+    
+    $this->db->select("*", FALSE)
              ->from($this->_table)
-             ->join('sub_departamento','sub_departamento.id_sub_departamento='.$this->_table.'.id_sub_departamento')
-             ->join('departamento','departamento.id_departamento=sub_departamento.id_departamento')
-             ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-             ->where('borrado', 0)
-             ->where('empresa.id_empresa', $id_empresa);
-
-            if($id_departamento>0)
-            {
-              $this->db->where('departamento.id_departamento', $id_departamento);
-            }
-
-            if($id_sub_departamento>0)
-            {
-              $this->db->where('sub_departamento.id_sub_departamento', $id_sub_departamento);
-            }
-    }
-    else
-    {
-      $this->db->select("id_archivo,nombre_archivo,".$this->_table.".observacion,archivos.fecha_vigencia,nombre_empresa,departamento.descripcion as departamento,sub_departamento.descripcion as sub_departamento,ruta,sub_departamento.id_sub_departamento,departamento.id_departamento,empresa.id_empresa", FALSE)
-             ->from($this->_table)
-             ->join('sub_departamento','sub_departamento.id_sub_departamento='.$this->_table.'.id_sub_departamento')
-             ->join('departamento','departamento.id_departamento=sub_departamento.id_departamento')
-             ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-             ->where('borrado', 0);
-    }
+            ->where('activo', 1);;   
     
     $result = $this->db->get();
     // Util::dump_exit($result->row());
@@ -272,11 +269,11 @@ class archivo_model extends MY_Model {
    * @param  integer $id_archivo
    * @return array
    */
-  public function eliminar($id_archivo=0) {
+  public function eliminar($id_ficha=0) {
    //si existe modificamos
   $sql = "UPDATE ".$this->_table."
-            SET borrado  = 1
-            WHERE id_archivo = ".$id_archivo.";";
+            SET activo  = 0
+            WHERE id_ficha = ".$id_ficha.";";
 // echo $sql; exit;
     $this->db->query($sql);
 
@@ -292,13 +289,10 @@ class archivo_model extends MY_Model {
    * @param  integer $login
    * @return array
    */
-  public function obtenerArchivo($id_archivo) {
-    $this->db->select("id_archivo,sub_departamento.id_sub_departamento,empresa.id_empresa,departamento.id_departamento,".$this->_table.".observacion,".$this->_table.".fecha_vigencia", FALSE)
+  public function obtenerFicha($id_ficha) {
+    $this->db->select("*", FALSE)
              ->from($this->_table)
-             ->join('sub_departamento','sub_departamento.id_sub_departamento='.$this->_table.'.id_sub_departamento')
-             ->join('departamento','departamento.id_departamento=sub_departamento.id_departamento')
-             ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-             ->where('id_archivo', $id_archivo);
+             ->where('id_ficha', $id_ficha);
     $result = $this->db->get();
 
     // Util::dump_exit($result->row());

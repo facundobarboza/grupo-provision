@@ -24,12 +24,12 @@ var
    */
   context.inicializar = function() {
     // establecer los mensajes del datatable
-    datatable_es.sLengthMenu   = "Mostrando _MENU_ archivos por p&aacute;gina";
-    datatable_es.sInfo         = "_START_ a _END_ de _TOTAL_ archivos";
-    datatable_es.sInfoEmpty    = "Mostrando de 0 a 0 de 0 archivos";
-    datatable_es.sInfoFiltered = "(filtrado de un total de _MAX_ archivos)";
+    datatable_es.sLengthMenu   = "Mostrando _MENU_ fichas por p&aacute;gina";
+    datatable_es.sInfo         = "_START_ a _END_ de _TOTAL_ fichas";
+    datatable_es.sInfoEmpty    = "Mostrando de 0 a 0 de 0 fichas";
+    datatable_es.sInfoFiltered = "(filtrado de un total de _MAX_ fichas)";
 
-    $datatable_archivos = $("#datatable-archivo").DataTable({
+    $datatable_fichas = $("#datatable-ficha").DataTable({
       "iDisplayLength"  : 50,
       "sPaginationType" : "full_numbers",
       "searching": true,        
@@ -43,14 +43,14 @@ var
         { bSortable: true },
         { bSortable: true },
         { bSortable: true },
-        { bSortable: false },
+        { bSortable: true },
         { bSortable: false },
         { bSortable: false }
       ]
     });
 
     // boton para descargar el recibo de sueldo
-    $datatable_archivos.on("click", ".btn-modificar-archivo", function() {
+    $datatable_fichas.on("click", ".btn-modificar-ficha", function() {
       
       var
           $this = $(this),
@@ -62,8 +62,8 @@ var
       
     });
 
-     // boton para eliminar un archivo
-    $datatable_archivos.on("click", ".btn-eliminar-archivo", function() {
+     // boton para eliminar un ficha
+    $datatable_fichas.on("click", ".btn-eliminar-ficha", function() {
       
       var
           $this = $(this),
@@ -71,15 +71,15 @@ var
       
       //pasamos por parametro el id
       // $iframe_modificar_empresa.attr('src',appGeneral.obtenerSiteUrl() + "empresas/nueva/" + $info.data("id"));
-      if(confirm("Esta seguro que quiere eliminar este archivo?"))
+      if(confirm("Esta seguro que quiere eliminar este ficha?"))
       {
-        id_archivo = $info.data("id");
+        id_ficha = $info.data("id");
 
        jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "archivo/eliminar/"+id_archivo,
+            url: appGeneral.obtenerSiteUrl() + "archivo/eliminar/"+id_ficha,
             type: 'POST',
             data: {
-                'id_archivo': id_archivo
+                'id_ficha': id_ficha
             },
             async: true,
             dataType: 'html',
@@ -96,7 +96,7 @@ var
 
     $("#eliminar-masivo").click(function(){
 
-      if(confirm("Esta seguro que quiere eliminar todos los archivos seleccionados?"))
+      if(confirm("Esta seguro que quiere eliminar todos los fichas seleccionados?"))
       {
         $(".cb-eliminar").each(function() {       
       
@@ -106,13 +106,13 @@ var
 
           if($this.is(':checked'))
           {
-            id_archivo = $info.data("id");
+            id_ficha = $info.data("id");
             
             jQuery.ajax({
-                  url: appGeneral.obtenerSiteUrl() + "archivo/eliminar/"+id_archivo,
+                  url: appGeneral.obtenerSiteUrl() + "archivo/eliminar/"+id_ficha,
                   type: 'POST',
                   data: {
-                      'id_archivo': id_archivo
+                      'id_ficha': id_ficha
                   },
                   async: true,
                   dataType: 'html',
