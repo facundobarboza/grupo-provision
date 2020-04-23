@@ -1,74 +1,56 @@
 var
-  $formulario = $("#formulario-alerta"),
+  $formulario = $("#formulario-stock"),
 
-  $id_stock = $("id_stock"),
-  $codigo_patilla = $("codigo_patilla"),
-  $codigo_color = $("codigo_color"),
-  $descripcion_color = $("descripcion_color"),
-  $nro_codigo_interno = $("nro_codigo_interno"),
-  $letra_color_interno = $("letra_color_interno"),
-  $Id_tipo_armazon = $("Id_tipo_armazon"),
-  $Id_material = $("Id_material"),
-  $Id_ubicacion = $("Id_ubicacion"),
-  $cantidad = $("cantidad"),
-  $costo = $("costo"),
-  $precio_venta = $("precio_venta")
+  $id_stock            = $("#id_stock"),
+  $codigo_patilla      = $("#codigo_patilla"),
+  $codigo_color        = $("#codigo_color"),
+  $descripcion_color   = $("#descripcion_color"),
+  $nro_codigo_interno  = $("#nro_codigo_interno"),
+  $letra_color_interno = $("#letra_color_interno"),
+  $id_tipo_armazon     = $("#id_tipo_armazon"),
+  $id_material         = $("#id_material"),
+  $id_ubicacion        = $("#id_ubicacion"),
+  $cantidad            = $("#cantidad"),
+  $costo               = $("#costo"),
+  $precio_venta        = $("#precio_venta");
 
 // DOM ready!
 $(function () {
 
-
-  $fecha_mensaje.datepicker({
-    firstDay: 1,
-    dateFormat: 'dd-mm-yy',
-    monthNames: ['Enero', 'Febreo', 'Marzo',
-      'Abril', 'Mayo', 'Junio',
-      'Julio', 'Agosto', 'Septiembre',
-      'Octubre', 'Noviembre', 'Diciembre'],
-    dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-  });
 
   // $fecha_vigencia.datepicker();
 
   $formulario.on("submit", function (e) {
     var
       error = false,
-      fecha_mensaje = $fecha_mensaje.val(),
-      Id_tipo_armazon = $Id_tipo_armazon.val();
-    mensaje = $mensaje.val();
+      codigo_patilla      = $codigo_patilla.val(),
+      codigo_color        = $codigo_color.val(),
+      descripcion_color   = $descripcion_color.val(),
+      nro_codigo_interno  = $nro_codigo_interno.val(),
+      letra_color_interno = $letra_color_interno.val(),
+      id_tipo_armazon     = $id_tipo_armazon.val(),
+      id_material         = $id_material.val(),
+      id_ubicacion        = $id_ubicacion.val(),
+      cantidad            = $cantidad.val(),
+      costo               = $costo.val(),
+      precio_venta        = $precio_venta.val();
 
     // no ingreso
-    if (Id_tipo_armazon == 0) {
+    if (codigo_patilla == "") {
       error = true;
 
-      $Id_tipo_armazon
+      $codigo_patilla
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0);
 
-      $Id_tipo_armazon
-        .parent()
-        .find(".text-center")
-        .eq(0)
-        .removeClass("hide");
-
-    }
-    else if (codigo_patilla == "") {
-      error = true;
-
-      $codigo_patilla
-        .parent()
-        .addClass("has-error")
-        .find(".form-control-feedback")
-        .eq(0)
-        .removeClass("hide");
-
       $codigo_patilla
         .parent()
         .find(".text-center")
         .eq(0)
         .removeClass("hide");
+
     }
     else if (codigo_color == "") {
       error = true;
@@ -77,9 +59,25 @@ $(function () {
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
-        .eq(0);
+        .eq(0)
+        .removeClass("hide");
 
       $codigo_color
+        .parent()
+        .find(".text-center")
+        .eq(0)
+        .removeClass("hide");
+    }
+    else if (descripcion_color == "") {
+      error = true;
+
+      $descripcion_color
+        .parent()
+        .addClass("has-error")
+        .find(".form-control-feedback")
+        .eq(0);
+
+      $descripcion_color
         .parent()
         .find(".text-center")
         .eq(0)
@@ -134,48 +132,48 @@ $(function () {
         .removeClass("hide");
 
     }
-    else if (stock_usuario == "") {
+    else if (id_tipo_armazon == 0) {
       error = true;
 
-      $stock_usuario
+      $id_tipo_armazon
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0);
 
-      $stock_usuario
+      $id_tipo_armazon
         .parent()
         .find(".text-center")
         .eq(0)
         .removeClass("hide");
 
     }
-    else if (Id_material == "") {
+    else if (id_material == 0) {
       error = true;
 
-      $Id_material
+      $id_material
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0);
 
-      $Id_material
+      $id_material
         .parent()
         .find(".text-center")
         .eq(0)
         .removeClass("hide");
 
     }
-    else if (Id_ubicacion == "") {
+    else if (id_ubicacion == 0) {
       error = true;
 
-      $Id_ubicacion
+      $id_ubicacion
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0);
 
-      $Id_ubicacion
+      $id_ubicacion
         .parent()
         .find(".text-center")
         .eq(0)
@@ -198,44 +196,45 @@ $(function () {
         .removeClass("hide");
 
     }
-    // else
-    //   if (costo == "") {
-    //     error = true;
+    else
+      if (costo == "") {
+        error = true;
 
-    //     $costo
-    //       .parent()
-    //       .addClass("has-error")
-    //       .find(".form-control-feedback")
-    //       .eq(0);
+        $costo
+          .parent()
+          .addClass("has-error")
+          .find(".form-control-feedback")
+          .eq(0);
 
-    //     $costo
-    //       .parent()
-    //       .find(".text-center")
-    //       .eq(0)
-    //       .removeClass("hide");
+        $costo
+          .parent()
+          .find(".text-center")
+          .eq(0)
+          .removeClass("hide");
 
-    //   }
-    //   else
-    //     if (precio_venta == "") {
-    //       error = true;
+      }
+      else
+        if (precio_venta == "") {
+          error = true;
 
-    //       $precio_venta
-    //         .parent()
-    //         .addClass("has-error")
-    //         .find(".form-control-feedback")
-    //         .eq(0);
+          $precio_venta
+            .parent()
+            .addClass("has-error")
+            .find(".form-control-feedback")
+            .eq(0);
 
-    //       $precio_venta
-    //         .parent()
-    //         .find(".text-center")
-    //         .eq(0)
-    //         .removeClass("hide");
+          $precio_venta
+            .parent()
+            .find(".text-center")
+            .eq(0)
+            .removeClass("hide");
+        }
 
-    //     }
-
-    if (!error) {
+    if (!error) 
+    {
     }
     else
       e.preventDefault();
+    // return false;
   });
 });

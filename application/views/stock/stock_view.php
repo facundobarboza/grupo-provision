@@ -2,16 +2,29 @@
 // echo $empresa[0]["id_empresa"];
 // $this->util->dump_exit($empresa);
 
-
-if(!$id_stock)
+if($stoks)
 {
-  $titulo    = "Nuevo Stock";
-  $id_stock = 0;
+    $id_stock            = $fichas->row()->id_stock;
+    $codigo_patilla      = $fichas->row()->codigo_patilla;
+    $codigo_color        = $fichas->row()->codigo_color;
+    $descripcion_color   = $fichas->row()->descripcion_color;
+    $nro_codigo_interno  = $fichas->row()->nro_codigo_interno;
+    $letra_color_interno = $fichas->row()->letra_color_interno;
+    $id_tipo_armazon     = $fichas->row()->id_tipo_armazon;
+    $id_material         = $fichas->row()->id_material;
+    $id_ubicacion        = $fichas->row()->id_ubicacion;
+    $cantidad            = $fichas->row()->cantidad;
+    $costo               = $fichas->row()->costo;
+    $precio_venta        = $fichas->row()->precio_venta;
+
+    $titulo = "Modificar Stock Producto ID - ".$id_stock;
 }
 else
 {
-  $titulo = "Modificar Stock";
+  $titulo    = "Nuevo Producto";
+  $id_stock = 0;
 }
+
 ?>
 <div class="row">
     <div class="col-md-6">
@@ -30,6 +43,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="codigo_patilla">Código patilla</label>
+        <input type="hidden" name="id_stock" value="<? echo $id_stock?>">
         <input type="text" class="form-control" name="codigo_patilla" id="codigo_patilla" autocomplete="off" autofocus maxlength="32" value="<? echo $codigo_patilla?>">
         <!-- <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>"> -->
         <span class="glyphicon glyphicon-remove form-control-feedba
@@ -90,8 +104,18 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-4">
         <div class="form-group has-feedback">
             <label for="stock_usuario">Tipo armazon</label>
-            <select class="form-control" name="Id_tipo_armazon" id="Id_tipo_armazon">
-                <option value="0">Seleccionar --</option>                
+            <select class="form-control" name="id_tipo_armazon" id="id_tipo_armazon">
+                <option value="0">Seleccionar --</option>
+                <?
+                  foreach( $tipo_armazon as $armazon ) 
+                  {
+                    if($id_tipo_armazon==$armazon['id_tipo_armazon']) 
+                      echo "<option value='".$armazon['id_tipo_armazon']."' selected >".$armazon['descripcion']."</option>";
+                    else  
+                      echo "<option value='".$armazon['id_tipo_armazon']."'>".$armazon['descripcion']."</option>";
+
+                  }
+              ?>                
             </select>
             <!-- <input type="hidden" name="id_stock" value="<? echo $id_stock;?>"> -->
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
@@ -107,8 +131,20 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     </div>
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="Id_material">Material</label>
-        <input type="text" class="form-control" name="Id_material" id="Id_material" autocomplete="off" autofocus maxlength="32" value="<? echo $Id_material?>">
+        <label for="id_material">Material</label>
+            <select class="form-control" name="id_material" id="id_material">
+                <option value="0">Seleccionar --</option>
+                <?
+                  foreach( $materiales as $material ) 
+                  {
+                    if($id_material==$material['id_material']) 
+                      echo "<option value='".$material['id_material']."' selected >".$material['descripcion']."</option>";
+                    else  
+                      echo "<option value='".$material['id_material']."'>".$material['descripcion']."</option>";
+
+                  }
+              ?>                 
+            </select>
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar material.</p>
@@ -116,8 +152,20 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     </div>
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="Id_ubicacion">Ubicación</label>
-        <input type="text" class="form-control" name="Id_ubicacion" id="Id_ubicacion" autocomplete="off" autofocus maxlength="32" value="<? echo $Id_ubicacion?>">
+        <label for="id_ubicacion">Ubicación</label>
+        <select class="form-control" name="id_ubicacion" id="id_ubicacion">
+                <option value="0">Seleccionar --</option>
+                <?
+                  foreach( $ubicaciones as $ubicacion ) 
+                  {
+                    if($id_ubicacion==$ubicacion['id_ubicacion']) 
+                      echo "<option value='".$ubicacion['id_ubicacion']."' selected >".$ubicacion['descripcion']."</option>";
+                    else  
+                      echo "<option value='".$ubicacion['id_ubicacion']."'>".$ubicacion['descripcion']."</option>";
+
+                  }
+              ?>               
+            </select>
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar ubicación.</p>

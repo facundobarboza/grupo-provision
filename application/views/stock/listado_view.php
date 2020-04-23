@@ -8,13 +8,6 @@
         </h4>
     </div>
 </div><!-- /.row-fluid -->
-<!-- <div class="row">
-    <div class="col-md-12" align="right">
-        <input type="button" id='nueva-stock' value="Agregar a Stock" class="btn btn-primary"
-            title="Agregar un nuevo stock"><br>
-    </div> -->
-</div>
-<!-- /.row -->
 <div class="row">
     <div class="col-md-12" align="center">
         &nbsp;&nbsp;&nbsp;
@@ -27,19 +20,62 @@
                 <tr>
                     <th>ID</th>
                     <th>Código patilla</th>
-                    <th>Código color</th>
-                    <th>Descrición color</th>
                     <th>N° código int.</th>
-                    <th>Letra código int.</th>
-                    <th>ID tipo armazon</th>
-                    <th>ID material</th>
-                    <th>ID ubicación</th>
+                    <th>Tipo armazon</th>
+                    <th>Material</th>
+                    <th>Ubicación</th>
                     <th>Cantidad</th>
                     <th>Costo</th>
                     <th>Precio venta</th>
                     <th>Modificar / Eliminar</th>
                 </tr>
             </thead>
+            <?php 
+            foreach( $stocks as $stock ) { ?>
+                <tr>
+                  
+                  <td>
+                    <?php echo $stock['id_stock']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['codigo_patilla']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['nro_codigo_interno']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['id_tipo_armazon']; ?>
+                  </td>
+                  <td>
+                    <?php echo$stock['id_material']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['id_ubicacion']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['cantidad']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['costo']; ?>
+                  </td>
+                  <td>
+                    <?php echo $stock['precio_venta']; ?>
+                  </td>
+                  <td width="60px">
+                    <div class="info" data-id="<?php echo $stock['id_stock'] ?>"></div>
+                    <div class="text-center">
+                      <button type="button" class="btn btn-default btn-xs btn-modificar-stock" title="Modificar Stock">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                      </button>
+                    </div>
+                    <div class="text-center">
+                      <button type="button" class="btn btn-default btn-xs btn-eliminar-stock" title="Eliminar stock">
+                        <span class="glyphicon glyphicon-remove"></span>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              <?php } ?> 
          
         </table>
     </div>
