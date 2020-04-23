@@ -28,39 +28,38 @@ class Stock_model extends MY_Model {
    */
   public function agregar($data) 
   {
-    $fecha_mensaje = Util::fecha_db($data['fecha_mensaje']);
-
     // $this->util->dump_exit($data);
     //si no existe lo guardamos
-    if($data['id_alerta']==0)
+    if($data['id_ficha']==0)
     {
       $this->db->set('codigo_patilla',$data['codigo_patilla'])
-              ->set('codigo_color',utf8_encode($codigo_color))
-              ->set('descripcion_color',utf8_encode($descripcion_color))
-              ->set('nro_codigo_interno',utf8_encode($nro_codigo_interno))
-              ->set('letra_color_interno',utf8_encode($letra_color_interno))
-              ->set('id_tipo_armazon',utf8_encode($id_tipo_armazon))
-              ->set('id_material',utf8_encode($id_material))
-              ->set('id_ubicacion',utf8_encode($id_ubicacion))
-              ->set('costo',utf8_encode($costo))
-              ->set('precio_venta',utf8_encode($precio_venta))
+              ->set('codigo_color',utf8_encode($data['codigo_color']))
+              ->set('descripcion_color',utf8_encode($data['descripcion_color']))
+              ->set('nro_codigo_interno',utf8_encode($data['nro_codigo_interno']))
+              ->set('letra_color_interno',utf8_encode($data['letra_color_interno']))
+              ->set('id_tipo_armazon',utf8_encode($data['id_tipo_armazon']))
+              ->set('id_material',utf8_encode($data['id_material']))
+              ->set('id_ubicacion',utf8_encode($data['id_ubicacion']))
+              ->set('costo',utf8_encode($data['costo']))
+              ->set('cantidad',utf8_encode($data['cantidad']))
+              ->set('precio_venta',utf8_encode($data['precio_venta']))
               ->insert($this->_table);
     }
     else
     {
       //si existe modificamos
       $sql = "UPDATE ".$this->_table."
-            SET id_usuario    = ".$data['id_usuario'].",
-                codigo_patilla = '".utf8_encode($codigo_patilla)."',
-                codigo_color = '".utf8_encode($codigo_color)."',
-                descripcion_color = '".utf8_encode($descripcion_color)."',
-                nro_codigo_interno = '".utf8_encode($nro_codigo_interno)."',
-                letra_color_interno = '".utf8_encode($letra_color_interno)."',                
-                id_tipo_armazon = ".$this->session->userdata('id_tipo_armazon')."
-                id_material = ".$this->session->userdata('id_material')."
-                id_ubicacion = ".$this->session->userdata('id_ubicacion')."
-                costo = ".$this->session->userdata('costo')."
-                precio_venta = ".$this->session->userdata('precio_venta')."
+            SET codigo_patilla = '".utf8_encode($data['codigo_patilla'])."',
+                codigo_color = '".utf8_encode($data['codigo_color'])."',
+                descripcion_color = '".utf8_encode($data['descripcion_color'])."',
+                nro_codigo_interno = '".utf8_encode($data['nro_codigo_interno'])."',
+                letra_color_interno = '".utf8_encode($data['letra_color_interno'])."',                
+                id_tipo_armazon = ".$data['id_tipo_armazon']."
+                id_material = ".$data['id_material']."
+                id_ubicacion = ".$data['id_ubicacion']."
+                costo = '".$data['costo']."''
+                cantidad = '".$data['cantidad']."''
+                precio_venta = '".$data['precio_venta']."''
             WHERE id_stock = ".$data['id_stock'].";";
             // echo $sql;exit;
       $this->db->query($sql);

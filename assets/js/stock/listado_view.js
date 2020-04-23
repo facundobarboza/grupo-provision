@@ -30,10 +30,7 @@ var
       "order": [[ 1, "desc" ], [ 0, "desc" ]],
       "language": datatable_es,
       "aoColumns": [
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
+        { bSortable: false },
         { bSortable: true },
         { bSortable: true },
         { bSortable: true },

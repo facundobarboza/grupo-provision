@@ -93,45 +93,44 @@ class Stock extends MY_Controller {
    * @access public
    * @return void
    */
-  public function guardarAlerta() {
+  public function guardarStock() {
 
     // cargamos el modelo
     $this->load->model('stock_model');
     
     // datos pasados al modelo
     $data = array(
-                  'id_stock'           => $this->input->post('id_stock'),
-                  'codigo_patilla'     => $this->input->post('codigo_patilla'),
-                  'codigo_color'       => $this->input->post('codigo_color'),
-                  'descripcion_color'  => $this->input->post('descripcion_color'),
-                  'nro_codigo_interno' => $this->input->post('nro_codigo_interno'),
-                  'letra_color_interno'=> $this->input->post('letra_color_interno'),
-                  'id_tipo_armazon'    => $this->input->post('id_tipo_armazon'),
-                  'id_material'        => $this->input->post('id_material'),
-                  'id_ubicacion'       => $this->input->post('id_ubicacion'),
-                  'costo'              => $this->input->post('costo '),
-                  'precio_venta'       => $this->input->post('precio_venta'),
+                  'id_stock'            => $this->input->post('id_stock'),
+                  'codigo_patilla'      => $this->input->post('codigo_patilla'),
+                  'codigo_color'        => $this->input->post('codigo_color'),
+                  'descripcion_color'   => $this->input->post('descripcion_color'),
+                  'nro_codigo_interno'  => $this->input->post('nro_codigo_interno'),
+                  'letra_color_interno' => $this->input->post('letra_color_interno'),
+                  'id_tipo_armazon'     => $this->input->post('id_tipo_armazon'),
+                  'id_material'         => $this->input->post('id_material'),
+                  'id_ubicacion'        => $this->input->post('id_ubicacion'),
+                  'costo'               => $this->input->post('costo'),
+                  'cantidad'            => $this->input->post('cantidad'),
+                  'precio_venta'        => $this->input->post('precio_venta'),
                 );
-    
+    // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
     $this->stock_model->agregar($data);
-     
-    // $this->util->dump_exit($data);
 
     //si guardamos una nueva stock
     if($this->input->post('id_stock')==0)
     {
       // guardamos el log
       $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se ingreso la Alerta con &eacute;xito.');  
-      redirect('stock/nuevaAlerta/','refresh');
+      $this->session->set_flashdata('exito', 'Se ingreso un Producto con &eacute;xito.');  
+      redirect('stock/nuevoStock/','refresh');
     }
     else
     {
       // guardamos el log
       $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se modifico la Alerta con &eacute;xito.');
-      redirect('stock/nuevaAlerta/'.$this->input->post('id_stock'),'refresh');
+      $this->session->set_flashdata('exito', 'Se modifico el Producto ID - '.$id_stock.' con &eacute;xito.');
+      redirect('stock/listado/','refresh');
     }
     
     
@@ -170,7 +169,7 @@ class Stock extends MY_Controller {
 
     foreach( $ubicacion_r->result() as $row )
     {     
-      $ubicacion[] = array('id_ubicacion' => (int)$row->id,
+      $ubicaciones[] = array('id_ubicacion' => (int)$row->id,
                             'descripcion'     => $row->descripcion
                           );  
     }
@@ -180,7 +179,7 @@ class Stock extends MY_Controller {
 
     foreach( $material_r->result() as $row )
     {     
-      $material[] = array('id_material' => (int)$row->id,
+      $materiales[] = array('id_material' => (int)$row->id,
                             'descripcion'     => $row->descripcion
                                   );  
     }
@@ -191,8 +190,8 @@ class Stock extends MY_Controller {
       // $this->util->dump_exit($usuarios_validas);
       $data = array(
                     'tipo_armazon'   => $tipo_armazon,
-                    'ubicacion'      => $ubicacion,
-                    'material'       => $material,
+                    'ubicaciones'      => $ubicaciones,
+                    'materiales'       => $materiales,
                     'contenido_view' => 'stock/stock_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/stock/stock_view.js'),
