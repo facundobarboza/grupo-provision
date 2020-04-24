@@ -1,20 +1,18 @@
 var
-    $formulario           = $("#formulario-sindicato"),
-    $nombre_sindicato    = $('#nombre_sindicato')
+  $formulario = $("#formulario-sindicato"),
+  $nombre_sindicato = $('#nombre_sindicato')
 
 // DOM ready!
-$(function() {
+$(function () {
 
   // $fecha_vigencia.datepicker();
 
-  $formulario.on("submit", function(e) {
+  $formulario.on("submit", function (e) {
     var
-        error               = false,
-        nombre_sindicato = $nombre_sindicato.val(),
+      error = false,
+      nombre_sindicato = $nombre_sindicato.val(),
 
-    
-    if( nombre_sindicato == "")
-    {
+    if (nombre_sindicato == "") {
       error = true;
 
       $nombre_sindicato
@@ -30,15 +28,10 @@ $(function() {
         .eq(0)
         .removeClass("hide");
     }
-      
-        
+    if (!error) {
 
-    if( !error )
-    {
-      
     }
     else
       e.preventDefault();
   });
-  
 });
