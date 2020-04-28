@@ -74,9 +74,7 @@ class Stock extends MY_Controller {
     );
 
     if($elimino==1)
-    {      
-      // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+    { 
       $this->session->set_flashdata('exito', 'Se elimino la stock con &eacute;xito.');
       redirect('stock/listado','refresh');    
     }
@@ -121,14 +119,14 @@ class Stock extends MY_Controller {
     if($this->input->post('id_stock')==0)
     {
       // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'),4,"log_stock","id_stock",0);
       $this->session->set_flashdata('exito', 'Se ingreso un Producto con &eacute;xito.');  
       redirect('stock/nuevoStock/','refresh');
     }
     else
     {
       // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'),6,"log_stock","id_stock",$this->input->post('id_stock'));
       $this->session->set_flashdata('exito', 'Se modifico el Producto ID - '.$id_stock.' con &eacute;xito.');
       redirect('stock/listado/','refresh');
     }
@@ -235,7 +233,8 @@ class Stock extends MY_Controller {
 
     // obtenemos las empresas
     $this->stock_model->eliminar($id_stock);
-
+    // guardamos el log
+    $this->log_model->guardar_log($this->session->userdata('id_usuario'),5,"log_stock","id_stock",$id_stock);
      // $this->util->dump_exit($empresas_validas);
     
     // $this->load->view('iframe_view', $data);

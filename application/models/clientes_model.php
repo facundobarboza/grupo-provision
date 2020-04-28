@@ -29,7 +29,7 @@ class Clientes_model extends MY_Model {
   public function agregar($data) 
   { 
     //si no existe lo guardamos
-    $fecha_vigencia = Util::fecha_db($data['fecha_vigencia']);
+    // $fecha_vigencia = Util::fecha_db($data['fecha_vigencia']);
 
     if($data['id_cliente']==0)
     {

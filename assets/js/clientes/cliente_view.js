@@ -9,7 +9,7 @@ var
 // DOM ready!
 $(function() {
 
-
+$('#tabla_logs').hide();
   $formulario.on("submit", function(e) {
     var
         error              = false,
@@ -131,6 +131,14 @@ $(function() {
     }
     else
       e.preventDefault();
+  });
+  
+  // mostrar/ocultar el log
+  $('#mostrar_log').click(function () {
+      if (this.checked)
+          $('#tabla_logs').show();
+      else
+          $('#tabla_logs').hide();
   });
   
 });

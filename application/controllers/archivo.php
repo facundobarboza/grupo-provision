@@ -87,9 +87,7 @@ class archivo extends MY_Controller {
     );
 
     if($elimino==1)
-    {      
-      // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+    { 
       $this->session->set_flashdata('exito', 'Se elimino el archivo con &eacute;xito.');
       redirect('archivo/listado','refresh');    
     }
@@ -188,14 +186,14 @@ class archivo extends MY_Controller {
     if($this->input->post('id_ficha')==0)
     {
       // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 4,"log_fichas","id_ficha",0);
       $this->session->set_flashdata('exito', 'Se ingreso el ficha con &eacute;xito.');  
       redirect('archivo/nuevo','refresh');
     }
     else
     {
-      // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+     // guardamos el log
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_fichas","id_ficha",$this->input->post('id_ficha'));
       $this->session->set_flashdata('exito', 'Se modifico la ficha ID '.$id_ficha.' con &eacute;xito.');
        redirect('archivo/listado','refresh');
     }
@@ -266,6 +264,8 @@ class archivo extends MY_Controller {
     $this->load->helper('form');
 
     $this->archivo_model->eliminar($id_ficha);
+    // guardamos el log
+    $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_fichas","id_ficha",$id_ficha);
     
     // $this->load->view('iframe_view', $data);
   }

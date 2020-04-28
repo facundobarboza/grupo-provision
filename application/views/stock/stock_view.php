@@ -7,7 +7,7 @@ if($stock)
     $id_stock            = $stock->row()->id_stock;
     $codigo_patilla      = $stock->row()->codigo_patilla;
     $codigo_color        = $stock->row()->codigo_color;
-    $descripcion_color   = $stock->row()->descripcion_color;
+    $descripcion_color   = utf8_encode($stock->row()->descripcion_color);
     $nro_codigo_interno  = $stock->row()->nro_codigo_interno;
     $letra_color_interno = $stock->row()->letra_color_interno;
     $id_tipo_armazon     = $stock->row()->id_tipo_armazon;

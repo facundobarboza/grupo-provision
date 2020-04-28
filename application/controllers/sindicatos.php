@@ -49,7 +49,7 @@ class Sindicatos extends MY_Controller {
     {     
 
       $sindicatos_validos[] = array('id_sindicato' => (int)$row->id_sindicato,
-                                  'descripcion'     => $row->descripcion
+                                  'descripcion'     => utf8_encode($row->descripcion)
                                   );  
     }
 
@@ -67,9 +67,7 @@ class Sindicatos extends MY_Controller {
     );
 
     if($elimino==1)
-    {      
-      // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+    { 
       $this->session->set_flashdata('exito', 'Se elimino el sindicato con &eacute;xito.');
       redirect('sindicatos/listado','refresh');    
     }
@@ -106,14 +104,14 @@ class Sindicatos extends MY_Controller {
     if($this->input->post('id_sindicato')==0)
     {
       // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+    $this->log_model->guardar_log($this->session->userdata('id_usuario'), 4,"log_sindicatos","id_sindicato",0);
       $this->session->set_flashdata('exito', 'Se ingreso el Sindicato con &eacute;xito.');  
       redirect('sindicatos/nuevoSindicato/','refresh');
     }
     else
     {
       // guardamos el log
-      $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'),6,"log_sindicatos","id_sindicato",$this->input->post('id_sindicato'));
       $this->session->set_flashdata('exito', 'Se modifico el Sindicato con &eacute;xito.');
       redirect('sindicatos/nuevoSindicato/'.$this->input->post('id_sindicato'),'refresh');
     }
@@ -177,6 +175,8 @@ class Sindicatos extends MY_Controller {
 
     // obtenemos las sindicatos
     $this->sindicatos_model->eliminar($id_sindicato);
+    // guardamos el log
+    $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_sindicatos","id_sindicato",$id_sindicato);
 
      // $this->util->dump_exit($sindicatos_validas);
     

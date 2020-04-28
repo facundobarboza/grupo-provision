@@ -5,8 +5,8 @@
 if($clientes)
 {
     $id_cliente           = $clientes->row()->id_cliente;
-    $nombre_cliente       = $clientes->row()->nombre_cliente;
-    $apellido_cliente     = $clientes->row()->apellido_cliente;
+    $nombre_cliente       = utf8_encode($clientes->row()->nombre_cliente);
+    $apellido_cliente     = utf8_encode($clientes->row()->apellido_cliente);
     $dni_cliente          = $clientes->row()->dni;
     $numero_cliente       = $clientes->row()->nro_cliente;
     $id_sindicato_cliente = $clientes->row()->id_sindicato_cliente;
@@ -20,6 +20,40 @@ if(!$id_cliente)
 // else
 {
   $titulo = "Modificar afiliado";
+}
+
+//si existe mostramos el log
+if($id_cliente)
+{
+?>
+<div align="right" style="width: 100%;height: 26px; ">
+    <input id="mostrar_log" type="checkbox" value="1"> Mostrar Logs
+</div>
+<div id="tabla_logs" width="50%" style="display: none" >
+    <table class="table table-striped" id='tabla_logs' >
+
+  <?
+    foreach( $logs->result() as $log ) 
+    {
+      // print_r($log);
+    ?>
+      <tr >
+          <td height="20" nowrap>
+            Fecha: <? echo $log->fecha?> 
+        </td>
+        <td nowrap > 
+          Usuario : <? echo utf8_encode($log->apellido).", ".utf8_encode($log->nombre);?> 
+        </td>
+        <td nowrap > 
+            Acción : <? echo $log->accion; ?> 
+        </td>
+      </tr>
+    <?    
+    } 
+    ?>
+    </table>
+</div>
+      <?
 }
 ?>
   <div class="row">
