@@ -220,7 +220,7 @@
                     <li><a href="<?php echo site_url('usuario/logout') ?>">Cerrar sesi&oacute;n</a></li>
                 </ul>
             </li> -->
-            <li><a href="<?php echo site_url('usuario/perfil') ?>"><span class="fa fa-address-card"></span> Perfil</a></li>
+            <li><a href="<?php echo site_url('usuario/perfil') ?>" class="item-menu"><span class="fa fa-address-card"></span> Perfil</a></li>
             <li><a href="<?php echo site_url('usuario/logout') ?>"><span class="fa fa-sign-out"></span> Cerrar sesi&oacute;n</a></li>
         </ul>
     </div>
