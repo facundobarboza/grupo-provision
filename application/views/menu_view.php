@@ -205,7 +205,7 @@
         </button>
         <a class="navbar-brand" href="#">
         <!-- Grupo Provision S.R.L -->
-        <img src="assets/images/grupo-provision-blanco-texto.png" width="150">
+        <img src="assets/images/grupo-provision-blanco-texto.png" width="210">
         </a>
     </div>
 
