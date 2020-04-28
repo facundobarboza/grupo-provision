@@ -203,7 +203,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">Grupo Provision S.R.L</a>
+        <a class="navbar-brand" href="#">
+        <!-- Grupo Provision S.R.L -->
+        <img src="assets/images/grupo-provision-blanco-texto.png" width="150">
+        </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
