@@ -2,27 +2,30 @@
 // echo $empresa[0]["id_empresa"];
 // $this->util->dump_exit($empresa);
 
-if($stoks)
+if($stock)
 {
-    $id_stock            = $fichas->row()->id_stock;
-    $codigo_patilla      = $fichas->row()->codigo_patilla;
-    $codigo_color        = $fichas->row()->codigo_color;
-    $descripcion_color   = $fichas->row()->descripcion_color;
-    $nro_codigo_interno  = $fichas->row()->nro_codigo_interno;
-    $letra_color_interno = $fichas->row()->letra_color_interno;
-    $id_tipo_armazon     = $fichas->row()->id_tipo_armazon;
-    $id_material         = $fichas->row()->id_material;
-    $id_ubicacion        = $fichas->row()->id_ubicacion;
-    $cantidad            = $fichas->row()->cantidad;
-    $costo               = $fichas->row()->costo;
-    $precio_venta        = $fichas->row()->precio_venta;
-
-    $titulo = "Modificar Stock Producto ID - ".$id_stock;
+    $id_stock            = $stock->row()->id_stock;
+    $codigo_patilla      = $stock->row()->codigo_patilla;
+    $codigo_color        = $stock->row()->codigo_color;
+    $descripcion_color   = $stock->row()->descripcion_color;
+    $nro_codigo_interno  = $stock->row()->nro_codigo_interno;
+    $letra_color_interno = $stock->row()->letra_color_interno;
+    $id_tipo_armazon     = $stock->row()->id_tipo_armazon;
+    $id_material         = $stock->row()->id_material;
+    $id_ubicacion        = $stock->row()->id_ubicacion;
+    $cantidad            = $stock->row()->cantidad;
+    $costo               = $stock->row()->costo;
+    $precio_venta        = $stock->row()->precio_venta;
+    $titulo              = "Modificar Stock Producto ID - ".$id_stock;
+    $class_button        = "btn btn-success";
+    $name_button         = "Modificar";
 }
 else
 {
-  $titulo    = "Nuevo Producto";
-  $id_stock = 0;
+  $titulo       = "Nuevo Stock";
+  $class_button = "btn btn-primary";
+  $name_button  = "Guardar";
+  $id_stock     = 0;
 }
 
 ?>
@@ -158,6 +161,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
                 <?
                   foreach( $ubicaciones as $ubicacion ) 
                   {
+                    // echo $ubicacion['id_ubicacion']; exit
                     if($id_ubicacion==$ubicacion['id_ubicacion']) 
                       echo "<option value='".$ubicacion['id_ubicacion']."' selected >".$ubicacion['descripcion']."</option>";
                     else  
@@ -181,7 +185,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="cantidad">Cantidad</label>
-        <input type="text" class="form-control" name="cantidad" id="cantidad" autocomplete="off" autofocus maxlength="32" value="<? echo $cantidad?>">
+        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789');" name="cantidad" id="cantidad" autocomplete="off" autofocus maxlength="32" value="<? echo $cantidad?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar cantidad.</p>
@@ -190,7 +194,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="costo">Costo</label>
-        <input type="text" class="form-control" name="costo" id="costo" autocomplete="off" autofocus maxlength="32" value="<? echo $costo?>">
+        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789,');"  name="costo" id="costo" autocomplete="off" autofocus maxlength="32" value="<? echo $costo?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar costo.</p>
@@ -206,7 +210,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="precio_venta">Precio venta</label>
-        <input type="text" class="form-control" name="precio_venta" id="precio_venta" autocomplete="off" autofocus maxlength="32" value="<? echo $precio_venta?>">
+        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789,');" name="precio_venta" id="precio_venta" autocomplete="off" autofocus maxlength="32" value="<? echo $precio_venta?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar precio venta.</p>
@@ -218,7 +222,7 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
 
 <div class="row">
     <div class="col-md-12" align="center">
-        <input type="submit" value="Guardar" id='guardar-departamento' class="btn btn-primary">
+        <input type="submit" value="<? echo $name_button?>" id='guardar-departamento' class="<? echo $class_button?>">
     </div>
 </div><!-- /.row -->
 <?php echo form_close(); ?>

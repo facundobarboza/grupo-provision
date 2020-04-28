@@ -52,9 +52,9 @@ class Stock extends MY_Controller {
                                 'descripcion_color'   => $row->descripcion_color,
                                 'nro_codigo_interno'  => $row->nro_codigo_interno,
                                 'letra_color_interno' => $row->letra_color_interno,
-                                'id_tipo_armazon'     => $row->id_tipo_armazon,
-                                'id_material'         => $row->id_material,
-                                'id_ubicacion'        => $row->id_ubicacion,
+                                'tipo_armazon'        => $row->tipo_armazon,
+                                'material'            => $row->material,
+                                'ubicacion'           => $row->ubicacion,
                                 'cantidad'            => $row->cantidad,
                                 'costo'               => $row->costo,
                                 'precio_venta'        => $row->precio_venta
@@ -204,10 +204,10 @@ class Stock extends MY_Controller {
       //obtenemos el detalle del stock 
       $stock = $this->stock_model->obtenerDetalle($id_stock);
   
-      // $this->util->dump_exit($stock);
+      // $this->util->dump_exit($stock->row());
       $data = array('tipo_armazon'   => $tipo_armazon,
-                    'ubicacion'      => $ubicacion,
-                    'material'       => $material,
+                    'ubicaciones'    => $ubicaciones,
+                    'materiales'     => $materiales,
                     'stock'          => $stock,
                     'id_stock'       => $id_stock,
                     'contenido_view' => 'stock/stock_view',

@@ -49,14 +49,14 @@ var
           $this = $(this),
           $info = $this.parents("tr").find(".info");
 
-      $("#modal-stock").modal({
-          backdrop: "static",
-          keyboard: false,
-          show: true
-        });
-      
+      // $("#modal-stock").modal({
+      //     backdrop: "static",
+      //     keyboard: false,
+      //     show: true
+      //   });
+      window.location = appGeneral.obtenerSiteUrl() + "stock/nuevoStock/" + $info.data("id");
       //pasamos por parametro el id
-      $iframe_modificar_stock.attr('src',appGeneral.obtenerSiteUrl() + "stock/nuevoStock/" + $info.data("id"));
+      // $iframe_modificar_stock.attr('src',appGeneral.obtenerSiteUrl() + "stock/nuevoStock/" + $info.data("id"));
       
     });
 

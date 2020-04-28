@@ -238,3 +238,43 @@ $(function () {
     // return false;
   });
 });
+
+function filtrar_teclas(e, goods, invert)
+  {
+    var key, keychar;
+    key = getkey(e);
+    if (key == null) return false;
+
+    // get character
+    keychar = String.fromCharCode(key);
+    keychar = keychar.toLowerCase();
+    goods = goods.toLowerCase();
+
+    // check goodkeys
+    //si invert==true checkea que las teclas que se pasaron no aparezcan
+    //de lo contrario solo deja imprimir las teclas que se pasaron
+    if (arguments.length==3 && invert)
+    {
+      if (goods.indexOf(keychar) == -1)
+        return true;
+    }
+    else if (goods.indexOf(keychar) != -1)
+      return true;
+
+    // control keys
+    if ( key==null || key==0 || key==8 || key==9 || key==13 || key==27 )
+       return true;
+
+    // else return false
+    return false;
+  }
+
+  function getkey(e)
+  {
+    if (window.event)
+      return window.event.keyCode;
+    else if (e)
+      return e.which;
+    else
+      return null;
+  }

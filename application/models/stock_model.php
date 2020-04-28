@@ -30,7 +30,7 @@ class Stock_model extends MY_Model {
   {
     // $this->util->dump_exit($data);
     //si no existe lo guardamos
-    if($data['id_ficha']==0)
+    if($data['id_stock']==0)
     {
       $this->db->set('codigo_patilla',$data['codigo_patilla'])
               ->set('codigo_color',utf8_encode($data['codigo_color']))
@@ -54,12 +54,12 @@ class Stock_model extends MY_Model {
                 descripcion_color = '".utf8_encode($data['descripcion_color'])."',
                 nro_codigo_interno = '".utf8_encode($data['nro_codigo_interno'])."',
                 letra_color_interno = '".utf8_encode($data['letra_color_interno'])."',                
-                id_tipo_armazon = ".$data['id_tipo_armazon']."
-                id_material = ".$data['id_material']."
-                id_ubicacion = ".$data['id_ubicacion']."
-                costo = '".$data['costo']."''
-                cantidad = '".$data['cantidad']."''
-                precio_venta = '".$data['precio_venta']."''
+                id_tipo_armazon = ".$data['id_tipo_armazon'].",
+                id_material = ".$data['id_material'].",
+                id_ubicacion = ".$data['id_ubicacion'].",
+                costo = '".$data['costo']."',
+                cantidad = '".$data['cantidad']."',
+                precio_venta = '".$data['precio_venta']."'
             WHERE id_stock = ".$data['id_stock'].";";
             // echo $sql;exit;
       $this->db->query($sql);
@@ -143,10 +143,12 @@ class Stock_model extends MY_Model {
    */
   public function obtenerStocks() {   
     
-    $this->db->select("*", FALSE)
-           ->from($this->_table);
-           // ->join('usuario',$this->_table.'.id_usuario=usuario.id_usuario')
-           // ->where('cantidad', 0);     
+    $this->db->select($this->_table.".*,tipo_armazon.descripcion as tipo_armazon,ubicacion.descripcion as ubicacion, material.descripcion as material", FALSE)
+           ->from($this->_table)
+           ->join('tipo_armazon',$this->_table.'.id_tipo_armazon=tipo_armazon.id_tipo_armazon')
+           ->join('ubicacion',$this->_table.'.id_ubicacion=ubicacion.id')
+           ->join('material',$this->_table.'.id_material=material.id')
+           ->where('activo', 1);     
     
     $result = $this->db->get();
 

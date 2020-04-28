@@ -44,13 +44,13 @@
                     <?php echo $stock['nro_codigo_interno']; ?>
                   </td>
                   <td>
-                    <?php echo $stock['id_tipo_armazon']; ?>
+                    <?php echo $stock['tipo_armazon']; ?>
                   </td>
                   <td>
-                    <?php echo$stock['id_material']; ?>
+                    <?php echo$stock['material']; ?>
                   </td>
                   <td>
-                    <?php echo $stock['id_ubicacion']; ?>
+                    <?php echo $stock['ubicacion']; ?>
                   </td>
                   <td>
                     <?php echo $stock['cantidad']; ?>
@@ -67,8 +67,7 @@
                       <button type="button" class="btn btn-default btn-xs btn-modificar-stock" title="Modificar Stock">
                         <span class="glyphicon glyphicon-pencil"></span>
                       </button>
-                    </div>
-                    <div class="text-center">
+                    
                       <button type="button" class="btn btn-default btn-xs btn-eliminar-stock" title="Eliminar stock">
                         <span class="glyphicon glyphicon-remove"></span>
                       </button>
