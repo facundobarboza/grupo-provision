@@ -1,6 +1,6 @@
 var
   $formulario = $("#formulario-sindicato"),
-  $nombre_sindicato = $('#nombre_sindicato')
+  $nombre_sindicato = $('#nombre_sindicato');
 
 // DOM ready!
 $(function () {
@@ -10,9 +10,9 @@ $(function () {
   $formulario.on("submit", function (e) {
     var
       error = false,
-      nombre_sindicato = $nombre_sindicato.val(),
+      nombre_sindicato = $nombre_sindicato.val();
 
-    if (nombre_sindicato == "") {
+    if(nombre_sindicato == "") {
       error = true;
 
       $nombre_sindicato
