@@ -9,15 +9,6 @@ var
 // DOM ready!
 $(function() {
 
-$fecha_vigencia.datepicker({
-          firstDay: 1,
-          dateFormat: 'dd-mm-yy',
-          monthNames: ['Enero', 'Febreo', 'Marzo',
-          'Abril', 'Mayo', 'Junio',
-          'Julio', 'Agosto', 'Septiembre',
-          'Octubre', 'Noviembre', 'Diciembre'],
-          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-        });
 
   $formulario.on("submit", function(e) {
     var
@@ -111,7 +102,7 @@ $fecha_vigencia.datepicker({
           }
           else
           {
-            if( id_sindicato_cliente == "" )
+            if( id_sindicato_cliente == 0)
             {
               error = true;
 
