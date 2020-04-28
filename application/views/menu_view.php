@@ -228,7 +228,7 @@
     <div class="sidenav">
         <div class="img bg-wrap text-center" style="background-image: url(assets/images/anteojo-bg.jpg);">
             <div class="user-logo">
-                <img src="assets/images/logo-solo.png" width="50">
+                <img src="assets/images/logo-solo-blanco.png" width="50">
                 <h6><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?></h6>
             </div>
         </div>
