@@ -84,22 +84,6 @@ $(function () {
         .removeClass("hide");
 
     }
-    else if (descripcion_color == "") {
-      error = true;
-
-      $descripcion_color
-        .parent()
-        .addClass("has-error")
-        .find(".form-control-feedback")
-        .eq(0);
-
-      $descripcion_color
-        .parent()
-        .find(".text-center")
-        .eq(0)
-        .removeClass("hide");
-
-    }
     else if (nro_codigo_interno == "") {
       error = true;
 

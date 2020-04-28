@@ -114,7 +114,7 @@ class Clientes extends MY_Controller {
     {
       // guardamos el log
       // $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
-      $this->session->set_flashdata('exito', 'Se ingreso el Cliente con &eacute;xito.');
+      $this->session->set_flashdata('exito', 'Se ingreso el afiliado con &eacute;xito.');
 
     }
     else
