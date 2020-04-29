@@ -32,6 +32,13 @@ var
 // DOM ready!
 $(function() {
 
+   // mostrar/ocultar el log
+  $('#mostrar_log').click(function () {
+      if (this.checked)
+          $('#tabla_logs').show();
+      else
+          $('#tabla_logs').hide();
+  });
   
 
   // establecer los mensajes del datatable
@@ -391,6 +398,48 @@ $(function() {
         });
       }
       
+    });
+
+    //AUTOCOMPLETAR DE PROVEEDOR
+    $("#filtro_cliente").autocomplete({
+        source: "index.php?operacion=2",
+        minLength: 2,
+        open: function (event, ui) 
+        {
+          $("#filtro_cliente").css('background-color','white');
+          $(".ui-autocomplete").eq(0).scrollTop(0);
+          
+        },
+        search: function () 
+        {
+          $("#filtro_cliente").css('background-color','white');
+        },
+        select: function (event, ui) 
+        {
+            if (ui.item.id != "-1")
+            {
+              // lo deshabilitamos para que no pueda seguir buscando
+              $("#filtro_cliente").attr("readonly", true);
+              // mostramos boton para cancelar la entidad seleccionada
+              $("#cancelar_autocomplete_cliente").removeClass("hide");
+              // establecemos el id de la entidad
+              $("#select_cliente").val(ui.item.id);
+            }
+            else
+                return false;
+        }
+    });
+
+    $("#cancelar_autocomplete_cliente").click(function () {
+       // ocultamos el boton para cancelar
+      $("#cancelar_autocomplete_cliente").addClass("hide");
+      // habilitamos y reiniciamos el input text para buscar una entidad
+      $("#filtro_cliente")
+              .val("")
+              .removeAttr("readonly")
+              .focus();
+
+      $("#select_cliente").val(0);
     });
   
 });

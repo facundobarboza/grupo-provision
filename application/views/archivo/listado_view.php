@@ -1,6 +1,8 @@
-<div class="row">
+<div class="panel panel-default" >
+   <div class="panel-body">
+  <div class="row">
   <div class="col-md-12">
-  <h4 class="page-header text-uppercase">
+    <h4 class="page-header text-uppercase">
       Listado Fichas
     </h4>
   </div>
@@ -82,4 +84,6 @@
     </table>
   </div>
 </div><!-- /.row-fluid -->
+</div>
+</div>
 

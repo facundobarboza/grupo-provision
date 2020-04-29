@@ -148,9 +148,10 @@ class Sindicatos extends MY_Controller {
     else
     {
       $sindicatos = $this->sindicatos_model->obtenerSindicato($id_sindicato);
-  
+      $logs     = $this->log_model->get_log("log_sindicatos","id_sindicato",$id_sindicato);  
       // $this->util->dump_exit($sindicatos->row());
       $data = array('id_sindicato'    => $sindicatos->row()->id_sindicato,
+                    'logs'            => $logs,
                     'nombre_sindicato'=> $sindicatos->row()->descripcion,
                     'contenido_view'     => 'sindicatos/sindicato_view',
                     'js'                 => array(base_url('assets/js/sindicatos/sindicato_view.js'))

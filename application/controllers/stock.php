@@ -201,9 +201,10 @@ class Stock extends MY_Controller {
     {
       //obtenemos el detalle del stock 
       $stock = $this->stock_model->obtenerDetalle($id_stock);
-  
+      $logs     = $this->log_model->get_log("log_stock","id_stock",$id_stock);  
       // $this->util->dump_exit($stock->row());
       $data = array('tipo_armazon'   => $tipo_armazon,
+                    'logs'           => $logs,
                     'ubicaciones'    => $ubicaciones,
                     'materiales'     => $materiales,
                     'stock'          => $stock,

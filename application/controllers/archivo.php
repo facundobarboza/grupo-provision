@@ -234,9 +234,10 @@ class archivo extends MY_Controller {
     else
     {
       $fichas = $this->archivo_model->obtenerFicha($id_ficha);
-  
+      $logs   = $this->log_model->get_log("log_fichas","id_ficha",$id_ficha);  
       // $this->util->dump_exit($sindicatos->row());
       $data = array('fichas'       => $fichas,
+                    'logs'         => $logs,
                     'contenido_view' => 'archivo/archivo_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),

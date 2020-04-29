@@ -9,7 +9,7 @@ var
 // DOM ready!
 $(function() {
 
-$('#tabla_logs').hide();
+
   $formulario.on("submit", function(e) {
     var
         error              = false,

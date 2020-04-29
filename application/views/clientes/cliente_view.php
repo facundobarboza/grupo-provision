@@ -23,7 +23,7 @@ if(!$id_cliente)
 }
 
 //si existe mostramos el log
-if($id_cliente)
+if($id_cliente>0)
 {
 ?>
 <div align="right" style="width: 100%;height: 26px; ">
