@@ -54,8 +54,8 @@ class Clientes extends MY_Controller {
 
       $clientes_validas[] = array(
         'id_cliente'        => (int)$row->id_cliente,
-        'nombre_cliente'    => $row->nombre_cliente,
-        'apellido_cliente'  => $row->apellido_cliente,
+        'nombre_cliente'    => utf8_encode($row->nombre_cliente),
+        'apellido_cliente'  => utf8_encode($row->apellido_cliente),
         'dni_cliente'       => $row->dni,
         'numero_cliente'    => $row->nro_cliente,
         'sindicato' => $row->descripcion
@@ -77,7 +77,7 @@ class Clientes extends MY_Controller {
     if($id_elimino>0)
     {      
       // guardamos el log
-      // $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_cliente","id_cliente",$id_elimino);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_clientes","id_cliente",$id_elimino);
       $this->session->set_flashdata('exito', 'Se elimino el Afiliado con &eacute;xito.');
       redirect('clientes/listado','refresh');    
     }
@@ -112,15 +112,16 @@ class Clientes extends MY_Controller {
     
     if($this->input->post('id_cliente')==0)
     {
+
       // guardamos el log
-      // $this->log_model->guardar($this->session->userdata('id_usuario'), 4);
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 4,"log_clientes","id_cliente",0);
       $this->session->set_flashdata('exito', 'Se ingreso el afiliado con &eacute;xito.');
 
     }
     else
     {
       // guardamos el log
-      // $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_empresa","id_cliente",$this->input->post('id_cliente'));
+      $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_clientes","id_cliente",$this->input->post('id_cliente'));
       $this->session->set_flashdata('exito', 'Se modifico el Cliente con &eacute;xito.');
       
     }
@@ -147,7 +148,7 @@ class Clientes extends MY_Controller {
     foreach( $sindicatos->result() as $row )
     {     
       $sindicatos_validos[] = array('id_sindicato' => (int)$row->id_sindicato,
-                                    'descripcion'   => $row->descripcion
+                                    'descripcion'   => utf8_encode($row->descripcion)
                                     );  
     }
 
@@ -167,10 +168,11 @@ class Clientes extends MY_Controller {
     {
       // obtenemos los datos del usuario
       $clientes = $this->clientes_model->obtenerCliente($id_cliente);      
+      $logs     = $this->log_model->get_log("log_clientes","id_cliente",$id_cliente);  
 
-      // $this->util->dump_exit($clientes->row());
-      $data = array('sindicatos'      => $sindicatos_validos,
-                    'clientes'        => $clientes,
+      $data = array('sindicatos'     => $sindicatos_validos,
+                    'clientes'       => $clientes,
+                    'logs'           => $logs,
                     'contenido_view' => 'clientes/cliente_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array("https://code.jquery.com/jquery-1.12.4.js",

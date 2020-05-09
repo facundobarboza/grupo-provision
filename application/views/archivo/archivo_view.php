@@ -57,7 +57,41 @@ else
   $titulo = "Modificar Ficha Nro ".$id_ficha;
   $title_button = "Modificar";
 }
+//si existe mostramos el log
+if($id_ficha>0)
+{
 ?>
+<div align="right" style="width: 100%;height: 26px; ">
+    <input id="mostrar_log" type="checkbox" value="1"> Mostrar Logs
+</div>
+<div id="tabla_logs" width="50%" style="display: none" >
+    <table class="table table-striped" id='tabla_logs' >
+
+  <?
+    foreach( $logs->result() as $log ) 
+    {
+      // print_r($log);
+    ?>
+      <tr >
+          <td height="20" nowrap>
+            Fecha: <? echo $log->fecha?> 
+        </td>
+        <td nowrap > 
+          Usuario : <? echo utf8_encode($log->apellido).", ".utf8_encode($log->nombre);?> 
+        </td>
+        <td nowrap > 
+            Acción : <? echo $log->accion; ?> 
+        </td>
+      </tr>
+    <?    
+    } 
+    ?>
+    </table>
+</div>
+      <?
+}
+?>
+
   <div class="row">
     <div class="col-md-12">
       <h4 class="page-header text-uppercase">

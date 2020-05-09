@@ -1,11 +1,13 @@
-<div class="row">
+<div class="panel panel-default" >
+   <div class="panel-body">
+  <div class="row">
   <div class="col-md-12">
-  <h4 class="page-header text-uppercase">
+    <h4 class="page-header text-uppercase">
       Listado Fichas
     </h4>
   </div>
 </div><!-- /.row-fluid -->
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-2" align="left" >  
     <button class="btn btn-danger" id='eliminar-masivo' > Eiminar Seleccionados</button>
   </div>
@@ -13,7 +15,7 @@
     <button class="btn btn-success" rol='link' onclick="window.location='<?php echo site_url('archivo/listado_excel') ?>'">
       Descargar Excel</button><br>&nbsp;&nbsp;&nbsp;
       
-  </div>
+  </div> -->
 </div><!-- /.row -->
 <div class="row">
   <div class="col-md-12 ">
@@ -82,4 +84,6 @@
     </table>
   </div>
 </div><!-- /.row-fluid -->
+</div>
+</div>
 

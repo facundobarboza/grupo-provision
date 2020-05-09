@@ -170,8 +170,8 @@ class Usuario extends MY_Controller {
               $datos_sesion = array(
                 'logged_in'  => TRUE,
                 'id_usuario'  => (int)$usuario->row()->id_usuario,
-                'nombre'     => $usuario->row()->nombre,
-                'apellido'   => $usuario->row()->apellido,
+                'nombre'     => utf8_encode($usuario->row()->nombre),
+                'apellido'   => utf8_encode($usuario->row()->apellido),
                 'email'      => $usuario->row()->mail,
                 'id_rol'     => $usuario->row()->id_rol,
                 'user_name'  => $this->input->post('user_name')
@@ -541,8 +541,8 @@ class Usuario extends MY_Controller {
 
       $usuarios_validos[] = array(
         'id_usuario'    => (int)$row->id_usuario,
-        'nombre'        => $row->nombre,
-        'apellido'      => $row->apellido,
+        'nombre'        => utf8_encode($row->nombre),
+        'apellido'      => utf8_encode($row->apellido),
         'mail'          => $row->mail,
         'nombre_empresa'=> $row->nombre_empresa,
         'user_name'     => $row->user_name

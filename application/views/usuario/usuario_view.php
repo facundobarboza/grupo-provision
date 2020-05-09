@@ -5,8 +5,8 @@
 if($usuarios)
 {
     $id_usuario = $usuarios->row()->id_usuario;
-    $apellido   = $usuarios->row()->apellido;
-    $nombre     = $usuarios->row()->nombre;
+    $apellido   = utf8_encode($usuarios->row()->apellido);
+    $nombre     = utf8_encode($usuarios->row()->nombre);
     $mail       = $usuarios->row()->mail;
     $id_rol     = $usuarios->row()->id_rol;
     $user_name  = $usuarios->row()->user_name;

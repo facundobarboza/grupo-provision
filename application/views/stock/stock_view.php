@@ -7,7 +7,7 @@ if($stock)
     $id_stock            = $stock->row()->id_stock;
     $codigo_patilla      = $stock->row()->codigo_patilla;
     $codigo_color        = $stock->row()->codigo_color;
-    $descripcion_color   = $stock->row()->descripcion_color;
+    $descripcion_color   = utf8_encode($stock->row()->descripcion_color);
     $nro_codigo_interno  = $stock->row()->nro_codigo_interno;
     $letra_color_interno = $stock->row()->letra_color_interno;
     $id_tipo_armazon     = $stock->row()->id_tipo_armazon;
@@ -28,6 +28,40 @@ else
   $id_stock     = 0;
 }
 
+
+//si existe mostramos el log
+if($stock>0)
+{
+?>
+<div align="right" style="width: 100%;height: 26px; ">
+    <input id="mostrar_log" type="checkbox" value="1"> Mostrar Logs
+</div>
+<div id="tabla_logs" width="50%" style="display: none" >
+    <table class="table table-striped" id='tabla_logs' >
+
+  <?
+    foreach( $logs->result() as $log ) 
+    {
+      // print_r($log);
+    ?>
+      <tr >
+          <td height="20" nowrap>
+            Fecha: <? echo $log->fecha?> 
+        </td>
+        <td nowrap > 
+          Usuario : <? echo utf8_encode($log->apellido).", ".utf8_encode($log->nombre);?> 
+        </td>
+        <td nowrap > 
+            Acción : <? echo $log->accion; ?> 
+        </td>
+      </tr>
+    <?    
+    } 
+    ?>
+    </table>
+</div>
+      <?
+}
 ?>
 <div class="row">
     <div class="col-md-6">
