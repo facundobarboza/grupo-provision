@@ -1,9 +1,21 @@
+<style type="text/css">
+
+.cancelar-autocomplete {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+    background-color: #F5F5F5;
+    cursor: hand;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+</style>
+
 <?
-/*
-<td id="ma">
-  <a href="../../uploads/personal/<?=$archivos_varios->fields["url_archivo"]?>" onclick="window.open(this.href, this.target, 'width=800,height=600'); return false;"><img src='<?=$html_root?>/imagenes/page_find.gif' /></a>
-</td>
-*/
 
 if($fichas)
 {
@@ -43,18 +55,22 @@ else
 //si no existe es nuevo
 $this->load->helper('cookie');
 
-// if($archivos)
-// {
-//    $this->util->dump_exit($archivos);
-// }
+//si es casa central
+if($es_casa_central==1)
+{
+   $casa = "Casa Central";
+}
+else
+  $casa = " Optica";
+
 if($id_ficha==0)
 {
-  $titulo = "Nueva Ficha";
+  $titulo       = "Nueva Ficha"." ".$casa;
   $title_button = "Guardar";
 }
 else
 {
-  $titulo = "Modificar Ficha Nro ".$id_ficha;
+  $titulo       = "Modificar Ficha" ." ".$casa." Nro".$id_ficha;
   $title_button = "Modificar";
 }
 //si existe mostramos el log
@@ -70,7 +86,6 @@ if($id_ficha>0)
   <?
     foreach( $logs->result() as $log ) 
     {
-      // print_r($log);
     ?>
       <tr >
           <td height="20" nowrap>
@@ -103,42 +118,112 @@ if($id_ficha>0)
 
 echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fichas')); 
 ?>
+  <div class="row">
+      <div class="col-md-4">
+        <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
+        <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
+        <div class="form-group has-feedback">
+          <label for="beneficiario">Sindicato</label>          
+          <select class="form-control" name="id_sindicato" id="id_sindicato_cliente">
+                <option value="0">Seleccionar --</option>
+              <?
+              foreach( $sindicatos as $sindicato ) 
+              {
+                if($id_sindicato_cliente==$sindicato['id_sindicato']) 
+                  echo "<option value='".$sindicato['id_sindicato']."' selected >".$sindicato['descripcion']."</option>";
+                else  
+                  echo "<option value='".$sindicato['id_sindicato']."'>".$sindicato['descripcion']."</option>";
+
+              }
+            ?>
+            </select>
+          <span class="glyphicon glyphicon-remove form-control-feedba
+          ck hide"></span>
+          <p class="text-center help-block hide">Debe ingresar un sindicato.</p>
+        </div>
+      </div>
+       <div class="col-md-4">
+        <div class="form-group has-feedback">
+          <label for="delegacion">Delegación</label>
+          <input type="text" class="form-control" name="delegacion" id="delegacion" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
+          <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+          <p class="text-center help-block hide">Debe ingresar un delegación.</p>
+        </div>
+      </div>
+       <div class="col-md-4">
+        <div class="form-group has-feedback">
+          <label for="fecha">Fecha</label>
+          <br>
+          <input type="input" name="fecha" style="
+                                                  height: 34px;
+                                                  padding: 6px 12px;    
+                                                  border: 1px solid #ccc;" id='fecha' autocomplete="off" autofocus maxlength="50" value="<? echo $fecha?>">
+          <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+          <p class="text-center help-block hide">Debe ingresar un fecha.</p>
+        </div>
+      </div>
+      
+    </div><!-- /.row -->
 
   <div class="row">
     <div class="col-md-4">
       <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
       <div class="form-group has-feedback">
-        <label for="beneficiario">Beneficiario</label>
-        <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="32" value="<? echo $beneficiario?>">
-        <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>">
+        <label for="beneficiario">Titular</label>
+        
+        <input type="hidden" name="id_cliente" id='id_cliente' value="0">
+        <input type='text' class="form-control col-sm" autofocus name='filtro_cliente' id='filtro_cliente' value='' placeholder=''>
+        <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_cliente' title='cancelar para buscar un nuevo beneficiario' class="hide">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div> 
+        
+        <!-- <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="32" value="<? echo $beneficiario?>">
+        <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>"> -->
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
-        <p class="text-center help-block hide">Debe ingresar un beneficiario.</p>
+        <p class="text-center help-block hide">Debe ingresar un titular.</p>
       </div>
     </div>
      <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="delegacion">Delegación</label>
-        <input type="text" class="form-control" name="delegacion" id="delegacion" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
+        <label for="delegacion">Beneficiario</label>
+        <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar un delegación.</p>
       </div>
     </div>
-     <div class="col-md-4">
+     <div class="col-md-2">
       <div class="form-group has-feedback">
-        <label for="fecha">Fecha</label>
-        <br>
-        <input type="input" name="fecha" style="
-                                                height: 34px;
-                                                padding: 6px 12px;    
-                                                border: 1px solid #ccc;" id='fecha' autocomplete="off" autofocus maxlength="50" value="<? echo $fecha?>">
+        <label for="fecha">Nro Afiliado</label>
+        <input type="text" class="form-control" name="nro_cliente" id="nro_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-        <p class="text-center help-block hide">Debe ingresar un fecha.</p>
+        <p class="text-center help-block hide">Debe ingresar un nro de afiliado.</p>
       </div>
     </div>
     
   </div><!-- /.row -->
 
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-10" border='1'>
+      <table  class="table table-bordered hide" id='thistorial' >
+        <thead>
+        <tr style="background-color: #cddae4;">
+          <th>Sindicato</th>
+          <th>Estado</th>
+          <th>Codigo Armazon</th>
+          <th>Color Armazon</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody id='historial_titular'>
+      </tbody>
+      </table>
+    </div>
+    <div class="col-md-1">
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group has-feedback">
@@ -151,8 +236,15 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     </div>
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="codigo_armazon">Armazón</label>
-        <input type="text" class="form-control" name="codigo_armazon" id="codigo_armazon" autocomplete="off" autofocus maxlength="32" value="<? echo $codigo_armazon?>">
+        <label for="codigo_armazon">Codigo Armazón</label>
+
+        <input type="hidden" name="id_stock" id='id_stock' value="0">
+        <input type='text' class="form-control col-sm" autofocus name='codigo_armazon' id='codigo_armazon' value="<? echo $codigo_armazon?>" placeholder=''>
+        <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_armazon' title='cancelar para buscar un nuevo armazon' class="hide">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div> 
+
+        <!-- <input type="text" class="form-control" name="codigo_armazon" id="codigo_armazon" autocomplete="off" autofocus maxlength="32" value="<? echo $codigo_armazon?>"> -->
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar un codigo de armazon.</p>
@@ -197,6 +289,11 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     </div>
   </div><!-- /.row -->
 
+<?php
+//si no es casa central
+if($es_casa_central==0)
+{
+?>
   <div class="row">
      <div class="col-md-4">
       <div class="form-group has-feedback">
@@ -328,7 +425,9 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       </div>
     </div>
   </div><!-- /.row -->
- 
+ <?php
+  }// FIN if casa_central
+ ?>
   <div class="row">
     <div class="col-md-12" align="center" >
       <input type="submit" id='id-guardar' value="<? echo $title_button;?>" class="btn btn-primary">      

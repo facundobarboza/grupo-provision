@@ -241,7 +241,10 @@
                 <ul class="nav nav-list collapse" id="fichas">
                     <li><a href="<?php echo site_url('archivo/listado') ?>" class="collapse-item item-menu">- Listado Fichas
                         </a></li>
-                    <li><a href="<?php echo site_url('archivo/nuevo') ?>" class="collapse-item item-menu">- Nueva Ficha</a>
+                    <li><a href="<?php echo site_url('archivo/nuevo/0/0/1') ?>" class="collapse-item item-menu">- Nueva Ficha Casa Central</a>
+                    </li>
+                    <li>
+                        <a href="<?php echo site_url('archivo/nuevo/0/0/0') ?>" class="collapse-item item-menu">- Nueva Ficha Optica</a>
                     </li>
                 </ul>
             </li>
@@ -258,9 +261,9 @@
                 <a href="<?php echo site_url('sindicatos/listado') ?>" class="collapse-item item-menu"><span class="fa fa-building"></span> Sindicatos </a>
             </li>
             <li data-toggle="collapse" data-target="#stock">
-                <span class="collapse-item"><span class="fa fa-th-list"></span> Stock</span>
+                <span class="collapse-item"><span class="fa fa-th-list"></span> Stock Armazones</span>
                 <ul class="nav nav-list collapse" id="stock">
-                    <li><a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">- Listado </a>
+                    <li><a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">- Listado de Stock</a>
                     </li>
                     <li><a href="<?php echo site_url('stock/nuevoStock') ?>" class="collapse-item item-menu">- Nuevo
                             stock</a></li>

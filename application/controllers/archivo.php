@@ -83,6 +83,7 @@ class archivo extends MY_Controller {
       'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                 base_url('assets/js/datatable/dataTables.bootstrap.js'),
+                                base_url('assets/js/jquery_autocomplete/autocomplete.jquery.js'),
                                 base_url('assets/js/archivo/listado_view.js'))
     );
 
@@ -148,6 +149,12 @@ class archivo extends MY_Controller {
     $costo_adicional       = $this->input->post("costo_adicional");
     $sena_adicional        = $this->input->post("sena_adicional");
     $saldo_adicional       = $this->input->post("saldo_adicional");
+    $id_sindicato          = $this->input->post("id_sindicato");
+    $id_cliente            = $this->input->post("id_cliente");
+    $id_stock              = $this->input->post("id_stock");
+    $nro_cliente           = $this->input->post("nro_cliente");
+    $es_casa_central       = $this->input->post("es_casa_central");
+    $titular               = $this->input->post("filtro_cliente");
 
     // cargamos el modelo
     $this->load->model('archivo_model');
@@ -176,11 +183,39 @@ class archivo extends MY_Controller {
                     'telefono'              => $telefono,
                     'costo_adicional'       => $costo_adicional,
                     'sena_adicional'        => $sena_adicional,
-                    'saldo_adicional'       => $saldo_adicional);
+                    'saldo_adicional'       => $saldo_adicional,
+                    'id_sindicato'          => $id_sindicato,
+                    'id_cliente'            => $id_cliente,
+                    'id_stock'              => $id_stock,
+                    'nro_cliente'           => $nro_cliente,
+                    'es_casa_central'       => $es_casa_central,
+                    'titular'               => $titular);
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
     $this->archivo_model->agregar($data);
-      
+    
+    // //si el cliente no existe lo creamos
+    // if($data['es_casa_central']==0)
+    // {
+    //    $this->db->set('titular_cliente',utf8_encode($data['titular']))
+    //         ->set('beneficiario_cliente',utf8_encode($data['beneficiario']))
+    //         ->set('nro_cliente',utf8_encode($data['nro_cliente']))
+    //         ->set('id_sindicato_cliente',utf8_encode($data['id_sindicato']))
+    //   ->insert("clientes");
+    // }
+
+    // if($id_stock)
+    // {
+    //   //descontamos el armazon utlizado del stock
+    //   $sql = "UPDATE stock
+    //             SET  cantidad  = cantidad-1 
+    //             WHERE id_stock = ".$data['id_stock'].";";
+    //     // echo $sql; die();       
+    //     $this->db->query($sql);
+
+    //    $this->load->model('archivo_model');    
+    // }
+    
 
     //si guardamos un nuevo departamento
     if($this->input->post('id_ficha')==0)
@@ -188,7 +223,7 @@ class archivo extends MY_Controller {
       // guardamos el log
       $this->log_model->guardar_log($this->session->userdata('id_usuario'), 4,"log_fichas","id_ficha",0);
       $this->session->set_flashdata('exito', 'Se ingreso el ficha con &eacute;xito.');  
-      redirect('archivo/nuevo','refresh');
+      redirect('archivo/listado','refresh');
     }
     else
     {
@@ -210,18 +245,28 @@ class archivo extends MY_Controller {
    * @access public
    * @return void
    */
-  public function nuevo($id_ficha=0,$elimino=0) {
+  public function nuevo($id_ficha=0,$elimino=0,$es_casa_central=0) {
     // cargamos el modelo
     
     $this->load->model('archivo_model');
-
+    $this->load->model('clientes_model');
     $this->load->helper('form');
 
+    $sindicatos = $this->clientes_model->obtenerSindicatos();
+
+    foreach( $sindicatos->result() as $row )
+    {     
+      $sindicatos_validos[] = array('id_sindicato' => (int)$row->id_sindicato,
+                                    'descripcion'   => utf8_encode($row->descripcion)
+                                    );  
+    }
     // si es nueva le pasamos estos datos a la vista
     if($id_ficha==0)
     {
       // $this->util->dump_exit($empresas->row());
-      $data = array('contenido_view' => 'archivo/archivo_view',
+      $data = array('es_casa_central' => $es_casa_central,
+                    'sindicatos'      => $sindicatos_validos,
+                    'contenido_view' => 'archivo/archivo_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                               base_url('assets/js/datatable/jquery.dataTables.es.js'),
@@ -236,7 +281,9 @@ class archivo extends MY_Controller {
       $fichas = $this->archivo_model->obtenerFicha($id_ficha);
       $logs   = $this->log_model->get_log("log_fichas","id_ficha",$id_ficha);  
       // $this->util->dump_exit($sindicatos->row());
-      $data = array('fichas'       => $fichas,
+      $data = array('es_casa_central' => $es_casa_central,
+                    'sindicatos'      => $sindicatos_validos,
+                    'fichas'       => $fichas,
                     'logs'         => $logs,
                     'contenido_view' => 'archivo/archivo_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
@@ -271,6 +318,100 @@ class archivo extends MY_Controller {
     // $this->load->view('iframe_view', $data);
   }
   // --------------------------------------------------------------------
+
+   /**
+     * autocomplete del titular a la hora de agregar la ficha
+     *
+     * @access public
+     * @return json
+     */
+
+  public function autocompleteBeneficiario()
+  {    
+      $this->load->model('archivo_model');
+      $salida = array();
+      $term = trim(utf8_decode($this->input->get('term')));
+      
+      $rResult = $this->archivo_model->autocompleteBeneficiario($term);
+      // $this->util->dump_exit($term);
+      
+        foreach( $rResult->result() as $row )
+        {  
+          $salida[] = array(  'id'    => $row->id_cliente,
+                              'label' => utf8_encode($row->titular_cliente." - Nro ".$row->nro_cliente),
+                              'value' => utf8_encode($row->titular_cliente),
+                              'nro_cliente' => $row->nro_cliente);
+        }        
+      
+      header('Content-Type: application/json');
+      echo json_encode($salida);  
+      exit;
+  }
+
+   // --------------------------------------------------------------------
+
+   /**
+     * autocomplete del titular a la hora de agregar la ficha
+     *
+     * @access public
+     * @return json
+     */
+
+  public function autocompleteArmazon()
+  {    
+      $this->load->model('archivo_model');
+      $salida = array();
+      $term = trim(utf8_decode($this->input->get('term')));
+      
+      $rResult = $this->archivo_model->autocompleteArmazon($term);
+      // $this->util->dump_exit($term);
+      
+        foreach( $rResult->result() as $row )
+        {  
+          $salida[] = array(  'id'    => $row->id_stock,
+                              'label' => utf8_encode($row->codigo_color." - CI ".$row->nro_codigo_interno." - ".$row->letra_color),
+                              'value' => utf8_encode($row->codigo_patilla." - CI ".$row->nro_codigo_interno),
+                              'descripcion_color' => $row->descripcion_color);
+        }        
+      
+      header('Content-Type: application/json');
+      echo json_encode($salida);  
+      exit;
+  }
+  
+  // --------------------------------------------------------------------
+
+   /**
+     * las ultimas dos ventas a este titular
+     *
+     * @access public
+     * @return json
+     */
+
+  public function historialVentas()
+  {    
+      $this->load->model('archivo_model');
+      $salida = array();
+      $id_cliente = $this->input->post('id_cliente');
+      
+      $rResult = $this->archivo_model->historialVentas($id_cliente);
+      // $this->util->dump_exit($term);
+      
+      $contenido = "";
+      
+      foreach( $rResult->result() as $row )
+      {  
+        $contenido .= utf8_encode("<tr><td>".$row->sindicato."</td><td>".
+                                  $row->estado."</td><td>".
+                                  $row->codigo_armazon."</td><td>".
+                                  $row->color_armazon."</td><td>".
+                                  $this->util->fecha($row->fecha)."</td><tr>");
+        
+      }        
+      // header('Content-Type: application/json');
+      echo $contenido;  
+      exit;
+  } 
 
 }
 

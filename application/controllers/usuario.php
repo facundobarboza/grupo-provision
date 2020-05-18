@@ -195,7 +195,7 @@ class Usuario extends MY_Controller {
                   break;
                 case 2://si es un usuario encargado de una empresa
                   // lo redireccionamos al inicio de la aplicacion
-                  redirect('empresas', 'refresh');
+                  redirect('archivo', 'refresh');
                   break;
                   case 3://si es un usuario comun
                   // lo redireccionamos al inicio de la aplicacion

@@ -1,0 +1,76 @@
+
+ 
+/* El cuadro donde se encontrara nuestra caja de autocompletar*/
+.autocomplete-jquery-aBox{
+    margin: 0px 0px 0px 0px;    
+    z-index: 0;
+    border: 1px solid;
+    display: block;
+}
+/* la etiqueta de autocompletar*/
+.autocomplete-jquery-aBox label{
+    margin-right: 20px;
+    margin-top: 30px;
+    display: block;
+}
+/* El input, tiene un tamaño de 250 , pero se podria cambiar y deberia 
+*  el script darse cuenta de esto cambiando tambien el tamaño del box de
+*  sugerencias. 
+*/
+/*.autocomplete-jquery-aBox input{
+    height: 20px;
+    width: 700px;
+    z-index: 0;
+}*/
+
+/*
+ * Resultados
+ */
+.autocomplete-jquery-results{
+    border:1px solid silver;
+    float:right;
+    display: none;
+    z-index: 2;
+    position: absolute;
+    margin-top: 20px; /*fix for IE7*/ 
+    
+    
+}
+/*input{
+    border: 1px solid;
+    z-index: 0; 
+    display: block;    
+}*/
+
+/* Si ubica el mouse sobre el imput toma este estilo*/
+.autocomplete-jquery-aBox input:focus{
+    border: 1px solid #41B5EA;
+    /*box-shadow:0px 0px 3px #41B5EA;*/
+    height: 30px;
+    width: 700px;
+}
+
+/*Esta clase se activa cuando el usuario se mueve por las sugerencias*/
+.autocomplete-jquery-mark{
+    color:black;
+    background-color: #E0F0FF !important;
+}
+
+/* Cada sugerencia va a llevar esta clase, por lo tanto tomara el estilo siguiente */
+.autocomplete-jquery-item{
+    border-bottom: 1px solid lightgray;
+    display: block;
+    height: 40px;
+    padding-top: 5px;
+    text-decoration: none;     
+    padding-left: 3px;  
+    background-color: white;    
+}
+.autocomplete-jquery-results{
+     /*box-shadow: 1px 1px 3px black;*/
+}
+/* Al pasar por ensima de las sugerencias*/
+.autocomplete-jquery-item:hover{
+    background-color: #E0F0FF;
+    color:black;
+}

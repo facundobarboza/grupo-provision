@@ -32,7 +32,7 @@
     }
     else
     {
-      $url_index = "archivo/nuevo";
+      $url_index = "archivo/listado";
     }
     ?>
 

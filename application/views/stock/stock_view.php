@@ -16,13 +16,13 @@ if($stock)
     $cantidad            = $stock->row()->cantidad;
     $costo               = $stock->row()->costo;
     $precio_venta        = $stock->row()->precio_venta;
-    $titulo              = "Modificar Stock Producto ID - ".$id_stock;
+    $titulo              = "Modificar Stock Armazon ID - ".$id_stock;
     $class_button        = "btn btn-success";
     $name_button         = "Modificar";
 }
 else
 {
-  $titulo       = "Nuevo Stock";
+  $titulo       = "Nuevo Stock Armazon";
   $class_button = "btn btn-primary";
   $name_button  = "Guardar";
   $id_stock     = 0;
