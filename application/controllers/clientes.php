@@ -54,11 +54,12 @@ class Clientes extends MY_Controller {
 
       $clientes_validas[] = array(
         'id_cliente'        => (int)$row->id_cliente,
-        'nombre_cliente'    => utf8_encode($row->nombre_cliente),
-        'apellido_cliente'  => utf8_encode($row->apellido_cliente),
+        'titular_cliente'    => utf8_encode($row->titular_cliente),
+        'beneficiario_cliente'  => utf8_encode($row->beneficiario_cliente),
         'dni_cliente'       => $row->dni,
         'numero_cliente'    => $row->nro_cliente,
-        'sindicato' => $row->descripcion
+        'sindicato' => $row->descripcion,
+
       );  
     }
 
@@ -100,8 +101,8 @@ class Clientes extends MY_Controller {
     
     // datos pasados al modelo
     $data = array('id_cliente'        => $this->input->post('id_cliente'),
-                  'nombre_cliente'    => $this->input->post('nombre_cliente'),
-                  'apellido_cliente'  => $this->input->post('apellido_cliente'),
+                  'titular_cliente'    => $this->input->post('titular_cliente'),
+                  'beneficiario_cliente'  => $this->input->post('beneficiario_cliente'),
                   'dni_cliente'       => $this->input->post('dni_cliente'),
                   'numero_cliente'    => $this->input->post('numero_cliente'),
                   'id_sindicato_cliente' => $this->input->post('id_sindicato_cliente')

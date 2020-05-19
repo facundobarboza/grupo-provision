@@ -94,6 +94,13 @@ var
       
     });
 
+    $(".stock_minimo").click(function(event) {  
+      id = $(this).attr('id');
+      window.location = appGeneral.obtenerSiteUrl() + "stock/nuevoStock/"+id;
+      /* Act on the event */
+
+    });
+
     $("#eliminar-masivo").click(function(){
 
       if(confirm("Esta seguro que quiere eliminar todos los fichas seleccionados?"))

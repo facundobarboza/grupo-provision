@@ -4,12 +4,12 @@
 
 if($clientes)
 {
-    $id_cliente           = $clientes->row()->id_cliente;
-    $nombre_cliente       = utf8_encode($clientes->row()->nombre_cliente);
-    $apellido_cliente     = utf8_encode($clientes->row()->apellido_cliente);
-    $dni_cliente          = $clientes->row()->dni;
-    $numero_cliente       = $clientes->row()->nro_cliente;
-    $id_sindicato_cliente = $clientes->row()->id_sindicato_cliente;
+  $id_cliente           = $clientes->row()->id_cliente;
+  $titular_cliente      = utf8_encode($clientes->row()->titular_cliente);
+  $beneficiario_cliente = utf8_encode($clientes->row()->beneficiario_cliente);
+  $dni_cliente          = $clientes->row()->dni;
+  $numero_cliente       = $clientes->row()->nro_cliente;
+  $id_sindicato_cliente = $clientes->row()->id_sindicato_cliente;
 }
  
 if(!$id_cliente)
@@ -71,20 +71,20 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
     </div>
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="nombre_cliente">Nombre</label>
-        <input type="text" class="form-control" name="nombre_cliente" id="nombre_cliente" autocomplete="off" autofocus maxlength="32" value="<? echo $nombre_cliente?>">
+        <label for="nombre_cliente">Titular</label>
+        <input type="text" class="form-control" name="titular_cliente" id="titular_cliente" autocomplete="off" autofocus maxlength="32" value="<? echo $titular_cliente?>">
         <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
-        <p class="text-center help-block hide">Debe ingresar un nombre.</p>
+        <p class="text-center help-block hide">Debe ingresar un titular.</p>
       </div>
     </div>
      <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="apellido_cliente">Apellido</label>
-        <input type="text" class="form-control" name="apellido_cliente" id="apellido_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $apellido_cliente?>">
+        <label for="apellido_cliente">Beneficiario</label>
+        <input type="text" class="form-control" name="beneficiario_cliente" id="beneficiario_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $beneficiario_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-        <p class="text-center help-block hide">Debe ingresar un apellido.</p>
+        <p class="text-center help-block hide">Debe ingresar un beneficiario.</p>
       </div>
     </div>
      <div class="col-md-2">

@@ -33,8 +33,8 @@ class Clientes_model extends MY_Model {
 
     if($data['id_cliente']==0)
     {
-      $this->db->set('nombre_cliente',utf8_encode($data['nombre_cliente']))
-              ->set('apellido_cliente',utf8_encode($data['apellido_cliente']))
+      $this->db->set('titular_cliente',utf8_encode($data['titular_cliente']))
+              ->set('beneficiario_cliente',utf8_encode($data['beneficiario_cliente']))
               ->set('dni',utf8_encode($data['dni_cliente']))
               ->set('nro_cliente',utf8_encode($data['numero_cliente']))
               ->set('id_sindicato_cliente',utf8_encode($data['id_sindicato_cliente']))
@@ -44,8 +44,8 @@ class Clientes_model extends MY_Model {
     {
       //si existe modificamos
       $sql = "UPDATE ".$this->_table."
-              SET nombre_cliente       = '".utf8_encode($data['nombre_cliente'])."',
-                  apellido_cliente     = '".utf8_encode($data['apellido_cliente'])."',
+              SET titular_cliente       = '".utf8_encode($data['titular_cliente'])."',
+                  beneficiario_cliente     = '".utf8_encode($data['beneficiario_cliente'])."',
                   dni                  = '".utf8_encode($data['dni_cliente'])."',
                   nro_cliente       = '".utf8_encode($data['numero_cliente'])."',
                   id_sindicato_cliente = '".utf8_encode($data['id_sindicato_cliente'])."'

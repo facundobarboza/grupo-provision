@@ -16,6 +16,7 @@ if($stock)
     $cantidad            = $stock->row()->cantidad;
     $costo               = $stock->row()->costo;
     $precio_venta        = $stock->row()->precio_venta;
+    $cantidad_minima     = $stock->row()->cantidad_minima;
     $titulo              = "Modificar Stock Armazon ID - ".$id_stock;
     $class_button        = "btn btn-success";
     $name_button         = "Modificar";
@@ -227,11 +228,11 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     </div>
     <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="costo">Costo</label>
-        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789,');"  name="costo" id="costo" autocomplete="off" autofocus maxlength="32" value="<? echo $costo?>">
+        <label for="costo">Cantidad Minima</label>
+        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789');"  name="cantidad_minima" id="cantidad_minima" autocomplete="off" autofocus maxlength="32" value="<? echo $cantidad_minima?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
-        <p class="text-center help-block hide">Debe ingresar costo.</p>
+        <p class="text-center help-block hide">Debe ingresar cantidad minima.</p>
       </div>
     </div>
     <div class="col-md-2">
@@ -242,6 +243,17 @@ echo form_open('stock/guardarStock', array('id' => 'formulario-stock', 'role' =>
     <div class="col-md-2">
     </div>
     <div class="col-md-4">
+      <div class="form-group has-feedback">
+        <label for="costo">Costo</label>
+        <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789,');"  name="costo" id="costo" autocomplete="off" autofocus maxlength="32" value="<? echo $costo?>">
+        <span class="glyphicon glyphicon-remove form-control-feedba
+        ck hide"></span>
+        <p class="text-center help-block hide">Debe ingresar costo.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      
+
       <div class="form-group has-feedback">
         <label for="precio_venta">Precio venta</label>
         <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789,');" name="precio_venta" id="precio_venta" autocomplete="off" autofocus maxlength="32" value="<? echo $precio_venta?>">

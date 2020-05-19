@@ -54,20 +54,31 @@ class archivo extends MY_Controller {
     // cargamos el modelo
     $this->load->model(array('archivo_model'));
 
-    // obtenemos los archivos
-    $fichas = $this->archivo_model->obtenerFichas();    
+    // obtenemos las fichas y el stock minimo
+    $fichas   = $this->archivo_model->obtenerFichas();
+    $s_minimo = $this->archivo_model->stockMinimo();    
   
-    // recorremos las liquidaciones del usuario obtenidas
     foreach( $fichas->result() as $row )
     {     
-      $fichas_validos[] = array(
+      $fichas_validos[] = array(  
                                   'id_ficha'       => $row->id_ficha,
                                   'beneficiario'   => $row->beneficiario,
                                   'optica'         => $row->optica,
                                   'codigo_armazon' => $row->codigo_armazon,
                                   'color_armazon'  => $row->color_armazon,
                                   'estado'         => $row->estado,
-                                  'fecha'          => $row->fecha
+                                  'fecha'          => $row->fecha,
+                                  'es_casa_central' => $row->es_casa_central
+                                  );  
+    }
+
+    // recorremos las liquidaciones del usuario obtenidas
+    foreach( $s_minimo->result() as $row )
+    {    
+      $stock_minimo[] = array(  'id_stock'           => $row->id_stock,
+                                'codigo_patilla'     => $row->codigo_patilla,
+                                'codigo_color'       => $row->codigo_color,
+                                'nro_codigo_interno' => $row->nro_codigo_interno
                                   );  
     }
 
@@ -76,6 +87,7 @@ class archivo extends MY_Controller {
     $contenido = "archivo/listado_view";
     // datos pasados a la vista
     $data = array(
+      'stock_minimo' => $stock_minimo,
       'fichas'       => $fichas_validos,
       'alertas'        => $alertas_validas,
       'contenido_view' => $contenido,
@@ -280,7 +292,7 @@ class archivo extends MY_Controller {
     {
       $fichas = $this->archivo_model->obtenerFicha($id_ficha);
       $logs   = $this->log_model->get_log("log_fichas","id_ficha",$id_ficha);  
-      // $this->util->dump_exit($sindicatos->row());
+      // $this->util->dump_exit($fichas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
                     'fichas'       => $fichas,

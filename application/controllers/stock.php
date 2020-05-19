@@ -109,7 +109,8 @@ class Stock extends MY_Controller {
                   'id_ubicacion'        => $this->input->post('id_ubicacion'),
                   'costo'               => $this->input->post('costo'),
                   'cantidad'            => $this->input->post('cantidad'),
-                  'precio_venta'        => $this->input->post('precio_venta'),
+                  'cantidad_minima'     => $this->input->post('cantidad_minima'),
+                  'precio_venta'        => $this->input->post('precio_venta')
                 );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 

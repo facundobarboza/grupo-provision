@@ -1,7 +1,7 @@
 var
     $formulario           = $("#formulario-cliente"),
-    $nombre_cliente       = $('#nombre_cliente'),
-    $apellido_cliente     = $('#apellido_cliente'),
+    $titular_cliente      = $('#titular_cliente'),
+    $beneficiario_cliente = $('#beneficiario_cliente'),
     $dni_cliente          = $('#dni_cliente'),
     $numero_cliente       = $('#numero_cliente'),
     $id_sindicato_cliente = $('#id_sindicato_cliente')
@@ -14,25 +14,25 @@ $(function() {
     var
         error              = false,
 
-        nombre_cliente       = $nombre_cliente.val(),
-        apellido_cliente     = $apellido_cliente.val(),
+        titular_cliente      = $titular_cliente.val(),
+        beneficiario_cliente = $beneficiario_cliente.val(),
         dni_cliente          = $dni_cliente.val(),
         numero_cliente       = $numero_cliente.val(),
         id_sindicato_cliente = $id_sindicato_cliente.val()
 
     // no ingreso
-    if( nombre_cliente == "" )
+    if( titular_cliente == "" )
     {
       error = true;
 
-      $nombre_cliente
+      $titular_cliente
         .parent()
         .addClass("has-error")
         .find(".form-control-feedback")
         .eq(0)
         .removeClass("hide");
 
-      $nombre_cliente
+      $titular_cliente
         .parent()
         .find(".text-center")
         .eq(0)
@@ -41,18 +41,18 @@ $(function() {
     }
     else
     {
-      if( apellido_cliente == "")
+      if( beneficiario_cliente == "")
       {
         error = true;
 
-        $apellido_cliente
+        $beneficiario_cliente
           .parent()
           .addClass("has-error")
           .find(".form-control-feedback")
           .eq(0)
           .removeClass("hide");
 
-        $apellido_cliente
+        $beneficiario_cliente
           .parent()
           .find(".text-center")
           .eq(0)

@@ -259,6 +259,7 @@ class archivo_model extends MY_Model {
     return $result;
   }
 
+   // --------------------------------------------------------------------
    /**
    *
    * @access public
@@ -270,6 +271,25 @@ class archivo_model extends MY_Model {
     $this->db->select("*", FALSE)
              ->from($this->_table)
             ->where('activo', 1);;   
+    
+    $result = $this->db->get();
+    // Util::dump_exit($result->row());
+
+    return $result;
+  }
+
+   // --------------------------------------------------------------------
+  /**
+   *
+   * @access public
+   * @return array
+   */
+  public function stockMinimo() {   
+    
+    $this->db->select("id_stock, codigo_patilla, codigo_color, nro_codigo_interno", FALSE)
+             ->from("stock")
+            ->where('cantidad <= cantidad_minima')
+            ->where('activo',1);   
     
     $result = $this->db->get();
     // Util::dump_exit($result->row());
@@ -368,8 +388,9 @@ class archivo_model extends MY_Model {
    * @return array
    */
   public function obtenerFicha($id_ficha) {
-    $this->db->select("*", FALSE)
+    $this->db->select($this->_table.".*,titular_cliente", FALSE)
              ->from($this->_table)
+             ->join('clientes','clientes.id_cliente='.$this->_table.'.id_cliente')
              ->where('id_ficha', $id_ficha);
     $result = $this->db->get();
 
@@ -421,6 +442,7 @@ class archivo_model extends MY_Model {
 
     $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color", FALSE)
              ->from("stock")
+             ->where('activo',1)
              ->or_like($array);
              
     $result = $this->db->get();

@@ -11,6 +11,7 @@ var
   $id_material         = $("#id_material"),
   $id_ubicacion        = $("#id_ubicacion"),
   $cantidad            = $("#cantidad"),
+  $cantidad_minima     = $("#cantidad_minima"),
   $costo               = $("#costo"),
   $precio_venta        = $("#precio_venta");
 
@@ -39,6 +40,7 @@ $(function () {
       id_material         = $id_material.val(),
       id_ubicacion        = $id_ubicacion.val(),
       cantidad            = $cantidad.val(),
+      cantidad_minima     = $cantidad_minima.val(),
       costo               = $costo.val(),
       precio_venta        = $precio_venta.val();
 
@@ -188,16 +190,16 @@ $(function () {
 
     }
     else
-      if (costo == "") {
+      if (cantidad_minima == "") {
         error = true;
 
-        $costo
+        $cantidad_minima
           .parent()
           .addClass("has-error")
           .find(".form-control-feedback")
           .eq(0);
 
-        $costo
+        $cantidad_minima
           .parent()
           .find(".text-center")
           .eq(0)
@@ -205,7 +207,24 @@ $(function () {
 
       }
       else
-        if (precio_venta == "") {
+        if (costo == "") {
+          error = true;
+
+          $costo
+            .parent()
+            .addClass("has-error")
+            .find(".form-control-feedback")
+            .eq(0);
+
+          $costo
+            .parent()
+            .find(".text-center")
+            .eq(0)
+            .removeClass("hide");
+        }
+        else
+        {
+          if (precio_venta == "") {
           error = true;
 
           $precio_venta
@@ -219,7 +238,9 @@ $(function () {
             .find(".text-center")
             .eq(0)
             .removeClass("hide");
+          }
         }
+          
 
     if (!error) 
     {

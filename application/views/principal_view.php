@@ -35,7 +35,7 @@
       $url_index = "archivo/listado";
     }
     ?>
-
+    
     <iframe src="<?php echo site_url($url_index); ?>" id="iframe-principal" class="p-l-200" width="100%" style="position: fixed; border:0; padding-top:5px;"></iframe>
 
     <script src="<?php echo base_url('assets/js/jquery.min.js') ?>"></script>

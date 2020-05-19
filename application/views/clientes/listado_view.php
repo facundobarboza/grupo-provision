@@ -10,8 +10,8 @@
     <table id="datatable-cliente" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
+          <th>Titular</th>
+          <th>Beneficiario</th>
           <th>DNI</th>
           <th>Número</th>
           <th>Sindicato</th>
@@ -23,10 +23,10 @@
       foreach( $clientes as $cliente ) { ?>
         <tr>
           <td>
-            <?php echo $cliente['nombre_cliente']; ?>
+            <?php echo $cliente['titular_cliente']; ?>
           </td>
           <td>
-            <?php echo $cliente['apellido_cliente']; ?>
+            <?php echo $cliente['beneficiario_cliente']; ?>
           </td>
           <td>
             <?php echo $cliente['dni_cliente']; ?>

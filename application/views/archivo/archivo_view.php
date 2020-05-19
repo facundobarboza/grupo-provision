@@ -20,6 +20,10 @@
 if($fichas)
 {
   $id_ficha                 = $fichas->row()->id_ficha;
+  $id_sindicato             = $fichas->row()->id_sindicato;
+  $nro_cliente              = $fichas->row()->nro_cliente;
+  $titular                  = $fichas->row()->titular_cliente;
+  $id_cliente               = $fichas->row()->id_cliente;
   $beneficiario             = $fichas->row()->beneficiario;
   $id_cliente               = $fichas->row()->id_cliente;
   $delegacion               = $fichas->row()->delegacion;
@@ -45,11 +49,15 @@ if($fichas)
   $costo_adicional          = $fichas->row()->costo_adicional;
   $seña_adicional           = $fichas->row()->sena_adicional;
   $saldo_adicional          = $fichas->row()->saldo_adicional;
+  $es_casa_central          = $fichas->row()->es_casa_central;
+  $id_stock                 = $fichas->row()->id_stock;
 }
 else
 {
-  $id_ficha = 0;
-  $fecha    = date("d-m-Y");
+  $id_ficha   = 0;
+  $fecha      = date("d-m-Y");
+  $id_cliente = 0;
+  $id_stock   = 0;
 }
 
 //si no existe es nuevo
@@ -123,13 +131,13 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
         <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
         <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
         <div class="form-group has-feedback">
-          <label for="beneficiario">Sindicato</label>          
+          <label for="sindicato">Sindicato</label>          
           <select class="form-control" name="id_sindicato" id="id_sindicato_cliente">
                 <option value="0">Seleccionar --</option>
               <?
               foreach( $sindicatos as $sindicato ) 
               {
-                if($id_sindicato_cliente==$sindicato['id_sindicato']) 
+                if($id_sindicato==$sindicato['id_sindicato']) 
                   echo "<option value='".$sindicato['id_sindicato']."' selected >".$sindicato['descripcion']."</option>";
                 else  
                   echo "<option value='".$sindicato['id_sindicato']."'>".$sindicato['descripcion']."</option>";
@@ -171,8 +179,8 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       <div class="form-group has-feedback">
         <label for="beneficiario">Titular</label>
         
-        <input type="hidden" name="id_cliente" id='id_cliente' value="0">
-        <input type='text' class="form-control col-sm" autofocus name='filtro_cliente' id='filtro_cliente' value='' placeholder=''>
+        <input type="hidden" name="id_cliente" id='id_cliente' value="<? echo $id_cliente?>">
+        <input type='text' class="form-control col-sm" autofocus name='filtro_cliente' id='filtro_cliente' value='<? echo $titular?>' placeholder=''>
         <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_cliente' title='cancelar para buscar un nuevo beneficiario' class="hide">
           <span class="glyphicon glyphicon-remove"></span>
         </div> 
@@ -187,7 +195,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
      <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="delegacion">Beneficiario</label>
-        <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
+        <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="50" value="<? echo $beneficiario?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar un delegación.</p>
       </div>
@@ -195,7 +203,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
      <div class="col-md-2">
       <div class="form-group has-feedback">
         <label for="fecha">Nro Afiliado</label>
-        <input type="text" class="form-control" name="nro_cliente" id="nro_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $delegacion?>">
+        <input type="text" class="form-control" name="nro_cliente" id="nro_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $nro_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar un nro de afiliado.</p>
       </div>
@@ -238,7 +246,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       <div class="form-group has-feedback">
         <label for="codigo_armazon">Codigo Armazón</label>
 
-        <input type="hidden" name="id_stock" id='id_stock' value="0">
+        <input type="hidden" name="id_stock" id='id_stock' value="<? echo $id_stock?>">
         <input type='text' class="form-control col-sm" autofocus name='codigo_armazon' id='codigo_armazon' value="<? echo $codigo_armazon?>" placeholder=''>
         <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_armazon' title='cancelar para buscar un nuevo armazon' class="hide">
           <span class="glyphicon glyphicon-remove"></span>

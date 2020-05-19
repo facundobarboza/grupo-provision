@@ -1,3 +1,22 @@
+<?php
+//si tenemos stock minimo mostramos el mensaje
+if($stock_minimo)
+{ ?>
+  <div class="alert alert-warning " role="alert">
+    <strong>ATENCIÓN STOCK MINIMO</strong>
+    <?php 
+      foreach( $stock_minimo as $stock ) 
+      { 
+        echo "<br>Armazon cod innterno: ".$stock['nro_codigo_interno']." - cod color: ".$stock['codigo_color']." <a href='#' class='stock_minimo' id='".$stock['id_stock']."' ><b> ID ".$stock['id_stock']."</b></a>";
+      }
+      ?>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <?
+  }
+?>
 <div class="panel panel-default" >
    <div class="panel-body">
   <div class="row">
@@ -30,8 +49,8 @@
           <th>Color Armazon</th>
           <th>Estado</th>
           <th>Fecha</th>
-          <th>Modificar</th>
-          <th>Eliminar</th>
+          <th>Tipo</th>
+          <th>Mod/Elim</th>
         </tr>
       </thead>
       <tbody> 
@@ -63,6 +82,14 @@
           <td>
             <?php echo Util::fecha($ficha['fecha']); ?>
           </td>
+          <td>
+            <?php
+            if($ficha['es_casa_central']==1)
+              echo "Casa Central";
+            else
+              echo "Optica";
+            ?>
+          </td>
           <td width="60px">
             <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
             <div class="text-center">
@@ -70,8 +97,6 @@
                 <span class="glyphicon glyphicon-pencil"></span>
               </button>
             </div>
-          </td>
-          <td width="60px">
             <div class="text-center">
               <button type="button" class="btn btn-default btn-xs btn-eliminar-ficha" title="Eliminar ficha">
                 <span class="glyphicon glyphicon-remove"></span>

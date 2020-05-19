@@ -42,6 +42,7 @@ class Stock_model extends MY_Model {
               ->set('id_ubicacion',utf8_encode($data['id_ubicacion']))
               ->set('costo',utf8_encode($data['costo']))
               ->set('cantidad',utf8_encode($data['cantidad']))
+              ->set('cantidad_minima',utf8_encode($data['cantidad_minima']))
               ->set('precio_venta',utf8_encode($data['precio_venta']))
               ->insert($this->_table);
     }
@@ -59,6 +60,7 @@ class Stock_model extends MY_Model {
                 id_ubicacion = ".$data['id_ubicacion'].",
                 costo = '".$data['costo']."',
                 cantidad = '".$data['cantidad']."',
+                cantidad_minima = '".$data['cantidad_minima']."',
                 precio_venta = '".$data['precio_venta']."'
             WHERE id_stock = ".$data['id_stock'].";";
             // echo $sql;exit;
@@ -224,7 +226,7 @@ class Stock_model extends MY_Model {
 
   // --------------------------------------------------------------------
 
-}
+} 
 
 /* Fin del archivo alertas_model.php */
 /* Ubicacion: ./application/models/alertas_model.php */
