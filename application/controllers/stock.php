@@ -121,14 +121,14 @@ class Stock extends MY_Controller {
     {
       // guardamos el log
       $this->log_model->guardar_log($this->session->userdata('id_usuario'),4,"log_stock","id_stock",0);
-      $this->session->set_flashdata('exito', 'Se ingreso un Producto con &eacute;xito.');  
+      $this->session->set_flashdata('exito', 'Se ingreso un Armazon con &eacute;xito.');  
       redirect('stock/nuevoStock/','refresh');
     }
     else
     {
       // guardamos el log
       $this->log_model->guardar_log($this->session->userdata('id_usuario'),6,"log_stock","id_stock",$this->input->post('id_stock'));
-      $this->session->set_flashdata('exito', 'Se modifico el Producto ID - '.$id_stock.' con &eacute;xito.');
+      $this->session->set_flashdata('exito', 'Se modifico el Armazon ID - '.$id_stock.' con &eacute;xito.');
       redirect('stock/listado/','refresh');
     }
     

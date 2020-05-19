@@ -466,6 +466,7 @@ class archivo_model extends MY_Model {
              ->from("fichas")
              ->join('sindicatos','fichas.id_sindicato=sindicatos.id_sindicato')
              ->where('id_cliente',$id_cliente)
+             ->where('fichas.activo',1)
              ->order_by('fecha','DESC')
              ->limit(3);
              
