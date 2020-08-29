@@ -70,7 +70,7 @@
 </head>
 
 <body>
-  <img src="<?php echo base_url('assets/images/fondo_1.jpg') ?>" id="bg">
+  <img src="<?php echo base_url('assets/images/fondo_1.png') ?>" id="bg">
 
   <?php
   $inicio_html_error = '<div class="alert alert-danger" role="alert">
