@@ -96,3 +96,8 @@ footer {
 @media screen and (max-height: 450px) {
   .sidenav .collapse-item {font-size: 18px;}
 }
+
+.container-fluid {
+
+    margin-bottom: 30px;
+}
