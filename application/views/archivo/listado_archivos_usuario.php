@@ -13,7 +13,7 @@ foreach( $alertas as $alerta )
 ?>
 <div class="row">
   <div class="col-md-12">
-    <<h4 class="page-header text-uppercase">
+    <h4 class="page-header text-uppercase">
       Listado de Archivos Subidos
     </h4>
   </div>

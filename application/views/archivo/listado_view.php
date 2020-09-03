@@ -1,7 +1,8 @@
 <?php
 //si tenemos stock minimo mostramos el mensaje
 if($stock_minimo)
-{ ?>
+{ 
+  ?>
   <div class="alert alert-warning " role="alert">
     <strong>ATENCIÓN STOCK MINIMO</strong>
     <?php 
@@ -9,33 +10,21 @@ if($stock_minimo)
       { 
         echo "<br>Armazon cod innterno: ".$stock['nro_codigo_interno']." - cod color: ".$stock['codigo_color']." <a href='#' class='stock_minimo' id='".$stock['id_stock']."' ><b> ID ".$stock['id_stock']."</b></a>";
       }
-      ?>
+    ?>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <?
-  }
+}
 ?>
-<div class="panel panel-default" >
-   <div class="panel-body">
-  <div class="row">
+
+<div class="row">
   <div class="col-md-12">
-    <h4 class="page-header text-uppercase">
-      Listado Fichas
-    </h4>
+    <h4 class="page-header text-uppercase">Listado Fichas</h4>
   </div>
-</div><!-- /.row-fluid -->
-<!-- <div class="row">
-  <div class="col-md-2" align="left" >  
-    <button class="btn btn-danger" id='eliminar-masivo' > Eiminar Seleccionados</button>
-  </div>
-  <div class="col-md-10" align="right" >    
-    <button class="btn btn-success" rol='link' onclick="window.location='<?php echo site_url('archivo/listado_excel') ?>'">
-      Descargar Excel</button><br>&nbsp;&nbsp;&nbsp;
-      
-  </div> -->
-</div><!-- /.row -->
+</div>
+
 <div class="row">
   <div class="col-md-12 ">
     <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">
@@ -108,7 +97,4 @@ if($stock_minimo)
       </tbody>
     </table>
   </div>
-</div><!-- /.row-fluid -->
 </div>
-</div>
-
