@@ -17,44 +17,46 @@
 
 if($fichas)
 {
-  $id_ficha                 = $fichas->row()->id_ficha;
-  $id_sindicato             = $fichas->row()->id_sindicato;
-  $nro_cliente              = $fichas->row()->nro_cliente;
-  $titular                  = $fichas->row()->titular_cliente;
-  $id_cliente               = $fichas->row()->id_cliente;
-  $beneficiario             = $fichas->row()->beneficiario;
-  $id_cliente               = $fichas->row()->id_cliente;
-  $delegacion               = $fichas->row()->delegacion;
-  $optica                   = $fichas->row()->optica;
-  $fecha                    = $this->util->fecha($fichas->row()->fecha);
-  $codigo_armazon           = $fichas->row()->codigo_armazon;
-  $color_armazon            = $fichas->row()->color_armazon;
-  $id_stock                 = $fichas->row()->id_stock;
-  $estado                   = $fichas->row()->estado;
-  $voucher                  = $fichas->row()->voucher;
-  $nro_pedido               = $fichas->row()->nro_pedido;
-  $grad_od_esf_lejos        = $fichas->row()->grad_od_esf_lejos;
-  $grad_od_esf_cerca        = $fichas->row()->grad_od_esf_cerca;
-  $grad_od_cil_lejos        = $fichas->row()->grad_od_cil_lejos;
-  $grad_od_cil_cerca        = $fichas->row()->grad_od_cil_cerca;
-  $eje_od_lejos             = $fichas->row()->eje_od_lejos;
-  $eje_od_cerca             = $fichas->row()->eje_od_cerca;
-  $grad_oi_esf_lejos        = $fichas->row()->grad_oi_esf_lejos;
-  $grad_oi_esf_cerca        = $fichas->row()->grad_oi_esf_cerca;
-  $grad_oi_cil_lejos        = $fichas->row()->grad_oi_cil_lejos;
-  $grad_oi_cil_cerca        = $fichas->row()->grad_oi_cil_cerca;
-  $eje_oi_lejos             = $fichas->row()->eje_oi_lejos;
-  $eje_oi_cerca             = $fichas->row()->eje_oi_cerca;
-  $comentario               = $fichas->row()->comentario;
-  // $es_lejos              = $fichas->row()->es_lejos;
-  $adicional                = $fichas->row()->adicional;
-  $descripcion_adicional    = $fichas->row()->descripcion_adicional;
-  $telefono                 = $fichas->row()->telefono;
-  $costo_adicional          = $fichas->row()->costo_adicional;
-  $seña_adicional           = $fichas->row()->sena_adicional;
-  $saldo_adicional          = $fichas->row()->saldo_adicional;
-  $es_casa_central          = $fichas->row()->es_casa_central;
-  $id_stock                 = $fichas->row()->id_stock;
+  $id_ficha              = $fichas->row()->id_ficha;
+  $id_sindicato          = $fichas->row()->id_sindicato;
+  $nro_cliente           = $fichas->row()->nro_cliente;
+  $titular               = $fichas->row()->titular_cliente;
+  $id_cliente            = $fichas->row()->id_cliente;
+  $beneficiario          = $fichas->row()->beneficiario;
+  $id_cliente            = $fichas->row()->id_cliente;
+  $delegacion            = $fichas->row()->delegacion;
+  $optica                = $fichas->row()->optica;
+  $fecha                 = $this->util->fecha($fichas->row()->fecha);
+  $codigo_armazon        = $fichas->row()->codigo_armazon;
+  $color_armazon         = $fichas->row()->color_armazon;
+  $id_stock              = $fichas->row()->id_stock;
+  $estado                = $fichas->row()->estado;
+  $voucher               = $fichas->row()->voucher;
+  $nro_pedido            = $fichas->row()->nro_pedido;
+  $grad_od_esf           = $fichas->row()->grad_od_esf;
+  $grad_od_esf_cerca     = $fichas->row()->grad_od_esf_cerca;
+  $grad_od_cil           = $fichas->row()->grad_od_cil;
+  $grad_od_cil_cerca     = $fichas->row()->grad_od_cil_cerca;
+  $eje_od                = $fichas->row()->eje_od;
+  $eje_od_cerca          = $fichas->row()->eje_od_cerca;
+  $grad_oi_esf           = $fichas->row()->grad_oi_esf;
+  $grad_oi_esf_cerca     = $fichas->row()->grad_oi_esf_cerca;
+  $grad_oi_cil           = $fichas->row()->grad_oi_cil;
+  $grad_oi_cil_cerca     = $fichas->row()->grad_oi_cil_cerca;
+  $eje_oi                = $fichas->row()->eje_oi;
+  $eje_oi_cerca          = $fichas->row()->eje_oi_cerca;
+  $comentario            = $fichas->row()->comentario;
+  $select_tipo           = $fichas->row()->es_lejos;
+  $adicional             = $fichas->row()->adicional;
+  $descripcion_adicional = $fichas->row()->descripcion_adicional;
+  $telefono              = $fichas->row()->telefono;
+  $costo_adicional       = $fichas->row()->costo_adicional;
+  $seña_adicional        = $fichas->row()->sena_adicional;
+  $saldo_adicional       = $fichas->row()->saldo_adicional;
+  $es_casa_central       = $fichas->row()->es_casa_central;
+  $id_stock_cerca        = $fichas->row()->id_stock_cerca;
+  $codigo_armazon_cerca        = $fichas->row()->codigo_armazon_cerca;
+  $color_armazon_cerca         = $fichas->row()->color_armazon_cerca;
 }
 else
 {
@@ -177,8 +179,12 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
 <div class="row">
   <div class="col-md-4">
     <div class="form-group has-feedback">
-      <label for="delegacion">Beneficiario</label>
-      <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="50" value="<? echo $beneficiario?>">
+      <label for="beneficiario">Beneficiario</label>
+      <input type="hidden" name="id_cliente" id='id_cliente' value="<? echo $id_cliente?>">
+      <input type='text' class="form-control col-sm" autofocus name='filtro_cliente' id='filtro_cliente' value='<? echo $beneficiario?>' placeholder=''>
+      <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_cliente' title='cancelar para buscar un nuevo beneficiario' class="hide">
+        <span class="glyphicon glyphicon-remove"></span>
+      </div>
       <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
       <p class="text-center help-block hide">Debe ingresar un beneficiario.</p>
     </div>
@@ -186,12 +192,8 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
   <div class="col-md-4">
     <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
     <div class="form-group has-feedback">
-      <label for="beneficiario">Titular</label>
-      <input type="hidden" name="id_cliente" id='id_cliente' value="<? echo $id_cliente?>">
-      <input type='text' class="form-control col-sm" autofocus name='filtro_cliente' id='filtro_cliente' value='<? echo $titular?>' placeholder=''>
-      <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_cliente' title='cancelar para buscar un nuevo beneficiario' class="hide">
-        <span class="glyphicon glyphicon-remove"></span>
-      </div>
+      <label for="beneficiario">Titular</label>      
+      <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="50" value="<? echo $titular?>">
       <!-- <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" autofocus maxlength="32" value="<? echo $beneficiario?>">
         <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>"> -->
       <span class="glyphicon glyphicon-remove form-control-feedba
@@ -237,17 +239,42 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
     <div class="form-group has-feedback">
       <label for="types">Tipos</label>
-      <select class="form-control" name="id_types" id="id_types_cliente">
-        <option value="0">Seleccionar --</option>
+      <?php
+        $display_cerca = "style='display:none;'";
+        $display_lejos = "";
+      ?>
+      <select class="form-control" name="select_tipo" id="select_tipo">
+        <option value="1" <?php if($select_tipo==1) 
+                                {
+                                  echo "selected";
+                                  $display_cerca = "style='display:none;'";
+                                }?> >Lejos</option>
+        <option value="2" <?php if($select_tipo==2) 
+                                {
+                                  echo "selected";
+                                  $display_lejos = "style='display:none;'";
+                                }?> >Cerca</option>
+        <option value="3" <?php if($select_tipo==3) 
+                                {
+                                  echo "selected";
+                                  $display_cerca = "";
+                                  $display_lejos = "";
+                                }?> >Lejos y Cerca</option>
+        <option value="4" <?php if($select_tipo==4) 
+                                {
+                                  echo "selected";
+                                  $display_cerca = "";
+                                  $display_lejos = "";
+                                }?> >Fuera de Prestacion</option>
         <?
-              foreach( $typess as $types ) 
-              {
-                if($id_types==$types['id_types']) 
-                  echo "<option value='".$types['id_types']."' selected >".$types['descripcion']."</option>";
-                else  
-                  echo "<option value='".$types['id_types']."'>".$types['descripcion']."</option>";
+              // foreach( $tipos_lentes as $row ) 
+              // {
+              //   if($id_tipo==$row['id']) 
+              //     echo "<option value='".$row['id']."' selected >".$row['descripcion']."</option>";
+              //   else  
+              //     echo "<option value='".$row['id']."'>".$row['descripcion']."</option>";
 
-              }
+              // }
             ?>
       </select>
       <span class="glyphicon glyphicon-remove form-control-feedba
@@ -258,11 +285,11 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
 </div>
 
 <div class="row">
-  <div class="col-md-3">
+  <div class="col-md-3 div-lejos" <?php echo $display_lejos;?> >
     <div class="form-group has-feedback">
-      <label for="codigo_armazon_lejos">Código armazon lejos</label>
+      <label for="codigo_armazon">Código armazon lejos</label>
       <input type="hidden" name="id_stock" id='id_stock' value="<? echo $id_stock?>">
-      <input type='text' class="form-control col-sm" autofocus name='codigo_armazon_lejos' id='codigo_armazon_lejos' value="<? echo $codigo_armazon_lejos?>" placeholder=''>
+      <input type='text' class="form-control col-sm" autofocus name='codigo_armazon' id='codigo_armazon' value="<? echo $codigo_armazon?>" placeholder=''>
       <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_armazon' title='cancelar para buscar un nuevo armazon' class="hide">
         <span class="glyphicon glyphicon-remove"></span>
       </div>
@@ -272,20 +299,20 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       <p class="text-center help-block hide">Debe ingresar un codigo de armazon.</p>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 div-lejos" <?php echo $display_lejos;?> >
     <div class="form-group has-feedback">
-      <label for="color_armazon_lejos">Color de armazon lejos</label>
-      <input type="text" class="form-control" name="color_armazon_lejos" id="color_armazon_lejos" autocomplete="off" autofocus maxlength="50" value="<? echo $color_armazon_lejos?>">
+      <label for="color_armazon">Color de armazon lejos</label>
+      <input type="text" class="form-control" name="color_armazon" id="color_armazon" autocomplete="off" autofocus maxlength="50" value="<? echo $color_armazon?>">
       <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
       <p class="text-center help-block hide">Debe ingresar un color de armazon.</p>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 div-cerca" <?php echo $display_cerca;?> >
     <div class="form-group has-feedback">
       <label for="codigo_armazon_cerca">Código armazon cerca</label>
-      <input type="hidden" name="id_stock" id='id_stock' value="<? echo $id_stock?>">
+      <input type="hidden" name="id_stock_cerca" id='id_stock_cerca' value="<? echo $id_stock_cerca?>">
       <input type='text' class="form-control col-sm" autofocus name='codigo_armazon_cerca' id='codigo_armazon_cerca' value="<? echo $codigo_armazon_cerca?>" placeholder=''>
-      <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_armazon' title='cancelar para buscar un nuevo armazon' class="hide">
+      <div class='cancelar-autocomplete hide' id='cancelar_autocomplete_armazon_cerca' title='cancelar para buscar un nuevo armazon' class="hide">
         <span class="glyphicon glyphicon-remove"></span>
       </div>
       <!-- <input type="text" class="form-control" name="codigo_armazon_cerca" id="codigo_armazon_cerca" autocomplete="off" autofocus maxlength="32" value="<? echo $codigo_armazon_cerca?>"> -->
@@ -294,7 +321,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       <p class="text-center help-block hide">Debe ingresar un codigo de armazon.</p>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col-md-3 div-cerca" <?php echo $display_cerca;?> >
     <div class="form-group has-feedback">
       <label for="color_armazon_cerca">Color de armazon cerca</label>
       <input type="text" class="form-control" name="color_armazon_cerca" id="color_armazon_cerca" autocomplete="off" autofocus maxlength="50" value="<? echo $color_armazon_cerca?>">
@@ -308,12 +335,12 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
 //si no es casa central
 if ($es_casa_central == 0) {
 ?>
-  <div class="row">
+  <div class="row div-lejos" <?php echo $display_lejos;?> >
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
-        <label for="grad_od_esf_lejos">Grad. O D ESF lejos</label>
-        <input type="text" class="form-control" name="grad_od_esf_lejos" id="grad_od_esf_lejos" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_od_esf_lejos?>">
+        <label for="grad_od_esf">Grad. O D ESF lejos</label>
+        <input type="text" class="form-control" name="grad_od_esf" id="grad_od_esf" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_od_esf?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho esférico.</p>
       </div>
@@ -321,8 +348,8 @@ if ($es_casa_central == 0) {
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_od_cil">Graduación ojo derecho cilindrico</label> -->
-        <label for="grad_od_cil_lejos">Grad. O D CIL lejos</label>
-        <input type="text" class="form-control" name="grad_od_cil_lejos" id="grad_od_cil_lejos" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_od_cil_lejos?>">
+        <label for="grad_od_cil">Grad. O D CIL lejos</label>
+        <input type="text" class="form-control" name="grad_od_cil" id="grad_od_cil" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_od_cil?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho cilindrico.</p>
@@ -331,20 +358,20 @@ if ($es_casa_central == 0) {
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="eje_od">Eje ojo derecho</label> -->
-        <label for="eje_od_lejos">Eje O D lejos</label>
-        <input type="text" class="form-control" name="eje_od_lejos" id="eje_od_lejos" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_od_lejos?>">
+        <label for="eje_od">Eje O D lejos</label>
+        <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_od?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row div-lejos" <?php echo $display_lejos;?>>
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_oi_esf">Graduación ojo izquierdo esférico</label> -->
-        <label for="grad_oi_esf_lejos">Grad. O I ESF lejos</label>
-        <input type="text" class="form-control" name="grad_oi_esf_lejos" id="grad_oi_esf_lejos" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_oi_esf_lejos?>">
+        <label for="grad_oi_esf">Grad. O I ESF lejos</label>
+        <input type="text" class="form-control" name="grad_oi_esf" id="grad_oi_esf" autocomplete="off" autofocus maxlength="50" value="<? echo $grad_oi_esf?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo esférico.</p>
       </div>
@@ -352,8 +379,8 @@ if ($es_casa_central == 0) {
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_oi_cil">Graduación ojo izquierdo cilindrico</label> -->
-        <label for="grad_oi_cil_lejos">Grad. O I CIL lejos</label>
-        <input type="text" class="form-control" name="grad_oi_cil_lejos" id="grad_oi_cil_lejos" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_oi_cil_lejos?>">
+        <label for="grad_oi_cil">Grad. O I CIL lejos</label>
+        <input type="text" class="form-control" name="grad_oi_cil" id="grad_oi_cil" autocomplete="off" autofocus maxlength="32" value="<? echo $grad_oi_cil?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
@@ -362,15 +389,15 @@ if ($es_casa_central == 0) {
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
-        <label for="eje_oi_lejos">Eje O I lejos</label>
-        <input type="text" class="form-control" name="eje_oi_lejos" id="eje_oi_lejos" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_oi_lejos?>">
+        <label for="eje_oi">Eje O I lejos</label>
+        <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off" autofocus maxlength="50" value="<? echo $eje_oi?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
       </div>
     </div>
   </div>
 
-  <div class="row">
+  <div class="row div-cerca" <?php echo $display_cerca;?> >
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
@@ -401,7 +428,7 @@ if ($es_casa_central == 0) {
     </div>
   </div>
 
-  <div class="row">
+  <div class="row div-cerca" <?php echo $display_cerca;?> >
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <!-- <label for="grad_oi_esf">Graduación ojo izquierdo esférico</label> -->
@@ -443,8 +470,8 @@ if ($es_casa_central == 0) {
     </div> -->
     <!-- <div class="col-md-4">
       <div class="form-group has-feedback">
-        <label for="es_lejos">Lejos</label>
-        <input type="text" class="form-control" name="es_lejos" id="es_lejos" autocomplete="off" autofocus maxlength="32" value="<? echo $es_lejos?>">
+        <label for="es">Lejos</label>
+        <input type="text" class="form-control" name="es" id="es" autocomplete="off" autofocus maxlength="32" value="<? echo $es?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar lejos.</p>
@@ -558,7 +585,7 @@ if ($es_casa_central == 0) {
   <div class="col-md-12">
     <div class="form-group has-feedback">
       <label for="comentario">Comentario</label>
-      <textarea rows="2" class="form-control" name="comentario" id="comentario" autocomplete="off" autofocus maxlength="50" value="<? echo $comentario?>"></textarea>
+      <textarea rows="2" class="form-control" name="comentario" id="comentario" autocomplete="off" autofocus maxlength="50" ><? echo $comentario?></textarea>
       <!-- <input type="text" class="form-control" name="comentario" id="comentario" autocomplete="off" autofocus maxlength="50" value="<? echo $comentario?>"> -->
       <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
       <p class="text-center help-block hide">Debe ingresar un comentario.</p>

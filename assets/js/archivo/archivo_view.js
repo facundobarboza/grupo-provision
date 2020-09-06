@@ -3,7 +3,6 @@ var
     $id_ficha                 = $("#id_ficha"),
     $id_stock                 = $("#id_stock"),
     $id_cliente               = $("#id_cliente"),
-
     $sindicato                = $("#id_sindicato_cliente"),    
     $beneficiario             = $("#beneficiario"),
     $titular                  = $("#filtro_cliente"),    
@@ -34,7 +33,7 @@ var
 
 // DOM ready!
 $(function() {
-
+  
    // mostrar/ocultar el log
   $('#mostrar_log').click(function () {
       if (this.checked)
@@ -469,6 +468,30 @@ $(function() {
       
     });
 
+    $("#select_tipo").change(function(event) {
+        
+        id = $(this).val();
+
+        if(id==1)
+        {
+          $(".div-cerca").hide();
+          $(".div-lejos").show();
+        }
+        else
+        {
+          if(id==2)
+          {
+            $(".div-cerca").show();
+            $(".div-lejos").hide();
+          }  
+          else
+          {
+            $(".div-cerca").show();
+            $(".div-lejos").show();
+          }
+        }
+    });
+
     //AUTOCOMPLETAR DE TITULAR
     $("#filtro_cliente").autocomplete({
         source: appGeneral.obtenerSiteUrl()+"archivo/autocompleteBeneficiario/",
@@ -563,6 +586,50 @@ $(function() {
       $("#color_armazon").val("");
     });
 
+
+    //AUTOCOMPLETAR DE ARMAZON
+    $("#codigo_armazon_cerca").autocomplete({
+        source: appGeneral.obtenerSiteUrl()+"archivo/autocompleteArmazon/",
+        minLength: 2,
+        open: function (event, ui) 
+        {
+          $("#codigo_armazon_cerca").css('background-color','white');
+          $(".ui-autocomplete").eq(0).scrollTop(0);
+          
+        },
+        search: function () 
+        {
+          $("#codigo_armazon_cerca").css('background-color','white');
+        },
+        select: function (event, ui) 
+        {
+            if (ui.item.id != "-1")
+            {
+              // lo deshabilitamos para que no pueda seguir buscando
+              $("#codigo_armazon_cerca").attr("readonly", true);
+              // mostramos boton para cancelar la entidad seleccionada
+              $("#cancelar_autocomplete_armazon_cerca").removeClass("hide");
+              // establecemos el id de la entidad
+              $("#id_stock_cerca").val(ui.item.id);
+              $("#color_armazon_cerca").val(ui.item.descripcion_color);
+            }
+            else
+                return false;
+        }
+    });
+
+    $("#cancelar_autocomplete_armazon_cerca").click(function () {
+       // ocultamos el boton para cancelar
+      $("#cancelar_autocomplete_armazon_cerca").addClass("hide");
+      // habilitamos y reiniciamos el input text para buscar una entidad
+      $("#codigo_armazon_cerca")
+              .val("")
+              .removeAttr("readonly")
+              .focus();
+
+      $("#id_stock_cerca").val(0);
+      $("#color_armazon_cerca").val("");
+    });
 
   
 });

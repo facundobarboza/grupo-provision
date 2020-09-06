@@ -122,6 +122,17 @@ class archivo_model extends MY_Model {
                   ->set('id_stock', $data['id_stock'])
                   ->set('nro_cliente', $data['nro_cliente'])
                   ->set('es_casa_central', $data['es_casa_central'])
+                  ->set('codigo_armazon_cerca', $data['codigo_armazon_cerca'])
+                  ->set('color_armazon_cerca', $data['color_armazon_cerca'])
+                  ->set('id_stock_cerca', $data['id_stock_cerca'])
+                  ->set('grad_od_esf_cerca', $data['grad_od_esf_cerca'])
+                  ->set('grad_od_cil_cerca', $data['grad_od_cil_cerca'])
+                  ->set('eje_od_cerca', $data['eje_od_cerca'])
+                  ->set('grad_oi_esf_cerca', $data['grad_oi_esf_cerca'])
+                  ->set('grad_oi_cil_cerca', $data['grad_oi_cil_cerca'])
+                  ->set('eje_oi_cerca', $data['eje_oi_cerca'])
+                  ->set('es_lejos' , $data['es_lejos'])
+
                ->insert($this->_table);
       }
       else
@@ -135,13 +146,16 @@ class archivo_model extends MY_Model {
                   ->set('color_armazon', $data['color_armazon'])
                   ->set('estado', $data['estado'])
                   ->set('voucher', $data['voucher'])
-                  ->set('nro_pedido', $data['nro_pedido'])
-                  
+                  ->set('nro_pedido', $data['nro_pedido'])                  
                   ->set('id_sindicato', $data['id_sindicato'])
                   ->set('id_cliente', $data['id_cliente'])
                   ->set('id_stock', $data['id_stock'])
                   ->set('nro_cliente', $data['nro_cliente'])
                   ->set('es_casa_central', $data['es_casa_central'])
+                  ->set('codigo_armazon_cerca', $data['codigo_armazon_cerca'])
+                  ->set('color_armazon_cerca', $data['color_armazon_cerca'])
+                  ->set('id_stock_cerca', $data['id_stock_cerca'])
+                  ->set('es_lejos' , $data['es_lejos'])
                ->insert($this->_table);
       }
 
@@ -151,6 +165,13 @@ class archivo_model extends MY_Model {
       $sql = "UPDATE stock
               SET  cantidad  = cantidad-1 
               WHERE id_stock = ".$data['id_stock'].";";
+      // echo $sql; die();       
+      $this->db->query($sql);
+
+      //descontamos el armazon cerca utlizado del stock 
+      $sql = "UPDATE stock
+              SET  cantidad  = cantidad-1 
+              WHERE id_stock = ".$data['id_stock_cerca'].";";
       // echo $sql; die();       
       $this->db->query($sql);
     }
@@ -188,7 +209,16 @@ class archivo_model extends MY_Model {
                 id_sindicato          = '".$data['id_sindicato']."',
                 id_cliente            = '".$data['id_cliente']."',
                 id_stock              = '".$data['id_stock']."',
-                nro_cliente           = '".$data['nro_cliente']."'
+                nro_cliente           = '".$data['nro_cliente']."',
+                codigo_armazon_cerca  = '".$data['codigo_armazon_cerca']."',
+                color_armazon_cerca   = '".$data['color_armazon_cerca']."',
+                id_stock_cerca        = '".$data['id_stock_cerca']."',
+                grad_od_esf_cerca     = '".$data['grad_od_esf_cerca']."',
+                grad_od_cil_cerca     = '".$data['grad_od_cil_cerca']."',
+                eje_od_cerca          = '".$data['eje_od_cerca']."',
+                grad_oi_esf_cerca     = '".$data['grad_oi_esf_cerca']."',
+                grad_oi_cil_cerca     = '".$data['grad_oi_cil_cerca']."',
+                eje_oi_cerca           = '".$data['eje_oi_cerca']."'
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
       else
@@ -205,10 +235,13 @@ class archivo_model extends MY_Model {
                 estado                = '".$data['estado']."',
                 voucher               = '".$data['voucher']."',
                 nro_pedido            = '".$data['nro_pedido']."',
-                
+                es_lejos              = '".$data['es_lejos']."',
                 id_sindicato          = '".$data['id_sindicato']."',
                 id_cliente            = '".$data['id_cliente']."',
                 id_stock              = '".$data['id_stock']."',
+                codigo_armazon_cerca  = '".$data['codigo_armazon_cerca']."',
+                color_armazon_cerca   = '".$data['color_armazon_cerca']."',
+                id_stock_cerca        = '".$data['id_stock_cerca']."',
                 nro_cliente           = '".$data['nro_cliente']."'
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }

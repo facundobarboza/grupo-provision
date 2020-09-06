@@ -154,7 +154,7 @@ class archivo extends MY_Controller {
     $grad_oi_cil           = $this->input->post("grad_oi_cil");
     $eje_oi                = $this->input->post("eje_oi");
     $comentario            = $this->input->post("comentario");
-    $es_lejos              = $this->input->post("es_lejos");
+    $es_lejos              = $this->input->post("select_tipo");
     $adicional             = $this->input->post("adicional");
     $descripcion_adicional = $this->input->post("descripcion_adicional");
     $telefono              = $this->input->post("telefono");
@@ -167,12 +167,21 @@ class archivo extends MY_Controller {
     $nro_cliente           = $this->input->post("nro_cliente");
     $es_casa_central       = $this->input->post("es_casa_central");
     $titular               = $this->input->post("filtro_cliente");
+    $codigo_armazon_cerca        = $this->input->post("codigo_armazon_cerca");
+    $color_armazon_cerca         = $this->input->post("color_armazon_cerca");
+    $id_stock_cerca               = $this->input->post("id_stock_cerca");
+    $grad_od_esf_cerca           = $this->input->post("grad_od_esf_cerca");
+    $grad_od_cil_cerca           = $this->input->post("grad_od_cil_cerca");
+    $eje_od_cerca                = $this->input->post("eje_od_cerca");
+    $grad_oi_esf_cerca           = $this->input->post("grad_oi_esf_cerca");
+    $grad_oi_cil_cerca           = $this->input->post("grad_oi_cil_cerca");
+    $eje_oi_cerca                = $this->input->post("eje_oi_cerca");
 
     // cargamos el modelo
     $this->load->model('archivo_model');
     
     // datos pasados al modelo
-    $data = array('id_ficha'          => $id_ficha,
+    $data = array('id_ficha'                => $id_ficha,
                     'beneficiario'          => $beneficiario,
                     'delegacion'            => $delegacion,
                     'optica'                => $optica,
@@ -201,7 +210,17 @@ class archivo extends MY_Controller {
                     'id_stock'              => $id_stock,
                     'nro_cliente'           => $nro_cliente,
                     'es_casa_central'       => $es_casa_central,
-                    'titular'               => $titular);
+                    'titular'               => $titular,
+                    'codigo_armazon_cerca'  => $codigo_armazon_cerca,
+                    'color_armazon_cerca'   => $color_armazon_cerca,
+                    'id_stock_cerca'        => $id_stock_cerca,
+                    'grad_od_esf_cerca'     => $grad_od_esf_cerca,
+                    'grad_od_cil_cerca'     => $grad_od_cil_cerca,
+                    'eje_od_cerca'          => $eje_od_cerca,
+                    'grad_oi_esf_cerca'     => $grad_oi_esf_cerca,
+                    'grad_oi_cil_cerca'     => $grad_oi_cil_cerca,
+                    'eje_oi_cerca'          => $eje_oi_cerca
+                    );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
     $this->archivo_model->agregar($data);
@@ -382,7 +401,7 @@ class archivo extends MY_Controller {
         {  
           $salida[] = array(  'id'    => $row->id_stock,
                               'label' => utf8_encode($row->codigo_color." - CI ".$row->nro_codigo_interno." - ".$row->letra_color),
-                              'value' => utf8_encode($row->codigo_patilla." - CI ".$row->nro_codigo_interno),
+                              'value' => utf8_encode("CI ".$row->nro_codigo_interno." - CP ".$row->codigo_patilla),
                               'descripcion_color' => $row->descripcion_color);
         }        
       
