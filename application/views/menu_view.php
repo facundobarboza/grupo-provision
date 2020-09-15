@@ -96,7 +96,9 @@
     .navbar-default .navbar-nav>li>a:focus,
     .navbar-default .navbar-nav>.open>a,
     .navbar-default .navbar-nav>.open>a:hover,
-    .navbar-default .navbar-nav>.open>a:focus {
+    .navbar-default .navbar-nav>.open>a:focus,
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-brand:focus {
         color: #ffffff;
         background-color: transparent;
     }
@@ -139,6 +141,9 @@
             </li>
             <li>
                 <a href="<?php echo site_url('opticas/listado') ?>" class="item-menu"></span>Opticas</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('delegaciones/listado') ?>" class="item-menu"></span>Delegaciones</a>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock armazones<span class="caret"></span></a>
