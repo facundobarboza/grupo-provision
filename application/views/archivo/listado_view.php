@@ -1,24 +1,3 @@
-<?php
-//si tenemos stock minimo mostramos el mensaje
-if($stock_minimo)
-{ 
-  ?>
-  <div class="alert alert-warning " role="alert">
-    <strong>ATENCIÓN STOCK MINIMO</strong>
-    <?php 
-      foreach( $stock_minimo as $stock ) 
-      { 
-        echo "<br>Armazon cod innterno: ".$stock['nro_codigo_interno']." - cod color: ".$stock['codigo_color']." <a href='#' class='stock_minimo' id='".$stock['id_stock']."' ><b> ID ".$stock['id_stock']."</b></a>";
-      }
-    ?>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <?
-}
-?>
-
 <div class="row">
   <div class="col-md-12">
     <h4 class="page-header text-uppercase">Listado Fichas</h4>

@@ -65,7 +65,7 @@ if($stock>0)
 }
 ?>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <h4 class="page-header text-uppercase">
             <?echo $titulo;?>
         </h4>

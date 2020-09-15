@@ -47,47 +47,6 @@
         color: #000;
     }
 
-    .img {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-
-    .wrapper {
-        width: 100%;
-    }
-
-    .bg-wrap {
-        width: 100%;
-        position: relative;
-        z-index: 0;
-    }
-
-    .bg-wrap:after {
-        z-index: -1;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        content: '';
-        background: #000;
-        opacity: 0.3;
-    }
-
-    .bg-wrap .user-logo .img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        margin: 0 auto;
-        margin-bottom: 10px;
-    }
-
-    .bg-wrap .user-logo h3 {
-        color: #fff;
-        font-size: 18px;
-    }
-
     a[data-toggle="collapse"] {
         position: relative;
     }
@@ -98,13 +57,6 @@
         top: 50%;
         right: 0;
         transform: translateY(-50%);
-    }
-
-    #content {
-        width: 100%;
-        padding: 0;
-        min-height: 100vh;
-        transition: all 0.3s;
     }
 
     .btn.btn-primary {
@@ -118,10 +70,6 @@
         border-color: #2f89fc !important;
     }
 
-    .footer p {
-        color: rgba(255, 255, 255, .5);
-    }
-
     .form-control {
         height: 40px !important;
         background: #fff;
@@ -132,47 +80,11 @@
         border: transparent;
     }
 
-    .form-control:focus,
-    .form-control:active {
-        border-color: #000;
-    }
-
-    .form-control::-webkit-input-placeholder {
-        /* Chrome/Opera/Safari */
-        color: rgba(255, 255, 255, .5);
-    }
-
-    .form-control::-moz-placeholder {
-        /* Firefox 19+ */
-        color: rgba(255, 255, 255, .5);
-    }
-
-    .form-control:-ms-input-placeholder {
-        /* IE 10+ */
-        color: rgba(255, 255, 255, .5);
-    }
-
-    .form-control:-moz-placeholder {
-        /* Firefox 18- */
-        color: rgba(255, 255, 255, .5);
-    }
-
-    .subscribe-form .form-control {
-        background: #4897fc;
-    }
-
-    .img.bg-wrap {
-        padding: 10px;
-    }
-
-    span.fa {
-        margin-right: 4px;
-    }
-
     .navbar.navbar-default {
         background-color: #32373d;
         color: rgba(255, 255, 255, 0.6);
         border: none;
+        border-radius: 0px;
     }
 
     .navbar.navbar-default .navbar-brand,
@@ -189,13 +101,12 @@
         background-color: transparent;
     }
 
-    .sidenav h6 {
-        color: #ffffff;
+    #menu-superior {
+        margin: 0;
     }
 </style>
 
-<nav class="navbar navbar-default menu-superior" role="navigation" style="position: relative;">
-    <!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-default " role="navigation" id="menu-superior">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -203,81 +114,55 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#">
-        <!-- Grupo Provision S.R.L -->
-        <img src="assets/images/grupo-provision-blanco-texto.png" width="210">
-        </a>
+        <a class="navbar-brand item-menu" href="<?php echo site_url('archivo/listado') ?>">Grupo Provision S.R.L</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gestión de fichas<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('archivo/listado') ?>" class="item-menu">Listado Fichas</a></li>
+                    <li><a href="<?php echo site_url('archivo/nuevo/0/0/1') ?>" class="item-menu">Nueva Ficha Casa Central</a></li>
+                    <li><a href="<?php echo site_url('archivo/nuevo/0/0/0') ?>" class="item-menu">Nueva Ficha Optica</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Afiliados<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('clientes/listado') ?>" class="item-menu">Listado</a></li>
+                    <li><a href="<?php echo site_url('clientes/nuevo') ?>" class="item-menu">Nuevo afiliado</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="<?php echo site_url('sindicatos/listado') ?>" class="item-menu"></span>Sindicatos</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('opticas/listado') ?>" class="item-menu"></span>Opticas</a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock armazones<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('stock/listado') ?>" class="item-menu">Listado de stock</a></li>
+                    <li><a href="<?php echo site_url('stock/nuevoStock') ?>" class="item-menu">Nuevo stock</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('usuario/listado') ?>" class="item-menu">Listado usuarios</a></li>
+                    <li><a href="<?php echo site_url('usuario/nuevo') ?>" class="item-menu">Nuevo usuario</a></li>
+                </ul>
+            </li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
-            <!-- <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?>
-                    <span class="caret"></span></a>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?> <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo site_url('usuario/perfil') ?>" class="item-menu">Perfil</a></li>
                     <li><a href="<?php echo site_url('usuario/logout') ?>">Cerrar sesi&oacute;n</a></li>
                 </ul>
-            </li> -->
-            <li><a href="<?php echo site_url('usuario/perfil') ?>" class="item-menu"><span class="fa fa-address-card"></span> Perfil</a></li>
-            <li><a href="<?php echo site_url('usuario/logout') ?>"><span class="fa fa-sign-out"></span> Cerrar sesi&oacute;n</a></li>
+            </li>
         </ul>
     </div>
-    <!-- /.navbar-collapse -->
 </nav>
-
-<div class="wrapper d-flex align-items-stretch">
-    <div class="sidenav">
-        <div class="img bg-wrap text-center" style="background-image: url(assets/images/anteojo-bg.jpg);">
-            <div class="user-logo">
-                <img src="assets/images/logo-solo-blanco.png" width="50">
-                <h6><?php echo $this->session->userdata('apellido') . ', ' . $this->session->userdata('nombre') ?></h6>
-            </div>
-        </div>
-        <ul>
-            <li data-toggle="collapse" data-target="#fichas">
-                <span class="collapse-item"><span class="fa fa-file"></span> Gestion de Fichas</span>
-                <ul class="nav nav-list collapse" id="fichas">
-                    <li><a href="<?php echo site_url('archivo/listado') ?>" class="collapse-item item-menu">- Listado Fichas
-                        </a></li>
-                    <li><a href="<?php echo site_url('archivo/nuevo/0/0/1') ?>" class="collapse-item item-menu">- Nueva Ficha Casa Central</a>
-                    </li>
-                    <li>
-                        <a href="<?php echo site_url('archivo/nuevo/0/0/0') ?>" class="collapse-item item-menu">- Nueva Ficha Optica</a>
-                    </li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#afiliado">
-                <span class="collapse-item"><span class="fa fa-address-card"></span> Afiliados</span>
-                <ul class="nav nav-list collapse" id="afiliado">
-                    <li><a href="<?php echo site_url('clientes/listado') ?>" class="collapse-item item-menu">- Listado </a>
-                    </li>
-                    <li><a href="<?php echo site_url('clientes/nuevo') ?>" class="collapse-item item-menu">- Nuevo
-                            afiliado</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="<?php echo site_url('sindicatos/listado') ?>" class="collapse-item item-menu"><span class="fa fa-building"></span> Sindicatos </a>
-            </li>
-            <li data-toggle="collapse" data-target="#stock">
-                <span class="collapse-item"><span class="fa fa-th-list"></span> Stock Armazones</span>
-                <ul class="nav nav-list collapse" id="stock">
-                    <li><a href="<?php echo site_url('stock/listado') ?>" class="collapse-item item-menu">- Listado de Stock</a>
-                    </li>
-                    <li><a href="<?php echo site_url('stock/nuevoStock') ?>" class="collapse-item item-menu">- Nuevo
-                            stock</a></li>
-                </ul>
-            </li>
-            <li data-toggle="collapse" data-target="#usuarios">
-                <span class="collapse-item"><span class="fa fa-user-circle"></span> Usuarios</span>
-                <ul class="nav nav-list collapse" id="usuarios">
-                    <li><a href="<?php echo site_url('usuario/listado') ?>" class="collapse-item item-menu">- Listado Usuarios
-                        </a></li>
-                    <li><a href="<?php echo site_url('usuario/nuevo') ?>" class="collapse-item item-menu">- Nuevo Usuario</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-</div>
