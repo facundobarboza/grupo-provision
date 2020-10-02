@@ -38,7 +38,7 @@ echo form_open('usuario/guardarUsuario', array('id' => 'formulario-usuario', 'ro
         <div class="form-group has-feedback">
             <label for="nombre_usuario">Nombre</label>
             <input type="text" class="form-control" name="nombre_usuario" id="nombre_usuario" autocomplete="off"
-                autofocus maxlength="32" value="<? echo $nombre?>">
+                 maxlength="32" value="<? echo $nombre?>">
             <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
             <input type="hidden" name="id_usuario" id='id_usuario' value="<? echo $id_usuario?>">
@@ -49,7 +49,7 @@ echo form_open('usuario/guardarUsuario', array('id' => 'formulario-usuario', 'ro
         <div class="form-group has-feedback">
             <label for="apellido_usuario">Apellido</label>
             <input type="text" class="form-control" name="apellido_usuario" id="apellido_usuario" autocomplete="off"
-                autofocus maxlength="50" value="<? echo $apellido?>">
+                 maxlength="50" value="<? echo $apellido?>">
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
             <p class="text-center help-block hide">Debe ingresar un apellido.</p>
         </div>
@@ -92,7 +92,7 @@ echo form_open('usuario/guardarUsuario', array('id' => 'formulario-usuario', 'ro
     <div class="col-md-4">
         <div class="form-group has-feedback">
             <label for="user_name">Usuario</label>
-            <input type="text" class="form-control" name="user_name" id="user_name" autocomplete="off" autofocus
+            <input type="text" class="form-control" name="user_name" id="user_name" autocomplete="off" 
                 maxlength="15" value="<? echo $user_name?>">
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
             <p class="text-center help-block hide">Debe ingresar un usuario.</p>
@@ -117,7 +117,7 @@ echo form_open('usuario/guardarUsuario', array('id' => 'formulario-usuario', 'ro
     <div class="col-md-4">
         <div class="form-group has-feedback">
             <label for="mail_usuario">Mail</label>
-            <input type="text" class="form-control" name="mail_usuario" id="mail_usuario" autocomplete="off" autofocus
+            <input type="text" class="form-control" name="mail_usuario" id="mail_usuario" autocomplete="off" 
                 maxlength="30" value="<? echo $mail?>">
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
             <p class="text-center help-block hide">Debe ingresar un mail.</p>

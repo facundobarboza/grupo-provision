@@ -120,6 +120,51 @@ class Clientes_model extends MY_Model {
     return $result;
   }
 
+  // --------------------------------------------------------------------
+
+  /**
+   * Obtener los departamentos asociados a la empresa
+   *
+   * @access public
+   * @param  integer $login
+   * @return array
+   */
+  public function obtenerDelegaciones() {   
+   
+    $this->db->select("*")
+           ->from("delegacion")
+           ->where('activo', 1); 
+ 
+    $result = $this->db->get();
+
+    // Util::dump_exit($result->row());
+
+    return $result;
+  }
+
+
+  // --------------------------------------------------------------------
+
+  /**
+   * Obtener los departamentos asociados a la empresa
+   *
+   * @access public
+   * @param  integer $login
+   * @return array
+   */
+  public function obtenerOpticas() {   
+   
+    $this->db->select("*")
+           ->from("opticas")
+           ->where('activo', 1); 
+ 
+    $result = $this->db->get();
+
+    // Util::dump_exit($result->row());
+
+    return $result;
+  }
+
    // --------------------------------------------------------------------
 
   /**

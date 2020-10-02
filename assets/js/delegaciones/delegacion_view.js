@@ -5,14 +5,6 @@ var
 // DOM ready!
 $(function () {
 
-  // $fecha_vigencia.datepicker();
-   // mostrar/ocultar el log
-  $('#mostrar_log').click(function () {
-      if (this.checked)
-          $('#tabla_logs').show();
-      else
-          $('#tabla_logs').hide();
-  });
   
   $formulario.on("submit", function (e) {
     var

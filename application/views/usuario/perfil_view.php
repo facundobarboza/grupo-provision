@@ -24,7 +24,7 @@
     <div class="col-md-4">
         <div class="form-group has-feedback">
             <label for="contrasenia_actual">Contrase&ntilde;a actual</label>
-            <input type="password" class="form-control" name="contrasenia_actual" id="contrasenia_actual" autofocus
+            <input type="password" class="form-control" name="contrasenia_actual" id="contrasenia_actual" 
                 maxlength="32">
             <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
             <p class="text-center help-block hide">Debe ingresar su contrase&ntilde;a actual.</p>

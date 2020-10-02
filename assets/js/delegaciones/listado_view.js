@@ -52,7 +52,7 @@ var
         });
       
       //pasamos por parametro el id
-      $iframe_modificar_delegacion.attr('src',appGeneral.obtenerSiteUrl() + "delegaciones/nuevoDelegacion/" + $info.data("id"));
+      $iframe_modificar_delegacion.attr('src',appGeneral.obtenerSiteUrl() + "delegacion/nuevoDelegacion/" + $info.data("id"));
 
        // window.location = appGeneral.obtenerSiteUrl() + "empresas/nueva/" + $info.data("id");
       
@@ -67,7 +67,7 @@ var
         });
       
       //pasamos por parametro el id
-      $iframe_modificar_delegacion.attr('src',appGeneral.obtenerSiteUrl() + "delegaciones/nuevoDelegacion/");
+      $iframe_modificar_delegacion.attr('src',appGeneral.obtenerSiteUrl() + "delegacion/nuevoDelegacion/");
 
     });
 
@@ -92,7 +92,7 @@ var
         id_delegacion = $info.data("id");
 
        jQuery.ajax({
-            url: appGeneral.obtenerSiteUrl() + "delegaciones/eliminar/"+id_delegacion,
+            url: appGeneral.obtenerSiteUrl() + "delegacion/eliminar/"+id_delegacion,
             type: 'POST',
             data: {
                 'id_delegacion': id_delegacion
@@ -103,7 +103,7 @@ var
             timeout: 10000,
             success: function (data)
             {
-              window.location = appGeneral.obtenerSiteUrl() + "delegaciones/listado/1";
+              window.location = appGeneral.obtenerSiteUrl() + "delegacion/listado/1";
             }
         });
       }

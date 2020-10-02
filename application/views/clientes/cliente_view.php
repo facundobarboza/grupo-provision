@@ -72,7 +72,7 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="nombre_cliente">Titular</label>
-        <input type="text" class="form-control" name="titular_cliente" id="titular_cliente" autocomplete="off" autofocus maxlength="32" value="<? echo $titular_cliente?>">
+        <input type="text" class="form-control" name="titular_cliente" id="titular_cliente" autocomplete="off"  maxlength="32" value="<? echo $titular_cliente?>">
         <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
@@ -82,7 +82,7 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
      <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="apellido_cliente">Beneficiario</label>
-        <input type="text" class="form-control" name="beneficiario_cliente" id="beneficiario_cliente" autocomplete="off" autofocus maxlength="50" value="<? echo $beneficiario_cliente?>">
+        <input type="text" class="form-control" name="beneficiario_cliente" id="beneficiario_cliente" autocomplete="off"  maxlength="50" value="<? echo $beneficiario_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar un beneficiario.</p>
       </div>
@@ -97,7 +97,7 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
     <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="dni_cliente">DNI</label>
-        <input type="text" class="form-control" name="dni_cliente" id="dni_cliente" autocomplete="off" autofocus maxlength="14" value="<? echo $dni_cliente?>">
+        <input type="text" class="form-control" name="dni_cliente" id="dni_cliente" autocomplete="off"  maxlength="14" value="<? echo $dni_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar el DNI.</p>
       </div>
@@ -105,7 +105,7 @@ echo form_open('clientes/guardarCliente', array('id' => 'formulario-cliente', 'r
      <div class="col-md-4">
       <div class="form-group has-feedback">
         <label for="numero_cliente">Número de afiliado</label>
-        <input type="text" class="form-control" name="numero_cliente" id="numero_cliente" autocomplete="off" autofocus maxlength="30" value="<? echo $numero_cliente?>">
+        <input type="text" class="form-control" name="numero_cliente" id="numero_cliente" autocomplete="off"  maxlength="30" value="<? echo $numero_cliente?>">
         <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
         <p class="text-center help-block hide">Debe ingresar un número de afiliado.</p>
       </div>

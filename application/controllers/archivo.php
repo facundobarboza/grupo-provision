@@ -139,8 +139,8 @@ class archivo extends MY_Controller {
 
     $id_ficha              = $this->input->post("id_ficha");
     $beneficiario          = $this->input->post("beneficiario");
-    $delegacion            = $this->input->post("delegacion");
-    $optica                = $this->input->post("optica");
+    $id_delegacion         = $this->input->post("id_delegacion");
+    $id_optica             = $this->input->post("id_optica");
     $fecha                 = $this->input->post("fecha");
     $codigo_armazon        = $this->input->post("codigo_armazon");
     $color_armazon         = $this->input->post("color_armazon");
@@ -167,15 +167,18 @@ class archivo extends MY_Controller {
     $nro_cliente           = $this->input->post("nro_cliente");
     $es_casa_central       = $this->input->post("es_casa_central");
     $titular               = $this->input->post("filtro_cliente");
-    $codigo_armazon_cerca        = $this->input->post("codigo_armazon_cerca");
-    $color_armazon_cerca         = $this->input->post("color_armazon_cerca");
-    $id_stock_cerca               = $this->input->post("id_stock_cerca");
-    $grad_od_esf_cerca           = $this->input->post("grad_od_esf_cerca");
-    $grad_od_cil_cerca           = $this->input->post("grad_od_cil_cerca");
-    $eje_od_cerca                = $this->input->post("eje_od_cerca");
-    $grad_oi_esf_cerca           = $this->input->post("grad_oi_esf_cerca");
-    $grad_oi_cil_cerca           = $this->input->post("grad_oi_cil_cerca");
-    $eje_oi_cerca                = $this->input->post("eje_oi_cerca");
+    $codigo_armazon_cerca  = $this->input->post("codigo_armazon_cerca");
+    $color_armazon_cerca   = $this->input->post("color_armazon_cerca");
+    $id_stock_cerca        = $this->input->post("id_stock_cerca");
+    $grad_od_esf_cerca     = $this->input->post("grad_od_esf_cerca");
+    $grad_od_cil_cerca     = $this->input->post("grad_od_cil_cerca");
+    $eje_od_cerca          = $this->input->post("eje_od_cerca");
+    $grad_oi_esf_cerca     = $this->input->post("grad_oi_esf_cerca");
+    $grad_oi_cil_cerca     = $this->input->post("grad_oi_cil_cerca");
+    $eje_oi_cerca          = $this->input->post("eje_oi_cerca");
+    $id_estado_cerca       = $this->input->post("id_estado_cerca");
+    $voucher_cerca         = $this->input->post("voucher_cerca");
+    $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
 
     // cargamos el modelo
     $this->load->model('archivo_model');
@@ -183,8 +186,8 @@ class archivo extends MY_Controller {
     // datos pasados al modelo
     $data = array('id_ficha'                => $id_ficha,
                     'beneficiario'          => $beneficiario,
-                    'delegacion'            => $delegacion,
-                    'optica'                => $optica,
+                    'id_delegacion'         => $id_delegacion,
+                    'id_optica'             => $id_optica,
                     'fecha'                 => $fecha,
                     'codigo_armazon'        => $codigo_armazon,
                     'color_armazon'         => $color_armazon,
@@ -203,23 +206,26 @@ class archivo extends MY_Controller {
                     'descripcion_adicional' => $descripcion_adicional,
                     'telefono'              => $telefono,
                     'costo_adicional'       => $costo_adicional,
-                    'sena_adicional'        => $sena_adicional,
-                    'saldo_adicional'       => $saldo_adicional,
-                    'id_sindicato'          => $id_sindicato,
-                    'id_cliente'            => $id_cliente,
-                    'id_stock'              => $id_stock,
-                    'nro_cliente'           => $nro_cliente,
-                    'es_casa_central'       => $es_casa_central,
-                    'titular'               => $titular,
-                    'codigo_armazon_cerca'  => $codigo_armazon_cerca,
-                    'color_armazon_cerca'   => $color_armazon_cerca,
-                    'id_stock_cerca'        => $id_stock_cerca,
-                    'grad_od_esf_cerca'     => $grad_od_esf_cerca,
-                    'grad_od_cil_cerca'     => $grad_od_cil_cerca,
-                    'eje_od_cerca'          => $eje_od_cerca,
-                    'grad_oi_esf_cerca'     => $grad_oi_esf_cerca,
-                    'grad_oi_cil_cerca'     => $grad_oi_cil_cerca,
-                    'eje_oi_cerca'          => $eje_oi_cerca
+                    'sena_adicional'       => $sena_adicional,
+                    'saldo_adicional'      => $saldo_adicional,
+                    'id_sindicato'         => $id_sindicato,
+                    'id_cliente'           => $id_cliente,
+                    'id_stock'             => $id_stock,
+                    'nro_cliente'          => $nro_cliente,
+                    'es_casa_central'      => $es_casa_central,
+                    'titular'              => $titular,
+                    'codigo_armazon_cerca' => $codigo_armazon_cerca,
+                    'color_armazon_cerca'  => $color_armazon_cerca,
+                    'id_stock_cerca'       => $id_stock_cerca,
+                    'grad_od_esf_cerca'    => $grad_od_esf_cerca,
+                    'grad_od_cil_cerca'    => $grad_od_cil_cerca,
+                    'eje_od_cerca'         => $eje_od_cerca,
+                    'grad_oi_esf_cerca'    => $grad_oi_esf_cerca,
+                    'grad_oi_cil_cerca'    => $grad_oi_cil_cerca,
+                    'eje_oi_cerca'         => $eje_oi_cerca,
+                    'id_estado_cerca'      => $id_estado_cerca,
+                    'voucher_cerca'        => $voucher_cerca,
+                    'nro_pedido_cerca'     => $nro_pedido_cerca
                     );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
@@ -291,12 +297,34 @@ class archivo extends MY_Controller {
                                     'descripcion'   => utf8_encode($row->descripcion)
                                     );  
     }
+
+    $delegaciones = $this->clientes_model->obtenerDelegaciones();
+
+    foreach( $delegaciones->result() as $row )
+    {     
+      $delegaciones_validos[] = array('id_delegacion' => (int)$row->id_delegacion,
+                                    'descripcion'   => utf8_encode($row->descripcion)
+                                    );  
+    }
+
+
+    $opticas = $this->clientes_model->obtenerOpticas();
+
+    foreach( $opticas->result() as $row )
+    {     
+      $opticas_validos[] = array('id_optica' => (int)$row->id_optica,
+                                    'descripcion'   => utf8_encode($row->descripcion)
+                                    );  
+    }
+
     // si es nueva le pasamos estos datos a la vista
     if($id_ficha==0)
     {
       // $this->util->dump_exit($empresas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
+                    'delegaciones'      => $delegaciones_validos,
+                    'opticas'      => $opticas_validos,
                     'contenido_view' => 'archivo/archivo_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
@@ -314,6 +342,8 @@ class archivo extends MY_Controller {
       // $this->util->dump_exit($fichas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
+                    'delegaciones'      => $delegaciones_validos,
+                    'opticas'      => $opticas_validos, 
                     'fichas'       => $fichas,
                     'logs'         => $logs,
                     'contenido_view' => 'archivo/archivo_view',

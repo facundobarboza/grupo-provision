@@ -95,8 +95,8 @@ class archivo_model extends MY_Model {
       {
         // Util::dump_exit($data);
         $this->db->set('beneficiario', $data['beneficiario'])
-                  ->set('delegacion', $data['delegacion'])
-                  ->set('optica', $data['optica'])
+                  ->set('id_delegacion', $data['id_delegacion'])
+                  ->set('id_optica', $data['id_optica'])
                   ->set('fecha', $fecha)
                   ->set('codigo_armazon', $data['codigo_armazon'])
                   ->set('color_armazon', $data['color_armazon'])
@@ -131,6 +131,9 @@ class archivo_model extends MY_Model {
                   ->set('grad_oi_esf_cerca', $data['grad_oi_esf_cerca'])
                   ->set('grad_oi_cil_cerca', $data['grad_oi_cil_cerca'])
                   ->set('eje_oi_cerca', $data['eje_oi_cerca'])
+                  ->set('id_estado_cerca', $data['id_estado_cerca'])
+                  ->set('voucher_cerca', $data['voucher_cerca'])
+                  ->set('nro_pedido_cerca', $data['nro_pedido_cerca'])
                   ->set('es_lejos' , $data['es_lejos'])
 
                ->insert($this->_table);
@@ -139,8 +142,8 @@ class archivo_model extends MY_Model {
       {
         // Util::dump_exit($data);
         $this->db->set('beneficiario', $data['beneficiario'])
-                  ->set('delegacion', $data['delegacion'])
-                  ->set('optica', $data['optica'])
+                  ->set('id_delegacion', $data['id_delegacion'])
+                  ->set('id_optica', $data['id_optica'])
                   ->set('fecha', $fecha)
                   ->set('codigo_armazon', $data['codigo_armazon'])
                   ->set('color_armazon', $data['color_armazon'])
@@ -184,8 +187,8 @@ class archivo_model extends MY_Model {
         $sql = "UPDATE ".$this->_table."
                 SET 
                 beneficiario          = '".$data['beneficiario']."',
-                delegacion            = '".$data['delegacion']."',
-                optica                = '".$data['optica']."',
+                id_delegacion         = '".$data['id_delegacion']."',
+                id_optica             = '".$data['id_optica']."',
                 fecha                 = '".$fecha."',
                 codigo_armazon        = '".$data['codigo_armazon']."',
                 color_armazon         = '".$data['color_armazon']."',
@@ -218,7 +221,10 @@ class archivo_model extends MY_Model {
                 eje_od_cerca          = '".$data['eje_od_cerca']."',
                 grad_oi_esf_cerca     = '".$data['grad_oi_esf_cerca']."',
                 grad_oi_cil_cerca     = '".$data['grad_oi_cil_cerca']."',
-                eje_oi_cerca           = '".$data['eje_oi_cerca']."'
+                eje_oi_cerca          = '".$data['eje_oi_cerca']."',
+                id_estado_cerca       = '".$data['id_estado_cerca']."',
+                voucher_cerca         = '".$data['voucher_cerca']."',
+                nro_pedido_cerca      = '".$data['nro_pedido_cerca']."'
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
       else
@@ -227,8 +233,8 @@ class archivo_model extends MY_Model {
         $sql = "UPDATE ".$this->_table."
                 SET 
                 beneficiario          = '".$data['beneficiario']."',
-                delegacion            = '".$data['delegacion']."',
-                optica                = '".$data['optica']."',
+                id_delegacion         = '".$data['id_delegacion']."',
+                id_optica             = '".$data['id_optica']."',
                 fecha                 = '".$fecha."',
                 codigo_armazon        = '".$data['codigo_armazon']."',
                 color_armazon         = '".$data['color_armazon']."',

@@ -36,7 +36,7 @@
             <?php echo $delegacion['descripcion']; ?>
           </td>
           
-          <td width="60px">
+          <td width="150px">
             <div class="info" data-id="<?php echo $delegacion['id_delegacion'] ?>"></div>
             <div class="text-center">
               <button type="button" class="btn btn-default btn-xs btn-modificar-delegacion" title="Modificar delegacion">

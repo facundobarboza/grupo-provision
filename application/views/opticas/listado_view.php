@@ -36,7 +36,7 @@
             <?php echo $optica['descripcion']; ?>
           </td>
           
-          <td width="60px">
+          <td width="200px">
             <div class="info" data-id="<?php echo $optica['id_optica'] ?>"></div>
             <div class="text-center">
               <button type="button" class="btn btn-default btn-xs btn-modificar-optica" title="Modificar optica">

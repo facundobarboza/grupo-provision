@@ -143,7 +143,7 @@
                 <a href="<?php echo site_url('opticas/listado') ?>" class="item-menu"></span>Opticas</a>
             </li>
             <li>
-                <a href="<?php echo site_url('delegaciones/listado') ?>" class="item-menu"></span>Delegaciones</a>
+                <a href="<?php echo site_url('delegacion/listado') ?>" class="item-menu"></span>Delegaciones</a>
             </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock armazones<span class="caret"></span></a>

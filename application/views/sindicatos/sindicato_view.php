@@ -67,7 +67,7 @@ echo form_open('sindicatos/guardarSindicato', array('id' => 'formulario-sindicat
       <div class="form-group has-feedback">
         <label for="nombre_sindicato">Nombre</label>
          <input type="hidden" name="id_sindicato" value="<? echo $id_sindicato;?>">
-        <input type="text" class="form-control" name="nombre_sindicato" id="nombre_sindicato" autocomplete="off" autofocus maxlength="32" value="<? echo utf8_encode($nombre_sindicato);?>">
+        <input type="text" class="form-control" name="nombre_sindicato" id="nombre_sindicato" autocomplete="off"  maxlength="32" value="<? echo utf8_encode($nombre_sindicato);?>">
         <span class="glyphicon glyphicon-remove form-control-feedba
         ck hide"></span>
         <p class="text-center help-block hide">Debe ingresar un nombre.</p>
