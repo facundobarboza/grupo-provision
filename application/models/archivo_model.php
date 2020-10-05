@@ -171,12 +171,15 @@ class archivo_model extends MY_Model {
       // echo $sql; die();       
       $this->db->query($sql);
 
-      //descontamos el armazon cerca utlizado del stock 
-      $sql = "UPDATE stock
-              SET  cantidad  = cantidad-1 
-              WHERE id_stock = ".$data['id_stock_cerca'].";";
-      // echo $sql; die();       
-      $this->db->query($sql);
+      if($data['id_stock_cerca']>0)
+      {
+        //descontamos el armazon cerca utlizado del stock 
+        $sql = "UPDATE stock
+                SET  cantidad  = cantidad-1 
+                WHERE id_stock = ".$data['id_stock_cerca'].";";
+        // echo $sql; die();       
+        $this->db->query($sql);
+      }
     }
     else
     {

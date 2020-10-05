@@ -106,7 +106,7 @@ class Delegacion extends MY_Controller {
     {
       
       $this->session->set_flashdata('exito', 'Se modifico una delegación ID - '.$id_delegacion.' con &eacute;xito.');
-      redirect('delegacion/listado/','refresh');
+      redirect('delegacion/nuevoDelegacion/'.$this->input->post('id_delegacion'),'refresh');
     }
     
     

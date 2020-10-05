@@ -105,7 +105,7 @@ class Opticas extends MY_Controller {
     else
     {
       $this->session->set_flashdata('exito', 'Se modifico la optica ID - '.$id_optica.' con &eacute;xito.');
-      redirect('opticas/listado/','refresh');
+      redirect('opticas/nuevoOptica/'.$this->input->post('id_optica'),'refresh');
     }
     
     
