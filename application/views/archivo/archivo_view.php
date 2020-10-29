@@ -17,52 +17,56 @@
 
 if($fichas)
 {
-  $id_ficha              = $fichas->row()->id_ficha;
-  $id_sindicato          = $fichas->row()->id_sindicato;
-  $nro_cliente           = $fichas->row()->nro_cliente;
-  $titular               = $fichas->row()->titular_cliente;
-  $id_cliente            = $fichas->row()->id_cliente;
-  $beneficiario          = $fichas->row()->beneficiario;
-  $id_cliente            = $fichas->row()->id_cliente;
-  $id_delegacion         = $fichas->row()->id_delegacion;
-  $id_optica             = $fichas->row()->id_optica;
-  $fecha                 = $this->util->fecha($fichas->row()->fecha);
-  $codigo_armazon        = $fichas->row()->codigo_armazon;
-  $color_armazon         = $fichas->row()->color_armazon;
-  $id_stock              = $fichas->row()->id_stock;
-  $estado                = $fichas->row()->estado;
-  $voucher               = $fichas->row()->voucher;
-  $nro_pedido            = $fichas->row()->nro_pedido;
-  $estado_cerca          = $fichas->row()->estado_cerca;
-  $voucher_cerca         = $fichas->row()->voucher_cerca;
-  $nro_pedido_cerca      = $fichas->row()->nro_pedido_cerca;
-  $grad_od_esf           = $fichas->row()->grad_od_esf;
-  $grad_od_esf_cerca     = $fichas->row()->grad_od_esf_cerca;
-  $grad_od_cil           = $fichas->row()->grad_od_cil;
-  $grad_od_cil_cerca     = $fichas->row()->grad_od_cil_cerca;
-  $eje_od                = $fichas->row()->eje_od;
-  $eje_od_cerca          = $fichas->row()->eje_od_cerca;
-  $grad_oi_esf           = $fichas->row()->grad_oi_esf;
-  $grad_oi_esf_cerca     = $fichas->row()->grad_oi_esf_cerca;
-  $grad_oi_cil           = $fichas->row()->grad_oi_cil;
-  $grad_oi_cil_cerca     = $fichas->row()->grad_oi_cil_cerca;
-  $eje_oi                = $fichas->row()->eje_oi;
-  $eje_oi_cerca          = $fichas->row()->eje_oi_cerca;
-  $id_estado_cerca       = $fichas->row()->id_estado_cerca;
-  $voucher_cerca         = $fichas->row()->voucher_cerca;
-  $nro_pedido_cerca      = $fichas->row()->nro_pedido_cerca;
-  $comentario            = $fichas->row()->comentario;
-  $select_tipo           = $fichas->row()->es_lejos;
-  $adicional             = $fichas->row()->adicional;
-  $descripcion_adicional = $fichas->row()->descripcion_adicional;
-  $telefono              = $fichas->row()->telefono;
-  $costo_adicional       = $fichas->row()->costo_adicional;
-  $seña_adicional        = $fichas->row()->sena_adicional;
-  $saldo_adicional       = $fichas->row()->saldo_adicional;
-  $es_casa_central       = $fichas->row()->es_casa_central;
-  $id_stock_cerca        = $fichas->row()->id_stock_cerca;
-  $codigo_armazon_cerca  = $fichas->row()->codigo_armazon_cerca;
-  $color_armazon_cerca   = $fichas->row()->color_armazon_cerca;
+  $id_ficha                  = $fichas->row()->id_ficha;
+  $id_sindicato              = $fichas->row()->id_sindicato;
+  $nro_cliente               = $fichas->row()->nro_cliente;
+  $titular                   = $fichas->row()->titular_cliente;
+  $id_cliente                = $fichas->row()->id_cliente;
+  $beneficiario              = $fichas->row()->beneficiario;
+  $id_cliente                = $fichas->row()->id_cliente;
+  $id_delegacion             = $fichas->row()->id_delegacion;
+  $id_optica                 = $fichas->row()->id_optica;
+  $fecha                     = $this->util->fecha($fichas->row()->fecha);
+    
+  $comentario                = $fichas->row()->comentario;
+  $select_tipo               = $fichas->row()->es_lejos;
+  $adicional                 = $fichas->row()->adicional;
+  $descripcion_adicional     = $fichas->row()->descripcion_adicional;
+  $telefono                  = $fichas->row()->telefono;
+  $costo_adicional           = $fichas->row()->costo_adicional;
+  $seña_adicional            = $fichas->row()->sena_adicional;
+  $saldo_adicional           = $fichas->row()->saldo_adicional;
+  $es_casa_central           = $fichas->row()->es_casa_central;
+    
+  $codigo_armazon            = $fichas->row()->codigo_armazon;
+  $color_armazon             = $fichas->row()->color_armazon;
+  $id_stock                  = $fichas->row()->id_stock;
+  $voucher                   = $fichas->row()->voucher;
+  $nro_pedido                = $fichas->row()->nro_pedido;
+  $estado                    = $fichas->row()->estado;
+  $grad_od_esf               = $fichas->row()->grad_od_esf;
+  $grad_od_cil               = $fichas->row()->grad_od_cil;
+  $eje_od                    = $fichas->row()->eje_od;
+  $grad_oi_esf               = $fichas->row()->grad_oi_esf;
+  $grad_oi_cil               = $fichas->row()->grad_oi_cil;
+  $eje_oi                    = $fichas->row()->eje_oi;
+  $nro_pedido_voucher        = $fichas->row()->nro_pedido_voucher;
+  $tipo_lente                = $fichas->row()->tipo_lente;
+  
+  $codigo_armazon_cerca      = $fichas->row()->codigo_armazon_cerca;
+  $color_armazon_cerca       = $fichas->row()->color_armazon_cerca;
+  $id_stock_cerca            = $fichas->row()->id_stock_cerca;
+  $voucher_cerca             = $fichas->row()->voucher_cerca;
+  $nro_pedido_cerca          = $fichas->row()->nro_pedido_cerca;
+  $id_estado_cerca           = $fichas->row()->id_estado_cerca;
+  $grad_od_esf_cerca         = $fichas->row()->grad_od_esf_cerca;
+  $grad_od_cil_cerca         = $fichas->row()->grad_od_cil_cerca;
+  $eje_od_cerca              = $fichas->row()->eje_od_cerca;
+  $grad_oi_esf_cerca         = $fichas->row()->grad_oi_esf_cerca;
+  $grad_oi_cil_cerca         = $fichas->row()->grad_oi_cil_cerca;
+  $eje_oi_cerca              = $fichas->row()->eje_oi_cerca;
+  $nro_pedido_voucher_cerca  = $fichas->row()->nro_pedido_voucher_cerca;
+  $tipo_lente_cerca          = $fichas->row()->tipo_lente_cerca;
 }
 else
 {
@@ -180,7 +184,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
     <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
     <div class="form-group has-feedback">
-      <label for="optica">Optica (hacer)</label>
+      <label for="optica">Optica</label>
       <select class="form-control" name="id_optica" id="id_optica_cliente">
         <option value="0">Seleccionar --</option>
         <? foreach( $opticas as $optica )
@@ -205,7 +209,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
   </div> -->
   <div class="col-md-3">
     <div class="form-group has-feedback">
-      <label for="fecha">Fecha</label>
+      <label for="fecha">Fecha pedido</label>
       <br>
       <input type="input" name="fecha" style="width: 100%;
                                                   height: 34px;
@@ -222,7 +226,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
     <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
     <div class="form-group has-feedback">
-      <label for="types">Tipos</label>
+      <label for="types">Tipos de lentes</label>
       <?php
       $display_cerca = "style='display:none;'";
       $display_lejos = "";
@@ -288,7 +292,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
   </div>
   <div class="col-md-3">
     <div class="form-group has-feedback">
-      <label for="fecha">Nro Afiliado</label>
+      <label for="fecha">Nro Afiliado / DNI</label>
       <input type="text" class="form-control" name="nro_cliente" id="nro_cliente" autocomplete="off"  maxlength="50" value="<? echo $nro_cliente?>">
       <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
       <p class="text-center help-block hide">Debe ingresar un nro de afiliado.</p>
@@ -348,20 +352,10 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
           </div>
           <div class="col-md-3">
             <div class="form-group has-feedback">
-              <!-- <label for="eje_od">Eje ojo derecho</label> -->
-              <label for="eje_od">Eje O D</label>
-              <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off"  maxlength="50" value="<? echo $eje_od?>">
-              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-              <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group has-feedback">
-              <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
-              <label for="eje_oi">Eje O I</label>
-              <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off"  maxlength="50" value="<? echo $eje_oi?>">
-              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-              <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
+              <label for="nro_pedido_voucher">Número de pedido - Voucher</label>
+              <input type="text" class="form-control" name="nro_pedido_voucher" id="nro_pedido_voucher" autocomplete="off"  maxlength="32" value="<? echo $nro_pedido_voucher?>">
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un de número pedido.</p>
             </div>
           </div>
         </div>
@@ -371,6 +365,24 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
         if ($es_casa_central == 0) {
         ?>
           <div class="row">
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_od">Eje ojo derecho</label> -->
+                <label for="eje_od">Eje O D</label>
+                <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off"  maxlength="50" value="<? echo $eje_od?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
+                <label for="eje_oi">Eje O I</label>
+                <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off"  maxlength="50" value="<? echo $eje_oi?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
@@ -389,6 +401,9 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo esférico.</p>
               </div>
             </div>
+          </div>
+          
+          <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_od_cil">Graduación ojo derecho cilindrico</label> -->
@@ -405,6 +420,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <input type="text" class="form-control" name="grad_oi_cil" id="grad_oi_cil" autocomplete="off"  maxlength="32" value="<? echo $grad_oi_cil?>">
                 <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <label for="tipo_lente">Tipo lente</label>
+                    <select class="form-control" name="tipo_lente" id="tipo_lente">
+                      <option value="1" <?php if ($tipo_lente == 1) { echo "selected";} ?>>Stock</option>
+                      <option value="2" <?php if ($tipo_lente == 2) { echo "selected";} ?>>Laboratorio</option>
+                      <option value="3" <?php if ($tipo_lente == 3) { echo "selected";} ?>>1/2 Stock - 1/2 Laboratorio</option>
+                  </select>
+                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+                <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
               </div>
             </div>
           </div>
@@ -478,20 +505,10 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
           </div>
           <div class="col-md-3">
             <div class="form-group has-feedback">
-              <!-- <label for="eje_od">Eje ojo derecho</label> -->
-              <label for="eje_od_cerca">Eje O D</label>
-              <input type="text" class="form-control" name="eje_od_cerca" id="eje_od_cerca" autocomplete="off"  maxlength="50" value="<? echo $eje_od_cerca?>">
-              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-              <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group has-feedback">
-              <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
-              <label for="eje_oi_cerca">Eje O I</label>
-              <input type="text" class="form-control" name="eje_oi_cerca" id="eje_oi_cerca" autocomplete="off"  maxlength="50" value="<? echo $eje_oi_cerca?>">
-              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-              <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
+              <label for="nro_pedido_voucher_cerca">Número de pedido - Voucher</label>
+              <input type="text" class="form-control" name="nro_pedido_voucher_cerca" id="nro_pedido_voucher_cerca" autocomplete="off"  maxlength="32" value="<? echo $nro_pedido_voucher_cerca?>">
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un de número pedido.</p>
             </div>
           </div>
         </div>
@@ -500,6 +517,24 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
         if ($es_casa_central == 0) {
         ?>
           <div class="row">
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_od">Eje ojo derecho</label> -->
+                <label for="eje_od_cerca">Eje O D</label>
+                <input type="text" class="form-control" name="eje_od_cerca" id="eje_od_cerca" autocomplete="off"  maxlength="50" value="<? echo $eje_od_cerca?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
+                <label for="eje_oi_cerca">Eje O I</label>
+                <input type="text" class="form-control" name="eje_oi_cerca" id="eje_oi_cerca" autocomplete="off"  maxlength="50" value="<? echo $eje_oi_cerca?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
@@ -518,6 +553,9 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo esférico.</p>
               </div>
             </div>
+          </div>
+
+          <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_od_cil">Graduación ojo derecho cilindrico</label> -->
@@ -536,6 +574,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <label for="tipo_lente_cerca">Tipo lente</label>
+                    <select class="form-control" name="tipo_lente_cerca" id="tipo_lente_cerca">
+                      <option value="1" <?php if ($tipo_lente_cerca == 1) { echo "selected";} ?>>Stock</option>
+                      <option value="2" <?php if ($tipo_lente_cerca == 2) { echo "selected";} ?>>Laboratorio</option>
+                      <option value="3" <?php if ($tipo_lente_cerca == 3) { echo "selected";} ?>>1/2 Stock - 1/2 Laboratorio</option>
+                  </select>
+                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+                <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
+              </div>
+            </div>         
           </div>
 
           <div class="row">
@@ -549,7 +599,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
             </div>
             <div class="col-md-3">
               <div class="form-group has-feedback">
-                <label for="estado_cerca">Estado</label>
+                <label for="id_estado_cerca">Estado</label>
                 <select class="form-control" name="id_estado_cerca" id="id_estado_cerca">
                       <option value="1" <?php if ($id_estado_cerca == 1) { echo "selected";} ?>>Laboratorio</option>
                       <option value="2" <?php if ($id_estado_cerca == 2) { echo "selected";} ?>>Enviado</option>
@@ -558,7 +608,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
                 <p class="text-center help-block hide">Debe ingresar un codigo de estado.</p>
               </div>
-            </div>
+            </div>  
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <label for="voucher_cerca">Voucher</label>

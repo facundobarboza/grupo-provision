@@ -12,11 +12,14 @@
           <th>#</th>
           <th>ID</th>
           <th>Beneficiario</th>
+          <th>Nro Afiliado / DNI</th>
+          <th>Nro Pedido</th>
+          <th>Estado</th>
+          <th>Fecha</th>
+          <th>Delegación</th>
           <th>Optica</th>
           <th>Codigo Armazon</th>
           <th>Color Armazon</th>
-          <th>Estado</th>
-          <th>Fecha</th>
           <th>Tipo</th>
           <th>Mod/Elim</th>
         </tr>
@@ -36,6 +39,21 @@
             <?php echo $ficha['beneficiario']; ?>
           </td>
           <td>
+            <?php echo $ficha['nro_cliente']; ?>
+          </td>
+          <td>
+            <?php echo $ficha['nro_pedido']; ?>
+          </td>
+          <td>
+            <?php echo $ficha['estado']; ?>
+          </td>
+          <td>
+            <?php echo Util::fecha($ficha['fecha']); ?>
+          </td>
+          <td>
+            <?php echo $ficha['id_delegacion']; ?>
+          </td>
+          <td>
             <?php echo $ficha['optica']; ?>
           </td>
           <td>
@@ -43,12 +61,6 @@
           </td>
           <td>
             <?php echo$ficha['color_armazon']; ?>
-          </td>
-          <td>
-            <?php echo $ficha['estado']; ?>
-          </td>
-          <td>
-            <?php echo Util::fecha($ficha['fecha']); ?>
           </td>
           <td>
             <?php
