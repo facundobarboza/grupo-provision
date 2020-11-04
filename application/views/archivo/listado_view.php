@@ -45,13 +45,28 @@
             <?php echo $ficha['nro_pedido']; ?>
           </td>
           <td>
-            <?php echo $ficha['estado']; ?>
+            <?php 
+            switch ($ficha['estado']) {
+              case '1':
+                $estado = "Laboratorio";
+                break;
+              case '2':
+                $estado = "Enviado";
+                break;
+              case '3':
+                $estado = "Revisión";
+                break;
+              default:
+                $estado = "Laboratorio";
+                break;
+            }
+            echo $estado; ?>
           </td>
           <td>
             <?php echo Util::fecha($ficha['fecha']); ?>
           </td>
           <td>
-            <?php echo $ficha['id_delegacion']; ?>
+            <?php echo $ficha['delegacion']; ?>
           </td>
           <td>
             <?php echo $ficha['optica']; ?>

@@ -76,6 +76,44 @@ $(function() {
           'Octubre', 'Noviembre', 'Diciembre'],
           dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
 
+  $("#fecha_envio").datepicker({
+          firstDay: 1,
+          dateFormat: 'dd-mm-yy',
+          monthNames: ['Enero', 'Febreo', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'],
+          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
+
+  $("#fecha_envio_cerca").datepicker({
+          firstDay: 1,
+          dateFormat: 'dd-mm-yy',
+          monthNames: ['Enero', 'Febreo', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'],
+          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
+
+  $("#estado").change(function(event) {
+    
+    if($(this).val()==2)
+    {
+      $("#fecha_envio").prop('disabled', false);
+    }
+    else
+      $("#fecha_envio").prop('disabled', true);
+  });
+
+  $("#id_estado_cerca").change(function(event) {
+    
+    if($(this).val()==2)
+    {
+      $("#fecha_envio_cerca").prop('disabled', false);
+    }
+    else
+      $("#fecha_envio_cerca").prop('disabled', true);
+  });
+
   $formulario.on("submit", function(e) {
     var
         error                 = false,

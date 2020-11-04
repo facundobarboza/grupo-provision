@@ -37,14 +37,17 @@ var
       "language": datatable_es,
       "aoColumns": [
         { bSortable: false },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
-        { bSortable: true },
         { bSortable: false },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
+        { bSortable: true },
         { bSortable: false }
       ]
     });
