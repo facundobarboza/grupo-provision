@@ -495,7 +495,7 @@ class archivo_model extends MY_Model {
                    'codigo_color' => $term, 
                    'nro_codigo_interno' => $term);
 
-    $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color", FALSE)
+    $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color, letra_color_interno", FALSE)
              ->from("stock")
              ->where('activo',1)
              ->or_like($array);

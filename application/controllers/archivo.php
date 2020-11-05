@@ -94,11 +94,13 @@ class archivo extends MY_Controller {
       'fichas'       => $fichas_validos,
       'alertas'        => $alertas_validas,
       'contenido_view' => $contenido,
-      'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),
-      'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
+      'css'            => array(base_url('assets/css/dataTables.bootstrap.css',
+                                          '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')),
+      'js'             => array(
+                                base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                 base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                base_url('assets/js/jquery_autocomplete/autocomplete.jquery.js'),
+                                "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
                                 base_url('assets/js/archivo/listado_view.js'))
     );
 
@@ -422,8 +424,8 @@ class archivo extends MY_Controller {
         foreach( $rResult->result() as $row )
         {  
           $salida[] = array(  'id'    => $row->id_stock,
-                              'label' => utf8_encode($row->codigo_color." - CI ".$row->nro_codigo_interno." - ".$row->letra_color),
-                              'value' => utf8_encode("CI ".$row->nro_codigo_interno." - CP ".$row->codigo_patilla),
+                              'label' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
+                              'value' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
                               'descripcion_color' => $row->descripcion_color);
         }        
       

@@ -52,6 +52,25 @@ var
       ]
     });
 
+    $("#fecha_hasta").datepicker({
+          firstDay: 1,
+          dateFormat: 'dd-mm-yy',
+          monthNames: ['Enero', 'Febreo', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'],
+          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
+
+    $("#fecha_desde").datepicker({
+          firstDay: 1,
+          dateFormat: 'dd-mm-yy',
+          monthNames: ['Enero', 'Febreo', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'],
+          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
+
+
     // boton para descargar el recibo de sueldo
     $datatable_fichas.on("click", ".btn-modificar-ficha", function() {
       
