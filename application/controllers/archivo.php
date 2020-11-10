@@ -63,12 +63,15 @@ class archivo extends MY_Controller {
       $fichas_validos[] = array(  
                                   'id_ficha'       => $row->id_ficha,
                                   'beneficiario'   => $row->beneficiario,
+                                  'nro_cliente'    => $row->nro_cliente,
                                   'optica'         => $row->optica,
                                   'codigo_armazon' => $row->codigo_armazon,
                                   'color_armazon'  => $row->color_armazon,
                                   'estado'         => $row->estado,
                                   'fecha'          => $row->fecha,
-                                  'es_casa_central' => $row->es_casa_central
+                                  'es_casa_central' => $row->es_casa_central,
+                                  'nro_pedido'      => $row->nro_pedido,
+                                  'delegacion'      => $row->delegacion
                                   );  
     }
 
@@ -91,11 +94,13 @@ class archivo extends MY_Controller {
       'fichas'       => $fichas_validos,
       'alertas'        => $alertas_validas,
       'contenido_view' => $contenido,
-      'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),
-      'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
+      'css'            => array(base_url('assets/css/dataTables.bootstrap.css',
+                                          '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')),
+      'js'             => array(
+                                base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                 base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                base_url('assets/js/jquery_autocomplete/autocomplete.jquery.js'),
+                                "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
                                 base_url('assets/js/archivo/listado_view.js'))
     );
 
@@ -179,6 +184,12 @@ class archivo extends MY_Controller {
     $id_estado_cerca       = $this->input->post("id_estado_cerca");
     $voucher_cerca         = $this->input->post("voucher_cerca");
     $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
+    $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
+    $fecha_envio           = $this->input->post("fecha_envio");
+    $tipo_lente            = $this->input->post("tipo_lente");
+    $fecha_envio_cerca     = $this->input->post("fecha_envio_cerca");
+    $tipo_lente_cerca      = $this->input->post("tipo_lente_cerca");
+
 
     // cargamos el modelo
     $this->load->model('archivo_model');
@@ -225,33 +236,16 @@ class archivo extends MY_Controller {
                     'eje_oi_cerca'         => $eje_oi_cerca,
                     'id_estado_cerca'      => $id_estado_cerca,
                     'voucher_cerca'        => $voucher_cerca,
-                    'nro_pedido_cerca'     => $nro_pedido_cerca
+                    'nro_pedido_cerca'     => $nro_pedido_cerca,
+                    'fecha_envio'          => $fecha_envio,
+                    'tipo_lente'           => $tipo_lente,
+                    'fecha_envio_cerca'    => $fecha_envio_cerca,
+                    'tipo_lente_cerca'     => $tipo_lente_cerca
+
                     );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
     $this->archivo_model->agregar($data);
-    
-    // //si el cliente no existe lo creamos
-    // if($data['es_casa_central']==0)
-    // {
-    //    $this->db->set('titular_cliente',utf8_encode($data['titular']))
-    //         ->set('beneficiario_cliente',utf8_encode($data['beneficiario']))
-    //         ->set('nro_cliente',utf8_encode($data['nro_cliente']))
-    //         ->set('id_sindicato_cliente',utf8_encode($data['id_sindicato']))
-    //   ->insert("clientes");
-    // }
-
-    // if($id_stock)
-    // {
-    //   //descontamos el armazon utlizado del stock
-    //   $sql = "UPDATE stock
-    //             SET  cantidad  = cantidad-1 
-    //             WHERE id_stock = ".$data['id_stock'].";";
-    //     // echo $sql; die();       
-    //     $this->db->query($sql);
-
-    //    $this->load->model('archivo_model');    
-    // }
     
 
     //si guardamos un nuevo departamento
@@ -430,8 +424,8 @@ class archivo extends MY_Controller {
         foreach( $rResult->result() as $row )
         {  
           $salida[] = array(  'id'    => $row->id_stock,
-                              'label' => utf8_encode($row->codigo_color." - CI ".$row->nro_codigo_interno." - ".$row->letra_color),
-                              'value' => utf8_encode("CI ".$row->nro_codigo_interno." - CP ".$row->codigo_patilla),
+                              'label' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
+                              'value' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
                               'descripcion_color' => $row->descripcion_color);
         }        
       

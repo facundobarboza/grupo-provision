@@ -51,7 +51,8 @@ if($fichas)
   $grad_oi_cil               = $fichas->row()->grad_oi_cil;
   $eje_oi                    = $fichas->row()->eje_oi;
   $tipo_lente                = $fichas->row()->tipo_lente;
-  
+  $fecha_envio               = $this->util->fecha($fichas->row()->fecha_envio);
+
   $codigo_armazon_cerca      = $fichas->row()->codigo_armazon_cerca;
   $color_armazon_cerca       = $fichas->row()->color_armazon_cerca;
   $id_stock_cerca            = $fichas->row()->id_stock_cerca;
@@ -65,6 +66,7 @@ if($fichas)
   $grad_oi_cil_cerca         = $fichas->row()->grad_oi_cil_cerca;
   $eje_oi_cerca              = $fichas->row()->eje_oi_cerca;
   $tipo_lente_cerca          = $fichas->row()->tipo_lente_cerca;
+  $fecha_envio_cerca         = $this->util->fecha($fichas->row()->fecha_envio_cerca);
 }
 else
 {
@@ -92,7 +94,7 @@ if($id_ficha==0)
 }
 else
 {
-  $titulo       = "Modificar Ficha" ." ".$casa." Nro".$id_ficha;
+  $titulo       = "Modificar Ficha" ." ".$casa." N° ".$id_ficha;
   $title_button = "Modificar";
 }
 //si existe mostramos el log
@@ -467,6 +469,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar de voucher.</p>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <label for="fecha_envio">Fecha Envio</label>
+                <br>
+                <input type="input" name="fecha_envio" <?php if($estado!=2) echo "disabled='true'"?> style="width: 100%;
+                                                            height: 34px;
+                                                            padding: 6px 12px;    
+                                                            border: 1px solid #ccc;" id='fecha_envio' autocomplete="off"  maxlength="50" value="<? echo $fecha_envio?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar un fecha envio.</p>
+              </div>
+            </div>
           </div>
 
         <?php
@@ -622,6 +636,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <input type="text" class="form-control" name="voucher_cerca" id="voucher_cerca" autocomplete="off" maxlength="50" value="<? echo $voucher_cerca?>">
                 <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
                 <p class="text-center help-block hide">Debe ingresar de voucher.</p>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <label for="fecha_envio_cerca">Fecha Envio</label>
+                <br>
+                <input type="input" name="fecha_envio_cerca" <?php if($id_estado_cerca!=2) echo "disabled='true'"?> style="width: 100%;
+                                                            height: 34px;
+                                                            padding: 6px 12px;    
+                                                            border: 1px solid #ccc;" id='fecha_envio_cerca' autocomplete="off"  maxlength="50" value="<? echo $fecha_envio_cerca?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar un fecha_envio_cerca.</p>
               </div>
             </div>
           </div>

@@ -75,7 +75,9 @@ class archivo_model extends MY_Model {
   {
     // Util::dump_exit($data);
     //si no existe lo guardamos
-    $fecha = Util::fecha_db($data['fecha']);
+    $fecha             = Util::fecha_db($data['fecha']);
+    $fecha_envio       = Util::fecha_db($data['fecha_envio']);
+    $fecha_envio_cerca = Util::fecha_db($data['fecha_envio_cerca']);
 
     if($data['id_ficha']==0)
     {
@@ -135,6 +137,10 @@ class archivo_model extends MY_Model {
                   ->set('voucher_cerca', $data['voucher_cerca'])
                   ->set('nro_pedido_cerca', $data['nro_pedido_cerca'])
                   ->set('es_lejos' , $data['es_lejos'])
+                  ->set('fecha_envio' , $fecha_envio)
+                  ->set('tipo_lente' , $data['tipo_lente'])
+                  ->set('fecha_envio_cerca' , $fecha_envio_cerca)
+                  ->set('tipo_lente_cerca' , $data['tipo_lente_cerca'])
 
                ->insert($this->_table);
       }
@@ -227,7 +233,12 @@ class archivo_model extends MY_Model {
                 eje_oi_cerca          = '".$data['eje_oi_cerca']."',
                 id_estado_cerca       = '".$data['id_estado_cerca']."',
                 voucher_cerca         = '".$data['voucher_cerca']."',
-                nro_pedido_cerca      = '".$data['nro_pedido_cerca']."'
+                nro_pedido_cerca      = '".$data['nro_pedido_cerca']."',
+                fecha_envio           = '".$fecha_envio."',
+                tipo_lente            = '".$data['tipo_lente']."',
+                fecha_envio_cerca     = '".$fecha_envio_cerca."',
+                tipo_lente_cerca      = '".$data['tipo_lente_cerca']."'
+
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
       else
@@ -310,9 +321,11 @@ class archivo_model extends MY_Model {
   public function obtenerFichas() {
    
     
-    $this->db->select("*", FALSE)
+    $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion", FALSE)
              ->from($this->_table)
-            ->where('activo', 1);;   
+             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica')
+             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion')
+            ->where($this->_table.'.activo', 1);;   
     
     $result = $this->db->get();
     // Util::dump_exit($result->row());
@@ -482,7 +495,7 @@ class archivo_model extends MY_Model {
                    'codigo_color' => $term, 
                    'nro_codigo_interno' => $term);
 
-    $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color", FALSE)
+    $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color, letra_color_interno", FALSE)
              ->from("stock")
              ->where('activo',1)
              ->or_like($array);
