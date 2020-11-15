@@ -1,3 +1,7 @@
+<?php
+
+echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 'form'));
+?>
 <div class="row">
   <div class="col-md-12">
     <h4 class="page-header text-uppercase">Listado Fichas</h4>
@@ -52,6 +56,7 @@
     <div class="col-md-1">
     </div>
 </div>
+<?php echo form_close(); ?>
 <div class="row">
   <div class="col-md-12 ">
     <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">

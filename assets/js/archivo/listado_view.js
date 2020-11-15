@@ -84,6 +84,7 @@ var
       
     });
 
+
      // boton para eliminar un ficha
     $datatable_fichas.on("click", ".btn-eliminar-ficha", function() {
       

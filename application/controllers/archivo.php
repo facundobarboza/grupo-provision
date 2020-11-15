@@ -51,11 +51,26 @@ class archivo extends MY_Controller {
    * @return void
    */
   public function listado($elimino=0) {
+    //echo "entro";exit;
+    if($this->input->post('fecha_desde'))
+    {
+      $fecha_desde     = Util::fecha_db($this->input->post('fecha_desde'));
+      $fecha_hasta     = Util::fecha_db($this->input->post('fecha_hasta'));
+      $id_estado       = $this->input->post('estado');
+    }
+    else
+    {
+      $fecha_desde     = date('Y-m-d');
+      $fecha_hasta     = date('Y-m-d');
+      $id_estado       = 0;
+
+    }
+
     // cargamos el modelo
     $this->load->model(array('archivo_model'));
 
     // obtenemos las fichas y el stock minimo
-    $fichas   = $this->archivo_model->obtenerFichas();
+    $fichas   = $this->archivo_model->obtenerFichas($fecha_desde,$fecha_hasta,$id_estado);
     $s_minimo = $this->archivo_model->stockMinimo();    
   
     foreach( $fichas->result() as $row )
@@ -93,9 +108,12 @@ class archivo extends MY_Controller {
       'stock_minimo' => $stock_minimo,
       'fichas'       => $fichas_validos,
       'alertas'        => $alertas_validas,
+      'fecha_desde'         => Util::fecha($fecha_desde),
+      'fecha_hasta'         => Util::fecha($fecha_hasta),
+      'estado' => $id_estado,
       'contenido_view' => $contenido,
-      'css'            => array(base_url('assets/css/dataTables.bootstrap.css',
-                                          '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css')),
+      'css'            => array(base_url('assets/css/dataTables.bootstrap.css'),
+                                          '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
       'js'             => array(
                                 base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
