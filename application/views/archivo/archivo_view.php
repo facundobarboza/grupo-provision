@@ -367,15 +367,6 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
           <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
-                <!-- <label for="eje_od">Eje ojo derecho</label> -->
-                <label for="eje_od">Eje O D</label>
-                <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off" maxlength="50" value="<? echo $eje_od?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
                 <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
                 <label for="grad_od_esf">Grad. O D ESF</label>
                 <input type="text" class="form-control" name="grad_od_esf" id="grad_od_esf" autocomplete="off" maxlength="50" value="<? echo $grad_od_esf?>">
@@ -392,18 +383,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho cilindrico.</p>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_od">Eje ojo derecho</label> -->
+                <label for="eje_od">Eje O D</label>
+                <input type="text" class="form-control" name="eje_od" id="eje_od" autocomplete="off" maxlength="50" value="<? echo $eje_od?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
+              </div>
+            </div>
           </div>
 
           <div class="row">
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
-                <label for="eje_oi">Eje O I</label>
-                <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off" maxlength="50" value="<? echo $eje_oi?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
-              </div>
-            </div>
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_oi_esf">Graduación ojo izquierdo esférico</label> -->
@@ -422,71 +413,77 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
               </div>
             </div>
-          </div>
-
-          <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
-                <label for="tipo_lente">Tipo lente</label>
-                <select class="form-control" name="tipo_lente" id="tipo_lente">
-                  <option value="1" <?php if ($tipo_lente == 1) {
-                                      echo "selected";
-                                    } ?>>Stock</option>
-                  <option value="2" <?php if ($tipo_lente == 2) {
-                                      echo "selected";
-                                    } ?>>Laboratorio</option>
-                  <option value="3" <?php if ($tipo_lente == 3) {
-                                      echo "selected";
-                                    } ?>>1/2 Stock - 1/2 Laboratorio</option>
-                </select>
-                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="estado">Estado</label>
-                <select class="form-control" name="estado" id="estado">
-                  <option value="1" <?php if ($estado == 1) {
-                                      echo "selected";
-                                    } ?>>Laboratorio</option>
-                  <option value="2" <?php if ($estado == 2) {
-                                      echo "selected";
-                                    } ?>>Enviado</option>
-                  <option value="3" <?php if ($estado == 3) {
-                                      echo "selected";
-                                    } ?>>Revisión</option>
-                </select>
-                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un código de estado.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="voucher">Voucher</label>
-                <input type="text" class="form-control" name="voucher" id="voucher" autocomplete="off" maxlength="50" value="<? echo $voucher?>">
+                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
+                <label for="eje_oi">Eje O I</label>
+                <input type="text" class="form-control" name="eje_oi" id="eje_oi" autocomplete="off" maxlength="50" value="<? echo $eje_oi?>">
                 <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar de voucher.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="fecha_envio">Fecha Envio</label>
-                <br>
-                <input type="input" name="fecha_envio" <?php if($estado!=2) echo "disabled='true'"?> style="width: 100%;
-                                                            height: 34px;
-                                                            padding: 6px 12px;    
-                                                            border: 1px solid #ccc;" id='fecha_envio' autocomplete="off"  maxlength="50" value="<? echo $fecha_envio?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un fecha envio.</p>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
               </div>
             </div>
           </div>
-
         <?php
         } // FIN if casa_central
         ?>
-
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="tipo_lente">Tipo lente</label>
+              <select class="form-control" name="tipo_lente" id="tipo_lente">
+                <option value="1" <?php if ($tipo_lente == 1) {
+                                    echo "selected";
+                                  } ?>>Stock</option>
+                <option value="2" <?php if ($tipo_lente == 2) {
+                                    echo "selected";
+                                  } ?>>Laboratorio</option>
+                <option value="3" <?php if ($tipo_lente == 3) {
+                                    echo "selected";
+                                  } ?>>1/2 Stock - 1/2 Laboratorio</option>
+              </select>
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="estado">Estado</label>
+              <select class="form-control" name="estado" id="estado">
+                <option value="1" <?php if ($estado == 1) {
+                                    echo "selected";
+                                  } ?>>Laboratorio</option>
+                <option value="2" <?php if ($estado == 2) {
+                                    echo "selected";
+                                  } ?>>Enviado</option>
+                <option value="3" <?php if ($estado == 3) {
+                                    echo "selected";
+                                  } ?>>Revisión</option>
+              </select>
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un código de estado.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="voucher">Voucher</label>
+              <input type="text" class="form-control" name="voucher" id="voucher" autocomplete="off" maxlength="50" value="<? echo $voucher?>">
+              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+              <p class="text-center help-block hide">Debe ingresar de voucher.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="fecha_envio">Fecha Envio</label>
+              <br>
+              <input type="input" name="fecha_envio" <?php if ($estado != 2) echo "disabled='true'" ?> style="width: 100%;
+                                                            height: 34px;
+                                                            padding: 6px 12px;    
+                                                            border: 1px solid #ccc;" id='fecha_envio' autocomplete="off" maxlength="50" value="<? echo $fecha_envio?>">
+              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un fecha envio.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -535,15 +532,6 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
           <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
-                <!-- <label for="eje_od">Eje ojo derecho</label> -->
-                <label for="eje_od_cerca">Eje O D</label>
-                <input type="text" class="form-control" name="eje_od_cerca" id="eje_od_cerca" autocomplete="off" maxlength="50" value="<? echo $eje_od_cerca?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
                 <!-- <label for="grad_od_esf">Graduación ojo derecho esférico</label> -->
                 <label for="grad_od_esf_cerca">Grad. O D ESF</label>
                 <input type="text" class="form-control" name="grad_od_esf_cerca" id="grad_od_esf_cerca" autocomplete="off" maxlength="50" value="<? echo $grad_od_esf_cerca?>">
@@ -560,19 +548,18 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo derecho cilindrico.</p>
               </div>
             </div>
-
+            <div class="col-md-3">
+              <div class="form-group has-feedback">
+                <!-- <label for="eje_od">Eje ojo derecho</label> -->
+                <label for="eje_od_cerca">Eje O D</label>
+                <input type="text" class="form-control" name="eje_od_cerca" id="eje_od_cerca" autocomplete="off" maxlength="50" value="<? echo $eje_od_cerca?>">
+                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo derecho.</p>
+              </div>
+            </div>
           </div>
 
           <div class="row">
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
-                <label for="eje_oi_cerca">Eje O I</label>
-                <input type="text" class="form-control" name="eje_oi_cerca" id="eje_oi_cerca" autocomplete="off" maxlength="50" value="<? echo $eje_oi_cerca?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
-              </div>
-            </div>
             <div class="col-md-3">
               <div class="form-group has-feedback">
                 <!-- <label for="grad_oi_esf">Graduación ojo izquierdo esférico</label> -->
@@ -591,69 +578,78 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                 <p class="text-center help-block hide">Debe ingresar una graduación ojo izquierdo cilindrico.</p>
               </div>
             </div>
-          </div>
-
-          <div class="row">
             <div class="col-md-3">
               <div class="form-group has-feedback">
-                <label for="tipo_lente_cerca">Tipo lente</label>
-                <select class="form-control" name="tipo_lente_cerca" id="tipo_lente_cerca">
-                  <option value="1" <?php if ($tipo_lente_cerca == 1) {
-                                      echo "selected";
-                                    } ?>>Stock</option>
-                  <option value="2" <?php if ($tipo_lente_cerca == 2) {
-                                      echo "selected";
-                                    } ?>>Laboratorio</option>
-                  <option value="3" <?php if ($tipo_lente_cerca == 3) {
-                                      echo "selected";
-                                    } ?>>1/2 Stock - 1/2 Laboratorio</option>
-                </select>
-                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="id_estado_cerca">Estado</label>
-                <select class="form-control" name="id_estado_cerca" id="id_estado_cerca">
-                  <option value="1" <?php if ($id_estado_cerca == 1) {
-                                      echo "selected";
-                                    } ?>>Laboratorio</option>
-                  <option value="2" <?php if ($id_estado_cerca == 2) {
-                                      echo "selected";
-                                    } ?>>Enviado</option>
-                  <option value="3" <?php if ($id_estado_cerca == 3) {
-                                      echo "selected";
-                                    } ?>>Revisión</option>
-                </select>
-                <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un codigo de estado.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="voucher_cerca">Voucher</label>
-                <input type="text" class="form-control" name="voucher_cerca" id="voucher_cerca" autocomplete="off" maxlength="50" value="<? echo $voucher_cerca?>">
+                <!-- <label for="eje_oi">Eje ojo izquierdo</label> -->
+                <label for="eje_oi_cerca">Eje O I</label>
+                <input type="text" class="form-control" name="eje_oi_cerca" id="eje_oi_cerca" autocomplete="off" maxlength="50" value="<? echo $eje_oi_cerca?>">
                 <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar de voucher.</p>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="form-group has-feedback">
-                <label for="fecha_envio_cerca">Fecha Envio</label>
-                <br>
-                <input type="input" name="fecha_envio_cerca" <?php if($id_estado_cerca!=2) echo "disabled='true'"?> style="width: 100%;
-                                                            height: 34px;
-                                                            padding: 6px 12px;    
-                                                            border: 1px solid #ccc;" id='fecha_envio_cerca' autocomplete="off"  maxlength="50" value="<? echo $fecha_envio_cerca?>">
-                <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
-                <p class="text-center help-block hide">Debe ingresar un fecha_envio_cerca.</p>
+                <p class="text-center help-block hide">Debe ingresar una eje ojo izquierdo.</p>
               </div>
             </div>
           </div>
         <?php
         } // FIN if casa_central
         ?>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="tipo_lente_cerca">Tipo lente</label>
+              <select class="form-control" name="tipo_lente_cerca" id="tipo_lente_cerca">
+                <option value="1" <?php if ($tipo_lente_cerca == 1) {
+                                    echo "selected";
+                                  } ?>>Stock</option>
+                <option value="2" <?php if ($tipo_lente_cerca == 2) {
+                                    echo "selected";
+                                  } ?>>Laboratorio</option>
+                <option value="3" <?php if ($tipo_lente_cerca == 3) {
+                                    echo "selected";
+                                  } ?>>1/2 Stock - 1/2 Laboratorio</option>
+              </select>
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="id_estado_cerca">Estado</label>
+              <select class="form-control" name="id_estado_cerca" id="id_estado_cerca">
+                <option value="1" <?php if ($id_estado_cerca == 1) {
+                                    echo "selected";
+                                  } ?>>Laboratorio</option>
+                <option value="2" <?php if ($id_estado_cerca == 2) {
+                                    echo "selected";
+                                  } ?>>Enviado</option>
+                <option value="3" <?php if ($id_estado_cerca == 3) {
+                                    echo "selected";
+                                  } ?>>Revisión</option>
+              </select>
+              <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un codigo de estado.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="voucher_cerca">Voucher</label>
+              <input type="text" class="form-control" name="voucher_cerca" id="voucher_cerca" autocomplete="off" maxlength="50" value="<? echo $voucher_cerca?>">
+              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+              <p class="text-center help-block hide">Debe ingresar de voucher.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="fecha_envio_cerca">Fecha Envio</label>
+              <br>
+              <input type="input" name="fecha_envio_cerca" <?php if ($id_estado_cerca != 2) echo "disabled='true'" ?> style="width: 100%;
+                                                            height: 34px;
+                                                            padding: 6px 12px;    
+                                                            border: 1px solid #ccc;" id='fecha_envio_cerca' autocomplete="off" maxlength="50" value="<? echo $fecha_envio_cerca?>">
+              <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
+              <p class="text-center help-block hide">Debe ingresar un fecha_envio_cerca.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
