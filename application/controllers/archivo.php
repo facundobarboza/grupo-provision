@@ -469,16 +469,35 @@ class archivo extends MY_Controller {
       
       $rResult = $this->archivo_model->historialVentas($id_cliente);
       // $this->util->dump_exit($term);
+     
       
       $contenido = "";
       
       foreach( $rResult->result() as $row )
       {  
+         switch ($row->es_lejos) {
+                case '1':
+                  $es_lejos = "Lejos";
+                  break;
+                  case '2':
+                  $es_lejos = "Cerca";
+                  break;
+                  case '3':
+                  $es_lejos = "Lejos y cerca";
+                  break;
+                  case '4':
+                  $es_lejos = "Fuera de Prestacion";
+                  break;                
+                default:
+                  $es_lejos = "";
+                  break;
+              }
         $contenido .= utf8_encode("<tr><td>".$row->sindicato."</td><td>".
                                   $row->estado."</td><td>".
                                   $row->codigo_armazon."</td><td>".
                                   $row->color_armazon."</td><td>".
-                                  $this->util->fecha($row->fecha)."</td><tr>");
+                                  $this->util->fecha($row->fecha)."</td>
+                                  <td>".$es_lejos."</td><tr>");
         
       }        
       // header('Content-Type: application/json');

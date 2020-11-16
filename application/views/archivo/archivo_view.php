@@ -312,6 +312,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
           <th>Codigo Armazon</th>
           <th>Color Armazon</th>
           <th>Fecha</th>
+          <th>Tipo de Lentes</th>
         </tr>
       </thead>
       <tbody id='historial_titular'>

@@ -532,7 +532,7 @@ class archivo_model extends MY_Model {
      */
   public function historialVentas($id_cliente) {
 
-    $this->db->select("id_ficha,descripcion as sindicato,estado,codigo_armazon,color_armazon,fecha", FALSE)
+    $this->db->select("id_ficha,descripcion as sindicato,estado,codigo_armazon,color_armazon,fecha,es_lejos", FALSE)
              ->from("fichas")
              ->join('sindicatos','fichas.id_sindicato=sindicatos.id_sindicato')
              ->where('id_cliente',$id_cliente)
