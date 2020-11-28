@@ -161,7 +161,7 @@ class archivo extends MY_Controller {
     // $this->util->dump_exit($this->input->post());
 
     $id_ficha              = $this->input->post("id_ficha");
-    $beneficiario          = $this->input->post("beneficiario");
+    $beneficiario          = $this->input->post("filtro_cliente");
     $id_delegacion         = $this->input->post("id_delegacion");
     $id_optica             = $this->input->post("id_optica");
     $fecha                 = $this->input->post("fecha");
@@ -189,7 +189,7 @@ class archivo extends MY_Controller {
     $id_stock              = $this->input->post("id_stock");
     $nro_cliente           = $this->input->post("nro_cliente");
     $es_casa_central       = $this->input->post("es_casa_central");
-    $titular               = $this->input->post("filtro_cliente");
+    $titular               = $this->input->post("titular");
     $codigo_armazon_cerca  = $this->input->post("codigo_armazon_cerca");
     $color_armazon_cerca   = $this->input->post("color_armazon_cerca");
     $id_stock_cerca        = $this->input->post("id_stock_cerca");
@@ -411,8 +411,8 @@ class archivo extends MY_Controller {
         foreach( $rResult->result() as $row )
         {  
           $salida[] = array(  'id'    => $row->id_cliente,
-                              'label' => utf8_encode($row->titular_cliente." - Nro ".$row->nro_cliente),
-                              'value' => utf8_encode($row->titular_cliente),
+                              'label' => utf8_encode($row->beneficiario_cliente." - Nro ".$row->nro_cliente),
+                              'value' => utf8_encode($row->beneficiario_cliente),
                               'nro_cliente' => $row->nro_cliente);
         }        
       

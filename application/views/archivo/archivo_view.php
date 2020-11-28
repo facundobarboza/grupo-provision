@@ -282,7 +282,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
     <div class="form-group has-feedback">
       <label for="beneficiario">Titular</label>
-      <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off" maxlength="50" value="<? echo $titular?>">
+      <input type="text" class="form-control" name="titular" id="titular" autocomplete="off" maxlength="50" value="<? echo $titular?>">
       <!-- <input type="text" class="form-control" name="beneficiario" id="beneficiario" autocomplete="off"  maxlength="32" value="<? echo $beneficiario?>">
         <input type="hidden" name="id_cliente" value="<? echo $id_cliente?>"> -->
       <span class="glyphicon glyphicon-remove form-control-feedba
