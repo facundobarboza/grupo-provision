@@ -51,7 +51,7 @@ class archivo extends MY_Controller {
    * @return void
    */
   public function listado($elimino=0) {
-    //echo "entro";exit;
+    
     if($this->input->post('fecha_desde'))
     {
       $fecha_desde     = Util::fecha_db($this->input->post('fecha_desde'));
@@ -86,7 +86,8 @@ class archivo extends MY_Controller {
                                   'fecha'          => $row->fecha,
                                   'es_casa_central' => $row->es_casa_central,
                                   'nro_pedido'      => $row->nro_pedido,
-                                  'delegacion'      => $row->delegacion
+                                  'delegacion'      => $row->delegacion,
+                                  'sindicato'       => $row->sindicato,
                                   );  
     }
 
@@ -104,23 +105,22 @@ class archivo extends MY_Controller {
     
     $contenido = "archivo/listado_view";
     // datos pasados a la vista
-    $data = array(
-      'stock_minimo' => $stock_minimo,
-      'fichas'       => $fichas_validos,
-      'alertas'        => $alertas_validas,
-      'fecha_desde'         => Util::fecha($fecha_desde),
-      'fecha_hasta'         => Util::fecha($fecha_hasta),
-      'estado' => $id_estado,
-      'contenido_view' => $contenido,
-      'css'            => array(base_url('assets/css/dataTables.bootstrap.css'),
-                                          '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-      'js'             => array(
-                                base_url('assets/js/datatable/jquery.dataTables.min.js'),
-                                base_url('assets/js/datatable/jquery.dataTables.es.js'),
-                                base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                base_url('assets/js/archivo/listado_view.js'))
-    );
+    $data = array('stock_minimo'    => $stock_minimo,
+                  'fichas'          => $fichas_validos,
+                  'alertas'         => $alertas_validas,
+                  'fecha_desde'     => Util::fecha($fecha_desde),
+                  'fecha_hasta'     => Util::fecha($fecha_hasta),
+                  'estado'          => $id_estado,
+                  'contenido_view'  => $contenido,
+                  'css'             => array(base_url('assets/css/dataTables.bootstrap.css'),
+                                                      '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
+                  'js'              => array(
+                                            base_url('assets/js/datatable/jquery.dataTables.min.js'),
+                                            base_url('assets/js/datatable/jquery.dataTables.es.js'),
+                                            base_url('assets/js/datatable/dataTables.bootstrap.js'),
+                                            "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
+                                            base_url('assets/js/archivo/listado_view.js'))
+                );
 
     if($elimino==1)
     { 
@@ -262,11 +262,8 @@ class archivo extends MY_Controller {
 
                     );
     // $this->util->dump_exit($data);
-     //guardamos los datos de la empresa 
-    $this->archivo_model->agregar($data);
-    
+    $this->archivo_model->agregar($data);    
 
-    //si guardamos un nuevo departamento
     if($this->input->post('id_ficha')==0)
     {
       // guardamos el log
@@ -286,8 +283,6 @@ class archivo extends MY_Controller {
 
   // --------------------------------------------------------------------
 
-  // --------------------------------------------------------------------
-
   /**
    * Cargar la vista para editar el perfil del usuario
    *
@@ -295,7 +290,6 @@ class archivo extends MY_Controller {
    * @return void
    */
   public function nuevo($id_ficha=0,$elimino=0,$es_casa_central=0) {
-    // cargamos el modelo
     
     $this->load->model('archivo_model');
     $this->load->model('clientes_model');
@@ -335,11 +329,11 @@ class archivo extends MY_Controller {
       // $this->util->dump_exit($empresas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
-                    'delegaciones'      => $delegaciones_validos,
-                    'opticas'      => $opticas_validos,
-                    'contenido_view' => 'archivo/archivo_view',
-                    'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-                    'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
+                    'delegaciones'    => $delegaciones_validos,
+                    'opticas'         => $opticas_validos,
+                    'contenido_view'  => 'archivo/archivo_view',
+                    'css'             => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
+                    'js'              => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                               base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                               base_url('assets/js/datatable/dataTables.bootstrap.js'),
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
@@ -461,21 +455,19 @@ class archivo extends MY_Controller {
      * @return json
      */
 
-  public function historialVentas()
-  {    
-      $this->load->model('archivo_model');
-      $salida = array();
-      $id_cliente = $this->input->post('id_cliente');
+    public function historialVentas()
+    {    
+        $this->load->model('archivo_model');
+        $salida = array();
+        $id_cliente = $this->input->post('id_cliente');
+
+        $rResult = $this->archivo_model->historialVentas($id_cliente);
+        // $this->util->dump_exit($term);
+        $contenido = "";
       
-      $rResult = $this->archivo_model->historialVentas($id_cliente);
-      // $this->util->dump_exit($term);
-     
-      
-      $contenido = "";
-      
-      foreach( $rResult->result() as $row )
-      {  
-         switch ($row->es_lejos) {
+        foreach( $rResult->result() as $row )
+        {  
+            switch ($row->es_lejos) {
                 case '1':
                   $es_lejos = "Lejos";
                   break;
@@ -491,19 +483,18 @@ class archivo extends MY_Controller {
                 default:
                   $es_lejos = "";
                   break;
-              }
-        $contenido .= utf8_encode("<tr><td>".$row->sindicato."</td><td>".
-                                  $row->estado."</td><td>".
-                                  $row->codigo_armazon."</td><td>".
-                                  $row->color_armazon."</td><td>".
-                                  $this->util->fecha($row->fecha)."</td>
-                                  <td>".$es_lejos."</td><tr>");
-        
-      }        
-      // header('Content-Type: application/json');
-      echo $contenido;  
-      exit;
-  } 
+            }
+            $contenido .= utf8_encode("<tr><td>".$row->sindicato."</td><td>".
+                                      $row->estado."</td><td>".
+                                      $row->codigo_armazon."</td><td>".
+                                      $row->color_armazon."</td><td>".
+                                      $this->util->fecha($row->fecha)."</td>
+                                      <td>".$es_lejos."</td><tr>");
+        }        
+      
+        echo $contenido;  
+        exit;
+    } 
 
 }
 

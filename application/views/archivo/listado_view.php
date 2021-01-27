@@ -35,7 +35,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
                                                         border: 1px solid #ccc;" id='fecha_hasta' autocomplete="off" maxlength="50" value="<? echo $fecha_hasta?>">
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-2">
               <label for="apellido_cliente">Estado</label>
                 <select class="form-control" name="estado" id="estado">
                       <option value="-1">Todos --</option>
@@ -45,6 +45,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
                   </select>
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
+          
           <div class="col-md-2"><br>
             <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">
           </div>
@@ -53,8 +54,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
       </div>
       <!-- /.panel-->
 </div>
-    <div class="col-md-1">
-    </div>
+   
 </div>
 <?php echo form_close(); ?>
 <div class="row">
@@ -67,6 +67,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
           <th>Beneficiario</th>
           <th>Nro Afiliado / DNI</th>
           <th>Nro Pedido</th>
+          <th>Sindicato</th>
           <th>Estado</th>
           <th>Fecha</th>
           <th>Delegación</th>
@@ -96,6 +97,9 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
           </td>
           <td>
             <?php echo $ficha['nro_pedido']; ?>
+          </td>
+          <td>
+            <?php echo $ficha['sindicato']; ?>
           </td>
           <td>
             <?php 

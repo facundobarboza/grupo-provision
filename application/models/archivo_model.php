@@ -323,20 +323,22 @@ class archivo_model extends MY_Model {
     if($id_estado>0)
     {
       $where = "(estado=".$id_estado." OR id_estado_cerca=".$id_estado.")"; 
-      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion", FALSE)
+      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
              ->where($where); 
     }
     else
     {
-      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion", FALSE)
+      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato')
             ->where($this->_table.".activo ",1)
             ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'");    
     }     
