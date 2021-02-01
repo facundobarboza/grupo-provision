@@ -199,8 +199,6 @@ class Clientes extends MY_Controller {
     // si la liquidacion es un valor numerico
     if( !is_null($id_liquidacion) && is_numeric($id_liquidacion) )
     {
-      // cargamos el modelo
-      $this->load->model(array('recibo_sueldo_model'));
 
       // obtenemos el recibo de sueldo
       $recibo = $this->recibo_sueldo_model->get_by(array('id_liquidacion' => $id_liquidacion,'id_legajo' => $this->session->userdata('id_legajo')));

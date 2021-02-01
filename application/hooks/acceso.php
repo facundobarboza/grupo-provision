@@ -38,7 +38,7 @@ class Acceso {
       // si solicita una pagina de inicio de sesion
       if( array_search($this->_CI->router->class.'/'.$this->_CI->router->method, $urls_login) !== FALSE )
         // lo redireccionamos al inicio
-        redirect('recibo_sueldo', 'refresh');
+        redirect('archivo', 'refresh');
     }
     // el usuario no esta logueado
     else

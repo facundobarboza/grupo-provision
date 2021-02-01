@@ -228,14 +228,17 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <div class="form-group has-feedback">
       <label for="types">Tipos de lentes</label>
       <?php
-      $display_cerca = "style='display:none;'";
+     
+     $display_cerca = "";
       $display_lejos = "";
       ?>
       <select class="form-control" name="select_tipo" id="select_tipo">
-        <option value="1" <?php if ($select_tipo == 1) {
+        <option value="1" <?php if ($select_tipo == 1||$select_tipo == "") {
                             echo "selected";
                             $display_cerca = "style='display:none;'";
-                          } ?>>Lejos</option>
+                          }
+                           ?>>Lejos</option>
+                          }
         <option value="2" <?php if ($select_tipo == 2) {
                             echo "selected";
                             $display_lejos = "style='display:none;'";

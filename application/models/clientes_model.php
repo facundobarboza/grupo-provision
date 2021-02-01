@@ -156,7 +156,23 @@ class Clientes_model extends MY_Model {
    
     $this->db->select("*")
            ->from("opticas")
-           ->where('activo', 1); 
+           ->where('activo', 1)
+           ->order_by('descripcion', 'ASC'); 
+ 
+    $result = $this->db->get();
+
+    // Util::dump_exit($result->row());
+
+    return $result;
+  }
+
+  public function obtenerOpticasDelegacion() {   
+   
+    $this->db->select("opticas.*")
+           ->from("opticas")
+           ->join("delegacion", "opticas.id_delegacion=delegacion.id_delegacion")
+           ->where('opticas.activo', 1)
+           ->order_by('descripcion', 'ASC'); 
  
     $result = $this->db->get();
 

@@ -556,6 +556,7 @@ $(function() {
               $("#id_cliente").val(ui.item.id);
               $("#beneficiario").val(ui.item.value);
               $("#nro_cliente").val(ui.item.nro_cliente);
+              $("#titular").val(ui.item.titular_cliente);
               historialTitular(ui.item.id);
             }
             else

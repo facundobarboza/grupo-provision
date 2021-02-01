@@ -181,6 +181,24 @@ class Delegacion extends MY_Controller {
 
   // --------------------------------------------------------------------
 
+  public function updateDelegation() {
+    // cargamos el modelo
+    $this->load->model('delegacion_model');
+    // obtenemos las empresas
+    $this->delegacion_model->updateDelegation($id_delegacion);
+  }
+
+  public function update() {
+    // cargamos el modelo
+    $this->load->model('delegacion_model');
+    // obtenemos las empresas
+    //
+    //$this->delegacion_model->updateHomins();
+    $this->delegacion_model->updateUtedyc();
+  }
+
+
+
 }
 
 /* Fin del archivo delegacion.php */

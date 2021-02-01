@@ -318,29 +318,65 @@ class archivo_model extends MY_Model {
    * @access public
    * @return array
    */
-  public function obtenerFichas($fecha_desde,$fecha_hasta,$id_estado) {
+  public function obtenerFichas($fecha_desde,$fecha_hasta,$id_estado, $id_sindicato) {
    
+
     if($id_estado>0)
     {
       $where = "(estado=".$id_estado." OR id_estado_cerca=".$id_estado.")"; 
-      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+
+      if($id_sindicato>0 )
+      {
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
              ->from($this->_table)
-             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica')
-             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion')
-             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato')
+             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
+             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
-             ->where($where); 
+             ->where($where)
+             ->where($this->_table.'.id_sindicato',$id_sindicato)
+             ->order_by('fecha', 'DESC');
+      }
+      else
+      {
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+             ->from($this->_table)
+             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
+             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->where($this->_table.".activo ",1)
+             ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+             ->where($where)
+             ->order_by('fecha', 'DESC');
+           }
     }
     else
     {
-      $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
-             ->from($this->_table)
-             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica')
-             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion')
-             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato')
-            ->where($this->_table.".activo ",1)
-            ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'");    
+      if($id_sindicato>0 )
+      {
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+               ->from($this->_table)
+               ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
+               ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+               ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->where($this->_table.".activo ",1)
+              ->where($this->_table.'.id_sindicato',$id_sindicato)
+              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+              ->order_by('fecha', 'DESC');    
+        }
+      else
+      {
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+               ->from($this->_table)
+               ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
+               ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+               ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->where($this->_table.".activo ",1)
+              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+              ->order_by('fecha', 'DESC');    
+        
+      }
     }     
     
     
@@ -536,7 +572,7 @@ class archivo_model extends MY_Model {
 
     $this->db->select("id_ficha,descripcion as sindicato,estado,codigo_armazon,color_armazon,fecha,es_lejos", FALSE)
              ->from("fichas")
-             ->join('sindicatos','fichas.id_sindicato=sindicatos.id_sindicato')
+             ->join('sindicatos','fichas.id_sindicato=sindicatos.id_sindicato','left')
              ->where('id_cliente',$id_cliente)
              ->where('fichas.activo',1)
              ->order_by('fecha','DESC')

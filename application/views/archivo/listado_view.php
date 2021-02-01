@@ -35,6 +35,19 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
                                                         border: 1px solid #ccc;" id='fecha_hasta' autocomplete="off" maxlength="50" value="<? echo $fecha_hasta?>">
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
+          
+          <div class="col-md-2">
+            <label for="sindicato">Sindicato</label>
+                <select class="form-control" name="select_sindicato" id="id_sindicato">
+                  <option value="0">Seleccionar --</option>
+                  <? foreach( $sindicatos as $sindicato )
+                  {
+                    if($id_sindicato==$sindicato['id_sindicato'])
+                      echo "<option value='".$sindicato['id_sindicato']."' selected >".$sindicato['descripcion']."</option>";
+                    else echo "<option value='".$sindicato['id_sindicato']."'>".$sindicato['descripcion']."</option>";
+                  }?>
+                </select>
+          </div>
           <div class="col-md-2">
               <label for="apellido_cliente">Estado</label>
                 <select class="form-control" name="estado" id="estado">
@@ -45,7 +58,6 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
                   </select>
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
-          
           <div class="col-md-2"><br>
             <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">
           </div>
@@ -129,10 +141,19 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
             <?php echo $ficha['optica']; ?>
           </td>
           <td>
-            <?php echo $ficha['codigo_armazon']; ?>
+            <?php 
+            if($ficha['es_lejos']=="1")
+                echo $ficha['codigo_armazon'];
+            else 
+              echo $ficha['codigo_armazon_cerca'];?>
           </td>
           <td>
-            <?php echo$ficha['color_armazon']; ?>
+            <?php 
+            if($ficha['es_lejos']=="1")
+              echo$ficha['color_armazon'];
+            else
+              echo$ficha['color_armazon_cerca'];
+               ?>
           </td>
           <td>
             <?php

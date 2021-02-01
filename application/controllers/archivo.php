@@ -52,17 +52,21 @@ class archivo extends MY_Controller {
    */
   public function listado($elimino=0) {
     
+    $this->load->model('clientes_model');
+
     if($this->input->post('fecha_desde'))
     {
       $fecha_desde     = Util::fecha_db($this->input->post('fecha_desde'));
       $fecha_hasta     = Util::fecha_db($this->input->post('fecha_hasta'));
       $id_estado       = $this->input->post('estado');
+      $id_sindicato    = $this->input->post('select_sindicato');
     }
     else
     {
       $fecha_desde     = date('Y-m-d');
       $fecha_hasta     = date('Y-m-d');
       $id_estado       = 0;
+      $id_sindicato    = 0;
 
     }
 
@@ -70,7 +74,7 @@ class archivo extends MY_Controller {
     $this->load->model(array('archivo_model'));
 
     // obtenemos las fichas y el stock minimo
-    $fichas   = $this->archivo_model->obtenerFichas($fecha_desde,$fecha_hasta,$id_estado);
+    $fichas   = $this->archivo_model->obtenerFichas($fecha_desde,$fecha_hasta,$id_estado, $id_sindicato);
     $s_minimo = $this->archivo_model->stockMinimo();    
   
     foreach( $fichas->result() as $row )
@@ -82,12 +86,15 @@ class archivo extends MY_Controller {
                                   'optica'         => $row->optica,
                                   'codigo_armazon' => $row->codigo_armazon,
                                   'color_armazon'  => $row->color_armazon,
-                                  'estado'         => $row->estado,
-                                  'fecha'          => $row->fecha,
+                                  'codigo_armazon_cerca' => $row->codigo_armazon_cerca,
+                                  'color_armazon_cerca'  => $row->color_armazon_cerca,
+                                  'estado'          => $row->estado,
+                                  'fecha'           => $row->fecha,
                                   'es_casa_central' => $row->es_casa_central,
                                   'nro_pedido'      => $row->nro_pedido,
                                   'delegacion'      => $row->delegacion,
                                   'sindicato'       => $row->sindicato,
+                                  'es_lejos'        => $row->es_lejos,
                                   );  
     }
 
@@ -102,7 +109,15 @@ class archivo extends MY_Controller {
     }
 
     // $this->util->dump_exit($fichas_validos);
-    
+    $sindicatos = $this->clientes_model->obtenerSindicatos();
+
+    foreach( $sindicatos->result() as $row )
+    {     
+      $sindicatos_validos[] = array('id_sindicato' => (int)$row->id_sindicato,
+                                    'descripcion'   => utf8_encode($row->descripcion)
+                                    );  
+    }
+
     $contenido = "archivo/listado_view";
     // datos pasados a la vista
     $data = array('stock_minimo'    => $stock_minimo,
@@ -111,6 +126,8 @@ class archivo extends MY_Controller {
                   'fecha_desde'     => Util::fecha($fecha_desde),
                   'fecha_hasta'     => Util::fecha($fecha_hasta),
                   'estado'          => $id_estado,
+                  'sindicatos'      => $sindicatos_validos,
+                  'id_sindicato'    => $id_sindicato,
                   'contenido_view'  => $contenido,
                   'css'             => array(base_url('assets/css/dataTables.bootstrap.css'),
                                                       '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
@@ -314,18 +331,17 @@ class archivo extends MY_Controller {
     }
 
 
-    $opticas = $this->clientes_model->obtenerOpticas();
-
-    foreach( $opticas->result() as $row )
-    {     
-      $opticas_validos[] = array('id_optica' => (int)$row->id_optica,
-                                    'descripcion'   => utf8_encode($row->descripcion)
-                                    );  
-    }
-
     // si es nueva le pasamos estos datos a la vista
     if($id_ficha==0)
     {
+        $opticas = $this->clientes_model->obtenerOpticasDelegacion();
+
+        foreach( $opticas->result() as $row )
+        {     
+          $opticas_validos[] = array('id_optica' => (int)$row->id_optica,
+                                        'descripcion'   => utf8_encode($row->descripcion)
+                                        );  
+        }
       // $this->util->dump_exit($empresas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
@@ -343,6 +359,14 @@ class archivo extends MY_Controller {
     }
     else
     {
+        $opticas = $this->clientes_model->obtenerOpticas();
+
+        foreach( $opticas->result() as $row )
+        {     
+          $opticas_validos[] = array('id_optica' => (int)$row->id_optica,
+                                        'descripcion'   => utf8_encode($row->descripcion)
+                                        );  
+        }
       $fichas = $this->archivo_model->obtenerFicha($id_ficha);
       $logs   = $this->log_model->get_log("log_fichas","id_ficha",$id_ficha);  
       // $this->util->dump_exit($fichas->row());
@@ -407,7 +431,8 @@ class archivo extends MY_Controller {
           $salida[] = array(  'id'    => $row->id_cliente,
                               'label' => utf8_encode($row->beneficiario_cliente." - Nro ".$row->nro_cliente),
                               'value' => utf8_encode($row->beneficiario_cliente),
-                              'nro_cliente' => $row->nro_cliente);
+                              'nro_cliente' => $row->nro_cliente,
+                                'titular_cliente' => $row->titular_cliente);
         }        
       
       header('Content-Type: application/json');
