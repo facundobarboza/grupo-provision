@@ -1,6 +1,7 @@
 <?php
 
 echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 'form'));
+
 ?>
 <div class="row">
   <div class="col-md-12">
@@ -108,7 +109,11 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
             <?php echo $ficha['nro_cliente']; ?>
           </td>
           <td>
-            <?php echo $ficha['nro_pedido']; ?>
+            <?php 
+            if($ficha['es_lejos']=="1")
+              echo $ficha['nro_pedido'];
+            else
+            echo $ficha['nro_pedido_cerca']; ?>
           </td>
           <td>
             <?php echo $ficha['sindicato']; ?>

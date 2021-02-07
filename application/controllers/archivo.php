@@ -11,6 +11,7 @@ class archivo extends MY_Controller {
    * constructor
    */
   public function __construct() {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     parent::__construct();
     $this->load->helper('mysql_to_excel_helper');
   }
@@ -63,7 +64,7 @@ class archivo extends MY_Controller {
     }
     else
     {
-      $fecha_desde     = date('Y-m-d');
+      $fecha_desde     = date('Y-m-d',strtotime(date('Y-m-d')."- 3 days"));
       $fecha_hasta     = date('Y-m-d');
       $id_estado       = 0;
       $id_sindicato    = 0;
@@ -80,21 +81,22 @@ class archivo extends MY_Controller {
     foreach( $fichas->result() as $row )
     {     
       $fichas_validos[] = array(  
-                                  'id_ficha'       => $row->id_ficha,
-                                  'beneficiario'   => $row->beneficiario,
-                                  'nro_cliente'    => $row->nro_cliente,
-                                  'optica'         => $row->optica,
-                                  'codigo_armazon' => $row->codigo_armazon,
-                                  'color_armazon'  => $row->color_armazon,
+                                  'id_ficha'             => $row->id_ficha,
+                                  'beneficiario'         => $row->beneficiario,
+                                  'nro_cliente'          => $row->nro_cliente,
+                                  'optica'               => $row->optica,
+                                  'codigo_armazon'       => $row->codigo_armazon,
+                                  'color_armazon'        => $row->color_armazon,
                                   'codigo_armazon_cerca' => $row->codigo_armazon_cerca,
                                   'color_armazon_cerca'  => $row->color_armazon_cerca,
-                                  'estado'          => $row->estado,
-                                  'fecha'           => $row->fecha,
-                                  'es_casa_central' => $row->es_casa_central,
-                                  'nro_pedido'      => $row->nro_pedido,
-                                  'delegacion'      => $row->delegacion,
-                                  'sindicato'       => $row->sindicato,
-                                  'es_lejos'        => $row->es_lejos,
+                                  'estado'               => $row->estado,
+                                  'fecha'                => $row->fecha,
+                                  'es_casa_central'      => $row->es_casa_central,
+                                  'nro_pedido'           => $row->nro_pedido,
+                                  'delegacion'           => $row->delegacion,
+                                  'sindicato'            => $row->sindicato,
+                                  'es_lejos'             => $row->es_lejos,
+                                  'nro_pedido_cerca'     => $row->nro_pedido_cerca,
                                   );  
     }
 
@@ -330,6 +332,14 @@ class archivo extends MY_Controller {
                                     );  
     }
 
+    $tipo_lentes = $this->archivo_model->obtenerTipoLentes();
+
+    foreach( $tipo_lentes->result() as $row )
+    {     
+      $tipo_lentes_validos[] = array('id_tipo_lente' => (int)$row->id,
+                                    'descripcion'   => utf8_encode($row->descripcion)
+                                    );  
+    }
 
     // si es nueva le pasamos estos datos a la vista
     if($id_ficha==0)
@@ -347,6 +357,7 @@ class archivo extends MY_Controller {
                     'sindicatos'      => $sindicatos_validos,
                     'delegaciones'    => $delegaciones_validos,
                     'opticas'         => $opticas_validos,
+                    'result_tipo_lentes'     => $tipo_lentes_validos,
                     'contenido_view'  => 'archivo/archivo_view',
                     'css'             => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'              => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
@@ -372,13 +383,14 @@ class archivo extends MY_Controller {
       // $this->util->dump_exit($fichas->row());
       $data = array('es_casa_central' => $es_casa_central,
                     'sindicatos'      => $sindicatos_validos,
-                    'delegaciones'      => $delegaciones_validos,
-                    'opticas'      => $opticas_validos, 
-                    'fichas'       => $fichas,
-                    'logs'         => $logs,
-                    'contenido_view' => 'archivo/archivo_view',
-                    'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-                    'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
+                    'delegaciones'    => $delegaciones_validos,
+                    'opticas'         => $opticas_validos, 
+                    'fichas'          => $fichas,
+                    'result_tipo_lentes'     => $tipo_lentes_validos,
+                    'logs'            => $logs,
+                    'contenido_view'  => 'archivo/archivo_view',
+                    'css'             => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
+                    'js'              => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                               base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                               base_url('assets/js/datatable/dataTables.bootstrap.js'),
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",

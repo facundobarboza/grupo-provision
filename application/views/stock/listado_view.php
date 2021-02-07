@@ -23,10 +23,10 @@
                     <th>N° código int.</th>
                     <th>Tipo armazon</th>
                     <th>Material</th>
+                    <th>Letra Color</th>
+                    <th>Código Color</th>
                     <th>Ubicación</th>
                     <th>Cantidad</th>
-                    <th>Costo</th>
-                    <th>Precio venta</th>
                     <th>Modificar / Eliminar</th>
                 </tr>
             </thead>
@@ -50,16 +50,16 @@
                     <?php echo$stock['material']; ?>
                   </td>
                   <td>
+                    <?php echo$stock['letra_color_interno']; ?>
+                  </td>
+                   <td>
+                    <?php echo$stock['codigo_color']; ?>
+                  </td>
+                  <td>
                     <?php echo $stock['ubicacion']; ?>
                   </td>
                   <td>
                     <?php echo $stock['cantidad']; ?>
-                  </td>
-                  <td>
-                    <?php echo $stock['costo']; ?>
-                  </td>
-                  <td>
-                    <?php echo $stock['precio_venta']; ?>
                   </td>
                   <td width="60px">
                     <div class="info" data-id="<?php echo $stock['id_stock'] ?>"></div>

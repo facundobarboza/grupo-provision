@@ -50,7 +50,7 @@ if($fichas)
   $grad_oi_esf               = $fichas->row()->grad_oi_esf;
   $grad_oi_cil               = $fichas->row()->grad_oi_cil;
   $eje_oi                    = $fichas->row()->eje_oi;
-  $tipo_lente                = $fichas->row()->tipo_lente;
+  $id_tipo_lente             = $fichas->row()->tipo_lente;
   $fecha_envio               = $this->util->fecha($fichas->row()->fecha_envio);
 
   $codigo_armazon_cerca      = $fichas->row()->codigo_armazon_cerca;
@@ -65,7 +65,7 @@ if($fichas)
   $grad_oi_esf_cerca         = $fichas->row()->grad_oi_esf_cerca;
   $grad_oi_cil_cerca         = $fichas->row()->grad_oi_cil_cerca;
   $eje_oi_cerca              = $fichas->row()->eje_oi_cerca;
-  $tipo_lente_cerca          = $fichas->row()->tipo_lente_cerca;
+  $id_tipo_lente_cerca       = $fichas->row()->tipo_lente_cerca;
   $fecha_envio_cerca         = $this->util->fecha($fichas->row()->fecha_envio_cerca);
 }
 else
@@ -147,7 +147,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
 ?>
 <div class="row">
   <div class="col-md-3">
-    <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
+    <input type="hidden" name="id_ficha" id='id_ficha' value="<? echo $id_ficha?>">
     <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
     <div class="form-group has-feedback">
       <label for="sindicato">Sindicato</label>
@@ -435,15 +435,12 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
             <div class="form-group has-feedback">
               <label for="tipo_lente">Tipo lente</label>
               <select class="form-control" name="tipo_lente" id="tipo_lente">
-                <option value="1" <?php if ($tipo_lente == 1) {
-                                    echo "selected";
-                                  } ?>>Stock</option>
-                <option value="2" <?php if ($tipo_lente == 2) {
-                                    echo "selected";
-                                  } ?>>Laboratorio</option>
-                <option value="3" <?php if ($tipo_lente == 3) {
-                                    echo "selected";
-                                  } ?>>1/2 Stock - 1/2 Laboratorio</option>
+                <? foreach( $result_tipo_lentes as $tipo_lentes )
+                {
+                  if($id_tipo_lente==$tipo_lentes['id_tipo_lente'])
+                    echo "<option value='".$tipo_lentes['id_tipo_lente']."' selected >".$tipo_lentes['descripcion']."</option>";
+                  else echo "<option value='".$tipo_lentes['id_tipo_lente']."'>".$tipo_lentes['descripcion']."</option>";
+                }?>
               </select>
               <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
               <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
@@ -601,15 +598,14 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
             <div class="form-group has-feedback">
               <label for="tipo_lente_cerca">Tipo lente</label>
               <select class="form-control" name="tipo_lente_cerca" id="tipo_lente_cerca">
-                <option value="1" <?php if ($tipo_lente_cerca == 1) {
-                                    echo "selected";
-                                  } ?>>Stock</option>
-                <option value="2" <?php if ($tipo_lente_cerca == 2) {
-                                    echo "selected";
-                                  } ?>>Laboratorio</option>
-                <option value="3" <?php if ($tipo_lente_cerca == 3) {
-                                    echo "selected";
-                                  } ?>>1/2 Stock - 1/2 Laboratorio</option>
+                
+                <? foreach( $result_tipo_lentes as $tipo_lentes )
+                {
+                  if($id_tipo_lente_cerca == $tipo_lentes['id_tipo_lente'])
+                    echo "<option value='".$tipo_lentes['id_tipo_lente']."' selected >".$tipo_lentes['descripcion']."</option>";
+                  
+                  else echo "<option value='".$tipo_lentes['id_tipo_lente']."'>".$tipo_lentes['descripcion']."</option>";
+                }?>
               </select>
               <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
               <p class="text-center help-block hide">Debe ingresar un tipo de lente.</p>
@@ -728,7 +724,7 @@ if ($es_casa_central == 0) {
   <div class="col-md-12">
     <div class="form-group has-feedback">
       <label for="comentario">Comentario</label>
-      <textarea rows="2" class="form-control" name="comentario" id="comentario" autocomplete="off" maxlength="50"><? echo $comentario?></textarea>
+      <textarea rows="2" class="form-control" name="comentario" id="comentario" autocomplete="off" maxlength="250"><? echo $comentario?></textarea>
       <!-- <input type="text" class="form-control" name="comentario" id="comentario" autocomplete="off"  maxlength="50" value="<? echo $comentario?>"> -->
       <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
       <p class="text-center help-block hide">Debe ingresar un comentario.</p>

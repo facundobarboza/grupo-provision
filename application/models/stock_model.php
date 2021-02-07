@@ -167,7 +167,7 @@ class Stock_model extends MY_Model {
    * @return array
    */
   public function obtenerAlertasUsuario() {   
-    
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     $fecha = date("Y-m-d");
     $id_usuario = $this->session->userdata('id_usuario');
 

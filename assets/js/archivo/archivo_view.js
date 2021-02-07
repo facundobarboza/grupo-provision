@@ -1,34 +1,40 @@
 var
-    $formulario               = $("#formulario-fichas"),
-    $id_ficha                 = $("#id_ficha"),
-    $id_stock                 = $("#id_stock"),
-    $id_cliente               = $("#id_cliente"),
-    $sindicato                = $("#id_sindicato_cliente"),    
-    $titular                  = $("#titular"),
-    $beneficiario             = $("#filtro_cliente"),    
-    $delegacion               = $("#delegacion"),
-    $nro_cliente              = $("#nro_cliente"),
-    $optica                   = $("#optica"),
-    $fecha                    = $("#fecha"),
-    $codigo_armazon           = $("#codigo_armazon"),
-    $color_armazon            = $("#color_armazon"),
-    $estado                   = $("#estado"),
-    $voucher                  = $("#voucher"),
-    $nro_pedido               = $("#nro_pedido"),
-    $grad_od_esf              = $("#grad_od_esf"),
-    $grad_od_cil              = $("#grad_od_cil"),
-    $eje_od                   = $("#eje_od"),
-    $grad_oi_esf              = $("#grad_oi_esf"),
-    $grad_oi_cil              = $("#grad_oi_cil"),
-    $eje_oi                   = $("#eje_oi"),
-    $comentario               = $("#comentario"),
-    $es_lejos                 = $("#es_lejos"),
-    $adicional                = $("#adicional"),
-    $descripcion_adicional    = $("#descripcion_adicional"),
-    $telefono                 = $("#telefono"),
-    $costo_adicional          = $("#costo_adicional"),
-    $sena_adicional           = $("#sena_adicional"),
-    $saldo_adicional          = $("#saldo_adicional");
+    $formulario            = $("#formulario-fichas"),
+    $id_ficha              = $("#id_ficha"),
+    $id_stock              = $("#id_stock"),
+    $id_cliente            = $("#id_cliente"),
+    $sindicato             = $("#id_sindicato_cliente"),    
+    $titular               = $("#titular"),
+    $beneficiario          = $("#filtro_cliente"),    
+    $delegacion            = $("#delegacion"),
+    $nro_cliente           = $("#nro_cliente"),
+    $optica                = $("#optica"),
+    $fecha                 = $("#fecha"),
+    $codigo_armazon        = $("#codigo_armazon"),
+    $color_armazon         = $("#color_armazon"),
+    $estado                = $("#estado"),
+    $voucher               = $("#voucher"),
+    $nro_pedido            = $("#nro_pedido"),
+    $grad_od_esf           = $("#grad_od_esf"),
+    $grad_od_cil           = $("#grad_od_cil"),
+    $eje_od                = $("#eje_od"),
+    $grad_oi_esf           = $("#grad_oi_esf"),
+    $grad_oi_cil           = $("#grad_oi_cil"),
+    $eje_oi                = $("#eje_oi"),
+    $comentario            = $("#comentario"),
+    $es_lejos              = $("#es_lejos"),
+    $adicional             = $("#adicional"),
+    $descripcion_adicional = $("#descripcion_adicional"),
+    $telefono              = $("#telefono"),
+    $costo_adicional       = $("#costo_adicional"),
+    $sena_adicional        = $("#sena_adicional"),
+    $saldo_adicional       = $("#saldo_adicional"),
+    $codigo_armazon_cerca  = $("#codigo_armazon_cerca"),
+    $color_armazon_cerca   = $("#color_armazon_cerca"),
+    $estado_cerca          = $("#id_estado_cerca"),
+    $voucher_cerca         = $("#voucher_cerca"),
+    $nro_pedido_cerca      = $("#nro_pedido_cerca"),
+    $id_stock_cerca        = $("#id_stock_cerca");
 
 
 // DOM ready!
@@ -145,6 +151,17 @@ $(function() {
         saldo_adicional       = $saldo_adicional.val(),
         id_stock              = $id_stock.val();
 
+    
+    if($("#select_tipo").val()==2)//es cerca
+    {
+      codigo_armazon  = $codigo_armazon_cerca.val();
+      color_armazon   = $color_armazon_cerca.val();
+      estado          = $estado_cerca.val();
+      voucher         = $voucher_cerca.val();
+      nro_pedido      = $nro_pedido_cerca.val();
+      id_stock        = $id_stock_cerca.val();
+    }
+
     if (sindicato == 0 )
     {
       error = true;
@@ -232,243 +249,114 @@ $(function() {
     if (codigo_armazon == "" || id_stock ==0 )
     {
       error = true;
-      $codigo_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-      $codigo_armazon.parent().find(".text-center").eq(0).removeClass("hide");
+      if($("#select_tipo").val()==2)//es cerca
+      {        
+        $codigo_armazon_cerca.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $codigo_armazon_cerca.parent().find(".text-center").eq(0).removeClass("hide");
+      }
+      else
+      {
+        $codigo_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $codigo_armazon.parent().find(".text-center").eq(0).removeClass("hide"); 
+      }
     }
     else
     {
       $codigo_armazon.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
       $codigo_armazon.parent().find(".text-center").eq(0).addClass("hide"); 
+      $codigo_armazon_cerca.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
+      $codigo_armazon_cerca.parent().find(".text-center").eq(0).addClass("hide"); 
     }
     if (color_armazon == "" )
     {
       error = true;
-      $color_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-      $color_armazon.parent().find(".text-center").eq(0).removeClass("hide");
+      if($("#select_tipo").val()==2)//es cerca
+      {
+        $color_armazon_cerca.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $color_armazon_cerca.parent().find(".text-center").eq(0).removeClass("hide");
+      }
+      else
+      {
+        $color_armazon.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $color_armazon.parent().find(".text-center").eq(0).removeClass("hide"); 
+      }
     }
     else
     {
       $color_armazon.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
       $color_armazon.parent().find(".text-center").eq(0).addClass("hide"); 
+      $color_armazon_cerca.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
+      $color_armazon_cerca.parent().find(".text-center").eq(0).addClass("hide"); 
     }
     if (estado == "" )
     {
       error = true;
-      $estado.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-      $estado.parent().find(".text-center").eq(0).removeClass("hide");
+      if($("#select_tipo").val()==2)//es cerca
+      {
+        $estado_cerca.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $estado_cerca.parent().find(".text-center").eq(0).removeClass("hide");
+      }
+      else
+      {
+        $estado.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $estado.parent().find(".text-center").eq(0).removeClass("hide"); 
+      }
     }
     else
     {
       $estado.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
       $estado.parent().find(".text-center").eq(0).addClass("hide"); 
+      $estado_cerca.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
+      $estado_cerca.parent().find(".text-center").eq(0).addClass("hide"); 
     }
     if (voucher == "" )
     {
       error = true;
-      $voucher.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-      $voucher.parent().find(".text-center").eq(0).removeClass("hide");
+      if($("#select_tipo").val()==2)//es cerca
+      {
+        $voucher_cerca.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $voucher_cerca.parent().find(".text-center").eq(0).removeClass("hide"); 
+      }
+      else
+      {
+        $voucher.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $voucher.parent().find(".text-center").eq(0).removeClass("hide"); 
+      }
     }
     else
     {
       $voucher.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
       $voucher.parent().find(".text-center").eq(0).addClass("hide"); 
+      $voucher_cerca.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
+      $voucher_cerca.parent().find(".text-center").eq(0).addClass("hide"); 
     }
     if (nro_pedido == "" )
     {
       error = true;
-      $nro_pedido.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-      $nro_pedido.parent().find(".text-center").eq(0).removeClass("hide");
+      if($("#select_tipo").val()==2)//es cerca
+      {
+        $nro_pedido_cerca.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $nro_pedido_cerca.parent().find(".text-center").eq(0).removeClass("hide");
+      }
+      else
+      {
+        $nro_pedido.parent().addClass("has-error").find(".form-control-feedback").eq(0);
+        $nro_pedido.parent().find(".text-center").eq(0).removeClass("hide");
+      } 
     }
     else
     {
       $nro_pedido.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-      $nro_pedido.parent().find(".text-center").eq(0).addClass("hide"); 
+      $nro_pedido.parent().find(".text-center").eq(0).addClass("hide");
+      $nro_pedido_cerca.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
+      $nro_pedido_cerca.parent().find(".text-center").eq(0).addClass("hide");
     }
 
-    // if (grad_od_esf == "" )
-    // {
-    //   error = true;
-    //   $grad_od_esf.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_od_esf.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $grad_od_esf.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_od_esf.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (grad_od_cil == "" )
-    // {
-    //   error = true;
-    //   $grad_od_cil.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_od_cil.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $grad_od_cil.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_od_cil.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (eje_od == "" )
-    // {
-    //   error = true;
-    //   $eje_od.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $eje_od.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $eje_od.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $eje_od.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (grad_oi_esf == "" )
-    // {
-    //   error = true;
-    //   $grad_oi_esf.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_oi_esf.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $grad_oi_esf.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_oi_esf.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (grad_oi_cil == "" )
-    // {
-    //   error = true;
-    //   $grad_oi_cil.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_oi_cil.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $grad_oi_cil.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $grad_oi_cil.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (eje_oi  == "" )
-    // {
-    //   error = true;
-    //   $eje_oi.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $eje_oi.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $eje_oi.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $eje_oi.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (comentario == "" )
-    // {
-    //   error = true;
-    //   $comentario.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $comentario.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $comentario.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $comentario.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (es_lejos == "" )
-    // {
-    //   error = true;
-    //   $es_lejos.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $es_lejos.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $es_lejos.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $es_lejos.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (adicional == "" )
-    // {
-    //   error = true;
-    //   $adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $adicional.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $adicional.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $adicional.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (descripcion_adicional == "" )
-    // {
-    //   error = true;
-    //   $descripcion_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $descripcion_adicional.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $descripcion_adicional.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $descripcion_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (telefono == "" )
-    // {
-    //   error = true;
-    //   $telefono.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $telefono.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $telefono.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $telefono.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (costo_adicional == "" )
-    // {
-    //   error = true;
-    //   $costo_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $costo_adicional.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $costo_adicional.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $costo_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (sena_adicional == "" )
-    // {
-    //   error = true;
-    //   $sena_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $sena_adicional.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $sena_adicional.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $sena_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    // if (saldo_adicional== "" )
-    // {
-    //   error = true;
-    //   $saldo_adicional.parent().addClass("has-error").find(".form-control-feedback").eq(0);
-    //   $saldo_adicional.parent().find(".text-center").eq(0).removeClass("hide");
-    // }
-    // else
-    // {
-    //   $saldo_adicional.parent().removeClass("has-error").find(".form-control-feedback").eq(0);
-    //   $saldo_adicional.parent().find(".text-center").eq(0).addClass("hide"); 
-    // }
-    
-
     if(! error )
-    {
-      // console.log($archivo.attr('filename'));
-      // //Verificamos que el archivo no exista
-      //  jQuery.ajax({
-      //       url: appGeneral.obtenerSiteUrl() + "archivo/existeArchivo/"+select_empresa+"/"+select_departamento+"/"+select_sub_departamento+"/"+archivo,
-      //       type: 'POST',
-      //       data: {
-      //           'select_empresa': select_empresa
-      //       },
-      //       async: true,
-      //       dataType: 'html',
-      //       contentType: 'application/x-www-form-urlencoded',
-      //       timeout: 10000,
-      //       success: function (data)
-      //       {
-
-      //          e.preventDefault();
-      //         // $('#id-guardar').addClass('hide');
-      //         // $('#id-cargando').removeClass('hide');
-      //         // $('#text-cargando').removeClass('hide');
-      //         // window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/1";
-      //       }
-      //   }); 
-         // e.preventDefault();     
-         $('#id-guardar').addClass('hide');
-          $('#id-cargando').removeClass('hide');
-          $('#text-cargando').removeClass('hide');
+    {       
+      $('#id-guardar').addClass('hide');
+      $('#id-cargando').removeClass('hide');
+      $('#text-cargando').removeClass('hide');
     }
     else
       e.preventDefault();
@@ -514,6 +402,16 @@ $(function() {
         {
           $(".div-cerca").hide();
           $(".div-lejos").show();
+
+          if($("#id_ficha").val()==0)
+          {
+            $codigo_armazon_cerca.val('');
+            $color_armazon_cerca.val('');
+            $voucher_cerca.val('');
+            $nro_pedido_cerca.val('');
+            $id_stock_cerca.val('0');
+          }         
+
         }
         else
         {
@@ -521,6 +419,14 @@ $(function() {
           {
             $(".div-cerca").show();
             $(".div-lejos").hide();
+            if($("#id_ficha").val()==0)
+            {
+              $codigo_armazon.val('');
+              $color_armazon.val('');
+              $voucher.val('');
+              $nro_pedido.val('');
+              $id_stock.val('0');
+            }
           }  
           else
           {

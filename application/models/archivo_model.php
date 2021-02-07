@@ -169,26 +169,31 @@ class archivo_model extends MY_Model {
       }
 
      
-
+      if($data['id_stock']>0)
+      {
+        $id_stock = $data['id_stock'];
+      }
+      else
+      {
+        $id_stock = $data['id_stock_cerca'];
+      }
       //descontamos el armazon utlizado del stock
       $sql = "UPDATE stock
               SET  cantidad  = cantidad-1 
-              WHERE id_stock = ".$data['id_stock'].";";
+              WHERE id_stock = ".$id_stock.";";
       // echo $sql; die();       
       $this->db->query($sql);
-
-      if($data['id_stock_cerca']>0)
-      {
-        //descontamos el armazon cerca utlizado del stock 
-        $sql = "UPDATE stock
-                SET  cantidad  = cantidad-1 
-                WHERE id_stock = ".$data['id_stock_cerca'].";";
-        // echo $sql; die();       
-        $this->db->query($sql);
-      }
     }
     else
     {
+
+        $this->db->select("id_stock,id_stock_cerca", FALSE)
+               ->from("fichas")
+               ->where('id_ficha', $data['id_ficha']);
+        $result_stock = $this->db->get();
+
+        $id_stock_old = $result_stock->row()->id_stock==0 ? $result_stock->row()->id_stock_cerca: $result_stock->row()->id_stock;
+
       //si no es casa central
       if($data['es_casa_central']==0)
       {
@@ -262,11 +267,42 @@ class archivo_model extends MY_Model {
                 codigo_armazon_cerca  = '".$data['codigo_armazon_cerca']."',
                 color_armazon_cerca   = '".$data['color_armazon_cerca']."',
                 id_stock_cerca        = '".$data['id_stock_cerca']."',
-                nro_cliente           = '".$data['nro_cliente']."'
+                nro_cliente           = '".$data['nro_cliente']."',
+                id_estado_cerca       = '".$data['id_estado_cerca']."',
+                voucher_cerca         = '".$data['voucher_cerca']."',
+                nro_pedido_cerca      = '".$data['nro_pedido_cerca']."',
+                fecha_envio           = '".$fecha_envio."'
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
-              // echo $sql; die();
+              // echo $sql; echo "<br>s".$id_stock_old;die();
       $this->db->query($sql);
+
+      if($data['id_stock']>0)
+      {
+        $id_stock = $data['id_stock'];
+      }
+      else
+      {
+        $id_stock = $data['id_stock_cerca'];
+      }
+
+      if($id_stock!=$id_stock_old)
+      {
+        //descontamos el armazon utlizado del stock
+        $sql = "UPDATE stock
+                SET  cantidad  = cantidad+1 
+                WHERE id_stock = ".$id_stock_old.";";
+          
+        $this->db->query($sql);
+      }
+
+      //descontamos el armazon utlizado del stock
+        $sql = "UPDATE stock
+                SET  cantidad  = cantidad-1 
+                WHERE id_stock = ".$id_stock.";";
+        
+        $this->db->query($sql);
+      // echo $sql; die();       
     }
   }
 
@@ -278,7 +314,7 @@ class archivo_model extends MY_Model {
    * @return array
    */
   public function obtenerArchivosDelDia() {
-   
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     $fecha = date("Y-m-d");
     //si no es super admin filtramos por empresa
     if($this->session->userdata('id_rol')!=1)
@@ -413,23 +449,10 @@ class archivo_model extends MY_Model {
    * @access public
    * @return array
    */
-  public function obtenerDepartamentos($id_departamento=0) {   
-
-    //si es nueva la empresa
-    if($id_departamento==0)
-    {
-      $this->db->select("id_departamento, descripcion, nombre_empresa,departamento.id_empresa", FALSE)
-             ->from($this->_table)
-             ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-             ->where('departamento.activo', 1);
-    }
-    else
-    {
-      $this->db->select("id_departamento, descripcion, nombre_empresa,departamento.id_empresa", FALSE)
-             ->from($this->_table)
-             ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-             ->where('id_departamento', $id_departamento); 
-    }
+  public function obtenerTipoLentes() {   
+    
+    $this->db->select("id, descripcion", FALSE)
+           ->from("tipo_lentes");
     $result = $this->db->get();
 
     // Util::dump_exit($result->row());
@@ -477,10 +500,10 @@ class archivo_model extends MY_Model {
    */
   public function eliminar($id_ficha=0) {
    //si existe modificamos
-  $sql = "UPDATE ".$this->_table."
-            SET activo  = 0
-            WHERE id_ficha = ".$id_ficha.";";
-// echo $sql; exit;
+    $sql = "UPDATE ".$this->_table."
+              SET activo  = 0
+              WHERE id_ficha = ".$id_ficha.";";
+  // echo $sql; exit;
     $this->db->query($sql);
 
     // Util::dump_exit($result->row());
