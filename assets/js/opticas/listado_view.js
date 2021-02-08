@@ -29,9 +29,10 @@ var
     $datatable_opticas = $("#datatable-opticas").DataTable({
       "iDisplayLength"  : 50,
       "searching": true,
-      "order": [[ 1, "desc" ], [ 0, "desc" ]],
+      "order": [[ 1, "asc" ]],
       "language": datatable_es,
       "aoColumns": [
+        { bSortable: true },
         { bSortable: true },
         { bSortable: true },
         { bSortable: false }

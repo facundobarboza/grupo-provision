@@ -33,13 +33,15 @@ class Optica_model extends MY_Model {
     if($data['id_optica']==0)
     {
       $this->db->set('descripcion',$data['descripcion'])
+              ->set('id_delegacion',$data['id_delegacion'])
               ->insert($this->_table);
     }
     else
     {
       //si existe modificamos
       $sql = "UPDATE ".$this->_table."
-            SET descripcion = '".utf8_encode($data['descripcion'])."'
+            SET descripcion = '".utf8_encode($data['descripcion'])."',
+            id_delegacion = ".utf8_encode($data['id_delegacion'])."
             WHERE id_optica = ".$data['id_optica'].";";
             // echo $sql;exit;
       $this->db->query($sql);
@@ -57,9 +59,10 @@ class Optica_model extends MY_Model {
    */
   public function obtenerOpticas() {   
     
-    $this->db->select($this->_table.".*", FALSE)
+    $this->db->select($this->_table.".id_optica, opticas.descripcion, delegacion.descripcion as delegacion", FALSE)
            ->from($this->_table)
-           ->where('activo', 1);     
+           ->join("delegacion",$this->_table.".id_delegacion=delegacion.id_delegacion","left")
+           ->where('opticas.activo', 1);     
     
     $result = $this->db->get();
 

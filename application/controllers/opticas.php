@@ -46,22 +46,24 @@ class Opticas extends MY_Controller {
   
     foreach( $optica->result() as $row )
     {
-      $optica_validas[] = array( 'id_optica'            => (int)$row->id_optica,
-                                'descripcion'      => $row->descripcion
+      $optica_validas[] = array( 
+                                'id_optica'   => (int)$row->id_optica,
+                                'descripcion' => utf8_decode($row->descripcion),
+                                'delegacion'  => utf8_decode($row->delegacion)
                                   );  
     }
     // $this->util->dump_exit($empresas_validas);
 
     // datos pasados a la vista
     $data = array(
-      'opticas'       => $optica_validas,
-      'contenido_view' => 'opticas/listado_view',
-      'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),
-      'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
-                                base_url('assets/js/datatable/jquery.dataTables.es.js'),
-                                base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                base_url('assets/js/opticas/listado_view.js'))
-    );
+                  'opticas'         => $optica_validas,
+                  'contenido_view'  => 'opticas/listado_view',
+                  'css'             => array(base_url('assets/css/dataTables.bootstrap.css')),
+                  'js'              => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
+                                            base_url('assets/js/datatable/jquery.dataTables.es.js'),
+                                            base_url('assets/js/datatable/dataTables.bootstrap.js'),
+                                            base_url('assets/js/opticas/listado_view.js'))
+                  );
 
     if($elimino==1)
     { 
@@ -88,8 +90,9 @@ class Opticas extends MY_Controller {
     
     // datos pasados al modelo
     $data = array(
-                  'id_optica'            => $this->input->post('id_optica'),
-                  'descripcion'      => $this->input->post('nombre_optica')
+                  'id_optica'      => $this->input->post('id_optica'),
+                  'descripcion'    => $this->input->post('nombre_optica'),
+                  'id_delegacion'  =>  $this->input->post('id_delegacion')
                 );
     // $this->util->dump_exit($data);
      //guardamos los datos de la empresa 
@@ -124,14 +127,24 @@ class Opticas extends MY_Controller {
   public function nuevoOptica($id_optica=0) {
     // cargamos el modelo
     $this->load->model('optica_model');
-
+    $this->load->model('clientes_model');
     $this->load->helper('form');
+
+    $delegaciones = $this->clientes_model->obtenerDelegaciones();
+
+    foreach( $delegaciones->result() as $row )
+    {     
+      $delegaciones_validos[] = array('id_delegacion' => (int)$row->id_delegacion,
+                                      'descripcion'   => utf8_encode($row->descripcion)
+                                      );  
+    }
 
     // si es nueva le pasamos estos datos a la vista
     if($id_optica==0)
     {
       // $this->util->dump_exit($usuarios_validas);
       $data = array(
+                    'delegaciones'    => $delegaciones_validos,
                     'contenido_view' => 'opticas/optica_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/opticas/optica_view.js'),
@@ -147,6 +160,8 @@ class Opticas extends MY_Controller {
       // $this->util->dump_exit($optica->row());
       $data = array('nombre_optica'  => $optica->row()->descripcion,
                     'id_optica'      => $optica->row()->id_optica,
+                    'id_delegacion'  => $optica->row()->id_delegacion,
+                    'delegaciones'   => $delegaciones_validos,
                     'contenido_view' => 'opticas/optica_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array(base_url('assets/js/opticas/optica_view.js'),

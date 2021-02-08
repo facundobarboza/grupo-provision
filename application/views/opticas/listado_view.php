@@ -22,6 +22,7 @@
         <tr>
           <th>ID</th>
           <th>Nombre Optica</th>
+          <th>Delegación</th>
           <th>Modificar / Eliminar</th>
         </tr>
       </thead>
@@ -34,6 +35,9 @@
           </td>
           <td>
             <?php echo $optica['descripcion']; ?>
+          </td>
+          <td>
+            <?php echo $optica['delegacion']; ?>
           </td>
           
           <td width="200px">

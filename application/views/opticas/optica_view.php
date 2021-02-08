@@ -42,7 +42,24 @@ echo form_open('opticas/guardarOptica', array('id' => 'formulario-optica', 'role
       </div>
     </div>
   </div><!-- /.row -->
-
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+        <div class="form-group has-feedback">
+          <label for="delegacion">Delegación</label>
+            <select class="form-control" name="id_delegacion" id="id_delegacion">
+              <option value="0">Seleccionar --</option>
+              <? foreach( $delegaciones as $delegacion )
+              {
+                if($id_delegacion==$delegacion['id_delegacion'])
+                  echo "<option value='".$delegacion['id_delegacion']."' selected >".$delegacion['descripcion']."</option>";
+                else echo "<option value='".$delegacion['id_delegacion']."'>".$delegacion['descripcion']."</option>";
+              }?>
+            </select>
+          </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6" align="center">
       <input type="submit" value="Guardar" id='guardar-optica' class="btn btn-primary">
