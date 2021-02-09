@@ -82,9 +82,9 @@ class archivo extends MY_Controller {
     {     
       $fichas_validos[] = array(  
                                   'id_ficha'             => $row->id_ficha,
-                                  'beneficiario'         => $row->beneficiario,
+                                  'beneficiario'         => utf8_encode($row->beneficiario),
                                   'nro_cliente'          => $row->nro_cliente,
-                                  'optica'               => $row->optica,
+                                  'optica'               => utf8_encode($row->optica),
                                   'codigo_armazon'       => $row->codigo_armazon,
                                   'color_armazon'        => $row->color_armazon,
                                   'codigo_armazon_cerca' => $row->codigo_armazon_cerca,
@@ -93,7 +93,7 @@ class archivo extends MY_Controller {
                                   'fecha'                => $row->fecha,
                                   'es_casa_central'      => $row->es_casa_central,
                                   'nro_pedido'           => $row->nro_pedido,
-                                  'delegacion'           => $row->delegacion,
+                                  'delegacion'           => utf8_encode($row->delegacion),
                                   'sindicato'            => $row->sindicato,
                                   'es_lejos'             => $row->es_lejos,
                                   'nro_pedido_cerca'     => $row->nro_pedido_cerca,
@@ -220,7 +220,6 @@ class archivo extends MY_Controller {
     $eje_oi_cerca          = $this->input->post("eje_oi_cerca");
     $id_estado_cerca       = $this->input->post("id_estado_cerca");
     $voucher_cerca         = $this->input->post("voucher_cerca");
-    $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
     $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
     $fecha_envio           = $this->input->post("fecha_envio");
     $tipo_lente            = $this->input->post("tipo_lente");

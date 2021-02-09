@@ -165,6 +165,12 @@ class archivo_model extends MY_Model {
                   ->set('color_armazon_cerca', $data['color_armazon_cerca'])
                   ->set('id_stock_cerca', $data['id_stock_cerca'])
                   ->set('es_lejos' , $data['es_lejos'])
+                  ->set('comentario', $data['comentario'])
+                  ->set('id_estado_cerca', $data['id_estado_cerca'])
+                  ->set('voucher_cerca', $data['voucher_cerca'])
+                  ->set('nro_pedido_cerca', $data['nro_pedido_cerca'])
+                  ->set('fecha_envio_cerca' , $fecha_envio_cerca)
+                  ->set('tipo_lente_cerca' , $data['tipo_lente_cerca'])
                ->insert($this->_table);
       }
 
@@ -271,7 +277,11 @@ class archivo_model extends MY_Model {
                 id_estado_cerca       = '".$data['id_estado_cerca']."',
                 voucher_cerca         = '".$data['voucher_cerca']."',
                 nro_pedido_cerca      = '".$data['nro_pedido_cerca']."',
-                fecha_envio           = '".$fecha_envio."'
+                fecha_envio           = '".$fecha_envio."',
+                fecha_envio_cerca     = '".$fecha_envio_cerca."',
+                tipo_lente_cerca      = '".$data['tipo_lente_cerca']."',
+                comentario            = '".$data['comentario']."'
+
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
               // echo $sql; echo "<br>s".$id_stock_old;die();

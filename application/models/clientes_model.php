@@ -133,7 +133,8 @@ class Clientes_model extends MY_Model {
    
     $this->db->select("*")
            ->from("delegacion")
-           ->where('activo', 1); 
+           ->where('activo', 1)
+           ->order_by("descripcion"); 
  
     $result = $this->db->get();
 

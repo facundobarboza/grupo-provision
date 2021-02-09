@@ -75,14 +75,15 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
     <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>  
-          <th>#</th>
+          <!-- <th>#</th> -->
           <th>ID</th>
           <th>Beneficiario</th>
           <th>Nro Afiliado / DNI</th>
+          <th>Tipo de Lente</th>
           <th>Nro Pedido</th>
           <th>Sindicato</th>
           <th>Estado</th>
-          <th>Fecha</th>
+          <th>Fecha Pedido</th>
           <th>Delegación</th>
           <th>Optica</th>
           <th>Codigo Armazon</th>
@@ -95,10 +96,10 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
       <?php 
       foreach( $fichas as $ficha ) { ?>
         <tr>
-          <td align="center">
+          <!-- <td align="center">
             <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
             <input type="checkbox" class="cb-eliminar">
-          </td>
+          </td> -->
           <td>
             <?php echo $ficha['id_ficha']; ?>
           </td>
@@ -109,11 +110,36 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
             <?php echo $ficha['nro_cliente']; ?>
           </td>
           <td>
+            <?php
+            switch ($ficha['es_lejos']) {
+              case '1':
+                echo "Lejos";
+                break;
+                case '2':
+                echo "Cerca";
+                break;
+                case '3':
+                echo "Lejos y Cerca";
+                break;
+                case '4':
+                echo "Fuera de Prestación";
+                break;
+                case '5':
+                echo "Bifocal";
+                break;
+              
+              default:
+                # code...
+                break;
+            }
+            ?>
+          </td>
+          <td>
             <?php 
-            if($ficha['es_lejos']=="1")
-              echo $ficha['nro_pedido'];
+            if($ficha['es_lejos']=="2")
+              echo $ficha['nro_pedido_cerca'];
             else
-            echo $ficha['nro_pedido_cerca']; ?>
+            echo $ficha['nro_pedido']; ?>
           </td>
           <td>
             <?php echo $ficha['sindicato']; ?>

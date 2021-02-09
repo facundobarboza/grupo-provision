@@ -37,6 +37,8 @@ class Opticas extends MY_Controller {
    * @return void
    */
   public function listado($elimino=0) {
+
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     // cargamos el modelo
     $this->load->model(array('optica_model'));
 
@@ -84,7 +86,7 @@ class Opticas extends MY_Controller {
    * @return void
    */
   public function guardarOptica() {
-
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     // cargamos el modelo
     $this->load->model('optica_model');
     
@@ -125,6 +127,7 @@ class Opticas extends MY_Controller {
    * @return void
    */
   public function nuevoOptica($id_optica=0) {
+    date_default_timezone_set('America/Argentina/Buenos_Aires');
     // cargamos el modelo
     $this->load->model('optica_model');
     $this->load->model('clientes_model');

@@ -233,6 +233,11 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       $display_lejos = "";
       ?>
       <select class="form-control" name="select_tipo" id="select_tipo">
+        <option value="5" <?php if ($select_tipo == 5) {
+                            echo "selected";
+                            $display_cerca = "";
+                            $display_lejos = "";
+                          } ?>>Bifocal</option>
         <option value="1" <?php if ($select_tipo == 1||$select_tipo == "") {
                             echo "selected";
                             $display_cerca = "style='display:none;'";
