@@ -398,10 +398,15 @@ $(function() {
         
         id = $(this).val();
 
-        if(id==1)
+        if(id==1 || id==5)
         {
           $(".div-cerca").hide();
           $(".div-lejos").show();
+          
+          if(id==1)
+            $("#titulo_lejos").html("<strong>Datos para lentes de lejos</strong>");
+          else
+            $("#titulo_lejos").html("<strong>Datos para lentes de bifocal</strong>");
 
           if($("#id_ficha").val()==0)
           {
@@ -430,6 +435,7 @@ $(function() {
           }  
           else
           {
+            $("#titulo_lejos").html("<strong>Datos para lentes de lejos</strong>");
             $(".div-cerca").show();
             $(".div-lejos").show();
           }

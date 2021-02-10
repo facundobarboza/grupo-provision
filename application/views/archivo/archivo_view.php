@@ -229,14 +229,16 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       <label for="types">Tipos de lentes</label>
       <?php
      
-     $display_cerca = "";
+      $display_cerca = "";
       $display_lejos = "";
+      $titulo_lejos  = "Datos para lentes de lejos";
       ?>
       <select class="form-control" name="select_tipo" id="select_tipo">
         <option value="5" <?php if ($select_tipo == 5) {
                             echo "selected";
-                            $display_cerca = "";
-                            $display_lejos = "";
+                            $display_cerca = "style='display:none;'";
+                            $titulo_lejos  = "Datos para lentes de bifocal";
+                            
                           } ?>>Bifocal</option>
         <option value="1" <?php if ($select_tipo == 1||$select_tipo == "") {
                             echo "selected";
@@ -334,7 +336,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
 <div class="row div-lejos" <?php echo $display_lejos; ?>>
   <div class="col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading"><strong>Datos para lentes de lejos</strong></div>
+      <div class="panel-heading" id='titulo_lejos'><strong><?php echo $titulo_lejos;?></strong></div>
       <div class="panel-body">
 
         <div class="row">
