@@ -38,11 +38,13 @@ class archivo extends MY_Controller {
    * @return void
    */
 
-  public function listado_excel()
+  public function listado_excel($fecha_desde,$fecha_hasta,$id_sindicato,$estado)
   {
-    $fecha = date("d_m_Y");
     $this->load->model(array('archivo_model'));
-    to_excel($this->archivo_model->get_excel(), "listado_archivos_".$fecha);
+    
+    $fecha = date("d_m_Y");
+    
+    to_excel($this->archivo_model->get_excel($fecha_desde,$fecha_hasta,$estado, $id_sindicato), "listado_fichas_".$fecha);
   }
   // --------------------------------------------------------------------
 

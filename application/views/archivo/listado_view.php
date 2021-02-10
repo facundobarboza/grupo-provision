@@ -60,7 +60,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
           <div class="col-md-2"><br>
-            <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">
+            <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">            
           </div>
         </div>
        </div>
@@ -71,6 +71,12 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
 </div>
 <?php echo form_close(); ?>
 <div class="row">
+  <div class="col-md-12 " align="right">
+    <button class="btn btn-primary" rol='link' id='descargar' title="Descarga excel filtrando por busqueda avanzada">
+      Descargar Excel</button>
+      <br>
+      <br>
+  </div>
   <div class="col-md-12 ">
     <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
@@ -86,7 +92,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
           <th>Fecha Pedido</th>
           <th>Delegación</th>
           <th>Optica</th>
-          <th>Codigo Armazon</th>
+          <th>Código Armazon</th>
           <th>Color Armazon</th>
           <th>Tipo</th>
           <th>Mod/Elim</th>

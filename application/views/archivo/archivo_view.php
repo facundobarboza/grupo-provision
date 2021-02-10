@@ -317,7 +317,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
         <tr style="background-color: #cddae4;">
           <th>Sindicato</th>
           <th>Estado</th>
-          <th>Codigo Armazon</th>
+          <th>Código Armazon</th>
           <th>Color Armazon</th>
           <th>Fecha</th>
           <th>Tipo de Lentes</th>

@@ -78,7 +78,7 @@ var
       window.location.reload();
     });
 
-
+    
      // boton para eliminar el optica
     $datatable_opticas.on("click", ".btn-eliminar-optica", function() {
       

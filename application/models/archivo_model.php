@@ -25,41 +25,81 @@ class archivo_model extends MY_Model {
    * @param  array $datos
    * @return void
    */
-  public function get_excel()
+  public function get_excel($fecha_desde,$fecha_hasta,$id_estado, $id_sindicato)
   {
+
+    $fecha_desde = Util::fecha_db($fecha_desde);
+    $fecha_hasta = Util::fecha_db($fecha_hasta);
     // $fields = $this->db->field_data('archivos');
-    $fields =   array("Empresa","Departamento","Sub Departamento","Nombre Archivo","Vigencia","Observacion");
+    $fields =   array("Id Ficha","Fecha","Beneficiario","Nro Beneficiario","Sindicato","Optica","Codigo Armazon","Color Armazon","Nro Pedido","Codigo Armazon Cerca","Color Armazon Cerca","Nro Pedido Cerca", "Cantidad");
     
-    // Util::dump_exit($fields);
+    
     // $query  = $this->db->select('*')->get('archivos');
 
-    //si no es super admin filtramos por empresa
-    if($this->session->userdata('id_rol')!=1)
+    if($id_estado>0)
     {
-      $id_empresa = $this->session->userdata('id_empresa');
-      $this->db->select("nombre_empresa,departamento.descripcion as departamento,sub_departamento.descripcion as sub_departamento,nombre_archivo,archivos.fecha_vigencia,".$this->_table.".observacion", FALSE)
-               ->from($this->_table)
-               ->join('sub_departamento','sub_departamento.id_sub_departamento='.$this->_table.'.id_sub_departamento')
-               ->join('departamento','departamento.id_departamento=sub_departamento.id_departamento')
-               ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-               //->where('borrado', 0)
-               ->like('fecha_carga', $fecha)
-               ->where('borrado', 0)
-               ->where('empresa.id_empresa', $id_empresa);
+      $where = "(estado=".$id_estado." OR id_estado_cerca=".$id_estado.")"; 
+
+      if($id_sindicato>0 )
+      {
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+             ->from($this->_table)
+             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
+             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->where($this->_table.".activo ",1)
+             ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+             ->where($where)
+             ->where($this->_table.'.id_sindicato',$id_sindicato)
+             ->order_by('fecha', 'DESC');
       }
       else
       {
-        $this->db->select("nombre_empresa,departamento.descripcion as departamento,sub_departamento.descripcion as sub_departamento,nombre_archivo,archivos.fecha_vigencia,".$this->_table.".observacion", FALSE)
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+             ->from($this->_table)
+             ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
+             ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+             ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->where($this->_table.".activo ",1)
+             ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+             ->where($where)
+             ->order_by('fecha', 'DESC');
+           }
+    }
+    else
+    {
+      if($id_sindicato>0 )
+      {
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
                ->from($this->_table)
-               ->join('sub_departamento','sub_departamento.id_sub_departamento='.$this->_table.'.id_sub_departamento')
-               ->join('departamento','departamento.id_departamento=sub_departamento.id_departamento')
-               ->join('empresa','departamento.id_empresa=empresa.id_empresa')
-               //->where('borrado', 0)
-               ->like('fecha_carga', $fecha)
-               ->where('borrado', 0);
+               ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
+               ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+               ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->where($this->_table.".activo ",1)
+              ->where($this->_table.'.id_sindicato',$id_sindicato)
+              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+              ->order_by('fecha', 'DESC');    
+        }
+      else
+      {
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+               ->from($this->_table)
+               ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
+               ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
+               ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->where($this->_table.".activo ",1)
+              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
+              ->order_by('fecha', 'DESC');    
+        
       }
-    $result = $this->db->get();
+    }
 
+    $result = $this->db->get();
+// Util::dump_exit($result->row());
     return array("fields" => $fields, "query" => $result);
   }
 

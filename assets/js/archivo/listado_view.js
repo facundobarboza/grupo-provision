@@ -85,7 +85,17 @@ var
       
     });
 
+    $("#descargar").click(function(event) {
+     
+    fecha_desde   = $("#fecha_desde").val();
+    fecha_hasta   = $("#fecha_hasta").val();
+    id_sindicato  = $("#id_sindicato").val();
+    estado        = $("#estado").val();
 
+    window.location = appGeneral.obtenerSiteUrl() + "archivo/listado_excel/"+fecha_desde+"/"+fecha_hasta+"/"+id_sindicato+"/"+estado;
+
+    return false;
+    });
      // boton para eliminar un ficha
     $datatable_fichas.on("click", ".btn-eliminar-ficha", function() {
       

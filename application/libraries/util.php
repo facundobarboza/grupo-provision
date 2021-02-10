@@ -287,7 +287,7 @@ class Util {
     $a = substr($fecha_db,0,4);
     if (is_numeric($d) && is_numeric($m) && is_numeric($a)) 
     {
-        return "$d/$m/$a";
+        return "$d-$m-$a";
     }
     else 
     {
