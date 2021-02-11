@@ -344,15 +344,15 @@ class archivo_model extends MY_Model {
                 WHERE id_stock = ".$id_stock_old.";";
           
         $this->db->query($sql);
-      }
 
-      //descontamos el armazon utlizado del stock
+        //descontamos el armazon utlizado del stock
         $sql = "UPDATE stock
                 SET  cantidad  = cantidad-1 
                 WHERE id_stock = ".$id_stock.";";
         
         $this->db->query($sql);
-      // echo $sql; die();       
+        // echo $sql; die();
+      }      
     }
   }
 
