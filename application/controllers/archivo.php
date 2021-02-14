@@ -56,6 +56,7 @@ class archivo extends MY_Controller {
   public function listado($elimino=0) {
     
     $this->load->model('clientes_model');
+    $version = date('Ymdhmis');
 
     if($this->input->post('fecha_desde'))
     {
@@ -143,7 +144,7 @@ class archivo extends MY_Controller {
                                             base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                             base_url('assets/js/datatable/dataTables.bootstrap.js'),
                                             "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                            base_url('assets/js/archivo/listado_view.js'))
+                                            base_url('assets/js/archivo/listado_view.js?'.$version))
                 );
 
     if($elimino>0)
@@ -320,6 +321,7 @@ class archivo extends MY_Controller {
     $this->load->model('archivo_model');
     $this->load->model('clientes_model');
     $this->load->helper('form');
+    $version = date('Ymdhmis');
 
     $sindicatos = $this->clientes_model->obtenerSindicatos();
 
@@ -371,7 +373,7 @@ class archivo extends MY_Controller {
                                               base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                               base_url('assets/js/datatable/dataTables.bootstrap.js'),
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                              base_url('assets/js/archivo/archivo_view.js'))
+                                              base_url('assets/js/archivo/archivo_view.js?'.$version))
                     );  
        // $this->util->dump_exit($data);
     }
@@ -401,7 +403,7 @@ class archivo extends MY_Controller {
                                               base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                               base_url('assets/js/datatable/dataTables.bootstrap.js'),
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                              base_url('assets/js/archivo/archivo_view.js'))
+                                              base_url('assets/js/archivo/archivo_view.js?'.$version))
                     ); 
     }    
 

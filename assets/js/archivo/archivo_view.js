@@ -44,6 +44,7 @@ var
     $id_optica_cliente = $("#id_optica_cliente");
     $id_guardar        = $("#id-guardar");
     $id_editar         = $("#id-editar");
+    $select_tipo       = $("#select_tipo");
 
 // DOM ready!
 $(function() {
@@ -51,6 +52,8 @@ $(function() {
 
   if($("#id_ficha").val()>0)
     grisarForm(true);
+  else
+    grisarForm(false);
 
    // mostrar/ocultar el log
   $('#mostrar_log').click(function () {
@@ -643,6 +646,7 @@ function grisarForm(value)
     $tipo_lente_cerca .attr("disabled",value);
     $id_delegacion.attr("disabled",value);
     $id_optica_cliente.attr("disabled",value);
+    $select_tipo.attr("disabled",value);
 
     if(value)
     {
