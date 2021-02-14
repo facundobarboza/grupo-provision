@@ -57,6 +57,16 @@ var
       
     });
 
+    $("#btn-buscar").click(function(event) {
+       
+        if ($("#filtro_afiliado").val() == "" )
+        {
+          $("#filtro_afiliado").parent().addClass("has-error").find(".form-control-feedback").eq(0);
+          $("#filtro_afiliado").parent().find(".text-center").eq(0).removeClass("hide");
+          return false;
+        }
+    });
+
     // boton para eliminar cliente
     $datatable_cliente.on("click", ".btn-eliminar", function() {
       

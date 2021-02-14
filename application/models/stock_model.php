@@ -18,6 +18,28 @@ class Stock_model extends MY_Model {
     $this->_table  = 'stock';
   }
 
+  /**
+   * [exportamos los datos para el excel]
+   * 
+   * @param  array $datos
+   * @return void
+   */
+  public function get_excel()
+  {
+    $fields =   array("Id","Codigo Patilla","Nro Codigo Interno","Tipo Armazon","Material","Letra Color","Codigo Color","Ubicacion","Cantidad");    
+    // $query  = $this->db->select('*')->get('archivos');
+
+    $this->db->select("id_stock,codigo_patilla,nro_codigo_interno,tipo_armazon.descripcion as tipo_armazon,material.descripcion as material,letra_color_interno,codigo_color,ubicacion.descripcion as ubicacion,cantidad", FALSE)
+           ->from($this->_table)
+           ->join('tipo_armazon',$this->_table.'.id_tipo_armazon=tipo_armazon.id_tipo_armazon')
+           ->join('ubicacion',$this->_table.'.id_ubicacion=ubicacion.id')
+           ->join('material',$this->_table.'.id_material=material.id')
+           ->where('activo', 1);
+
+    $result = $this->db->get();
+// Util::dump_exit($result->row());
+    return array("fields" => $fields, "query" => $result);
+  }
   // --------------------------------------------------------------------
 
   /**

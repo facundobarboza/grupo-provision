@@ -41,9 +41,20 @@ class Clientes extends MY_Controller {
     // $this->util->dump_exit($elimino);
     // cargamos el modelo
     $this->load->model(array('clientes_model'));
-
+    $version = date('Ymdhmis');
+    if($this->input->post('filtro_afiliado'))
+    {
+      $filtro_afiliado   = $this->input->post('filtro_afiliado');
+      $es_busqueda       = 1;
+    }
+    else
+    {
+      $filtro_afiliado = "";
+      $es_busqueda       = 0;
+    }
+    // $this->util->dump_exit($filtro_afiliado);
     // obtenemos el recibo de sueldo
-    $clientes         = $this->clientes_model->ListarClientes();
+    $clientes         = $this->clientes_model->ListarClientes($filtro_afiliado);
     // $this->util->dump_exit($clientes->result());
     $recibos_validos = array();
 
@@ -53,13 +64,12 @@ class Clientes extends MY_Controller {
       // $this->util->dump_exit($row);
 
       $clientes_validas[] = array(
-        'id_cliente'        => (int)$row->id_cliente,
-        'titular_cliente'    => utf8_encode($row->titular_cliente),
-        'beneficiario_cliente'  => utf8_encode($row->beneficiario_cliente),
-        'dni_cliente'       => $row->dni,
-        'numero_cliente'    => $row->nro_cliente,
-        'sindicato' => $row->descripcion,
-
+        'id_cliente'           => (int)$row->id_cliente,
+        'titular_cliente'      => utf8_encode($row->titular_cliente),
+        'beneficiario_cliente' => utf8_encode($row->beneficiario_cliente),
+        'dni_cliente'          => $row->dni,
+        'numero_cliente'       => $row->nro_cliente,
+        'sindicato'            => $row->descripcion
       );  
     }
 
@@ -69,11 +79,13 @@ class Clientes extends MY_Controller {
     $data = array(
       'clientes'       => $clientes_validas,
       'contenido_view' => 'clientes/listado_view',
+      'es_busqueda'    => $es_busqueda,
+      'filtro_afiliado' =>$filtro_afiliado,
       'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),
       'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                 base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                base_url('assets/js/clientes/listado_view.js'))
+                                base_url('assets/js/clientes/listado_view.js?'.$version))
     );
     if($id_elimino>0)
     {      
@@ -141,7 +153,7 @@ class Clientes extends MY_Controller {
   public function nuevo($id_cliente=0) {
     // cargamos el modelo
     $this->load->model('clientes_model');
-
+    $version = date('Ymdhmis');
     $this->load->helper('form');
     // obtenemos los sindicatos
     $sindicatos = $this->clientes_model->obtenerSindicatos();
@@ -162,7 +174,7 @@ class Clientes extends MY_Controller {
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array("https://code.jquery.com/jquery-1.12.4.js",
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                              base_url('assets/js/clientes/cliente_view.js'))
+                                              base_url('assets/js/clientes/cliente_view.js?'.$version))
                     );  
     }
     else
@@ -178,7 +190,7 @@ class Clientes extends MY_Controller {
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
                     'js'             => array("https://code.jquery.com/jquery-1.12.4.js",
                                               "https://code.jquery.com/ui/1.12.1/jquery-ui.js",
-                                              base_url('assets/js/clientes/cliente_view.js'))
+                                              base_url('assets/js/clientes/cliente_view.js?'.$version))
                     ); 
     }    
 

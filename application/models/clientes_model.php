@@ -86,11 +86,31 @@ class Clientes_model extends MY_Model {
    * @param  integer $login
    * @return array
    */
-  public function ListarClientes() {
-    $this->db->select("*", FALSE)
+  public function ListarClientes($filtro_afiliado) {
+
+    if($filtro_afiliado!="")
+    {
+      $array = array('titular_cliente'      => $filtro_afiliado, 
+                     'beneficiario_cliente' => $filtro_afiliado,
+                     'dni'                  => $filtro_afiliado,
+                     'nro_cliente'          => $filtro_afiliado);
+
+      $this->db->select("*", FALSE)
+               ->from($this->_table)
+               ->join("sindicatos", "id_sindicato_cliente=id_sindicato")
+               ->where('clientes.activo', 1)
+               ->or_like($array);  
+    }
+    else
+    {
+      $this->db->select("*", FALSE)
              ->from($this->_table)
              ->join("sindicatos", "id_sindicato_cliente=id_sindicato")
-             ->where('clientes.activo', 1);
+             ->where('clientes.activo', 1)
+             ->limit(0); 
+    }
+    
+
     $result = $this->db->get();
 
     // Util::dump_exit($result->row());

@@ -73,6 +73,13 @@ var
 
     });
 
+    $("#descargar").click(function(event) {      
+
+        window.location = appGeneral.obtenerSiteUrl() + "stock/listado_excel";
+
+        return false;
+    });
+
     $("#modal-stock").on("hide.bs.modal", function(e) {
       // si se esta haciendo la peticion para regenerar la contraseña,
       // evitamos que se cierre el modal

@@ -9,8 +9,13 @@
     </div>
 </div><!-- /.row-fluid -->
 <div class="row">
-    <div class="col-md-12" align="center">
-        &nbsp;&nbsp;&nbsp;
+    <div class="col-md-12"  align="right">
+        <button class="btn btn-primary" rol='link' id='descargar' title="Descarga excel filtrando por busqueda avanzada">
+          <span class="glyphicon glyphicon-download-alt"></span>
+          Descargar Excel
+        </button>
+      <br>
+      <br>
     </div>
 </div><!-- /.row -->
 <div class="row">

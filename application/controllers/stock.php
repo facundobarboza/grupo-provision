@@ -11,7 +11,9 @@ class Stock extends MY_Controller {
    * constructor
    */
   public function __construct() {
+   date_default_timezone_set('America/Argentina/Buenos_Aires');
     parent::__construct();
+    $this->load->helper('mysql_to_excel_helper');
   }
 
   // --------------------------------------------------------------------
@@ -28,6 +30,24 @@ class Stock extends MY_Controller {
     $this->load->view('principal_view');
   }
 
+
+  // --------------------------------------------------------------------
+ 
+  /**
+   * listamos los archivos en excel
+   * @access public
+   * @return void
+   */
+
+  public function listado_excel($fecha_desde,$fecha_hasta,$id_sindicato,$estado)
+  {
+    $this->load->model(array('stock_model'));
+    
+    $fecha = date("d_m_Y");
+    
+    to_excel($this->stock_model->get_excel(), "listado_stock_".$fecha);
+  }
+
   // --------------------------------------------------------------------
 
   /**
@@ -39,7 +59,7 @@ class Stock extends MY_Controller {
   public function listado($elimino=0) {
     // cargamos el modelo
     $this->load->model(array('stock_model'));
-
+    $version = date('Ymdhmis');
   // echo "entro";exit;
     $stock = $this->stock_model->obtenerStocks();
     // $this->util->dump_exit($stock->result());    
@@ -70,7 +90,7 @@ class Stock extends MY_Controller {
       'js'             => array(base_url('assets/js/datatable/jquery.dataTables.min.js'),
                                 base_url('assets/js/datatable/jquery.dataTables.es.js'),
                                 base_url('assets/js/datatable/dataTables.bootstrap.js'),
-                                base_url('assets/js/stock/listado_view.js'))
+                                base_url('assets/js/stock/listado_view.js?'.$version))
     );
 
     if($elimino==1)
@@ -148,7 +168,7 @@ class Stock extends MY_Controller {
   public function nuevoStock($id_stock=0) {
     // cargamos el modelo
     $this->load->model('stock_model');
-
+    $version = date('Ymdhmis');
     $this->load->helper('form');
 
     // obtenemos los tipo de armazones
@@ -193,7 +213,7 @@ class Stock extends MY_Controller {
                     'materiales'       => $materiales,
                     'contenido_view' => 'stock/stock_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-                    'js'             => array(base_url('assets/js/stock/stock_view.js'),
+                    'js'             => array(base_url('assets/js/stock/stock_view.js?'.$version),
                                         "https://code.jquery.com/ui/1.12.1/jquery-ui.js")
                     );  
        // $this->util->dump_exit($data);
@@ -212,7 +232,7 @@ class Stock extends MY_Controller {
                     'id_stock'       => $id_stock,
                     'contenido_view' => 'stock/stock_view',
                     'css'            => array('//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'),
-                    'js'             => array(base_url('assets/js/stock/stock_view.js'),
+                    'js'             => array(base_url('assets/js/stock/stock_view.js?'.$version),
                                                             "https://code.jquery.com/ui/1.12.1/jquery-ui.js"), 
                     ); 
     }    
