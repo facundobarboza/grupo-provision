@@ -1,6 +1,7 @@
 <?php
 
 echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 'form'));
+$fecha_envio     = date('d-m-Y');
 
 ?>
 <div class="row">
@@ -60,9 +61,43 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
           </div>
           <div class="col-md-2"><br>
-            <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">            
+            <button type="submit" class="btn btn-success" id='btn-buscar'>
+              <span class="glyphicon glyphicon-search"></span>
+              Buscar
+            </button>
+            <!-- <input type="submit" class="btn btn-success" id='btn-buscar' value="Buscar">             -->
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-6">                
+            <div class="panel panel-default" >
+              <div class="panel-body">
+                <div class="row">     
+                  <div class="col-md-3">
+                    <label>Fecha Envio</label>
+                  </div>             
+                  <div class="col-md-5">
+                      <input type="input" name="fecha_envio" style="
+                                                                height: 34px;
+                                                                padding: 6px 12px;    
+                                                                border: 1px solid #ccc;" id='fecha_envio' autocomplete="off" maxlength="50" value="<? echo $fecha_envio?>">
+                      <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>            
+                  </div>
+                  <div class="col-md-3">
+                    <button type="submit" class="btn btn-success" id='btn-cambiar-estado'>
+                      <span class="glyphicon glyphicon-retweet"></span>
+                      Cambiar Estado
+                    </button>
+                    <!-- <input type="submit" class="btn btn-success" id='btn-cambiar-estado' value="Cambiar Estado">  -->
+
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
        </div>
       </div>
       <!-- /.panel-->
@@ -73,6 +108,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
 <div class="row">
   <div class="col-md-12 " align="right">
     <button class="btn btn-primary" rol='link' id='descargar' title="Descarga excel filtrando por busqueda avanzada">
+      <span class="glyphicon glyphicon-download-alt"></span>
       Descargar Excel</button>
       <br>
       <br>
@@ -81,7 +117,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
     <table id="datatable-ficha" class="table table-striped table-bordered table-hover" width="100%">
       <thead>
         <tr>  
-          <!-- <th>#</th> -->
+          <th>#</th>
           <th>ID</th>
           <th>Beneficiario</th>
           <th>Nro Afiliado / DNI</th>
@@ -93,7 +129,7 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
           <th>Delegación</th>
           <th>Optica</th>
           <th>Código Armazon</th>
-          <th>Color Armazon</th>
+          <th>Tipo Lente</th>
           <th>Tipo</th>
           <th>Mod/Elim</th>
         </tr>
@@ -102,10 +138,10 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
       <?php 
       foreach( $fichas as $ficha ) { ?>
         <tr>
-          <!-- <td align="center">
+          <td align="center">
             <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
-            <input type="checkbox" class="cb-eliminar">
-          </td> -->
+            <input type="checkbox" class="cb-check">
+          </td> 
           <td>
             <?php echo $ficha['id_ficha']; ?>
           </td>
@@ -145,13 +181,22 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
             if($ficha['es_lejos']=="2")
               echo $ficha['nro_pedido_cerca'];
             else
-            echo $ficha['nro_pedido']; ?>
+            {
+              if($ficha['es_lejos']=="3")
+              {
+                echo $ficha['nro_pedido']." / ".$ficha['nro_pedido_cerca'];
+              }
+              else
+                echo $ficha['nro_pedido']; 
+            }
+            ?>
           </td>
           <td>
             <?php echo $ficha['sindicato']; ?>
           </td>
           <td>
-            <?php 
+            <?php
+
             switch ($ficha['estado']) {
               case '1':
                 $estado = "Laboratorio";
@@ -166,7 +211,40 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
                 $estado = "Laboratorio";
                 break;
             }
-            echo $estado; ?>
+            
+
+             switch ($ficha['estado_cerca']) {
+              case '1':
+                $estado_cerca = "Laboratorio";
+                break;
+              case '2':
+                $estado_cerca = "Enviado";
+                break;
+              case '3':
+                $estado_cerca = "Revisión";
+                break;
+              default:
+                $estado_cerca = "Laboratorio";
+                break;
+            }
+            
+
+            if($ficha['es_lejos']=="1")
+            {
+                echo $estado;
+            }
+            else
+            {
+              if($ficha['es_lejos']=="3")
+              {
+                echo $estado." / ".$estado_cerca;
+              }
+              else
+                echo $estado_cerca;
+            }
+            
+            ?>
+
           </td>
           <td>
             <?php echo Util::fecha($ficha['fecha']); ?>
@@ -182,15 +260,30 @@ echo form_open('archivo/listado', array('id' => 'formulario-listado', 'role' => 
             if($ficha['es_lejos']=="1")
                 echo $ficha['codigo_armazon'];
             else 
-              echo $ficha['codigo_armazon_cerca'];?>
+            {
+              if($ficha['es_lejos']=="3")
+              {
+                echo $ficha['codigo_armazon']." / ".$ficha['codigo_armazon_cerca'];
+              }
+              else
+                echo $ficha['codigo_armazon_cerca']; 
+            }
+            ?>
           </td>
           <td>
             <?php 
             if($ficha['es_lejos']=="1")
-              echo$ficha['color_armazon'];
+              echo $ficha['t_desc'];
             else
-              echo$ficha['color_armazon_cerca'];
-               ?>
+            {
+              if($ficha['es_lejos']=="3")
+              {
+                echo $ficha['t_desc']." / ".$ficha['t_desc_cerca'];
+              }
+              else
+                echo $ficha['t_desc_cerca'];
+            }
+            ?>
           </td>
           <td>
             <?php

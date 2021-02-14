@@ -14,7 +14,6 @@
 </style>
 
 <?
-
 if($fichas)
 {
   $id_ficha                  = $fichas->row()->id_ficha;
@@ -90,12 +89,12 @@ else
 if($id_ficha==0)
 {
   $titulo       = "Nueva Ficha"." ".$casa;
-  $title_button = "Guardar";
+  $title_button = "Guardar Ficha";
 }
 else
 {
   $titulo       = "Modificar Ficha" ." ".$casa." N° ".$id_ficha;
-  $title_button = "Modificar";
+  $title_button = "Modificar Ficha";
 }
 //si existe mostramos el log
 if($id_ficha>0)
@@ -233,7 +232,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
       $display_lejos = "";
       $titulo_lejos  = "Datos para lentes de lejos";
       ?>
-      <select class="form-control" name="select_tipo" id="select_tipo">
+      <select class="form-control"  name="select_tipo" id="select_tipo">
         <option value="5" <?php if ($select_tipo == 5) {
                             echo "selected";
                             $display_cerca = "style='display:none;'";
@@ -742,6 +741,11 @@ if ($es_casa_central == 0) {
 <div class="row">
   <div class="col-md-12" align="center">
     <input type="submit" id='id-guardar' value="<? echo $title_button;?>" class="btn btn-primary">
+    <button id='id-editar' class="btn btn-success">
+       <span class="glyphicon glyphicon-pencil"></span>
+       Editar Ficha
+    </button>
+    
     <span id='id-cargando' class="glyphicon glyphicon-refresh hide"><b>
         <p id='text-cargando' class="text-center help-block hide">Cargando, por favor esperar..</p>
       </b></span>

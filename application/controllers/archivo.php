@@ -92,6 +92,7 @@ class archivo extends MY_Controller {
                                   'codigo_armazon_cerca' => $row->codigo_armazon_cerca,
                                   'color_armazon_cerca'  => $row->color_armazon_cerca,
                                   'estado'               => $row->estado,
+                                  'estado_cerca'         => $row->id_estado_cerca,
                                   'fecha'                => $row->fecha,
                                   'es_casa_central'      => $row->es_casa_central,
                                   'nro_pedido'           => $row->nro_pedido,
@@ -99,6 +100,8 @@ class archivo extends MY_Controller {
                                   'sindicato'            => $row->sindicato,
                                   'es_lejos'             => $row->es_lejos,
                                   'nro_pedido_cerca'     => $row->nro_pedido_cerca,
+                                  't_desc'               => utf8_encode($row->t_desc),
+                                  't_desc_cerca'         => utf8_encode($row->t_desc_cerca)
                                   );  
     }
 
@@ -143,13 +146,16 @@ class archivo extends MY_Controller {
                                             base_url('assets/js/archivo/listado_view.js'))
                 );
 
-    if($elimino==1)
+    if($elimino>0)
     { 
-      $this->session->set_flashdata('exito', 'Se elimino el archivo con &eacute;xito.');
+      $mensaje = $elimino==1? "elimino la ficha": "cambio el estado de las fichas a enviado";
+      $this->session->set_flashdata('exito', 'Se '.$mensaje.' con &eacute;xito.');
       redirect('archivo/listado','refresh');    
     }
     else
+    {
       $this->load->view('iframe_view', $data);
+    }
 
   }
 
@@ -289,7 +295,7 @@ class archivo extends MY_Controller {
       // guardamos el log
       $this->log_model->guardar_log($this->session->userdata('id_usuario'), 4,"log_fichas","id_ficha",0);
       $this->session->set_flashdata('exito', 'Se ingreso el ficha con &eacute;xito.');  
-      redirect('archivo/listado','refresh');
+      redirect(site_url('archivo/nuevo/0/0/1'),'refresh');
     }
     else
     {
@@ -533,6 +539,26 @@ class archivo extends MY_Controller {
         echo $contenido;  
         exit;
     } 
+
+    // --------------------------------------------------------------------
+
+   /**
+   *
+   * @access public
+   * @return void
+   */
+  public function cambiarEstado($id_ficha=0,$fecha_envio) {
+    // cargamos el modelo
+    $this->load->model('archivo_model');
+
+    $this->load->helper('form');
+
+    $this->archivo_model->cambiarEstado($id_ficha,$fecha_envio);
+    // guardamos el log
+    //$this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_fichas","id_ficha",$id_ficha);
+    
+    // $this->load->view('iframe_view', $data);
+  }
 
 }
 

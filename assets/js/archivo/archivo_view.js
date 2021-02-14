@@ -36,10 +36,22 @@ var
     $nro_pedido_cerca      = $("#nro_pedido_cerca"),
     $id_stock_cerca        = $("#id_stock_cerca");
 
+    $fecha_envio       = $("#fecha_envio");
+    $fecha_envio_cerca = $("#fecha_envio_cerca");
+    $tipo_lente        = $("#tipo_lente");
+    $tipo_lente_cerca  = $("#tipo_lente_cerca");    
+    $id_delegacion     = $("#id_delegacion");
+    $id_optica_cliente = $("#id_optica_cliente");
+    $id_guardar        = $("#id-guardar");
+    $id_editar         = $("#id-editar");
 
 // DOM ready!
 $(function() {
   
+
+  if($("#id_ficha").val()>0)
+    grisarForm(true);
+
    // mostrar/ocultar el log
   $('#mostrar_log').click(function () {
       if (this.checked)
@@ -442,6 +454,11 @@ $(function() {
         }
     });
 
+    $id_editar.click(function(event) {
+      grisarForm(false);
+      return false;
+    });
+
     //AUTOCOMPLETAR DE TITULAR
     $("#filtro_cliente").autocomplete({
         source: appGeneral.obtenerSiteUrl()+"archivo/autocompleteBeneficiario/",
@@ -489,6 +506,7 @@ $(function() {
       $("#beneficiario").val("");
       $("#nro_cliente").val("");
       $("#historial_titular").html("");
+      $("#titular").html("");
       $("#thistorial").addClass('hide');  
     });
 
@@ -585,12 +603,68 @@ $(function() {
   
 });
 
+function grisarForm(value)
+{
+    $id_cliente.attr("disabled",value);
+    $sindicato.attr("disabled",value);
+    $titular.attr("disabled",value);
+    $beneficiario.attr("disabled",value);
+    $delegacion.attr("disabled",value);
+    $nro_cliente.attr("disabled",value);
+    $optica.attr("disabled",value);
+    $fecha.attr("disabled",value);
+    $codigo_armazon.attr("disabled",value);
+    $color_armazon.attr("disabled",value);
+    $estado.attr("disabled",value);
+    $voucher.attr("disabled",value);
+    $nro_pedido.attr("disabled",value);
+    $grad_od_esf.attr("disabled",value);
+    $grad_od_cil.attr("disabled",value);
+    $eje_od.attr("disabled",value);
+    $grad_oi_esf.attr("disabled",value);
+    $grad_oi_cil.attr("disabled",value);
+    $eje_oi.attr("disabled",value);
+    $comentario.attr("disabled",value);
+    $es_lejos.attr("disabled",value);
+    $adicional.attr("disabled",value);
+    $descripcion_adicional.attr("disabled",value);
+    $telefono.attr("disabled",value);
+    $costo_adicional.attr("disabled",value);
+    $sena_adicional.attr("disabled",value);
+    $saldo_adicional      .attr("disabled",value);
+    $codigo_armazon_cerca.attr("disabled",value);
+    $color_armazon_cerca .attr("disabled",value);
+    $estado_cerca.attr("disabled",value);
+    $voucher_cerca.attr("disabled",value);
+    $nro_pedido_cerca.attr("disabled",value);
+    $fecha_envio.attr("disabled",value);
+    $fecha_envio_cerca.attr("disabled",value);
+    $tipo_lente.attr("disabled",value);
+    $tipo_lente_cerca .attr("disabled",value);
+    $id_delegacion.attr("disabled",value);
+    $id_optica_cliente.attr("disabled",value);
+
+    if(value)
+    {
+        $id_guardar.attr("style","display:none");
+        $id_editar.attr("style","display:block");
+    }
+    else
+    {
+        $id_guardar.attr("style","display:block");
+        $id_editar.attr("style","display:none");
+    }  
+    
+
+
+}
+
 function historialTitular(titular)
 {
    jQuery.ajax({
-                url: appGeneral.obtenerSiteUrl() + "archivo/historialVentas/",
-                type: 'POST',
-                data: {
+ url: appGeneral.obtenerSiteUrl() + "archivo/historialVentas/",
+   type: 'POST',
+    data: {
                     'id_cliente': titular
                 },
                 async: true,

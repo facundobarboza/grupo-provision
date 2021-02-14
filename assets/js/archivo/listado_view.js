@@ -49,6 +49,7 @@ var
                     { bSortable: true },
                     { bSortable: true },
                     { bSortable: true },
+                    { bSortable: true },
                     { bSortable: false }
                   ]
     });
@@ -56,7 +57,7 @@ var
     $("#fecha_hasta").datepicker({
           firstDay: 1,
           dateFormat: 'dd-mm-yy',
-          monthNames: ['Enero', 'Febreo', 'Marzo',
+          monthNames: ['Enero', 'Febrero', 'Marzo',
           'Abril', 'Mayo', 'Junio',
           'Julio', 'Agosto', 'Septiembre',
           'Octubre', 'Noviembre', 'Diciembre'],
@@ -65,7 +66,16 @@ var
     $("#fecha_desde").datepicker({
           firstDay: 1,
           dateFormat: 'dd-mm-yy',
-          monthNames: ['Enero', 'Febreo', 'Marzo',
+          monthNames: ['Enero', 'Febrero', 'Marzo',
+          'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre',
+          'Octubre', 'Noviembre', 'Diciembre'],
+          dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']});
+
+    $("#fecha_envio").datepicker({
+          firstDay: 1,
+          dateFormat: 'dd-mm-yy',
+          monthNames: ['Enero', 'Febrero', 'Marzo',
           'Abril', 'Mayo', 'Junio',
           'Julio', 'Agosto', 'Septiembre',
           'Octubre', 'Noviembre', 'Diciembre'],
@@ -135,11 +145,12 @@ var
 
     });
 
-    $("#eliminar-masivo").click(function(){
+    $("#btn-cambiar-estado").click(function(){
 
-      if(confirm("Esta seguro que quiere eliminar todos los fichas seleccionados?"))
+      fecha_envio =  $("#fecha_envio").val();
+      if(confirm("Desea cambiar las fichas seleccionadas con fecha "+fecha_envio +" a estado enviadas?"))
       {
-        $(".cb-eliminar").each(function() {       
+        $(".cb-check").each(function() {      
       
           var
             $this = $(this),
@@ -147,10 +158,10 @@ var
 
           if($this.is(':checked'))
           {
-            id_ficha = $info.data("id");
+            id_ficha    = $info.data("id");
             
             jQuery.ajax({
-                  url: appGeneral.obtenerSiteUrl() + "archivo/eliminar/"+id_ficha,
+                  url: appGeneral.obtenerSiteUrl() + "archivo/cambiarEstado/"+id_ficha+"/"+fecha_envio,
                   type: 'POST',
                   data: {
                       'id_ficha': id_ficha
@@ -167,9 +178,10 @@ var
           }
         });
 
-        window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/1";
-      }
+        window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/2";
 
+      }
+      return false;
     });
 
   };

@@ -24,7 +24,7 @@ function to_excel($sql, $filename='exceloutput')
                          $value = "\t";
                     } else {
                          $value = str_replace('"', '""', $value);
-                         $value = '"' . $value . '"' . "\t";
+                         $value = '"' . utf8_encode($value) . '"' . "\t";
                     }
                     $line .= $value;
                }

@@ -31,7 +31,7 @@ class archivo_model extends MY_Model {
     $fecha_desde = Util::fecha_db($fecha_desde);
     $fecha_hasta = Util::fecha_db($fecha_hasta);
     // $fields = $this->db->field_data('archivos');
-    $fields =   array("Id Ficha","Fecha","Beneficiario","Nro Beneficiario","Sindicato","Optica","Codigo Armazon","Color Armazon","Nro Pedido","Codigo Armazon Cerca","Color Armazon Cerca","Nro Pedido Cerca", "Cantidad");
+    $fields =   array("Id Ficha","Fecha","Beneficiario","Nro Beneficiario","Sindicato","Optica","Tipo de Lente","Codigo Armazon","Color Armazon","Nro Pedido","Tipo Lente","Fecha Envio","Codigo Armazon Cerca","Color Armazon Cerca","Nro Pedido Cerca","Tipo Lente Cerca","Fecha Envio Cerca", "Cantidad", "Comentarios");
     
     
     // $query  = $this->db->select('*')->get('archivos');
@@ -42,12 +42,18 @@ class archivo_model extends MY_Model {
 
       if($id_sindicato>0 )
       {
-        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
-          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,
+          CASE WHEN es_lejos = 1 THEN 'Lejos' 
+            ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
+                  ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,fecha_envio_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
              ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+             ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
              ->where($where)
@@ -56,12 +62,18 @@ class archivo_model extends MY_Model {
       }
       else
       {
-        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
-          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion, opticas.descripcion as optica,,
+          CASE WHEN es_lejos = 1 THEN 'Lejos' 
+            ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
+                  ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipocodigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,fecha_envio_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
              ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+             ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
              ->where($where)
@@ -72,12 +84,18 @@ class archivo_model extends MY_Model {
     {
       if($id_sindicato>0 )
       {
-        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
-          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,
+          CASE WHEN es_lejos = 1 THEN 'Lejos' 
+            ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
+                  ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,fecha_envio_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
                ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
                ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
               ->where($this->_table.".activo ",1)
               ->where($this->_table.'.id_sindicato',$id_sindicato)
               ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
@@ -85,12 +103,18 @@ class archivo_model extends MY_Model {
         }
       else
       {
-        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,codigo_armazon,color_armazon,nro_pedido,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,
-          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END ", FALSE)
+        $this->db->select("id_ficha,DATE_FORMAT(fichas.fecha,'%d/%m/%Y') as fecha,beneficiario,nro_cliente, sindicatos.descripcion,opticas.descripcion as optica,
+          CASE WHEN es_lejos = 1 THEN 'Lejos' 
+            ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
+                  ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,fecha_envio_cerca,
+          CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
                ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
                ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+              ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
               ->where($this->_table.".activo ",1)
               ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
               ->order_by('fecha', 'DESC');    
@@ -210,6 +234,7 @@ class archivo_model extends MY_Model {
                   ->set('voucher_cerca', $data['voucher_cerca'])
                   ->set('nro_pedido_cerca', $data['nro_pedido_cerca'])
                   ->set('fecha_envio_cerca' , $fecha_envio_cerca)
+                  ->set('tipo_lente' , $data['tipo_lente'])
                   ->set('tipo_lente_cerca' , $data['tipo_lente_cerca'])
                ->insert($this->_table);
       }
@@ -318,6 +343,7 @@ class archivo_model extends MY_Model {
                 voucher_cerca         = '".$data['voucher_cerca']."',
                 nro_pedido_cerca      = '".$data['nro_pedido_cerca']."',
                 fecha_envio           = '".$fecha_envio."',
+                tipo_lente            = '".$data['tipo_lente']."',
                 fecha_envio_cerca     = '".$fecha_envio_cerca."',
                 tipo_lente_cerca      = '".$data['tipo_lente_cerca']."',
                 comentario            = '".$data['comentario']."'
@@ -413,11 +439,13 @@ class archivo_model extends MY_Model {
 
       if($id_sindicato>0 )
       {
-        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato,tipo_lentes.descripcion as t_desc, tl_cerca.descripcion as t_desc_cerca", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
              ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
              ->where($where)
@@ -426,11 +454,13 @@ class archivo_model extends MY_Model {
       }
       else
       {
-        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato,tipo_lentes.descripcion as t_desc, tl_cerca.descripcion as t_desc_cerca", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
              ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
              ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+             ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
              ->where($this->_table.".activo ",1)
              ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
              ->where($where)
@@ -441,11 +471,13 @@ class archivo_model extends MY_Model {
     {
       if($id_sindicato>0 )
       {
-        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato,tipo_lentes.descripcion as t_desc, tl_cerca.descripcion as t_desc_cerca", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
                ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
                ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+               ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
               ->where($this->_table.".activo ",1)
               ->where($this->_table.'.id_sindicato',$id_sindicato)
               ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
@@ -453,11 +485,13 @@ class archivo_model extends MY_Model {
         }
       else
       {
-        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato", FALSE)
+        $this->db->select($this->_table.".*, opticas.descripcion as optica,delegacion.descripcion as delegacion, sindicatos.descripcion as sindicato,tipo_lentes.descripcion as t_desc, tl_cerca.descripcion as t_desc_cerca", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
                ->join('delegacion',$this->_table.'.id_delegacion=delegacion.id_delegacion', 'left')
                ->join('sindicatos',$this->_table.'.id_sindicato=sindicatos.id_sindicato', 'left')
+               ->join('tipo_lentes',$this->_table.'.tipo_lente=tipo_lentes.id', 'left')
+              ->join('tipo_lentes as tl_cerca',$this->_table.'.tipo_lente_cerca=tl_cerca.id', 'left')
               ->where($this->_table.".activo ",1)
               ->where("CONVERT(fichas.fecha, DATE) between '".$fecha_desde."' AND '".$fecha_hasta."'")
               ->order_by('fecha', 'DESC');    
@@ -562,6 +596,62 @@ class archivo_model extends MY_Model {
   // --------------------------------------------------------------------
 
   /**
+   *
+   * @access public
+   * @param  integer $id_archivo
+   * @return array
+   */
+  public function cambiarEstado($id_ficha=0,$fecha_envio) {
+   
+    $fecha_envio = Util::fecha_db($fecha_envio);
+
+    $this->db->select("es_lejos", FALSE)
+               ->from("fichas")
+               ->where('id_ficha', $id_ficha);
+    $result = $this->db->get();
+
+    switch ($result->row()->es_lejos) {
+      case '1': //lejos
+      case '5': //bifocal
+         $sql = " UPDATE ".$this->_table."
+                  SET fecha_envio   = '".$fecha_envio."',
+                      estado        = 2
+                  WHERE id_ficha = ".$id_ficha;
+        break;
+      case '2'://cerca
+         $sql = " UPDATE ".$this->_table."
+                  SET fecha_envio_cerca  = '".$fecha_envio."',
+                      id_estado_cerca    = 2
+                  WHERE id_ficha = ".$id_ficha;
+        break;
+      case '3'://lejos y cerca
+          $sql = " UPDATE ".$this->_table."
+                      SET fecha_envio_cerca  = '".$fecha_envio."',
+                          id_estado_cerca    = 2,
+                          fecha_envio        = '".$fecha_envio."',
+                          estado             = 2
+                      WHERE id_ficha = ".$id_ficha;
+        break;
+      default:
+         $sql = " UPDATE ".$this->_table."
+                  SET fecha_envio_cerca  = '".$fecha_envio."',
+                      id_estado_cerca    = 2,
+                      fecha_envio        = '".$fecha_envio."',
+                      estado             = 2
+                  WHERE id_ficha = ".$id_ficha;
+        break;
+    }
+    
+    
+    $this->db->query($sql);
+// echo $sql; exit;
+    // Util::dump_exit($result->row());
+  }
+
+
+  // --------------------------------------------------------------------
+
+  /**
    * Obtener los datos de la ficha
    *
    * @access public
@@ -590,8 +680,7 @@ class archivo_model extends MY_Model {
    */
   public function autocompleteBeneficiario($term) {
 
-    $array = array('titular_cliente' => $term,
-                   'beneficiario_cliente' => $term, 
+    $array = array('beneficiario_cliente' => $term, 
                    'nro_cliente' => $term,
                    'dni' => $term);
 
@@ -624,6 +713,7 @@ class archivo_model extends MY_Model {
     $this->db->select("id_stock,codigo_color,codigo_patilla,nro_codigo_interno,descripcion_color, letra_color_interno", FALSE)
              ->from("stock")
              ->where('activo',1)
+             ->where('cantidad >',0)
              ->or_like($array);
              
     $result = $this->db->get();
