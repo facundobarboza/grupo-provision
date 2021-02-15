@@ -30,11 +30,12 @@ var
 
     $datatable_cliente = $("#datatable-cliente").DataTable({
       "iDisplayLength"  : 50,
+      "sPaginationType" : "full_numbers",
       "searching": true,
       "order": [[ 1, "desc" ], [ 0, "desc" ]],
       "language": datatable_es,
       "aoColumns": [
-        { bSortable: true },
+        { bSortable: false },
         { bSortable: true },
         { bSortable: true },
         { bSortable: true },

@@ -2,6 +2,7 @@
 echo form_open('clientes/listado', array('id' => 'formulario-listado-afiliado', 'role' => 'form'));
 
 ?>
+
   <div class="row">
       <div class="col-md-1">
       </div>
@@ -36,7 +37,9 @@ echo form_open('clientes/listado', array('id' => 'formulario-listado-afiliado', 
         </div>
         <!-- /.panel-->
   </div>
+  <?php echo form_close(); ?>
 <?php
+
 if($es_busqueda==1)
 {
 ?>
@@ -51,7 +54,7 @@ if($es_busqueda==1)
   </div><!-- /.row-fluid -->
   <div class="row">
     <div class="col-md-12 col-md-offset-0">
-      <table id="datatable-cliente" class="table table-striped table-bordered table-hover" width="100%">
+      <table name="datatable" id="datatable-cliente" class="table table-striped table-bordered table-hover" width="100%">
         <thead>
           <tr>
             <th>Titular</th>
@@ -119,3 +122,4 @@ if($es_busqueda==1)
   <?php
 }
 ?>
+
