@@ -39,7 +39,7 @@ class Stock extends MY_Controller {
    * @return void
    */
 
-  public function listado_excel($fecha_desde,$fecha_hasta,$id_sindicato,$estado)
+  public function listado_excel()
   {
     $this->load->model(array('stock_model'));
     

@@ -610,8 +610,14 @@ class archivo_model extends MY_Model {
                ->where('id_ficha', $id_ficha);
     $result = $this->db->get();
 
-    switch ($result->row()->es_lejos) {
+    $es_lejos = $result->row()->es_lejos;
+    switch ($es_lejos) {
       case '1': //lejos
+      $sql = " UPDATE ".$this->_table."
+                  SET fecha_envio   = '".$fecha_envio."',
+                      estado        = 2
+                  WHERE id_ficha = ".$id_ficha;
+        break;
       case '5': //bifocal
          $sql = " UPDATE ".$this->_table."
                   SET fecha_envio   = '".$fecha_envio."',
@@ -644,7 +650,11 @@ class archivo_model extends MY_Model {
     
     
     $this->db->query($sql);
-// echo $sql; exit;
+
+    $sql_log = "INSERT INTO log_enviados (id_ficha,fecha_envio,es_lejos) 
+                VALUES (".$id_ficha.",'".$fecha_envio."','".$es_lejos."');";
+    $this->db->query($sql_log);
+    // echo $sql; exit;
     // Util::dump_exit($result->row());
   }
 

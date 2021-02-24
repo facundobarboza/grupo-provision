@@ -90,6 +90,7 @@ $fecha_envio     = date('d-m-Y');
                       <span class="glyphicon glyphicon-retweet"></span>
                       Cambiar Estado
                     </button>
+                    <input type="hidden" id="id-ficha-estado">
                     <!-- <input type="submit" class="btn btn-success" id='btn-cambiar-estado' value="Cambiar Estado">  -->
 
                   </div>
@@ -229,7 +230,7 @@ $fecha_envio     = date('d-m-Y');
             }
             
 
-            if($ficha['es_lejos']=="1")
+            if($ficha['es_lejos']=="1" || $ficha['es_lejos']=="5")
             {
                 echo $estado;
             }
@@ -257,7 +258,7 @@ $fecha_envio     = date('d-m-Y');
           </td>
           <td>
             <?php 
-            if($ficha['es_lejos']=="1")
+            if($ficha['es_lejos']=="1" || $ficha['es_lejos']=="5")
                 echo $ficha['codigo_armazon'];
             else 
             {
@@ -272,7 +273,7 @@ $fecha_envio     = date('d-m-Y');
           </td>
           <td>
             <?php 
-            if($ficha['es_lejos']=="1")
+            if($ficha['es_lejos']=="1" || $ficha['es_lejos']=="5")
               echo $ficha['t_desc'];
             else
             {

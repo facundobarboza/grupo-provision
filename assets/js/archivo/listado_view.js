@@ -14,7 +14,7 @@ var
       $contrasenia             = $("#contrasenia"),
       $btn_form_modal          = $("#btn-form-modal"),
       $iframe_modificar_empresa = $("#iframe-modificar-empresa")
-
+      $cb_check                 = $(".cb-check");
 
   /**
    * [inicializar description]
@@ -145,12 +145,46 @@ var
 
     });
 
+    /*$cb_check.on("click", function(event) {
+     
+          var $this = $(this),
+            $info = $this.parents("tr").find(".info");
+
+          if($this.is(':checked'))
+          {
+            var id_fichas    = $info.data("id")+","+$("#id-ficha-estado").val();
+
+            $("#id-ficha-estado").val(id_fichas);
+          }
+          else
+          {
+            var array_fichas = $("#id-ficha-estado").val().split(",");
+
+            if(array_fichas.length>0)
+            {
+              $("#id-ficha-estado").val('');
+
+              for (var i = 0; i < array_fichas.length ; i++) {
+
+                  if(array_fichas[i]!=$info.data("id"))
+                  {
+                    var id_fichas = array_fichas[i]+",";
+
+                    $("#id-ficha-estado").val(id_fichas);
+                  }
+
+                }
+            } 
+          }
+
+    });*/
+
     $("#btn-cambiar-estado").click(function(){
 
       fecha_envio =  $("#fecha_envio").val();
       if(confirm("Desea cambiar las fichas seleccionadas con fecha "+fecha_envio +" a estado enviadas?"))
       {
-        $(".cb-check").each(function() {      
+        $cb_check.each(function() {      
       
           var
             $this = $(this),

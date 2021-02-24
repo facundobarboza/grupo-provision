@@ -231,9 +231,9 @@ class archivo extends MY_Controller {
     $voucher_cerca         = $this->input->post("voucher_cerca");
     $nro_pedido_cerca      = $this->input->post("nro_pedido_cerca");
     $fecha_envio           = $this->input->post("fecha_envio");
-    $tipo_lente            = $this->input->post("tipo_lente");
+    $tipo_lente            = ($es_lejos==2)? '0' : $this->input->post("tipo_lente");
     $fecha_envio_cerca     = $this->input->post("fecha_envio_cerca");
-    $tipo_lente_cerca      = $this->input->post("tipo_lente_cerca");
+    $tipo_lente_cerca      = ($es_lejos==2)? $this->input->post("tipo_lente_cerca") : '0';
 
 
     // cargamos el modelo
