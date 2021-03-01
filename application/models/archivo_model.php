@@ -205,6 +205,10 @@ class archivo_model extends MY_Model {
                   ->set('tipo_lente' , $data['tipo_lente'])
                   ->set('fecha_envio_cerca' , $fecha_envio_cerca)
                   ->set('tipo_lente_cerca' , $data['tipo_lente_cerca'])
+                  ->set('laboratorio' , $data['laboratorio'])
+                  ->set('laboratorio_cerca' , $data['laboratorio_cerca'])
+                  ->set('costo_adicional_cerca' ,$data['costo_adicional_cerca'])
+                  ->set('adicional_cerca' , $data['adicional_cerca'])
 
                ->insert($this->_table);
       }
@@ -236,6 +240,12 @@ class archivo_model extends MY_Model {
                   ->set('fecha_envio_cerca' , $fecha_envio_cerca)
                   ->set('tipo_lente' , $data['tipo_lente'])
                   ->set('tipo_lente_cerca' , $data['tipo_lente_cerca'])
+                  ->set('laboratorio' , $data['laboratorio'])
+                  ->set('laboratorio_cerca' , $data['laboratorio_cerca'])
+                  ->set('costo_adicional_cerca' ,$data['costo_adicional_cerca'])
+                  ->set('adicional_cerca' , $data['adicional_cerca'])
+                  ->set('adicional', $data['adicional'])
+                  ->set('costo_adicional', $data['costo_adicional'])
                ->insert($this->_table);
       }
 
@@ -313,7 +323,11 @@ class archivo_model extends MY_Model {
                 fecha_envio           = '".$fecha_envio."',
                 tipo_lente            = '".$data['tipo_lente']."',
                 fecha_envio_cerca     = '".$fecha_envio_cerca."',
-                tipo_lente_cerca      = '".$data['tipo_lente_cerca']."'
+                tipo_lente_cerca      = '".$data['tipo_lente_cerca']."',
+                laboratorio           = '".$data['laboratorio']."',
+                laboratorio_cerca     = '".$data['laboratorio_cerca']."',
+                costo_adicional_cerca = '".$data['costo_adicional_cerca']."',
+                adicional_cerca       = '".$data['adicional_cerca']."'
 
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
@@ -346,7 +360,13 @@ class archivo_model extends MY_Model {
                 tipo_lente            = '".$data['tipo_lente']."',
                 fecha_envio_cerca     = '".$fecha_envio_cerca."',
                 tipo_lente_cerca      = '".$data['tipo_lente_cerca']."',
-                comentario            = '".$data['comentario']."'
+                comentario            = '".$data['comentario']."',
+                laboratorio           = '".$data['laboratorio']."',
+                laboratorio_cerca     = '".$data['laboratorio_cerca']."',
+                costo_adicional_cerca = '".$data['costo_adicional_cerca']."',
+                adicional_cerca       = '".$data['adicional_cerca']."',
+                costo_adicional       = '".$data['costo_adicional']."',
+                adicional             = '".$data['adicional']."'
 
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }

@@ -29,10 +29,8 @@ if($fichas)
     
   $comentario                = $fichas->row()->comentario;
   $select_tipo               = $fichas->row()->es_lejos;
-  $adicional                 = $fichas->row()->adicional;
   $descripcion_adicional     = $fichas->row()->descripcion_adicional;
   $telefono                  = $fichas->row()->telefono;
-  $costo_adicional           = $fichas->row()->costo_adicional;
   $seña_adicional            = $fichas->row()->sena_adicional;
   $saldo_adicional           = $fichas->row()->saldo_adicional;
   $es_casa_central           = $fichas->row()->es_casa_central;
@@ -51,6 +49,9 @@ if($fichas)
   $eje_oi                    = $fichas->row()->eje_oi;
   $id_tipo_lente             = $fichas->row()->tipo_lente;
   $fecha_envio               = $this->util->fecha($fichas->row()->fecha_envio);
+  $laboratorio               = $fichas->row()->laboratorio;
+  $adicional                 = $fichas->row()->adicional;
+  $costo_adicional           = $fichas->row()->costo_adicional;
 
   $codigo_armazon_cerca      = $fichas->row()->codigo_armazon_cerca;
   $color_armazon_cerca       = $fichas->row()->color_armazon_cerca;
@@ -66,6 +67,9 @@ if($fichas)
   $eje_oi_cerca              = $fichas->row()->eje_oi_cerca;
   $id_tipo_lente_cerca       = $fichas->row()->tipo_lente_cerca;
   $fecha_envio_cerca         = $this->util->fecha($fichas->row()->fecha_envio_cerca);
+  $laboratorio_cerca         = $fichas->row()->laboratorio_cerca;
+  $adicional_cerca           = $fichas->row()->adicional_cerca;
+  $costo_adicional_cerca     = $fichas->row()->costo_adicional_cerca;
 }
 else
 {
@@ -84,7 +88,7 @@ if($es_casa_central==1)
    $casa = "Casa Central";
 }
 else
-  $casa = " Optica";
+  $casa = " Óptica";
 
 if($id_ficha==0)
 {
@@ -183,7 +187,7 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
     <input type="hidden" name="id_ficha" value="<? echo $id_ficha?>">
     <input type="hidden" name="es_casa_central" value="<? echo $es_casa_central?>">
     <div class="form-group has-feedback">
-      <label for="optica">Optica</label>
+      <label for="optica">Óptica</label>
       <select class="form-control" name="id_optica" id="id_optica_cliente">
         <option value="0">Seleccionar --</option>
         <? foreach( $opticas as $optica )
@@ -368,6 +372,17 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
               <p class="text-center help-block hide">Debe ingresar un de número pedido.</p>
             </div>
           </div>
+           <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="laboratorio">Laboratorio</label>
+              <select class="form-control" name="laboratorio" id="laboratorio">
+                <option value="0" >Seleccionar--</option>
+                <option value="1" <?php if ($laboratorio == 1) echo "selected"; ?>>Bs As</option>
+                <option value="2" <?php if ($laboratorio == 2) echo "selected"; ?>>M.O.A</option>
+                <option value="3" <?php if ($laboratorio == 3) echo "selected"; ?>>L.O.I</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         <?php
@@ -491,6 +506,21 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="adicional">Adicional</label>
+              <input type="text" class="form-control" name="adicional" id="adicional" autocomplete="off" maxlength="250" value="<? echo $adicional?>">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="costo_adicional">Costo Adicional</label>
+              <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789.');" name="costo_adicional" id="costo_adicional" autocomplete="off" maxlength="50" value="<? echo $costo_adicional?>">
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -529,6 +559,17 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
               <input type="text" class="form-control" name="nro_pedido_cerca" id="nro_pedido_cerca" autocomplete="off" maxlength="32" value="<? echo $nro_pedido_cerca?>">
               <span class="glyphicon glyphicon-remove form-control-feedba ck hide"></span>
               <p class="text-center help-block hide">Debe ingresar un de número pedido.</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="laboratorio_cerca">Laboratorio</label>
+              <select class="form-control" name="laboratorio_cerca" id="laboratorio_cerca">
+                <option value="0" >Seleccionar--</option>
+                <option value="1" <?php if ($laboratorio_cerca == 1) echo "selected"; ?>>Bs As</option>
+                <option value="2" <?php if ($laboratorio_cerca == 2) echo "selected"; ?>>M.O.A</option>
+                <option value="3" <?php if ($laboratorio_cerca == 3) echo "selected"; ?>>L.O.I</option>
+              </select>
             </div>
           </div>
         </div>
@@ -653,6 +694,20 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
                                                             border: 1px solid #ccc;" id='fecha_envio_cerca' autocomplete="off" maxlength="50" value="<? echo $fecha_envio_cerca?>">
               <span class="glyphicon glyphicon-remove form-control-feedback hide"></span>
               <p class="text-center help-block hide">Debe ingresar un fecha_envio_cerca.</p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="adicional_cerca">Adicional</label>
+              <input type="text" class="form-control" name="adicional_cerca" id="adicional_cerca" autocomplete="off" maxlength="250" value="<? echo $adicional_cerca?>">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="costo_adicional_cerca">Costo Adicional</label>
+              <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789.');" name="costo_adicional_cerca" id="costo_adicional_cerca" autocomplete="off" maxlength="50" value="<? echo $costo_adicional_cerca?>">
             </div>
           </div>
         </div>

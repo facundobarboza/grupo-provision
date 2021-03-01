@@ -46,6 +46,12 @@ var
     $id_editar         = $("#id-editar");
     $select_tipo       = $("#select_tipo");
 
+    $laboratorio           = $("#laboratorio");
+    $laboratorio_cerca     = $("#laboratorio_cerca");
+    $costo_adicional_cerca = $("#costo_adicional_cerca");
+    $adicional_cerca       = $("#adicional_cerca");
+
+
 // DOM ready!
 $(function() {
   
@@ -647,6 +653,11 @@ function grisarForm(value)
     $id_delegacion.attr("disabled",value);
     $id_optica_cliente.attr("disabled",value);
     $select_tipo.attr("disabled",value);
+
+    $laboratorio.attr("disabled",value);
+    $laboratorio_cerca.attr("disabled",value);
+    $costo_adicional_cerca.attr("disabled",value);
+    $adicional_cerca.attr("disabled",value);
 
     if(value)
     {

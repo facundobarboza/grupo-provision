@@ -234,7 +234,10 @@ class archivo extends MY_Controller {
     $tipo_lente            = ($es_lejos==2)? '0' : $this->input->post("tipo_lente");
     $fecha_envio_cerca     = $this->input->post("fecha_envio_cerca");
     $tipo_lente_cerca      = ($es_lejos==2)? $this->input->post("tipo_lente_cerca") : '0';
-
+    $costo_adicional_cerca = $this->input->post("costo_adicional_cerca");
+    $adicional_cerca       = $this->input->post("adicional_cerca");
+    $laboratorio           = $this->input->post("laboratorio");
+    $laboratorio_cerca     = $this->input->post("laboratorio_cerca");
 
     // cargamos el modelo
     $this->load->model('archivo_model');
@@ -285,7 +288,11 @@ class archivo extends MY_Controller {
                     'fecha_envio'          => $fecha_envio,
                     'tipo_lente'           => $tipo_lente,
                     'fecha_envio_cerca'    => $fecha_envio_cerca,
-                    'tipo_lente_cerca'     => $tipo_lente_cerca
+                    'tipo_lente_cerca'     => $tipo_lente_cerca,
+                    'laboratorio'          => $laboratorio,
+                    'laboratorio_cerca'    => $laboratorio_cerca,
+                    'adicional_cerca'      => $adicional_cerca,
+                    'costo_adicional_cerca'=> $costo_adicional_cerca
 
                     );
     // $this->util->dump_exit($data);

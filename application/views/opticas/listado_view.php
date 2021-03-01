@@ -7,7 +7,7 @@
 </div><!-- /.row-fluid -->
 <div class="row">
     <div class="col-md-12" align="right" >
-      <input type="button" id='nuevo-optica' value="Nuevo Optica" class="btn btn-primary" title="Agregar un nuevo optica "><br>
+      <input type="button" id='nuevo-optica' value="Nueva Optica" class="btn btn-primary" title="Agregar un nuevo optica "><br>
     </div>
 </div><!-- /.row -->
 <div class="row">

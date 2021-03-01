@@ -7,7 +7,7 @@
 </div><!-- /.row-fluid -->
 <div class="row">
     <div class="col-md-12" align="right" >
-      <input type="button" id='nuevo-delegacion' value="Nuevo Delegacion" class="btn btn-primary" title="Agregar un nuevo delegacion "><br>
+      <input type="button" id='nuevo-delegacion' value="Nueva Delegación" class="btn btn-primary" title="Agregar un nuevo delegacion "><br>
     </div>
 </div><!-- /.row -->
 <div class="row">
