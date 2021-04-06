@@ -646,8 +646,8 @@ function grisarForm(value)
     $estado_cerca.attr("disabled",value);
     $voucher_cerca.attr("disabled",value);
     $nro_pedido_cerca.attr("disabled",value);
-    $fecha_envio.attr("disabled",value);
-    $fecha_envio_cerca.attr("disabled",value);
+    //$fecha_envio.attr("disabled",value);
+    //$fecha_envio_cerca.attr("disabled",value);
     $tipo_lente.attr("disabled",value);
     $tipo_lente_cerca .attr("disabled",value);
     $id_delegacion.attr("disabled",value);

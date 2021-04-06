@@ -559,9 +559,10 @@ class archivo extends MY_Controller {
   public function cambiarEstado($id_ficha=0,$fecha_envio) {
     // cargamos el modelo
     $this->load->model('archivo_model');
-
+    
     $this->load->helper('form');
-
+    // $this->util->dump_exit($id_ficha);
+        
     $this->archivo_model->cambiarEstado($id_ficha,$fecha_envio);
     // guardamos el log
     //$this->log_model->guardar_log($this->session->userdata('id_usuario'), 5,"log_fichas","id_ficha",$id_ficha);

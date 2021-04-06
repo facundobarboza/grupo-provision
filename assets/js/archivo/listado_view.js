@@ -182,6 +182,7 @@ var
     $("#btn-cambiar-estado").click(function(){
 
       fecha_envio =  $("#fecha_envio").val();
+      var id_ficha = "";
       if(confirm("Desea cambiar las fichas seleccionadas con fecha "+fecha_envio +" a estado enviadas?"))
       {
         $cb_check.each(function() {      
@@ -192,9 +193,18 @@ var
 
           if($this.is(':checked'))
           {
-            id_ficha    = $info.data("id");
-            
-            jQuery.ajax({
+            if(id_ficha=="")
+              id_ficha    = $info.data("id");
+            else
+              id_ficha    = id_ficha +'-'+ $info.data("id");
+          }
+        });
+
+        console.log(id_ficha);
+
+        if(id_ficha!="")
+        {
+          jQuery.ajax({
                   url: appGeneral.obtenerSiteUrl() + "archivo/cambiarEstado/"+id_ficha+"/"+fecha_envio,
                   type: 'POST',
                   data: {
@@ -209,9 +219,7 @@ var
                     
                   }
               });
-          }
-        });
-
+        }
         window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/2";
 
       }
