@@ -1,23 +1,34 @@
 <?
- 
+$titulo = "Listado de Stock";
+
+ if($es_minimo>0)
+  $titulo .= " - Mínimo";
+
 ?>
 <div class="row">
     <div class="col-md-12">
         <h4 class="page-header text-uppercase">
-            Listado de Stock
+            <?echo $titulo?>
         </h4>
     </div>
 </div><!-- /.row-fluid -->
-<div class="row">
-    <div class="col-md-12"  align="right">
-        <button class="btn btn-primary" rol='link' id='descargar' title="Descarga excel filtrando por busqueda avanzada">
-          <span class="glyphicon glyphicon-download-alt"></span>
-          Descargar Excel
-        </button>
-      <br>
-      <br>
-    </div>
-</div><!-- /.row -->
+<?
+if($es_minimo==0)
+{
+?>
+  <div class="row">
+      <div class="col-md-12"  align="right">
+          <button class="btn btn-primary" rol='link' id='descargar' title="Descarga excel filtrando por busqueda avanzada">
+            <span class="glyphicon glyphicon-download-alt"></span>
+            Descargar Excel
+          </button>
+        <br>
+        <br>
+      </div>
+  </div><!-- /.row -->
+<?
+}
+?>
 <div class="row">
     <div class="col-md-12">
         <table id="datatable-stocks" class="table table-striped table-bordered table-hover" width="100%">

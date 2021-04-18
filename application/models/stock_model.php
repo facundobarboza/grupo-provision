@@ -165,14 +165,18 @@ class Stock_model extends MY_Model {
    * @param  integer $login
    * @return array
    */
-  public function obtenerStocks() {   
-    
+  public function obtenerStocks($es_minimo=0) {   
+    if($es_minimo>0)
+      $where = 'activo = 1 AND cantidad_minima>= cantidad';
+    else
+      $where = array('activo' => 1 );
+
     $this->db->select($this->_table.".*,tipo_armazon.descripcion as tipo_armazon,ubicacion.descripcion as ubicacion, material.descripcion as material", FALSE)
            ->from($this->_table)
            ->join('tipo_armazon',$this->_table.'.id_tipo_armazon=tipo_armazon.id_tipo_armazon')
            ->join('ubicacion',$this->_table.'.id_ubicacion=ubicacion.id')
            ->join('material',$this->_table.'.id_material=material.id')
-           ->where('activo', 1);     
+           ->where($where);     
     
     $result = $this->db->get();
 

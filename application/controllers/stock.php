@@ -56,12 +56,12 @@ class Stock extends MY_Controller {
    * @access public
    * @return void
    */
-  public function listado($elimino=0) {
+  public function listado($elimino=0, $es_minimo=0) {
     // cargamos el modelo
     $this->load->model(array('stock_model'));
     $version = date('Ymdhmis');
   // echo "entro";exit;
-    $stock = $this->stock_model->obtenerStocks();
+    $stock = $this->stock_model->obtenerStocks($es_minimo);
     // $this->util->dump_exit($stock->result());    
   
     foreach( $stock->result() as $row )
@@ -84,6 +84,7 @@ class Stock extends MY_Controller {
 
     // datos pasados a la vista
     $data = array(
+      'es_minimo'     => $es_minimo,
       'stocks'       => $stock_validas,
       'contenido_view' => 'stock/listado_view',
       'css'            => array(base_url('assets/css/dataTables.bootstrap.css')),

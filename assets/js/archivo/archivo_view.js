@@ -545,6 +545,11 @@ $(function() {
               // establecemos el id de la entidad
               $("#id_stock").val(ui.item.id);
               $("#color_armazon").val(ui.item.descripcion_color);
+
+              if(ui.item.alerta>1)
+              {
+                alert("Atención: armazon con stock mínimo (cantidad disponible: "+ui.item.alerta+").")
+              }
             }
             else
                 return false;

@@ -149,6 +149,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Stock armazones<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                     <li><a href="<?php echo site_url('stock/listado') ?>" class="item-menu">Listado de stock</a></li>
+                    <li><a href="<?php echo site_url('stock/listado/0/1') ?>" class="item-menu">Listado stock mínimo</a></li>
                     <li><a href="<?php echo site_url('stock/nuevoStock') ?>" class="item-menu">Nuevo stock</a></li>
                 </ul>
             </li>

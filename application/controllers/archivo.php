@@ -488,10 +488,17 @@ class archivo extends MY_Controller {
       
         foreach( $rResult->result() as $row )
         {  
+          $alerta = 0;
+          if($row->cantidad < $row->cantidad_minima && $row->cantidad_minima>0)
+          {
+            $alerta = $row->cantidad;
+          }
+
           $salida[] = array(  'id'    => $row->id_stock,
                               'label' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
                               'value' => utf8_encode($row->nro_codigo_interno."-".$row->letra_color_interno."-".$row->codigo_patilla."-".$row->codigo_color),
-                              'descripcion_color' => $row->descripcion_color);
+                              'descripcion_color' => $row->descripcion_color,
+                              'alerta' => $alerta);
         }        
       
       header('Content-Type: application/json');
