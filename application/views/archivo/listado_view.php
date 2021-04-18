@@ -120,13 +120,14 @@ $fecha_envio     = date('d-m-Y');
         <tr>  
           <th>#</th>
           <th>ID</th>
+          <th>Fecha Pedido</th>
           <th>Beneficiario</th>
           <th>Nro Afiliado / DNI</th>
           <th>Tipo de Lente</th>
           <th>Nro Pedido</th>
           <th>Sindicato</th>
           <th>Estado</th>
-          <th>Fecha Pedido</th>
+          <th>Fecha Envio</th>
           <th>Delegación</th>
           <th>Optica</th>
           <th>Código Armazon</th>
@@ -138,13 +139,16 @@ $fecha_envio     = date('d-m-Y');
       <tbody> 
       <?php 
       foreach( $fichas as $ficha ) { ?>
-        <tr>
+        <tr title="<? echo $ficha['comentario'] ?>">
           <td align="center">
             <div class="info" data-id="<?php echo $ficha['id_ficha'] ?>"></div>
             <input type="checkbox" class="cb-check">
           </td> 
           <td>
             <?php echo $ficha['id_ficha']; ?>
+          </td>
+          <td>
+            <?php echo Util::fecha($ficha['fecha']); ?>
           </td>
           <td>
             <?php echo $ficha['beneficiario']; ?>
@@ -248,7 +252,31 @@ $fecha_envio     = date('d-m-Y');
 
           </td>
           <td>
-            <?php echo Util::fecha($ficha['fecha']); ?>
+            <?          
+                $fecha_envio       = "-";
+                $fecha_envio_cerca = "-";
+
+                if($ficha['estado']==2)
+                    $fecha_envio = Util::fecha($ficha['fecha_envio']);
+                if($ficha['estado_cerca']==2)
+                    $fecha_envio_cerca = Util::fecha($ficha['fecha_envio_cerca']);
+
+                if($ficha['es_lejos']=="1" || $ficha['es_lejos']=="5")
+                {              
+                    echo $fecha_envio;
+                }
+                else
+                {
+                    if($ficha['es_lejos']=="3")
+                    {
+                        echo $fecha_envio." / ".$fecha_envio_cerca;
+                    }
+                    else
+                    {
+                        echo $fecha_envio_cerca;
+                    }              
+                }
+            ?>
           </td>
           <td>
             <?php echo $ficha['delegacion']; ?>
@@ -277,12 +305,12 @@ $fecha_envio     = date('d-m-Y');
               echo $ficha['t_desc'];
             else
             {
-              if($ficha['es_lejos']=="3")
-              {
-                echo $ficha['t_desc']." / ".$ficha['t_desc_cerca'];
-              }
-              else
-                echo $ficha['t_desc_cerca'];
+                if($ficha['es_lejos']=="3")
+                {
+                    echo $ficha['t_desc']." / ".$ficha['t_desc_cerca'];
+                }
+                else
+                    echo $ficha['t_desc_cerca'];
             }
             ?>
           </td>

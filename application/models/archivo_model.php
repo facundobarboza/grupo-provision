@@ -31,7 +31,7 @@ class archivo_model extends MY_Model {
     $fecha_desde = Util::fecha_db($fecha_desde);
     $fecha_hasta = Util::fecha_db($fecha_hasta);
     // $fields = $this->db->field_data('archivos');
-    $fields =   array("Id Ficha","Fecha","Beneficiario","Nro Beneficiario","Sindicato","Delegación","Optica","Tipo de Lente","Codigo Armazon","Color Armazon","Nro Pedido","Tipo Lente","Adicional","Costo Adicional","Fecha Envio","Codigo Armazon Cerca","Color Armazon Cerca","Nro Pedido Cerca","Tipo Lente Cerca","Adicional Cerca","Costo Adicional Cerca","Fecha Envio Cerca", "Cantidad", "Comentarios");
+    $fields =   array("Id Ficha","Fecha","Beneficiario","Nro Beneficiario","Sindicato","Delegación","Optica","Tipo de Lente","Codigo Armazon","Color Armazon","Nro Pedido","Tipo Lente","Voucher","Adicional","Costo Adicional","Fecha Envio","Codigo Armazon Cerca","Color Armazon Cerca","Nro Pedido Cerca","Tipo Lente Cerca","Voucher Cerca","Adicional Cerca","Costo Adicional Cerca","Fecha Envio Cerca", "Cantidad", "Comentarios");
     
     
     // $query  = $this->db->select('*')->get('archivos');
@@ -46,7 +46,7 @@ class archivo_model extends MY_Model {
           CASE WHEN es_lejos = 1 THEN 'Lejos' 
             ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
                   ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
-                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,voucher,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,voucher_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
           CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
@@ -66,7 +66,7 @@ class archivo_model extends MY_Model {
           CASE WHEN es_lejos = 1 THEN 'Lejos' 
             ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
                   ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
-                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipocodigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipocodigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,voucher,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,voucher_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
           CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
              ->from($this->_table)
              ->join('opticas',$this->_table.'.id_optica=opticas.id_optica' ,'left')
@@ -88,7 +88,7 @@ class archivo_model extends MY_Model {
           CASE WHEN es_lejos = 1 THEN 'Lejos' 
             ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
                   ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
-                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,voucher,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,voucher_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
           CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')
@@ -107,7 +107,7 @@ class archivo_model extends MY_Model {
           CASE WHEN es_lejos = 1 THEN 'Lejos' 
             ELSE (CASE WHEN es_lejos=5 THEN 'Bifocal' 
                   ELSE (CASE WHEN es_lejos= 3 THEN 'Lejos y Cerca' 
-                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
+                      ELSE (CASE WHEN es_lejos=4 THEN 'Fuera de Prestacion' ELSE 'Cerca' END) END ) END) END  as tipo,codigo_armazon,color_armazon,nro_pedido,tipo_lentes.descripcion as t_lentes,voucher,adicional,costo_adicional,fecha_envio,codigo_armazon_cerca,color_armazon_cerca,nro_pedido_cerca,tl_cerca.descripcion as t_lentes_cerca,voucher_cerca,adicional_cerca,costo_adicional_cerca,fecha_envio_cerca,
           CASE WHEN id_stock>0 AND id_stock_cerca>0 THEN 2 ELSE 1 END,comentario ", FALSE)
                ->from($this->_table)
                ->join('opticas',$this->_table.'.id_optica=opticas.id_optica', 'left')

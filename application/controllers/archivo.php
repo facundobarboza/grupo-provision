@@ -102,7 +102,10 @@ class archivo extends MY_Controller {
                                   'es_lejos'             => $row->es_lejos,
                                   'nro_pedido_cerca'     => $row->nro_pedido_cerca,
                                   't_desc'               => utf8_encode($row->t_desc),
-                                  't_desc_cerca'         => utf8_encode($row->t_desc_cerca)
+                                  't_desc_cerca'         => utf8_encode($row->t_desc_cerca),
+                                  'fecha_envio'          => $row->fecha_envio,
+                                  'fecha_envio_cerca'    => $row->fecha_envio_cerca,
+                                  'comentario'          => utf8_encode($row->comentario)
                                   );  
     }
 
@@ -310,7 +313,7 @@ class archivo extends MY_Controller {
      // guardamos el log
       $this->log_model->guardar_log($this->session->userdata('id_usuario'), 6,"log_fichas","id_ficha",$this->input->post('id_ficha'));
       $this->session->set_flashdata('exito', 'Se modifico la ficha ID '.$id_ficha.' con &eacute;xito.');
-       redirect('archivo/listado','refresh');
+      redirect(site_url('archivo/nuevo/'.$id_ficha.'/0/1'),'refresh');
     }
     
   }
@@ -439,7 +442,7 @@ class archivo extends MY_Controller {
   // --------------------------------------------------------------------
 
    /**
-     * autocomplete del titular a la hora de agregar la ficha
+     * autocomplete del beneficiario a la hora de agregar la ficha
      *
      * @access public
      * @return json

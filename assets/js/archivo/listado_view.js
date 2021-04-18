@@ -50,6 +50,7 @@ var
                     { bSortable: true },
                     { bSortable: true },
                     { bSortable: true },
+                    { bSortable: true },
                     { bSortable: false }
                   ]
     });
@@ -90,7 +91,7 @@ var
           $info = $this.parents("tr").find(".info");
 
       //pasamos por parametro el id
-       window.location = appGeneral.obtenerSiteUrl() + "archivo/nuevo/" + $info.data("id");
+       window.open(appGeneral.obtenerSiteUrl() + "archivo/nuevo/" + $info.data("id"));
       // $iframe_modificar_empresa.attr('src',appGeneral.obtenerSiteUrl() + "empresas/nueva/" + $info.data("id"));
       
     });
