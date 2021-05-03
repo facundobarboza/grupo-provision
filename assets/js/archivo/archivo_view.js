@@ -34,6 +34,12 @@ var
     $estado_cerca          = $("#id_estado_cerca"),
     $voucher_cerca         = $("#voucher_cerca"),
     $nro_pedido_cerca      = $("#nro_pedido_cerca"),
+    $grad_od_esf_cerca     = $("#grad_od_esf_cerca"),
+    $grad_od_cil_cerca     = $("#grad_od_cil_cerca"),
+    $eje_od_cerca          = $("#eje_od_cerca"),
+    $grad_oi_esf_cerca     = $("#grad_oi_esf_cerca"),
+    $grad_oi_cil_cerca     = $("#grad_oi_cil_cerca"),
+    $eje_oi_cerca          = $("#eje_oi_cerca"),
     $id_stock_cerca        = $("#id_stock_cerca");
 
     $fecha_envio       = $("#fecha_envio");
@@ -50,6 +56,10 @@ var
     $laboratorio_cerca     = $("#laboratorio_cerca");
     $costo_adicional_cerca = $("#costo_adicional_cerca");
     $adicional_cerca       = $("#adicional_cerca");
+
+    $codigo_barra       = $("#codigo_barra");
+    $codigo_barra_cerca = $("#codigo_barra_cerca");
+    
 
 
 // DOM ready!
@@ -663,6 +673,16 @@ function grisarForm(value)
     $laboratorio_cerca.attr("disabled",value);
     $costo_adicional_cerca.attr("disabled",value);
     $adicional_cerca.attr("disabled",value);
+
+    $grad_od_esf_cerca.attr("disabled",value);
+    $grad_od_cil_cerca.attr("disabled",value);
+    $eje_od_cerca.attr("disabled",value);
+    $grad_oi_esf_cerca.attr("disabled",value);
+    $grad_oi_cil_cerca.attr("disabled",value);
+    $eje_oi_cerca.attr("disabled",value);
+
+    $codigo_barra.attr("disabled",value);
+    $codigo_barra_cerca.attr("disabled",value);
 
     if(value)
     {

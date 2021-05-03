@@ -52,6 +52,7 @@ if($fichas)
   $laboratorio               = $fichas->row()->laboratorio;
   $adicional                 = $fichas->row()->adicional;
   $costo_adicional           = $fichas->row()->costo_adicional;
+  $codigo_barra              = $fichas->row()->codigo_barra;  
 
   $codigo_armazon_cerca      = $fichas->row()->codigo_armazon_cerca;
   $color_armazon_cerca       = $fichas->row()->color_armazon_cerca;
@@ -70,6 +71,8 @@ if($fichas)
   $laboratorio_cerca         = $fichas->row()->laboratorio_cerca;
   $adicional_cerca           = $fichas->row()->adicional_cerca;
   $costo_adicional_cerca     = $fichas->row()->costo_adicional_cerca;
+  $codigo_barra_cerca        = $fichas->row()->codigo_barra_cerca;
+
 }
 else
 {
@@ -519,6 +522,13 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
               <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789.');" name="costo_adicional" id="costo_adicional" autocomplete="off" maxlength="50" value="<? echo $costo_adicional?>">
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="codigo_barra">Código de Barra</label>
+              <input type="text" class="form-control"  name="codigo_barra" id="codigo_barra" autocomplete="off" maxlength="50" value="<? echo $codigo_barra?>">
+            </div>
+          </div>
+
         </div>
 
       </div>
@@ -708,6 +718,12 @@ echo form_open_multipart('archivo/guardarArchivo', array('id' => 'formulario-fic
             <div class="form-group has-feedback">
               <label for="costo_adicional_cerca">Costo Adicional</label>
               <input type="text" class="form-control" onkeypress="return filtrar_teclas(event,'0123456789.');" name="costo_adicional_cerca" id="costo_adicional_cerca" autocomplete="off" maxlength="50" value="<? echo $costo_adicional_cerca?>">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group has-feedback">
+              <label for="codigo_barra_cerca">Código de Barra</label>
+              <input type="text" class="form-control"  name="codigo_barra_cerca" id="codigo_barra_cerca" autocomplete="off" maxlength="50" value="<? echo $codigo_barra_cerca?>">
             </div>
           </div>
         </div>

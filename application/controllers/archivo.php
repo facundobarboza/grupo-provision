@@ -242,6 +242,9 @@ class archivo extends MY_Controller {
     $laboratorio           = $this->input->post("laboratorio");
     $laboratorio_cerca     = $this->input->post("laboratorio_cerca");
 
+    $codigo_barra          = $this->input->post("codigo_barra");
+    $codigo_barra_cerca    = $this->input->post("codigo_barra_cerca");
+
     // cargamos el modelo
     $this->load->model('archivo_model');
     
@@ -295,7 +298,9 @@ class archivo extends MY_Controller {
                     'laboratorio'          => $laboratorio,
                     'laboratorio_cerca'    => $laboratorio_cerca,
                     'adicional_cerca'      => $adicional_cerca,
-                    'costo_adicional_cerca'=> $costo_adicional_cerca
+                    'costo_adicional_cerca'=> $costo_adicional_cerca,
+                    'codigo_barra'         => $codigo_barra,
+                    'codigo_barra_cerca'   => $codigo_barra_cerca
 
                     );
     // $this->util->dump_exit($data);

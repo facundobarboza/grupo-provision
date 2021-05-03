@@ -209,6 +209,8 @@ class archivo_model extends MY_Model {
                   ->set('laboratorio_cerca' , $data['laboratorio_cerca'])
                   ->set('costo_adicional_cerca' ,$data['costo_adicional_cerca'])
                   ->set('adicional_cerca' , $data['adicional_cerca'])
+                  ->set('codigo_barra' , $data['codigo_barra'])
+                  ->set('codigo_barra_cerca' , $data['codigo_barra_cerca'])
 
                ->insert($this->_table);
       }
@@ -246,6 +248,9 @@ class archivo_model extends MY_Model {
                   ->set('adicional_cerca' , $data['adicional_cerca'])
                   ->set('adicional', $data['adicional'])
                   ->set('costo_adicional', $data['costo_adicional'])
+                  ->set('codigo_barra' , $data['codigo_barra'])
+                  ->set('codigo_barra_cerca' , $data['codigo_barra_cerca'])
+
                ->insert($this->_table);
       }
 
@@ -327,7 +332,9 @@ class archivo_model extends MY_Model {
                 laboratorio           = '".$data['laboratorio']."',
                 laboratorio_cerca     = '".$data['laboratorio_cerca']."',
                 costo_adicional_cerca = '".$data['costo_adicional_cerca']."',
-                adicional_cerca       = '".$data['adicional_cerca']."'
+                adicional_cerca       = '".$data['adicional_cerca']."',
+                codigo_barra          = '".$data['codigo_barra']."',
+                codigo_barra_cerca    = '".$data['codigo_barra_cerca']."'
 
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
@@ -366,7 +373,9 @@ class archivo_model extends MY_Model {
                 costo_adicional_cerca = '".$data['costo_adicional_cerca']."',
                 adicional_cerca       = '".$data['adicional_cerca']."',
                 costo_adicional       = '".$data['costo_adicional']."',
-                adicional             = '".$data['adicional']."'
+                adicional             = '".$data['adicional']."',
+                codigo_barra          = '".$data['codigo_barra']."',
+                codigo_barra_cerca    = '".$data['codigo_barra_cerca']."'
 
                 WHERE id_ficha = ".$data['id_ficha'].";";
       }
