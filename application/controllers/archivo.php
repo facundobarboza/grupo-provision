@@ -105,7 +105,9 @@ class archivo extends MY_Controller {
                                   't_desc_cerca'         => utf8_encode($row->t_desc_cerca),
                                   'fecha_envio'          => $row->fecha_envio,
                                   'fecha_envio_cerca'    => $row->fecha_envio_cerca,
-                                  'comentario'          => utf8_encode($row->comentario)
+                                  'comentario'          => utf8_encode($row->comentario),
+                                  'voucher'          => utf8_encode($row->voucher),
+                                  'voucher_cerca'          => utf8_encode($row->voucher_cerca)
                                   );  
     }
 

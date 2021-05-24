@@ -133,6 +133,7 @@ $fecha_envio     = date('d-m-Y');
           <th>Código Armazon</th>
           <th>Tipo Lente</th>
           <th>Tipo</th>
+          <th>Voucher</th>
           <th>Mod/Elim</th>
         </tr>
       </thead>
@@ -320,6 +321,21 @@ $fecha_envio     = date('d-m-Y');
               echo "Casa Central";
             else
               echo "Optica";
+            ?>
+          </td>
+          <td>
+            <?php 
+            if($ficha['es_lejos']=="1" || $ficha['es_lejos']=="5")
+              echo $ficha['voucher'];
+            else
+            {
+                if($ficha['es_lejos']=="3")
+                {
+                    echo $ficha['voucher']." / ".$ficha['voucher_cerca'];
+                }
+                else
+                    echo $ficha['voucher_cerca'];
+            }
             ?>
           </td>
           <td width="60px">
