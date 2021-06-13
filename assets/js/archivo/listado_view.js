@@ -218,11 +218,12 @@ var
                   timeout: 10000,
                   success: function (data)
                   {
-                    
+                      window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/2";            
                   }
               });
         }
-        window.location = appGeneral.obtenerSiteUrl() + "archivo/listado/2";
+        else
+          alert("Debe seleccionar una ficha");
 
       }
       return false;

@@ -1,50 +1,45 @@
 <?php
-
 if( !defined('BASEPATH') ) exit('No direct script access');
 
+class Status_model extends MY_Model {
 
-class Delegacion_model extends MY_Model {
-
-  // --------------------------------------------------------------------
-
-  /**
-   * [__construct description]
-   */
-  function __construct() {
-    parent::__construct();
-
-    // establecemos el esquema y la tabla
-    $this->_schema = '';
-    $this->_table  = 'delegacion';
-  }
-
-  // --------------------------------------------------------------------
-
-  /**
-   * [guardar empresa]
-   * 
-   * @param  array $datos
-   * @return void
-   */
-  public function agregar($data) 
-  {
-    // $this->util->dump_exit($data);
-    //si no existe lo guardamos
-    if($data['id_delegacion']==0)
-    {
-      $this->db->set('descripcion',$data['descripcion'])
-              ->insert($this->_table);
+    /**
+    * [__construct description]
+    */
+    function __construct() {
+        parent::__construct();
+        // establecemos el esquema y la tabla
+        $this->_schema = '';
+        $this->_table  = 'estados';
     }
-    else
+
+    // --------------------------------------------------------------------
+
+    /**
+    * [guardar empresa]
+    * 
+    * @param  array $datos
+    * @return void
+    */
+    public function agregar($data) 
     {
-      //si existe modificamos
-      $sql = "UPDATE ".$this->_table."
-            SET descripcion = '".utf8_encode($data['descripcion'])."'
-            WHERE id_delegacion = ".$data['id_delegacion'].";";
-            // echo $sql;exit;
-      $this->db->query($sql);
+        // $this->util->dump_exit($data);
+        //si no existe lo guardamos
+        if($data['id_estados']==0)
+        {
+          $this->db->set('descripcion',$data['descripcion'])
+                  ->insert($this->_table);
+        }
+        else
+        {
+          //si existe modificamos
+          $sql = "UPDATE ".$this->_table."
+                SET descripcion = '".utf8_encode($data['descripcion'])."'
+                WHERE id_estados = ".$data['id_estados'].";";
+                // echo $sql;exit;
+          $this->db->query($sql);
+        }
     }
-  }
 
    // --------------------------------------------------------------------
 
@@ -52,10 +47,9 @@ class Delegacion_model extends MY_Model {
    * listamos todas las alertas para una empresa
    *
    * @access public
-   * @param  integer $login
    * @return array
    */
-  public function obtenerDelegacions() {   
+  public function  getStatus() {   
     
     $this->db->select($this->_table.".*", FALSE)
            ->from($this->_table)
@@ -78,11 +72,11 @@ class Delegacion_model extends MY_Model {
    * @param  integer $id_departamento
    * @return array
    */
-  public function obtenerDetalle($id_delegacion=0) {
+  public function obtenerDetalle($id_estados=0) {
     
     $this->db->select("*", FALSE)
            ->from($this->_table)
-           ->where('id_delegacion', $id_delegacion);     
+           ->where('id_estados', $id_estados);     
     
     $result = $this->db->get();
 
@@ -99,61 +93,61 @@ class Delegacion_model extends MY_Model {
    * @param  integer $id_departamento
    * @return array
    */
-  public function eliminar($id_delegacion=0) {
+  public function eliminar($id_estados=0) {
     //si existe modificamos
     $sql = "UPDATE ".$this->_table."
             SET activo  = 0
-            WHERE id_delegacion = ".$id_delegacion.";";
+            WHERE id_estados = ".$id_estados.";";
 
     $this->db->query($sql);
 
     // Util::dump_exit($result->row());
   }
 
-    //ALTER TABLE `opticas` ADD `id_delegacion` INT NOT NULL AFTER `descripcion`;
+    //ALTER TABLE `opticas` ADD `id_estados` INT NOT NULL AFTER `descripcion`;
     public function updateDelegation() {
         
-        $sql = "SELECT delegaciones,opticas
-                FROM excel_delegaciones_opticas
-                ORDER BY delegaciones";
+        $sql = "SELECT estadoses,opticas
+                FROM excel_estadoses_opticas
+                ORDER BY estadoses";
 
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0;      
-        $delegacion    = "";
+        $id_estados = 0;      
+        $estados    = "";
 
         foreach ($result_query->result() as $result)
         {
-            if(trim($result->delegaciones) == trim($delegacion))
+            if(trim($result->estadoses) == trim($estados))
             {
-                echo " INSERT INTO opticas (descripcion,id_delegacion)
-                       VALUES ('".$result->opticas."',$id_delegacion)<br>";
+                echo " INSERT INTO opticas (descripcion,id_estados)
+                       VALUES ('".$result->opticas."',$id_estados)<br>";
 
-                $this->db->query(" INSERT INTO opticas (descripcion,id_delegacion)
-                                     VALUES ('".$result->opticas."',".$id_delegacion.");");  
+                $this->db->query(" INSERT INTO opticas (descripcion,id_estados)
+                                     VALUES ('".$result->opticas."',".$id_estados.");");  
 
             }
             else
             {
-                //insertamosla delegacion
-                echo " INSERT INTO delegacion (descripcion)
-                       VALUES ('".$result->delegaciones."')<br>";
+                //insertamosla estados
+                echo " INSERT INTO estados (descripcion)
+                       VALUES ('".$result->estadoses."')<br>";
 
-                $this->db->query(" INSERT INTO delegacion (descripcion)
-                        VALUES ('".$result->delegaciones."')");
+                $this->db->query(" INSERT INTO estados (descripcion)
+                        VALUES ('".$result->estadoses."')");
 
 
-                $id_delegacion = $this->db->insert_id();
+                $id_estados = $this->db->insert_id();
 
                 //insertamos la optica
-                echo " INSERT INTO opticas (descripcion,id_delegacion)
-                       VALUES ('".$result->opticas."',$id_delegacion)<br>";
+                echo " INSERT INTO opticas (descripcion,id_estados)
+                       VALUES ('".$result->opticas."',$id_estados)<br>";
 
-                $this->db->query(" INSERT INTO opticas (descripcion,id_delegacion)
-                                     VALUES ('".$result->opticas."',".$id_delegacion.");");  
+                $this->db->query(" INSERT INTO opticas (descripcion,id_estados)
+                                     VALUES ('".$result->opticas."',".$id_estados.");");  
                
-               $delegacion = $result->delegaciones;
+               $estados = $result->estadoses;
             }
         }
      }  
@@ -170,20 +164,20 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente = 1; //1 lejos 2 cerca
         $sql = "";
         foreach ($result_query->result() as $result)
         {       
-            $this->db->select("id_optica,id_delegacion", FALSE)
+            $this->db->select("id_optica,id_estados", FALSE)
                ->from("opticas")
                ->like('descripcion', $result->optica);
             $result_optica = $this->db->get();
             
             $id_optica = $result_optica->row()->id_optica=="" ? 0: $result_optica->row()->id_optica;
-            $id_delegacion = $result_optica->row()->id_delegacion=="" ? 0: $result_optica->row()->id_delegacion;
+            $id_estados = $result_optica->row()->id_estados=="" ? 0: $result_optica->row()->id_estados;
 
             $this->db->select("id_cliente", FALSE)
                ->from("clientes")
@@ -215,14 +209,14 @@ class Delegacion_model extends MY_Model {
             if(trim($result->tipo) == "CERCA")
             {
                 $tipo_lente = 2;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,14,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',$tipo_lente,1,1,2,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,14,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',$tipo_lente,1,1,2,'$comentario',$id_estados)";
             }
             else
             {
                 $tipo_lente=1;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,14,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',$tipo_lente,1,1,1,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,14,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',$tipo_lente,1,1,1,'$comentario',$id_estados)";
 
             }            
 
@@ -241,7 +235,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -249,13 +243,13 @@ class Delegacion_model extends MY_Model {
         $id_sindicato  = 16;
         foreach ($result_query->result() as $result)
         {       
-            $this->db->select("id_optica,id_delegacion", FALSE)
+            $this->db->select("id_optica,id_estados", FALSE)
                ->from("opticas")
                ->like('descripcion', $result->optica);
             $result_optica = $this->db->get();
             
             $id_optica      = $result_optica->row()->id_optica=="" ? 0: $result_optica->row()->id_optica;
-            $id_delegacion  = $result_optica->row()->id_delegacion=="" ? 0: $result_optica->row()->id_delegacion;
+            $id_estados  = $result_optica->row()->id_estados=="" ? 0: $result_optica->row()->id_estados;
 
             if($id_optica==0)
             {
@@ -303,14 +297,14 @@ class Delegacion_model extends MY_Model {
             if ($posicion_coincidencia === false) 
             {
                 $tipo_lente = 2;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_estados)";
             }
             else
             {
                 $tipo_lente=1;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados)";
 
             }            
 
@@ -329,7 +323,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -337,13 +331,13 @@ class Delegacion_model extends MY_Model {
         $id_sindicato  = 15;
         foreach ($result_query->result() as $result)
         {       
-            $this->db->select("id_optica,id_delegacion", FALSE)
+            $this->db->select("id_optica,id_estados", FALSE)
                ->from("opticas")
                ->like('descripcion', $result->optica);
             $result_optica = $this->db->get();
             
             $id_optica      = $result_optica->row()->id_optica=="" ? 0: $result_optica->row()->id_optica;
-            $id_delegacion  = $result_optica->row()->id_delegacion=="" ? 0: $result_optica->row()->id_delegacion;
+            $id_estados  = $result_optica->row()->id_estados=="" ? 0: $result_optica->row()->id_estados;
 
             if($id_optica==0)
             {
@@ -390,8 +384,8 @@ class Delegacion_model extends MY_Model {
 
             
                 $tipo_lente=1;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados)";
 
                         
 
@@ -409,7 +403,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -417,13 +411,13 @@ class Delegacion_model extends MY_Model {
         $id_sindicato  = 20;
         foreach ($result_query->result() as $result)
         {       
-            $this->db->select("id_optica,id_delegacion", FALSE)
+            $this->db->select("id_optica,id_estados", FALSE)
                ->from("opticas")
                ->like('descripcion', $result->optica);
             $result_optica = $this->db->get();
             
             $id_optica      = 210;// satsaid chaco
-            $id_delegacion  = 24;//chaco
+            $id_estados  = 24;//chaco
 
             if($id_optica==0)
             {
@@ -470,8 +464,8 @@ class Delegacion_model extends MY_Model {
 
             
             $tipo_lente=1;
-            $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-               VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion)";
+            $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+               VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados)";
 
                         
 
@@ -504,7 +498,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -512,30 +506,30 @@ class Delegacion_model extends MY_Model {
         
         foreach ($result_query->result() as $result)
         {       
-            switch (trim($result->delegacion)) {
+            switch (trim($result->estados)) {
                 case 'LA PAMPA':
                     $id_optica      = 0;// satsaid chaco
-                    $id_delegacion  = 50;
+                    $id_estados  = 50;
                     $id_sindicato   = 19;
                     break;
                 case 'ENTRE RIOS':
                     $id_optica      = 0;// satsaid chaco
-                    $id_delegacion  = 35;
+                    $id_estados  = 35;
                     $id_sindicato   = 17;
                     break;
                  case 'CORRIENTES':
                     $id_optica      = 0;// satsaid chaco
-                    $id_delegacion  = 31;
+                    $id_estados  = 31;
                     $id_sindicato   = 18;
                     break;
                 case 'ROSARIO':
                     $id_optica      = 0;// satsaid chaco
-                    $id_delegacion  = 90;
+                    $id_estados  = 90;
                     $id_sindicato   = 22;
                     break;
                 case 'SANTA FE':
                     $id_optica      = 0;// satsaid chaco
-                    $id_delegacion  = 105;
+                    $id_estados  = 105;
                     $id_sindicato   = 23;
                     break;
                 default:
@@ -576,8 +570,8 @@ class Delegacion_model extends MY_Model {
             $nro_pedido       = trim($result->nro_pedido);
             
             $tipo_lente=1;
-            $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-               VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion)";
+            $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+               VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados)";
 
             //echo $sql."<br>";
             //exit;
@@ -593,7 +587,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -601,13 +595,13 @@ class Delegacion_model extends MY_Model {
         $id_sindicato  = 25;
         foreach ($result_query->result() as $result)
         {       
-            $this->db->select("id_optica,id_delegacion", FALSE)
+            $this->db->select("id_optica,id_estados", FALSE)
                ->from("opticas")
                ->like('descripcion', $result->optica);
             $result_optica = $this->db->get();
             
             $id_optica      = $result_optica->row()->id_optica=="" ? 0: $result_optica->row()->id_optica;
-            $id_delegacion  = $result_optica->row()->id_delegacion=="" ? 0: $result_optica->row()->id_delegacion;
+            $id_estados  = $result_optica->row()->id_estados=="" ? 0: $result_optica->row()->id_estados;
 
             if($id_optica==0)
             {
@@ -656,14 +650,14 @@ class Delegacion_model extends MY_Model {
             if ($posicion_coincidencia === false) 
             {
                 $tipo_lente = 2;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_estados)";
             }
             else
             {
                 $tipo_lente=1;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion)";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados)";
 
             }            
 
@@ -683,7 +677,7 @@ class Delegacion_model extends MY_Model {
         $result_query = $this->db->query($sql);
         
         //por defecto el primer usuario
-        $id_delegacion = 0; //BUSCARLA POR NOMBRE    
+        $id_estados = 0; //BUSCARLA POR NOMBRE    
         $id_optica     = 0; //BUSCARLA POR NOMBRE    
         $comentario    = "";
         $tipo_lente    = 1; //1 lejos 2 cerca
@@ -692,19 +686,19 @@ class Delegacion_model extends MY_Model {
         foreach ($result_query->result() as $result)
         {              
             //echo $result->nro_pedido." ".$result->nro_beneficiario ;exit;
-            $this->db->select("id_delegacion", FALSE)
-               ->from("delegacion")
-               ->like('descripcion', $result->delegacion);
+            $this->db->select("id_estados", FALSE)
+               ->from("estados")
+               ->like('descripcion', $result->estados);
             $result_optica = $this->db->get();
             
             $id_optica      = 0; //$result_optica->row()->id_optica=="" ? 0: $result_optica->row()->id_optica;
-            $id_delegacion  = $result_optica->row()->id_delegacion=="" ? 0: $result_optica->row()->id_delegacion;
+            $id_estados  = $result_optica->row()->id_estados=="" ? 0: $result_optica->row()->id_estados;
 
-            if($id_delegacion==0)
+            if($id_estados==0)
             {
                 $this->db->set('descripcion',utf8_encode(trim($result->optica)))
-                        ->insert("delegacion");
-                $id_delegacion = $this->db->insert_id();
+                        ->insert("estados");
+                $id_estados = $this->db->insert_id();
             }  
 
             $this->db->select("id_cliente", FALSE)
@@ -747,14 +741,14 @@ class Delegacion_model extends MY_Model {
             if ($posicion_coincidencia === false) 
             {
                 $tipo_lente = 2;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_delegacion,voucher_cerca)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_delegacion,'".$voucher."')";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon_cerca,color_armazon_cerca, id_estado_cerca, nro_pedido,tipo_lente_cerca,es_casa_central,activo,es_lejos,comentario,id_estados,voucher_cerca)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',2,1,1,2,'$comentario',$id_estados,'".$voucher."')";
             }
             else
             {
                 $tipo_lente=1;
-                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_delegacion,voucher)
-                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_delegacion,'".$voucher."')";
+                $sql = " INSERT INTO fichas (beneficiario,nro_cliente,id_cliente,id_sindicato, id_optica,fecha,codigo_armazon,color_armazon, estado, nro_pedido,tipo_lente,es_casa_central,activo,es_lejos,comentario,id_estados,voucher)
+                   VALUES ('".$beneficiario."','".$nro_beneficiario."',$id_cliente,$id_sindicato,$id_optica,'".$fecha."','".$codigo_armazon."','".$color_armazon."',2,'".$nro_pedido."',1,1,1,1,'$comentario',$id_estados,'".$voucher."')";
 
             }            
 
