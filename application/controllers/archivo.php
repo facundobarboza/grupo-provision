@@ -541,7 +541,7 @@ class archivo extends MY_Controller {
                 case '1':
                   $es_lejos = "Lejos";
                   break;
-                  case '2':
+                  case '2': 
                   $es_lejos = "Cerca";
                   break;
                   case '3':
